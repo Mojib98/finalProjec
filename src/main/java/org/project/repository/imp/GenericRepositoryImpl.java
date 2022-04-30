@@ -1,12 +1,10 @@
 package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
-import org.project.entity.BaseClass;
 
-import javax.persistence.GeneratedValue;
 import java.util.List;
 
-public class GenericRepository<T> implements org.project.repository.GenericRepository<T> {
+public class GenericRepositoryImpl<T> implements org.project.repository.GenericRepository<T> {
     private Class<T> clazz;
     private final SessionFactory sessionFactory =SessionFactorySingleton.getInstance();
 
