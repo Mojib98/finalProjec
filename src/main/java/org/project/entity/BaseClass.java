@@ -2,22 +2,19 @@ package org.project.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalTime;
-@Entity
+import javax.persistence.*;
+import java.time.LocalDateTime;
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@MappedSuperclass
 public abstract class BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private LocalTime Time;
+    private LocalDateTime Time;
 
 
 }
