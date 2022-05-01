@@ -8,6 +8,8 @@ public class GenericRepositoryImpl<T> implements org.project.repository.GenericR
     private Class<T> clazz;
     private final SessionFactory sessionFactory =SessionFactorySingleton.getInstance();
 
+
+
     @Override
     public T insert(T t) {
         var session = sessionFactory.getCurrentSession();

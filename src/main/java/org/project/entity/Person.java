@@ -4,12 +4,9 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.project.entity.enumeration.statuses;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -24,6 +21,8 @@ public  abstract class Person extends BaseClass{
     @Column(nullable = false,unique = true)
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private statuses status;
 
 
 }
