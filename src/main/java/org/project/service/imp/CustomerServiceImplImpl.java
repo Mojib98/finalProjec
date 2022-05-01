@@ -18,7 +18,7 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Customer> implem
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                list = customerRepository.search(customer);
+
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();

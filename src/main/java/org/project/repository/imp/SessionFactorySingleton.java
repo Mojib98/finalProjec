@@ -3,10 +3,7 @@ package org.project.repository.imp;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.project.entity.BaseClass;
-import org.project.entity.Customer;
-import org.project.entity.Person;
-import org.project.entity.Specialist;
+import org.project.entity.*;
 
 import javax.persistence.PersistenceContext;
 
@@ -32,6 +29,9 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(Customer.class)
                     .addAnnotatedClass(Specialist.class)
                     .addAnnotatedClass(BaseClass.class)
+                    .addAnnotatedClass(RequestForConfirmation.class)
+                    .addAnnotatedClass(RequestForNewSpecialization.class)
+                    .addAnnotatedClass(Avatar.class)
                     .buildMetadata()
                     .buildSessionFactory();
         }

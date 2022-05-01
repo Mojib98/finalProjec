@@ -6,6 +6,6 @@ import org.project.entity.Customer;
 import java.util.List;
 
 public interface CustomerRepository<T extends BaseClass> {
-    List<Customer> search(T t);
+
     
 }

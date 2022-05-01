@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public abstract class BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long Id;
+    private Long id;
 //    @Column(name = "Time")
     @CreationTimestamp
     private LocalDateTime Time;

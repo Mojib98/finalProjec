@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.project.entity.enumeration.Statuses;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -24,5 +25,17 @@ public  abstract class Person extends BaseClass{
     @Enumerated(EnumType.STRING)
     private Statuses status;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Person person = (Person) o;
+        return Objects.equals(email, person.email);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), email);
+    }
 }
