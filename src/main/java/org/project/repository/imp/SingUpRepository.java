@@ -20,4 +20,14 @@ public class SingUpRepository {
         var s= session.createQuery(criteriaQuery).uniqueResult();
         return s;
     }
+    public void removeRequest(RequestForConfirmation request){
+        var session = sessionFactory.getCurrentSession();
+        var criteriaBuilder = session.getCriteriaBuilder();
+        var delete = criteriaBuilder.createCriteriaDelete(RequestForConfirmation.class);
+        var root = delete.from(RequestForConfirmation.class);
+        delete.where(criteriaBuilder.equal(root.get("id"), request.getId()));
+
+        // perform update
+        session.createQuery(delete).executeUpdate();
+    }
 }

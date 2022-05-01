@@ -47,4 +47,19 @@ public class SingUpService {
         }
         return request;
     }
+    public void removeRequest(RequestForConfirmation request){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                sing.removeRequest(request);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+//                System.out.println(e.getMessage());
+                e.printStackTrace();
+
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package org.project.app;
 
 import org.project.entity.RequestForConfirmation;
+import org.project.entity.enumeration.Statuses;
 import org.project.service.imp.SingUpService;
 
 import java.util.Scanner;
@@ -31,8 +32,18 @@ public class SingUpApp {
         RequestForConfirmation request = sing.tracking(track);
         if (request == null){
             System.out.println("your tracking number not find ");
-        }else
+        }else {
             System.out.println(request);
+            if (request.getStatus().equals(Statuses.UNCONFIRMED)) {
+                System.out.println("your request in umconfirmed please try again");
+                removeRequest(request);
+
+
+            }
+        }
+    }
+    private void removeRequest(RequestForConfirmation request){
+        sing.removeRequest(request);
     }
 
 }
