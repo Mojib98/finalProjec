@@ -1,6 +1,7 @@
 package org.project.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,8 +13,10 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class BaseClass {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long Id;
+//    @Column(name = "Time")
+    @CreationTimestamp
     private LocalDateTime Time;
 
 

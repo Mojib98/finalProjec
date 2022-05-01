@@ -2,7 +2,7 @@ package org.project.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.project.entity.enumeration.statuses;
+import org.project.entity.enumeration.Statuses;
 
 import javax.persistence.Entity;
 
@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 @Data
 @NoArgsConstructor
 public class Customer extends Person{
-    public Customer(String firstName, String lastName, String email, String password, statuses status) {
+    public Customer(String firstName, String lastName, String email, String password, Statuses status) {
         super(firstName, lastName, email, password, status);
     }
 }

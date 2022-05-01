@@ -1,6 +1,7 @@
 package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
+import org.project.entity.BaseClass;
 import org.project.entity.Customer;
 
 import javax.persistence.criteria.Predicate;
@@ -8,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CustomerRepository extends GenericRepositoryImpl<Customer> implements org.project.repository.CustomerRepository {
+public class CustomerRepository extends GenericRepositoryImpl<Customer> implements org.project.repository.CustomerRepository<Customer> {
 
 
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
-
     public List<Customer> search(Customer customer) {
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
@@ -21,6 +21,12 @@ public class CustomerRepository extends GenericRepositoryImpl<Customer> implemen
         List<Predicate> predicates = new ArrayList<>();
         if (customer.getFirstName() != null && !customer.getEmail().isEmpty())
             predicates.add(criteriaBuilder.equal(root.get("firstName"), customer.getFirstName()));
+        if (customer.getFirstName() != null && !customer.getEmail().isEmpty())
+            predicates.add(criteriaBuilder.equal(root.get("lastName"), customer.getFirstName()));
+        if (customer.getFirstName() != null && !customer.getEmail().isEmpty())
+            predicates.add(criteriaBuilder.equal(root.get("email"), customer.getFirstName()));
+        if (customer.getFirstName() != null && !customer.getEmail().isEmpty())
+            predicates.add(criteriaBuilder.equal(root.get("status"), customer.getFirstName()));
 
         criteriaQuery
                 .where(predicates.toArray(new Predicate[0]));

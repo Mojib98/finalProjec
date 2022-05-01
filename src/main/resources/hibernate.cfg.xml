@@ -6,7 +6,7 @@
         <property name="connection.url">jdbc:postgresql://localhost:5432/project</property>
         <property name="connection.username">project</property>
         <property name="connection.password">1</property>
-        <property name="hibernate.hbm2ddl.auto">update</property> <!-- Generates Database Schema. Do not Use In PRODUCTION! -->
+        <property name="hibernate.hbm2ddl.auto">create-drop</property> <!-- Generates Database Schema. Do not Use In PRODUCTION! -->
         <property name="show_sql">true</property>
         <property name="dialect">org.hibernate.dialect.PostgresPlusDialect</property>
         <property name="current_session_context_class">thread</property>

@@ -4,7 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.project.entity.enumeration.statuses;
+import org.project.entity.enumeration.Statuses;
 
 import javax.persistence.*;
 
@@ -22,7 +22,7 @@ public  abstract class Person extends BaseClass{
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
-    private statuses status;
+    private Statuses status;
 
 
 }
