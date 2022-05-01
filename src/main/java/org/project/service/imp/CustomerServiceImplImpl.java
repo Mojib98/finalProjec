@@ -9,7 +9,7 @@ import org.project.service.CustomerService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerServiceImpl extends GenericService<Customer> implements CustomerService {
+public class CustomerServiceImplImpl extends GenericServiceImpl<Customer> implements CustomerService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final CustomerRepository<Customer> customerRepository = new org.project.repository.imp.CustomerRepository();
     public List<Customer> search(Customer customer) {

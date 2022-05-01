@@ -7,7 +7,7 @@ import org.project.repository.imp.SessionFactorySingleton;
 
 import java.util.List;
 
-public class GenericService<T> implements org.project.service.GenericService<T> {
+public class GenericServiceImpl<T> implements org.project.service.GenericService<T> {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final GenericRepository<T> genericRepository = new GenericRepositoryImpl<>();
     @Override
