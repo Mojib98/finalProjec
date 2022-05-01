@@ -10,14 +10,14 @@ import java.util.Properties;
 
 public interface ManagerService {
 
-    void changeStatus(Properties properties);
-    void handleRequest(List<Specialist> specialists);
-    void insertService(String name);
-    void insertSpecial(String name);
+
     void ChangePriceService(Double startPrice,Double endPrice);
     void ChangePriceSpecial(Double startPrice,Double endPrice);
     List<BaseClass> showAllService();
-
+    void insertService(String name);
+    void insertSpecial(String name);
+    Boolean isServiceExists();
+    Boolean isSpecialExists();
     List<Specialist> search(Specialist specialist);
 
 }
