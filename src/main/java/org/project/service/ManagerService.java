@@ -8,8 +8,8 @@ import org.project.entity.Specialist;
 import java.util.List;
 import java.util.Properties;
 
-public interface ManagerService extends GenericService<BaseClass> {
-    void changeStatus(Customer customer);
+public interface ManagerService {
+
     void changeStatus(Properties properties);
     void handleRequest(List<Specialist> specialists);
     void insertService(String name);
@@ -17,7 +17,7 @@ public interface ManagerService extends GenericService<BaseClass> {
     void ChangePriceService(Double startPrice,Double endPrice);
     void ChangePriceSpecial(Double startPrice,Double endPrice);
     List<BaseClass> showAllService();
-    List<Customer> search(Customer customer);
+
     List<Specialist> search(Specialist specialist);
 
 }
