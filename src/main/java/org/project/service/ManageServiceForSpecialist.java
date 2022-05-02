@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Properties;
 
 public interface ManageServiceForSpecialist extends GenericService<Specialist> {
-    void changeStatus(Properties properties);
-    void handleRequest(List<RequestForConfirmation> request);
-    void deleteFromRequestList(List<RequestForConfirmation> request);
+    void changeStatus(Specialist specialist);
+
+    //    void changeStatus(Properties properties);
+    void acceptRequest(List<RequestForConfirmation> request);
     void acceptSpecial(List<RequestForNewSpecialization> request);
+    void unAcceptRequestConfirm(List<RequestForConfirmation> request);
     List<RequestForNewSpecialization> findNewRequest();
     void handleRequestForSpecialization(List<RequestForNewSpecialization> request);
     List<Properties> search(Properties properties);

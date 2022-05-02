@@ -22,6 +22,16 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
     }
 
 
+    @Override
+    public void changeStatus(RequestForConfirmation request) {
+        var session = sessionFactory.getCurrentSession();
+        session.update(request);
+    }
+
+    @Override
+    public void insertSpecial(Specialist specialist) {
+
+    }
 
     @Override
     public void acceptSpecial(RequestForNewSpecialization request) {
@@ -78,17 +88,6 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
         return request;
     }
 
-    @Override
-    public void removeRequestForConf(RequestForConfirmation request) {
-        var session = sessionFactory.getCurrentSession();
-        var criteriaBuilder = session.getCriteriaBuilder();
-        var delete = criteriaBuilder.createCriteriaDelete(RequestForConfirmation.class);
-        var root = delete.from(RequestForConfirmation.class);
-        delete.where(criteriaBuilder.equal(root.get("email"), request.getEmail()));
-
-        // perform update
-        session.createQuery(delete).executeUpdate();
-    }
 
     @Override
     public void removeRequestForNewSpec(RequestForNewSpecialization request) {

@@ -9,11 +9,12 @@ import java.util.Properties;
 
 public interface ManageRepositoryForSpecialist {
     void changeStatus(Properties properties);
+    void changeStatus(RequestForConfirmation request);
+    void insertSpecial(Specialist specialist);
     void acceptSpecial(RequestForNewSpecialization request);
     List<RequestForNewSpecialization> findNewRequest();
     void handleRequestForSpecialization(RequestForNewSpecialization request);
     List<Specialist> search(Specialist specialist);
     List<RequestForConfirmation> RequestList();
-    void removeRequestForConf(RequestForConfirmation request);
     void removeRequestForNewSpec(RequestForNewSpecialization request);
 }

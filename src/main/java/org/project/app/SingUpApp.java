@@ -45,5 +45,8 @@ public class SingUpApp {
     private void removeRequest(RequestForConfirmation request){
         sing.removeRequest(request);
     }
+    public void singUpForCustomer(){
+        
+    }
 
 }
