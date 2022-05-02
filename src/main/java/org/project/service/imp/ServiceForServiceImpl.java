@@ -132,4 +132,14 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> {
         return specialty;
 
     }
+    public void insertSpecialty(Service service){
+        try {
+            if (service.getCategory() == null)
+                throw new RuntimeException("dont have cateGury");
+            checkUniqueService(service);
+            insert(service);
+        }catch (Exception e){
+            e.getMessage();;
+        }
+    }
 }

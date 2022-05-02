@@ -19,7 +19,7 @@ public class SpecialistApp {
     public void showListOfSpecialty(){
         this.serviceList = service.showAllSpecialty();
         for (Service service:serviceList){
-            System.out.println(service);
+            System.out.println(service.getName());
         }
     }
     public void requestForSpecialty(){

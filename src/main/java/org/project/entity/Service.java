@@ -29,6 +29,13 @@ public class Service extends BaseClass{
         this.category = category;
     }
 
+    public Service(Long id, LocalDateTime Time, String name, Double upperPrice, Double lowerPrice) {
+        super(id, Time);
+        this.name = name;
+        this.upperPrice = upperPrice;
+        this.lowerPrice = lowerPrice;
+    }
+
     @OneToMany(mappedBy = "category")
     private List<Service> service;
 
