@@ -13,21 +13,21 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     RepositoryService serviceRegistry = new RepositoryService();
     public void addService(Service service){
-        try (var session = sessionFactory.getCurrentSession()){
-            var transaction = session.getTransaction();
+//        try (var session = sessionFactory.getCurrentSession()){
+//            var transaction = session.getTransaction();
             try {
-                transaction.begin();
+//                transaction.begin();
                 checkUniqueService(service);
                 insert(service);
-                transaction.commit();
+//                transaction.commit();
             } catch (Exception e) {
-                transaction.rollback();
+//                transaction.rollback();
                 System.out.println(e.getMessage());
 
             }
         }
 
-    }
+//    }
     private void checkUniqueService(Service service){
         Service service1 = null;
         try (var session = sessionFactory.getCurrentSession()){

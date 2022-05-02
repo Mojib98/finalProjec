@@ -14,7 +14,7 @@ public class SingUpService {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                Integer track=request.hashCode();
+                Integer track=Math.abs(request.hashCode());
                 request.setTrackingNumber(track);
                 sing.requestForSpecialist(request);
                 transaction.commit();

@@ -10,9 +10,10 @@ import java.util.List;
 public class GenericServiceImpl<T> implements org.project.service.GenericService<T> {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final GenericRepository<T> genericRepository = new GenericRepositoryImpl<>();
+
     @Override
     public T insert(T t) {
-        try (var session = sessionFactory.getCurrentSession()){
+        try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
@@ -29,7 +30,7 @@ public class GenericServiceImpl<T> implements org.project.service.GenericService
 
     @Override
     public T update(T t) {
-        try (var session = sessionFactory.getCurrentSession()){
+        try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
@@ -46,7 +47,7 @@ public class GenericServiceImpl<T> implements org.project.service.GenericService
 
     @Override
     public void remove(T t) {
-        try (var session = sessionFactory.getCurrentSession()){
+        try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
@@ -62,7 +63,7 @@ public class GenericServiceImpl<T> implements org.project.service.GenericService
     @Override
     public T findById(Integer id) {
 
-        try (var session = sessionFactory.getCurrentSession()){
+        try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
@@ -78,11 +79,11 @@ public class GenericServiceImpl<T> implements org.project.service.GenericService
     @Override
     public List<T> findAll() {
         List<T> list;
-        try (var session = sessionFactory.getCurrentSession()){
+        try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-               list= genericRepository.findAll();
+                list = genericRepository.findAll();
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();

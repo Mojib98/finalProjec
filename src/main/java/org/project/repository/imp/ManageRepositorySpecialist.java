@@ -5,6 +5,7 @@ import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;
 import org.project.entity.Specialist;
+import org.project.entity.enumeration.Statuses;
 import org.project.repository.ManageRepositoryForSpecialist;
 
 import javax.persistence.criteria.Predicate;
@@ -45,6 +46,7 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(RequestForNewSpecialization.class);
         var root = criteriaQuery.from(RequestForNewSpecialization.class);
+
         request= session.createQuery(criteriaQuery).list();
         return request;
     }
@@ -84,6 +86,7 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(RequestForConfirmation.class);
         var root = criteriaQuery.from(RequestForConfirmation.class);
+        criteriaQuery.where(criteriaBuilder.notEqual(root.get("status"),Statuses.CONFIRMED));
         request= session.createQuery(criteriaQuery).list();
         return request;
     }

@@ -37,4 +37,5 @@ public class SpecialistApp {
         specialistService.insert(request);
     }
 
+
 }

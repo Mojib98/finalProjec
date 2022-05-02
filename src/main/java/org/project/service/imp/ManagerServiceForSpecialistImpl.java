@@ -39,6 +39,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
                     specialist.setEmail(request1.getEmail());
                     specialist.setStatus(Statuses.CONFIRMED);
                     insert(specialist);
+                    request1.setStatus(Statuses.ACTIVE);
                     repositorySpecialist.changeStatus(request1);
                 }
             } catch (Exception e) {
@@ -138,10 +139,12 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
     @Override
     public List<RequestForConfirmation> RequestList() {
+        List<RequestForConfirmation> request = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
+                request=repositorySpecialist.RequestList();
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -150,7 +153,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
             }
 
         }
-        return null;
+        return request;
     }
 
     @Override
