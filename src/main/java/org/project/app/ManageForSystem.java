@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ManageForSystem {
     Scanner scanner = new Scanner(System.in);
     ServiceForServiceImpl serviceForService = new ServiceForServiceImpl();
-    public void AddService(){
+    public void addService(){
         System.out.println("enter name");
         String name = scanner.next();
         System.out.println("enter price");
@@ -18,6 +18,20 @@ public class ManageForSystem {
         System.out.println("enter name");
         Service service = new Service(null,null,name,pu,pl,null);
         serviceForService.addService(service);
+
+    }
+    public void addSpecialty(){
+        System.out.println("enter name of category");
+        String name = scanner.next();
+        Service service = serviceForService.findByName(name);
+        System.out.println("Enter name ");
+        String name1 = scanner.next();
+        System.out.println("Enter pu ");
+        Double pu = scanner.nextDouble();
+        System.out.println("Enter pl ");
+        Double pl = scanner.nextDouble();
+        Service service1 = new Service(null,null,name1,pl,pu,service);
+        serviceForService.addService(service1);
 
     }
 }
