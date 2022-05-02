@@ -1,5 +1,6 @@
 package org.project.app;
 
+import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.enumeration.Statuses;
 import org.project.service.imp.SingUpService;
@@ -46,7 +47,15 @@ public class SingUpApp {
         sing.removeRequest(request);
     }
     public void singUpForCustomer(){
-        
+        System.out.println("please insert your Firstname");
+        String fname = scanner.next();
+        System.out.println("please insert your Lastname");
+        String lname = scanner.next();
+        System.out.println("please insert your email");
+        String email = scanner.next();
+        System.out.println("please insert your password");
+        String password = scanner.next();
+        Customer customer = new Customer(fname,lname,email,password,Statuses.INACTIVE);
     }
 
 }

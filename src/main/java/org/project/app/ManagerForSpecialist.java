@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class ManagerForSpecialist {
     Scanner scanner = new Scanner(System.in);
     ManageServiceForSpecialist forSpecialist = new ManagerServiceForSpecialistImpl();
-    public void determine(){
+    public void determineSingUp(){
         List<RequestForConfirmation> list = forSpecialist.RequestList();
         List<RequestForConfirmation> accept = new ArrayList<>();
         List<RequestForConfirmation> unAccept = new ArrayList<>();
@@ -32,7 +32,6 @@ public class ManagerForSpecialist {
     }
     private void acceptList(List<RequestForConfirmation>request){
         forSpecialist.acceptRequest(request);
-
     }
     private void unAcceptList(List<RequestForConfirmation> request){
             forSpecialist.unAcceptRequestConfirm(request);
