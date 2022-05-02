@@ -105,7 +105,7 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                category=findJustCategory();
+                category=serviceRegistry.findJustCategory();
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -114,5 +114,22 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> {
             }
         }
         return category;
+    }
+    public List<Service> showAllSpecialty(){
+        List<Service> specialty = null;
+        try (var session = sessionFactory.getCurrentSession()){
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                specialty=serviceRegistry.findJustSpecialty();
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+
+            }
+        }
+        return specialty;
+
     }
 }

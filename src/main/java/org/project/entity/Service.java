@@ -32,4 +32,5 @@ public class Service extends BaseClass{
     @OneToMany(mappedBy = "category")
     private List<Service> service;
 
+
 }

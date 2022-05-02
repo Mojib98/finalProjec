@@ -26,7 +26,13 @@ public class RepositoryService {
     }
     public List<Service> findJustCategory(){
         var session = sessionFactory.getCurrentSession();
-        String hql="from Service s where s.category=NULL ";
+        String hql="from Service s where s.category is NULL ";
+        var query = session.createQuery(hql,Service.class);
+        return query.getResultList();
+    }
+    public List<Service> findJustSpecialty(){
+        var session = sessionFactory.getCurrentSession();
+        String hql="from Service s where s.category is not null ";
         var query = session.createQuery(hql,Service.class);
         return query.getResultList();
     }

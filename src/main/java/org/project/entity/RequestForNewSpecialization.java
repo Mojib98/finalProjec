@@ -21,5 +21,7 @@ public class RequestForNewSpecialization extends BaseClass {
     private Statuses statuses;
     @OneToOne
     private Specialist specialist;
+    @OneToOne
+    private Service service;
 }
 
