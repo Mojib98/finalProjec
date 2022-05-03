@@ -1,27 +1,25 @@
 package org.project.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
+@Setter
+@Getter
 public class Service extends BaseClass{
     @Column(nullable = false,unique = true)
     private String name;
     private Double upperPrice;
     private Double lowerPrice;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Service category;
 
-    public Service(Long id, LocalDateTime Time, String name, Double upperPrice, Double lowerPrice, Service category) {
+    public Service(Integer id, LocalDateTime Time, String name, Double upperPrice, Double lowerPrice, Service category) {
         super(id, Time);
         this.name = name;
         this.upperPrice = upperPrice;
@@ -29,15 +27,22 @@ public class Service extends BaseClass{
         this.category = category;
     }
 
-    public Service(Long id, LocalDateTime Time, String name, Double upperPrice, Double lowerPrice) {
+    public Service(Integer id, LocalDateTime Time, String name, Double upperPrice, Double lowerPrice) {
         super(id, Time);
         this.name = name;
         this.upperPrice = upperPrice;
         this.lowerPrice = lowerPrice;
     }
 
-    @OneToMany(mappedBy = "category")
-    private List<Service> service;
+   /* @OneToMany(mappedBy = "category")
+    private List<Service> service;*/
+    @ManyToMany(mappedBy = "services",fetch = FetchType.EAGER)
+    private List<Specialist> specialists;
+    @OneToOne(mappedBy = "service",fetch = FetchType.EAGER)
+    private RequestForNewSpecialization request;
 
-
+    public Service(Integer id, LocalDateTime Time, String name) {
+        super(id, Time);
+        this.name = name;
+    }
 }

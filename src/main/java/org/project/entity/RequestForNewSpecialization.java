@@ -1,27 +1,47 @@
 package org.project.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.project.entity.enumeration.Statuses;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 public class RequestForNewSpecialization extends BaseClass {
     private String name;
     private String Description;
     @Enumerated(EnumType.STRING)
     private Statuses statuses;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Specialist specialist;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Service service;
+    @Transient
+   private Long idS;
+
+    public RequestForNewSpecialization(Integer id, LocalDateTime Time, String name, String description,
+                                       Statuses statuses, Specialist specialist, Integer ids) {
+        super(id, Time);
+        this.name = name;
+        Description = description;
+        this.statuses = statuses;
+        this.specialist = specialist;
+        this.service = new Service();
+        service.setId(ids);
+    }
+
+    public RequestForNewSpecialization(Integer id, LocalDateTime Time, String name, String description, Statuses statuses, Specialist specialist, Service service) {
+        super(id, Time);
+        this.name = name;
+        Description = description;
+        this.statuses = statuses;
+        this.specialist = specialist;
+        this.service = service;
+
+    }
 }
 

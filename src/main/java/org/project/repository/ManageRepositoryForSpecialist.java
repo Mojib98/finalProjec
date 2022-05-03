@@ -2,6 +2,7 @@ package org.project.repository;
 
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;
+import org.project.entity.Service;
 import org.project.entity.Specialist;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface ManageRepositoryForSpecialist {
     void insertSpecial(Specialist specialist);
     void acceptSpecial(RequestForNewSpecialization request);
     List<RequestForNewSpecialization> findNewRequest();
-    void handleRequestForSpecialization(RequestForNewSpecialization request);
+    void handleRequestForSpecialization(Service service ,Specialist specialist);
     List<Specialist> search(Specialist specialist);
     List<RequestForConfirmation> RequestList();
     void removeRequestForNewSpec(RequestForNewSpecialization request);

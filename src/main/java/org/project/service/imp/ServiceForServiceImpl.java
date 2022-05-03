@@ -61,10 +61,7 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> {
         super.remove(service);
     }
 
-    @Override
-    public Service findById(Integer id) {
-        return super.findById(id);
-    }
+
 
     @Override
     public List<Service> findAll() {

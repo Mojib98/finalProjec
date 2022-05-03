@@ -1,10 +1,7 @@
 package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
-import org.project.entity.Customer;
-import org.project.entity.RequestForConfirmation;
-import org.project.entity.RequestForNewSpecialization;
-import org.project.entity.Specialist;
+import org.project.entity.*;
 import org.project.entity.enumeration.Statuses;
 import org.project.repository.ManageRepositoryForSpecialist;
 
@@ -49,11 +46,18 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
 
         request= session.createQuery(criteriaQuery).list();
         return request;
+   /*     String hql="select new RequestForNewSpecialization (s.id,s.Time,s.name,s.Description,s.statuses,s.specialist,s.service.id) from RequestForNewSpecialization s";
+        var q = session.createQuery(hql,RequestForNewSpecialization.class);
+        return q.getResultList();*/
     }
 
     @Override
-    public void handleRequestForSpecialization(RequestForNewSpecialization request) {
-
+    public void handleRequestForSpecialization(Service service,Specialist specialist) {
+        var session = sessionFactory.getCurrentSession();
+//        session.persist(specialist);
+      var s=  session.find(Specialist.class,specialist.getId());
+        s.addService(service);
+        session.update(s);
     }
 
     @Override
@@ -104,4 +108,5 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
         session.createQuery(delete).executeUpdate();
 
     }
+
 }

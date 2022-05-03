@@ -1,5 +1,6 @@
 package org.project.app;
 
+import lombok.Setter;
 import org.project.entity.RequestForNewSpecialization;
 import org.project.entity.Service;
 import org.project.entity.Specialist;
@@ -9,7 +10,7 @@ import org.project.service.imp.SpecialistService;
 
 import java.util.List;
 import java.util.Scanner;
-
+@Setter
 public class SpecialistApp {
     Specialist specialist;
     List<Service> serviceList;
@@ -31,7 +32,10 @@ public class SpecialistApp {
                 .findFirst().get();
         String name = scanner.next();
         String describe = scanner.next();
-        RequestForNewSpecialization request = new RequestForNewSpecialization(name,
+      /*  RequestForNewSpecialization request = new RequestForNewSpecialization(name,
+                describe, Statuses.AWAITING_CONFIRMATION,
+                specialist,service);*/
+        RequestForNewSpecialization request = new RequestForNewSpecialization(null,null,name,
                 describe, Statuses.AWAITING_CONFIRMATION,
                 specialist,service);
         specialistService.insert(request);

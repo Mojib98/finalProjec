@@ -23,7 +23,7 @@ public class SingUpApp {
         String password = scanner.next();
         System.out.println("please insert about u");
         String about = scanner.next();
-        RequestForConfirmation request = new RequestForConfirmation(fname,lname,email,password,about);
+        RequestForConfirmation request = new RequestForConfirmation(null,null,fname,lname,email,password,null,about);
        Integer track= sing.requestForSingUp(request);
         System.out.println("yout trackNumber is "+track);
     }
@@ -55,7 +55,6 @@ public class SingUpApp {
         String email = scanner.next();
         System.out.println("please insert your password");
         String password = scanner.next();
-        Customer customer = new Customer(fname,lname,email,password,Statuses.INACTIVE);
     }
 
 }

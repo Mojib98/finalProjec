@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.project.entity.enumeration.Statuses;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +25,16 @@ public  abstract class Person extends BaseClass{
     private String password;
     @Enumerated(EnumType.STRING)
     private Statuses status;
+
+    public Person(Integer id, LocalDateTime Time, String firstName,
+                  String lastName, String email, String password, Statuses status) {
+        super(id, Time);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.status = status;
+    }
 
     @Override
     public boolean equals(Object o) {

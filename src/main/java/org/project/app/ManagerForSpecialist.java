@@ -1,6 +1,8 @@
 package org.project.app;
 
 import org.project.entity.RequestForConfirmation;
+import org.project.entity.RequestForNewSpecialization;
+import org.project.entity.enumeration.Statuses;
 import org.project.service.ManageServiceForSpecialist;
 import org.project.service.imp.ManagerServiceForSpecialistImpl;
 
@@ -30,11 +32,38 @@ public class ManagerForSpecialist {
         acceptList(accept);
         unAcceptList(unAccept);
     }
-    private void acceptList(List<RequestForConfirmation>request){
+    private void acceptList(List<RequestForConfirmation> request){
         forSpecialist.acceptRequest(request);
     }
     private void unAcceptList(List<RequestForConfirmation> request){
             forSpecialist.unAcceptRequestConfirm(request);
     }
+    public void determineForRequestSpecialty() {
+        List<RequestForNewSpecialization> list = forSpecialist.findNewRequest();
+        List<RequestForNewSpecialization> accept = new ArrayList<>();
+        List<RequestForNewSpecialization> unAccept = new ArrayList<>();
+        for (RequestForNewSpecialization request : list) {
+            System.out.println(request.getSpecialist());
+            System.out.println(request.getIdS());
+            System.out.println("if confirmation insert 'y' or insert 'n'");
+            char check = scanner.next().charAt(0);
+            switch (check) {
+                case 'y':
+                    request.setStatuses(Statuses.CONFIRMED);
+                    accept.add(request);
+                    System.out.println(request.getIdS());
+                case 'n':
+                    continue;
+                default:
+            }
+        }
+        acceptLists(accept);
+    }
+
+    private void acceptLists(List<RequestForNewSpecialization> request){
+        forSpecialist.handleRequestForSpecialization(request);
+    }
+
+
 
 }
