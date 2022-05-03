@@ -36,7 +36,7 @@ public class ManagerForSpecialist {
         forSpecialist.acceptRequest(request);
     }
     private void unAcceptList(List<RequestForConfirmation> request){
-            forSpecialist.unAcceptRequestConfirm(request);
+            forSpecialist.changeStatusForRequest(request);
     }
     public void determineForRequestSpecialty() {
         List<RequestForNewSpecialization> list = forSpecialist.findNewRequest();

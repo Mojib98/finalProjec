@@ -84,14 +84,14 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
 
 
     @Override
-    public List<RequestForConfirmation> RequestList() {
+    public List<RequestForConfirmation> requestList() {
         List<RequestForConfirmation> request;
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(RequestForConfirmation.class);
         var root = criteriaQuery.from(RequestForConfirmation.class);
-        criteriaQuery.where(criteriaBuilder.notEqual(root.get("status"),Statuses.CONFIRMED));
-        request= session.createQuery(criteriaQuery).list();
+        criteriaQuery.where(criteriaBuilder.equal(root.get("status"),Statuses.AWAITING_CONFIRMATION));
+        request= session.createQuery(criteriaQuery).getResultList();
         return request;
     }
 

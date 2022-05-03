@@ -13,6 +13,7 @@ public class SingUpApp {
 
 
     public void requestForSingUp() {
+        //همه این ورودی و خروجی رو تبدیل به تابع بکن با چک کردن ورودی
         System.out.println("please insert your Firstname");
         String fname = scanner.next();
         System.out.println("please insert your Lastname");
@@ -25,7 +26,7 @@ public class SingUpApp {
         String about = scanner.next();
         RequestForConfirmation request = new RequestForConfirmation(null,null,fname,lname,email,password,null,about);
        Integer track= sing.requestForSingUp(request);
-        System.out.println("yout trackNumber is "+track);
+        System.out.println("your trackNumber is "+track);
     }
     public void tracking(){
         System.out.println("please inseert number");
@@ -38,9 +39,8 @@ public class SingUpApp {
             if (request.getStatus().equals(Statuses.UNCONFIRMED)) {
                 System.out.println("your request in umconfirmed please try again");
                 removeRequest(request);
-
-
-            }
+            }else
+                System.out.println("your request is "+request.getStatus());
         }
     }
     private void removeRequest(RequestForConfirmation request){

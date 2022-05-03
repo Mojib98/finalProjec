@@ -16,6 +16,6 @@ public interface ManageRepositoryForSpecialist {
     List<RequestForNewSpecialization> findNewRequest();
     void handleRequestForSpecialization(Service service ,Specialist specialist);
     List<Specialist> search(Specialist specialist);
-    List<RequestForConfirmation> RequestList();
+    List<RequestForConfirmation> requestList();
     void removeRequestForNewSpec(RequestForNewSpecialization request);
 }

@@ -2,6 +2,7 @@ package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.RequestForConfirmation;
+import org.project.entity.enumeration.Statuses;
 import org.project.repository.imp.SessionFactorySingleton;
 import org.project.repository.imp.SingUpRepository;
 
@@ -16,6 +17,7 @@ public class SingUpService {
                 transaction.begin();
                 Integer track=Math.abs(request.hashCode());
                 request.setTrackingNumber(track);
+                request.setStatus(Statuses.AWAITING_CONFIRMATION);
                 sing.requestForSpecialist(request);
                 transaction.commit();
                 return track;

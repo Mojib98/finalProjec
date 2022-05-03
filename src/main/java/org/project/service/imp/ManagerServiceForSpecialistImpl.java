@@ -41,9 +41,9 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
                 specialist.setEmail(request1.getEmail());
                 specialist.setStatus(Statuses.CONFIRMED);
                 insert(specialist);
-                request1.setStatus(Statuses.ACTIVE);
-                repositorySpecialist.changeStatus(request1);
+
             }
+            changeStatusForRequest(request);
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
@@ -52,12 +52,13 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
     }
 
-    public void unAcceptRequestConfirm(List<RequestForConfirmation> request) {
+    public void changeStatusForRequest(List<RequestForConfirmation> request) {
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
                 for (RequestForConfirmation request1 : request) {
+                    if (request1.getStatus().equals(Statuses.AWAITING_CONFIRMATION))
                     request1.setStatus(Statuses.UNCONFIRMED);
                     repositorySpecialist.changeStatus(request1);
                 }
@@ -178,7 +179,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                request = repositorySpecialist.RequestList();
+                request = repositorySpecialist.requestList();
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
