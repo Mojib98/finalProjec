@@ -74,11 +74,15 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
 
     @Override
-    public void acceptSpecial(List<RequestForNewSpecialization> request) {
+    public void unAccept(List<RequestForNewSpecialization> request) {
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
+                for (RequestForNewSpecialization request1:request){
+                    request1.setStatuses(Statuses.UNCONFIRMED);
+                    repositorySpecialist.unAccept(request1);
+                }
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -112,36 +116,17 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
     @Override
     public void handleRequestForSpecialization(List<RequestForNewSpecialization> request) {
-   /*     try {
-            for (RequestForNewSpecialization request1 : request) {
-                System.out.println(request1.getService());
-                System.out.println(request1.getSpecialist());
-                Service service = new Service(request1.getService().getId(),null,request1.getService().getName());
-                Specialist specialist = request1.getSpecialist();
-                Service service1 = request1.getService();
-                specialist.addService(service);
-
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-
-        }*/
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
                 for (RequestForNewSpecialization request1 : request) {
                     System.out.println(request1.getService());
-//                    System.out.println(request1.getSpecialist());
                     Service service = new Service(request1.getService().getId(), null, request1.getService().getName());
-//                    System.out.println(service);
                     Specialist specialist = request1.getSpecialist();
-//                    Service service1 = request1.getService();
-//                    session.update(specialist);
-//                    specialist.getServices().add(service);
                     repositorySpecialist.handleRequestForSpecialization(service,specialist);
                     transaction.commit();
-                }
+                 }
                 } catch(Exception e){
                     transaction.rollback();
                     System.out.println(e.getMessage());
@@ -150,6 +135,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
 
         }
+        removeRequest(request);
 
 
     }

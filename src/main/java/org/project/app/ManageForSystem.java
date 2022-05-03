@@ -3,10 +3,12 @@ package org.project.app;
 import org.project.entity.Service;
 import org.project.service.imp.ServiceForServiceImpl;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ManageForSystem {
     Scanner scanner = new Scanner(System.in);
+    List<Service> serviceList;
     ServiceForServiceImpl serviceForService = new ServiceForServiceImpl();
     public void addService(){
         System.out.println("enter name");
@@ -31,7 +33,19 @@ public class ManageForSystem {
         System.out.println("Enter pl ");
         Double pl = scanner.nextDouble();
         Service service1 = new Service(null,null,name1,pl,pu,service);
-        serviceForService.addService(service1);
+        serviceForService.insertSpecialty(service1);
 
+    }
+    public void showListOfSpecialty(){
+        List<Service> serviceList = serviceForService.showAllSpecialty();
+        for (Service service:serviceList){
+            System.out.println(service.getName());
+        }
+    }
+    public void showListOfService(){
+         serviceList = serviceForService.findJustCategory();
+        for (Service service:serviceList){
+            System.out.println(service.getName());
+        }
     }
 }

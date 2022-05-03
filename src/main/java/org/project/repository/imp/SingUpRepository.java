@@ -1,6 +1,7 @@
 package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
+import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;
 
@@ -29,5 +30,9 @@ public class SingUpRepository {
 
         // perform update
         session.createQuery(delete).executeUpdate();
+    }
+    public void insertCustomer(Customer customer){
+        var session = sessionFactory.getCurrentSession();
+        session.save(customer);
     }
 }

@@ -52,16 +52,19 @@ public class ManagerForSpecialist {
                     request.setStatuses(Statuses.CONFIRMED);
                     accept.add(request);
                     System.out.println(request.getIdS());
+                    break;
                 case 'n':
+                    unAccept.add(request);
                     continue;
                 default:
             }
         }
-        acceptLists(accept);
+        handleRequest(accept,unAccept);
     }
 
-    private void acceptLists(List<RequestForNewSpecialization> request){
-        forSpecialist.handleRequestForSpecialization(request);
+    private void handleRequest(List<RequestForNewSpecialization> accept,List<RequestForNewSpecialization> unAccept){
+        forSpecialist.handleRequestForSpecialization(accept);
+        forSpecialist.unAccept(unAccept);
     }
 
 

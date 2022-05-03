@@ -32,8 +32,9 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
     }
 
     @Override
-    public void acceptSpecial(RequestForNewSpecialization request) {
-
+    public void unAccept(RequestForNewSpecialization request) {
+        var session = sessionFactory.getCurrentSession();
+        session.update(request);
     }
 
     @Override
@@ -43,7 +44,7 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(RequestForNewSpecialization.class);
         var root = criteriaQuery.from(RequestForNewSpecialization.class);
-
+        criteriaQuery.where(criteriaBuilder.equal(root.get("statuses"),Statuses.AWAITING_CONFIRMATION));
         request= session.createQuery(criteriaQuery).list();
         return request;
    /*     String hql="select new RequestForNewSpecialization (s.id,s.Time,s.name,s.Description,s.statuses,s.specialist,s.service.id) from RequestForNewSpecialization s";

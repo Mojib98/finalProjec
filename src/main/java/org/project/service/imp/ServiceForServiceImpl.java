@@ -17,6 +17,7 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> {
 //            var transaction = session.getTransaction();
             try {
 //                transaction.begin();
+
                 checkUniqueService(service);
                 insert(service);
 //                transaction.commit();

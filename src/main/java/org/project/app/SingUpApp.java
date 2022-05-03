@@ -55,6 +55,8 @@ public class SingUpApp {
         String email = scanner.next();
         System.out.println("please insert your password");
         String password = scanner.next();
+        Customer customer = new Customer(null,null,fname,lname,email,password,Statuses.ACTIVE);
+        sing.insertCustomer(customer);
     }
 
 }

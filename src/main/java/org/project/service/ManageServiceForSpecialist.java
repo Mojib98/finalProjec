@@ -12,7 +12,7 @@ public interface ManageServiceForSpecialist extends GenericService<Specialist> {
 
     //    void changeStatus(Properties properties);
     void acceptRequest(List<RequestForConfirmation> request);
-    void acceptSpecial(List<RequestForNewSpecialization> request);
+    void unAccept(List<RequestForNewSpecialization> request);
     void changeStatusForRequest(List<RequestForConfirmation> request);
     List<RequestForNewSpecialization> findNewRequest();
     void handleRequestForSpecialization(List<RequestForNewSpecialization> request);

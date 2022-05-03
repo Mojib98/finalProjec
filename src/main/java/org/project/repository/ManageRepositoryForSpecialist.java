@@ -12,7 +12,7 @@ public interface ManageRepositoryForSpecialist {
     void changeStatus(Properties properties);
     void changeStatus(RequestForConfirmation request);
     void insertSpecial(Specialist specialist);
-    void acceptSpecial(RequestForNewSpecialization request);
+    void unAccept(RequestForNewSpecialization request);
     List<RequestForNewSpecialization> findNewRequest();
     void handleRequestForSpecialization(Service service ,Specialist specialist);
     List<Specialist> search(Specialist specialist);

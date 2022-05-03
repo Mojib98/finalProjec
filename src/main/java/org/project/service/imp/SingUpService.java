@@ -1,6 +1,7 @@
 package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
+import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.enumeration.Statuses;
 import org.project.repository.imp.SessionFactorySingleton;
@@ -55,6 +56,21 @@ public class SingUpService {
             try {
                 transaction.begin();
                 sing.removeRequest(request);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+//                System.out.println(e.getMessage());
+                e.printStackTrace();
+
+            }
+        }
+    }
+    public void insertCustomer(Customer customer){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                sing.insertCustomer(customer);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
