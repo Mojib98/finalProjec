@@ -3,7 +3,7 @@ package org.project.repository.imp;
 import org.hibernate.SessionFactory;
 import org.project.entity.*;
 import org.project.entity.enumeration.Statuses;
-import org.project.repository.ManageRepositoryForSpecialist;
+import org.project.repository.interfaces.ManageRepositoryForSpecialist;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;

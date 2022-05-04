@@ -1,15 +1,10 @@
 package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
-import org.project.entity.BaseClass;
-import org.project.entity.Customer;
-
-import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
-import java.util.List;
+import org.project.entity.Orders;
 
 
-public class CustomerRepository extends GenericRepositoryImpl<Customer> implements org.project.repository.CustomerRepository<Customer> {
+public class CustomerRepository extends GenericRepositoryImpl<Orders> implements org.project.repository.interfaces.CustomerRepository<Orders> {
 
 
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();

@@ -1,4 +1,4 @@
-package org.project.repository;
+package org.project.repository.interfaces;
 
 import org.project.entity.RequestForConfirmation;
 

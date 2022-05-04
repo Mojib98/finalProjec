@@ -1,4 +1,4 @@
-package org.project.service;
+package org.project.service.interfaces;
 
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;

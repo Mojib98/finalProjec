@@ -2,14 +2,14 @@ package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.BaseClass;
-import org.project.entity.Specialist;
-import org.project.repository.GenericRepository;
+import org.project.repository.interfaces.GenericRepository;
 import org.project.repository.imp.GenericRepositoryImpl;
 import org.project.repository.imp.SessionFactorySingleton;
+import org.project.service.interfaces.GenericService;
 
 import java.util.List;
 
-public abstract class GenericServiceImpl<T extends BaseClass> implements org.project.service.GenericService<T> {
+public abstract class GenericServiceImpl<T extends BaseClass> implements GenericService<T> {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final GenericRepository<T> genericRepository = new GenericRepositoryImpl<>();
 

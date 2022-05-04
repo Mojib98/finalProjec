@@ -1,14 +1,11 @@
-package org.project.repository;
-
-import org.project.entity.BaseClass;
+package org.project.service.interfaces;
 
 import java.util.List;
 
-public interface GenericRepository<T> {
+public interface GenericService<T> {
     T insert(T t);
     T update(T t);
     void remove(T t);
     T findById(Integer id);
     List<T> findAll();
-
 }

@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.project.entity.Customer;
 import org.project.entity.enumeration.Statuses;
 import org.project.repository.imp.SessionFactorySingleton;
-import org.project.service.ManageServiceForCustomer;
+import org.project.service.interfaces.ManageServiceForCustomer;
 
 import java.util.ArrayList;
 import java.util.List;

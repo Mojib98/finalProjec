@@ -3,7 +3,7 @@ package org.project.app;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;
 import org.project.entity.enumeration.Statuses;
-import org.project.service.ManageServiceForSpecialist;
+import org.project.service.interfaces.ManageServiceForSpecialist;
 import org.project.service.imp.ManagerServiceForSpecialistImpl;
 
 import java.util.ArrayList;

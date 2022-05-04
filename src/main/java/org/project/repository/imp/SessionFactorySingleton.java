@@ -5,8 +5,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.project.entity.*;
 
-import javax.persistence.PersistenceContext;
-
 public class SessionFactorySingleton {
 
     private SessionFactorySingleton() {}
@@ -33,6 +31,8 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(RequestForNewSpecialization.class)
                     .addAnnotatedClass(Avatar.class)
                     .addAnnotatedClass(Service.class)
+                    .addAnnotatedClass(Orders.class)
+                    .addAnnotatedClass(Offer.class)
                     .buildMetadata()
                     .buildSessionFactory();
         }

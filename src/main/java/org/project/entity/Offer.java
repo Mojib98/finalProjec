@@ -13,5 +13,5 @@ public class Offer extends BaseClass{
     private LocalDateTime workTime;
     private Integer timeWorkPerMinute;
     @ManyToOne
-    private Order order;
+    private Orders order;
 }

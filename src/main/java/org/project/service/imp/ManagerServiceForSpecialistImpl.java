@@ -8,7 +8,7 @@ import org.project.entity.Specialist;
 import org.project.entity.enumeration.Statuses;
 import org.project.repository.imp.ManageRepositorySpecialist;
 import org.project.repository.imp.SessionFactorySingleton;
-import org.project.service.ManageServiceForSpecialist;
+import org.project.service.interfaces.ManageServiceForSpecialist;
 
 import java.util.List;
 import java.util.Properties;

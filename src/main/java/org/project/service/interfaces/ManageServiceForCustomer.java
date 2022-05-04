@@ -1,4 +1,4 @@
-package org.project.service;
+package org.project.service.interfaces;
 
 import org.project.entity.Customer;
 
