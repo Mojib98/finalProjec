@@ -12,48 +12,47 @@ import java.util.Scanner;
 public class SingUpApp {
     Scanner scanner = new Scanner(System.in);
     SingUpService sing = new SingUpService();
+    private final Utility utility = new Utility();
 
 
     public void requestForSingUp() throws IOException {
         //همه این ورودی و خروجی رو تبدیل به تابع بکن با چک کردن ورودی
-        System.out.println("please insert your Firstname");
-        String fname = scanner.next();
-        System.out.println("please insert your Lastname");
-        String lname = scanner.next();
-        System.out.println("please insert your email");
-        String email = scanner.next();
+        String fname = utility.setName();
+        String lname = utility.setName();
+        String email = utility.email();
         System.out.println("please insert your password");
-        String password = scanner.next();
-        System.out.println("please insert about u");
+        String password = utility.setPassword();
+        System.out.print("please insert about u");
         String about = scanner.next();
-        System.out.println("insert path of pich");
-        String path = scanner.next();
-        File file = new File(path);
-        InputStream object1 = new FileInputStream(file);
-        RequestForConfirmation request = new RequestForConfirmation(null,null,fname,lname,email,password,null,about);
-        request.setAvatar(new Avatar(object1.readAllBytes()));
-       Integer track= sing.requestForSingUp(request);
-        System.out.println("your trackNumber is "+track);
+        System.out.println();
+        InputStream picture = utility.pathOfPicture();
+        RequestForConfirmation request = new RequestForConfirmation(null, null, fname, lname, email, password, null, about);
+        request.setAvatar(new Avatar(picture.readAllBytes()));
+        Integer track = sing.requestForSingUp(request);
+        System.out.println("your trackNumber is " + track);
     }
-    public void tracking(){
+
+    public void tracking() {
         System.out.println("please inseert number");
-        Integer track = scanner.nextInt();
+        Integer track = utility.giveIntegerInput();
         RequestForConfirmation request = sing.tracking(track);
-        if (request == null){
+        if (request == null) {
             System.out.println("your tracking number not find ");
-        }else {
+        } else {
             System.out.println(request);
             if (request.getStatus().equals(Statuses.UNCONFIRMED)) {
                 System.out.println("your request in umconfirmed please try again");
                 removeRequest(request);
-            }else
-                System.out.println("your request is "+request.getStatus());
+            } else
+                System.out.println("your request is " + request.getStatus());
         }
     }
-    private void removeRequest(RequestForConfirmation request){
+
+    private void removeRequest(RequestForConfirmation request) {
         sing.removeRequest(request);
     }
-    public void singUpForCustomer(){
+
+    public void singUpForCustomer() {
         System.out.println("please insert your Firstname");
         String fname = scanner.next();
         System.out.println("please insert your Lastname");
@@ -62,7 +61,7 @@ public class SingUpApp {
         String email = scanner.next();
         System.out.println("please insert your password");
         String password = scanner.next();
-        Customer customer = new Customer(null,null,fname,lname,email,password,Statuses.ACTIVE);
+        Customer customer = new Customer(null, null, fname, lname, email, password, Statuses.ACTIVE);
         sing.insertCustomer(customer);
     }
 

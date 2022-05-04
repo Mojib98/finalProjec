@@ -1,12 +1,17 @@
 package org.project.app;
 
+import org.hibernate.annotations.Cache;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Utility {
     private  final Scanner input = new Scanner(System.in);
-//    private final UserServiceImpel userServiceImpel = new UserServiceImpel();
 
     public Integer giveIntegerInput() {
         int i;
@@ -22,21 +27,21 @@ public class Utility {
         }
     }
 
-    public String setFullName(){
-        String fullName;
+    public String setName(){
+        String name;
         while(true){
             System.out.print("Enter name(just alpha):");
             try {
-                fullName = input.nextLine();
-                checkName(fullName);
-                return fullName;
+                name = input.nextLine();
+                checkName(name);
+                return name;
             }catch (InvalidName except){
                 System.out.println(except.getMessage());
             }
         }
     }
 
-    public void checkName(String name){
+    private void checkName(String name){
         if(name.length() < 3 )
             throw new InvalidName("name should be more than 2 character!");
         for (Character ch:name.toCharArray()
@@ -86,9 +91,9 @@ public class Utility {
     }
 
     public void passwordCheck(String password){
-        if(password.length() < 3 )
-            throw new InvalidPassword("password should be more than 2 ");
-        char[] passwordArray = password.toCharArray();
+        if(password.length() < 8 )
+            throw new InvalidPassword("password should be more than 8 ");
+      /*  char[] passwordArray = password.toCharArray();
         char[] signArray =  new char[] {'!','@','#','$','%','^','&','*','(',')','-','+','=','.',',','>','<','?','/','|',':',';'};
         int space = 0,lowerCase = 0,upperCase = 0,sign = 0,digit = 0;
         for(int i=0;i<passwordArray.length;i++)
@@ -108,7 +113,7 @@ public class Utility {
                 if(signArray[i] == passwordArray[j])
                     ++sign;
         if( (space == 0) || (lowerCase == 0) || (upperCase == 0) || (sign == 0) || (digit == 0) )
-            throw new InvalidPassword("password should have space+lowerCase+upperCase+sign+digit!");
+            throw new InvalidPassword("password should have space+lowerCase+upperCase+sign+digit!");*/
     }
     public  String email(){
         String regexPattern="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
@@ -116,7 +121,8 @@ public class Utility {
 
             while (true) {
                 try {
-                String emailAddress = input.next();
+                    System.out.print("Enter email");
+                    String emailAddress = input.next();
                 if (Pattern.compile(regexPattern)
                         .matcher(emailAddress)
                         .matches())
@@ -129,6 +135,24 @@ public class Utility {
                 continue;
             }
         }
+    }
+    public InputStream pathOfPicture(){
+        String path;
+        while (true){
+        try {
+            System.out.println("insert path of picture");
+            path = input.next();
+            File file = new File(path);
+            InputStream object1 = new FileInputStream(file);
+            object1.available();
+
+
+        }catch (IOException e){
+            e.printStackTrace();
+
+        }
+        }
+
     }
 
 }
