@@ -2,6 +2,7 @@ package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.BaseClass;
+import org.project.entity.Customer;
 import org.project.entity.Order;
 import org.project.entity.Specialist;
 import org.project.repository.imp.SessionFactorySingleton;
@@ -46,4 +47,37 @@ public class SpecialistService extends GenericServiceImpl<BaseClass>{
         }
         return specialist;
     }
+    public Customer findByIdCustomer(Integer id) {
+        Customer customer = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                customer = specialistRepository.findByIdCustomer(id);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+//                System.out.println(e.getMessage());
+                e.printStackTrace();
+
+            }
+            return customer;
+        }
+    }
+    public void changeWorkFlow(Order order){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                 specialistRepository.changeWorkFlow( order);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+//                System.out.println(e.getMessage());
+                e.printStackTrace();
+
+            }
+        }
+    }
+
 }

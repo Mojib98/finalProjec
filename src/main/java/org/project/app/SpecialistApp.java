@@ -3,6 +3,8 @@ package org.project.app;
 import lombok.Setter;
 import org.project.entity.*;
 import org.project.entity.enumeration.UserStatus;
+import org.project.entity.enumeration.WorkStatus;
+import org.project.service.imp.GenericServiceImpl;
 import org.project.service.imp.ServiceForServiceImpl;
 import org.project.service.imp.SpecialistService;
 
@@ -17,6 +19,7 @@ public class SpecialistApp {
     Scanner scanner = new Scanner(System.in);
     ServiceForServiceImpl service = new ServiceForServiceImpl();
     SpecialistService specialistService = new SpecialistService();
+    Utility utility = new Utility();
     public void showListOfSpecialty(){
         this.serviceList = service.showAllSpecialty();
         for (Service service:serviceList){
@@ -44,30 +47,54 @@ public class SpecialistApp {
     public void seeOrders(){
         List<Order> list = specialistService.findOrders(specialist);
         for (Order orders:list){
-            System.out.println(orders);
+            System.out.println(orders.getDescribe());
+            System.out.println(orders.getOfferPrice());
+            System.out.println(orders.getTimeForWork());
+            Customer customer = specialistService.findByIdCustomer(orders.getCustomers().getId());
+            System.out.println(orders.getCustomers().getId());
         }
     }
     public void writeOffer(){
-        Order orders = null;
+        Order order = null;
         List<Order> list = specialistService.findOrders(specialist);
         list.stream().forEach(System.out::println);
         System.out.println("insert id");
-        Integer id=scanner.nextInt();
-
-
-        orders= list.stream()
+        Integer id=utility.giveIntegerInput();
+        order= list.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst().get();
         System.out.println("insert des");
         String des=scanner.next();
         System.out.println("isnert price");
         Double offerPrice = scanner.nextDouble();
-        Offer offer = new Offer(null,null,offerPrice, LocalDateTime.now(),45,orders,specialist);
+        System.out.println("insert time");
+        LocalDateTime dateTime = utility.dateTime();
+        if (isTimeBefore(order.getTime(),dateTime)){
+            System.out.println("bad time ");
+            return;
+        }
+        Offer offer = new Offer(null,null,offerPrice, dateTime,45,order,specialist);
         specialistService.insert(offer);
+        specialistService.changeWorkFlow(order);
 
 
     }
     public void changePassword(){}
-
+    private boolean checkPrice(Service service,Double price){
+        Double lowerPrice =service.getLowerPrice();
+        Double upperPrice = service.getUpperPrice();
+        int low = lowerPrice.compareTo(price);//1
+        int up = upperPrice.compareTo(price);//-1
+        if (low>=up )
+            return true;
+//        return price >= lowerPrice && price <= upperPrice;
+        return false;
+    }
+    private boolean isTimeBefore(LocalDateTime orderTime,LocalDateTime offerTime){
+        if (offerTime.isBefore(orderTime)){
+            return true;
+        }
+        return false;
+    }
 
 }

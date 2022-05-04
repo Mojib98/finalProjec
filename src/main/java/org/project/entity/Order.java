@@ -1,6 +1,9 @@
 package org.project.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.project.entity.enumeration.UserStatus;
 import org.project.entity.enumeration.WorkStatus;
 
@@ -17,13 +20,16 @@ import java.util.List;
                         @ColumnResult(name = "offerprice",type = Double.class),
                         @ColumnResult(name = "timeforwork",type = LocalDateTime.class),
                         @ColumnResult(name = "describe",type = String.class),
-                        @ColumnResult(name = "customers",type = Customer.class)
+                        @ColumnResult(name = "customers_id",type = Customer.class)
 
                 })
 
 )
 @Entity
 @NoArgsConstructor
+@Setter
+@Getter
+@AllArgsConstructor
 @Table(name = "orders")
 public class Order extends BaseClass {
     private Double offerPrice;
@@ -68,5 +74,14 @@ public class Order extends BaseClass {
                 ", customers=" + customers +
                 ", service=" + service +
                 "} " + super.toString();
+    }
+
+    public Order(Integer id, LocalDateTime time, Double offerPrice, LocalDateTime timeForWork, String describe, Integer customers) {
+        super(id, time);
+        this.offerPrice = offerPrice;
+        this.timeForWork = timeForWork;
+        this.describe = describe;
+        this.customers = new Customer();
+        this.customers.setId(customers);
     }
 }
