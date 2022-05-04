@@ -38,8 +38,8 @@ public class SingUpApp {
     public void tracking(){
         System.out.println("please inseert number");
         Integer track = scanner.nextInt();
-        String request = sing.tracking(track);
-      /*  if (request == null){
+        RequestForConfirmation request = sing.tracking(track);
+        if (request == null){
             System.out.println("your tracking number not find ");
         }else {
             System.out.println(request);
@@ -48,8 +48,7 @@ public class SingUpApp {
                 removeRequest(request);
             }else
                 System.out.println("your request is "+request.getStatus());
-        }*/
-        System.out.println(request);
+        }
     }
     private void removeRequest(RequestForConfirmation request){
         sing.removeRequest(request);
