@@ -29,6 +29,15 @@ public class Offer extends BaseClass{
         this.order = order;
     }
 
+    public Offer(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime workTime, Integer timeWorkPerMinute, Orders order, Specialist specialists) {
+        super(id, Time);
+        this.offerPrice = offerPrice;
+        this.workTime = workTime;
+        this.timeWorkPerMinute = timeWorkPerMinute;
+        this.order = order;
+        this.specialists = specialists;
+    }
+
     public Offer() {
 
     }

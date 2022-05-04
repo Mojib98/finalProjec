@@ -78,15 +78,18 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
     @Override
     public void unAccept(List<RequestForNewSpecialization> request) {
+        if (request == null){
+            throw new RuntimeException("list is empty");
+        }
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
-                transaction.begin();
                 for (RequestForNewSpecialization request1:request){
+                    transaction.begin();
                     request1.setStatuses(Statuses.UNCONFIRMED);
                     repositorySpecialist.unAccept(request1);
+                    transaction.commit();
                 }
-                transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
                 System.out.println(e.getMessage());
@@ -119,6 +122,9 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
     @Override
     public void handleRequestForSpecialization(List<RequestForNewSpecialization> request) {
+        if (request == null){
+            throw new RuntimeException("list is empty");
+        }
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
@@ -191,9 +197,21 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
     }
 
     private void removeRequest(List<RequestForNewSpecialization> request) {
-        for (RequestForNewSpecialization request1 : request) {
-            repositorySpecialist.removeRequestForNewSpec(request1);
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                for (RequestForNewSpecialization request1 : request) {
+                    repositorySpecialist.removeRequestForNewSpec(request1);
+                }
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+
+            }
         }
+
     }
 
     @Override

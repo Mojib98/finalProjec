@@ -48,7 +48,7 @@ public class ManagerForSpecialist {
         List<RequestForNewSpecialization> unAccept = new ArrayList<>();
         for (RequestForNewSpecialization request : list) {
             System.out.println(request.getSpecialist());
-            System.out.println(request.getIdS());
+            System.out.println(request.getService().getName());
             System.out.println("if confirmation insert 'y' or insert 'n'");
             char check = scanner.next().charAt(0);
             switch (check) {
@@ -63,12 +63,16 @@ public class ManagerForSpecialist {
                 default:
             }
         }
-        handleRequestNew(accept,unAccept);
+        handleRequestNew(accept);
+        removeFromRequestSpecialty(unAccept);
     }
 
-    private void handleRequestNew(List<RequestForNewSpecialization> accept,List<RequestForNewSpecialization> unAccept){
+    private void handleRequestNew(List<RequestForNewSpecialization> accept){
         forSpecialist.handleRequestForSpecialization(accept);
-        forSpecialist.unAccept(unAccept);
+    }
+    private void removeFromRequestSpecialty(List<RequestForNewSpecialization> list){
+                forSpecialist.unAccept(list);
+
     }
 
 

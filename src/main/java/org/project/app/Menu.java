@@ -43,4 +43,12 @@ public class Menu {
             case "search":
         }
     }
+    public void specialistMenu(){
+        System.out.println("\t\twelcome" +
+                "\n\t\tfor see new order insert 'order'" +
+                "\n\t\tfor see your offer insert 'offer'" +
+                "\n\t\tfor request for new speciali insert 's'" +
+                "\n\t\tfor see your budget insert " +
+                "\n\t\tfor see your comment insert ");
+    }
 }

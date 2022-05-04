@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 @Setter
 public class SpecialistApp {
+    Integer id;
     Specialist specialist;
     List<Service> serviceList;
     Scanner scanner = new Scanner(System.in);
@@ -29,6 +30,7 @@ public class SpecialistApp {
         Service service = serviceList.stream()
                 .filter(p -> p.getName().equals(serviceName))
                 .findFirst().get();
+        System.out.println(service);
         String name = scanner.next();
         String describe = scanner.next();
       /*  RequestForNewSpecialization request = new RequestForNewSpecialization(name,
@@ -40,18 +42,27 @@ public class SpecialistApp {
         specialistService.insert(request);
     }
     public void seeOrders(){
-        List<Orders> list = specialistService.findOrders();
+        List<Orders> list = specialistService.findOrders(specialist);
         for (Orders orders:list){
             System.out.println(orders);
         }
     }
     public void writeOffer(){
         Orders orders = null;
-        List<Orders> list = specialistService.findOrders();
-        orders=list.get(0);
-        String des="sfsfdsdf";
-        Double offerPrice = 3000D;
-        Offer offer = new Offer(null,null,offerPrice, LocalDateTime.now(),45,orders);
+        List<Orders> list = specialistService.findOrders(specialist);
+        list.stream().forEach(System.out::println);
+        System.out.println("insert id");
+        Integer id=scanner.nextInt();
+
+
+        orders= list.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst().get();
+        System.out.println("insert des");
+        String des=scanner.next();
+        System.out.println("isnert price");
+        Double offerPrice = scanner.nextDouble();
+        Offer offer = new Offer(null,null,offerPrice, LocalDateTime.now(),45,orders,specialist);
         specialistService.insert(offer);
 
 

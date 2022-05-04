@@ -38,6 +38,8 @@ public class CustomerApp {
     }
     public Service findSpecialtyByName(String name){
         Service service1=service.findByName(name);
+        if (service1==null)
+            throw new RuntimeException();
         System.out.println( service1);
         return service1;
     }
@@ -51,8 +53,8 @@ public class CustomerApp {
         System.out.println("please insenrt offer price");
         Double p=scanner.nextDouble();
         Service service =findSpecialtyByName(sp);
-        /*Orders orders = new Orders(null,null,p, LocalDateTime.now(),customer,service);
-        customerRepository.insert(orders);*/
+        Orders orders = new Orders(null,null,p, LocalDateTime.now(),customer,service);
+        customerRepository.insert(orders);
     }
 
 

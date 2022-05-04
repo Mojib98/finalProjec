@@ -20,7 +20,6 @@ import java.util.List;
 )
 @Entity
 @NoArgsConstructor
-@ToString
 public class Orders extends BaseClass {
     private Double offerPrice;
     private LocalDateTime timeForWork;
@@ -48,7 +47,25 @@ public class Orders extends BaseClass {
 
     }
 
+    public Orders(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime timeForWork, Customer customers, Service service) {
+        super(id, Time);
+        this.offerPrice = offerPrice;
+        this.timeForWork = timeForWork;
+        this.customers = customers;
+        this.service = service;
+    }
+
     public Orders(Integer id, LocalDateTime Time) {
         super(id, Time);
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "offerPrice=" + offerPrice +
+                ", timeForWork=" + timeForWork +
+                ", customers=" + customers +
+                ", service=" + service +
+                "} " + super.toString();
     }
 }
