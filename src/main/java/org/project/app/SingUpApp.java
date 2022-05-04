@@ -20,7 +20,6 @@ public class SingUpApp {
         String fname = utility.setName();
         String lname = utility.setName();
         String email = utility.email();
-        System.out.println("please insert your password");
         String password = utility.setPassword();
         System.out.print("please insert about u");
         String about = scanner.next();
@@ -53,14 +52,10 @@ public class SingUpApp {
     }
 
     public void singUpForCustomer() {
-        System.out.println("please insert your Firstname");
-        String fname = scanner.next();
-        System.out.println("please insert your Lastname");
-        String lname = scanner.next();
-        System.out.println("please insert your email");
-        String email = scanner.next();
-        System.out.println("please insert your password");
-        String password = scanner.next();
+        String fname = utility.setName();
+        String lname = utility.setName();
+        String email = utility.email();
+        String password = utility.setPassword();
         Customer customer = new Customer(null, null, fname, lname, email, password, Statuses.ACTIVE);
         sing.insertCustomer(customer);
     }

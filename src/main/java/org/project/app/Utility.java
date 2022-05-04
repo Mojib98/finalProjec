@@ -140,19 +140,20 @@ public class Utility {
         String path;
         while (true){
         try {
-            System.out.println("insert path of picture");
+            System.out.println("insert path of picture: ");
             path = input.next();
             File file = new File(path);
-            InputStream object1 = new FileInputStream(file);
-            object1.available();
+            if(file.length()>299000)
+                throw new RuntimeException("size to big");
+            InputStream avatar = new FileInputStream(file);
+            return avatar;
 
 
-        }catch (IOException e){
-            e.printStackTrace();
+        }catch (IOException | RuntimeException e){
+                System.out.println(e.getMessage());
 
         }
         }
-
     }
 
 }

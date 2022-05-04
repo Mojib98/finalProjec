@@ -8,6 +8,7 @@ public class Menu {
     Scanner scanner = new Scanner(System.in);
     SingUpApp sing = new SingUpApp();
     ManagerForSpecialist managerForSpecialist = new ManagerForSpecialist();
+    ManageForSystem manageForSystem = new ManageForSystem();
     public void singUp() throws IOException {
         System.out.println("\t\tWelcome\n\t\t" +
                 "for request for specialist insert 'new specialist \n" +
@@ -50,5 +51,28 @@ public class Menu {
                 "\n\t\tfor request for new speciali insert 's'" +
                 "\n\t\tfor see your budget insert " +
                 "\n\t\tfor see your comment insert ");
+    }
+    public void mangeManagerSystem(){
+        System.out.println("\t\twelcome\n" +
+                "\t\tfor insert service 'service'" +
+                "\nt\t\tfor insert subService 'sub'" +
+                "\n\t\tfor see all specialty insert 's'" +
+                "\n\t\tfor see all categury insert 'c'" +
+                "\b\t\tfor search insert 'search'");
+        String choice = scanner.next().toLowerCase(Locale.ROOT);
+        switch (choice){
+            case "service":
+                manageForSystem.addService();
+                break;
+            case "sub":
+                manageForSystem.addSpecialty();
+                break;
+            case "search":
+            case "s":
+                manageForSystem.showListOfSpecialty();
+                break;
+            case "c":
+                manageForSystem.showListOfService();
+        }
     }
 }
