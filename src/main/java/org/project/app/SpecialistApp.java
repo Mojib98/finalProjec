@@ -2,7 +2,7 @@ package org.project.app;
 
 import lombok.Setter;
 import org.project.entity.*;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 import org.project.service.imp.ServiceForServiceImpl;
 import org.project.service.imp.SpecialistService;
 
@@ -37,19 +37,19 @@ public class SpecialistApp {
                 describe, Statuses.AWAITING_CONFIRMATION,
                 specialist,service);*/
         RequestForNewSpecialization request = new RequestForNewSpecialization(null,null,name,
-                describe, Statuses.AWAITING_CONFIRMATION,
+                describe, UserStatus.AWAITING_CONFIRMATION,
                 specialist,service);
         specialistService.insert(request);
     }
     public void seeOrders(){
-        List<Orders> list = specialistService.findOrders(specialist);
-        for (Orders orders:list){
+        List<Order> list = specialistService.findOrders(specialist);
+        for (Order orders:list){
             System.out.println(orders);
         }
     }
     public void writeOffer(){
-        Orders orders = null;
-        List<Orders> list = specialistService.findOrders(specialist);
+        Order orders = null;
+        List<Order> list = specialistService.findOrders(specialist);
         list.stream().forEach(System.out::println);
         System.out.println("insert id");
         Integer id=scanner.nextInt();
@@ -67,6 +67,7 @@ public class SpecialistApp {
 
 
     }
+    public void changePassword(){}
 
 
 }

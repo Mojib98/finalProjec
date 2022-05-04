@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +22,7 @@ public class Specialist extends Person{
     private Avatar avatar;
 
     public Specialist(Integer id, LocalDateTime Time, String firstName,
-                      String lastName, String email, String password, Statuses status) {
+                      String lastName, String email, String password, UserStatus status) {
         super(id, Time, firstName, lastName, email, password, status);
     }
 
@@ -38,5 +37,7 @@ public class Specialist extends Person{
     private RequestForNewSpecialization request;
     @OneToMany(mappedBy = "specialists")
     private List<Offer> offer;
+    @OneToOne
+    private Budget budget;
 
 }

@@ -1,8 +1,8 @@
 package org.project.entity;
 
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import org.project.entity.enumeration.UserStatus;
+import org.project.entity.enumeration.WorkStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,44 +10,45 @@ import java.util.List;
 @SqlResultSetMapping(
         name = "orders",
         classes = @ConstructorResult(
-                targetClass = Orders.class,
+                targetClass = Order.class,
                 columns = {
                         @ColumnResult(name = "id",type = Integer.class),
                         @ColumnResult(name = "time",type = LocalDateTime.class),
                         @ColumnResult(name = "offerprice",type = Double.class),
-                        @ColumnResult(name = "timeforwork",type = LocalDateTime.class)})
+                        @ColumnResult(name = "timeforwork",type = LocalDateTime.class),
+                        @ColumnResult(name = "describe",type = String.class),
+                        @ColumnResult(name = "customers",type = Customer.class)
+
+                })
 
 )
 @Entity
 @NoArgsConstructor
-public class Orders extends BaseClass {
+@Table(name = "orders")
+public class Order extends BaseClass {
     private Double offerPrice;
     private LocalDateTime timeForWork;
+    private String address;
+    private String describe;
+    @Enumerated(EnumType.STRING)
+    private WorkStatus workStatus;
     @ManyToOne
     private Customer customers;
     @ManyToOne
     private Service service;
     @OneToMany(mappedBy = "order")
     private List<Offer> offers;
-    @Transient
-    private Integer customers_id;
+    @OneToOne
+    private AcceptOffer acceptOffer;
 
-    /*public Orders(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime timeForWork, Customer customers, Service service) {
-        super(id, Time);
-        this.offerPrice = offerPrice;
-        this.timeForWork = timeForWork;
-        this.customers = customers;
-        this.service = service;
-    }*/
-
-    public Orders(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime timeForWork) {
+    public Order(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime timeForWork) {
         super(id, Time);
         this.offerPrice = offerPrice;
         this.timeForWork = timeForWork;
 
     }
 
-    public Orders(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime timeForWork, Customer customers, Service service) {
+    public Order(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime timeForWork, Customer customers, Service service) {
         super(id, Time);
         this.offerPrice = offerPrice;
         this.timeForWork = timeForWork;
@@ -55,7 +56,7 @@ public class Orders extends BaseClass {
         this.service = service;
     }
 
-    public Orders(Integer id, LocalDateTime Time) {
+    public Order(Integer id, LocalDateTime Time) {
         super(id, Time);
     }
 

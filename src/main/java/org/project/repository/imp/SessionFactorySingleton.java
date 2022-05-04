@@ -31,7 +31,7 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(RequestForNewSpecialization.class)
                     .addAnnotatedClass(Avatar.class)
                     .addAnnotatedClass(Service.class)
-                    .addAnnotatedClass(Orders.class)
+                    .addAnnotatedClass(Order.class)
                     .addAnnotatedClass(Offer.class)
                     .buildMetadata()
                     .buildSessionFactory();

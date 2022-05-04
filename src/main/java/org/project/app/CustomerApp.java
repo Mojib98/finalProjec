@@ -1,11 +1,9 @@
 package org.project.app;
 
-import jdk.jfr.Category;
 import lombok.Setter;
 import org.project.entity.Customer;
-import org.project.entity.Orders;
+import org.project.entity.Order;
 import org.project.entity.Service;
-import org.project.repository.imp.CustomerRepository;
 import org.project.service.imp.CustomerServiceImplImpl;
 import org.project.service.imp.ServiceForServiceImpl;
 
@@ -53,9 +51,10 @@ public class CustomerApp {
         System.out.println("please insenrt offer price");
         Double p=scanner.nextDouble();
         Service service =findSpecialtyByName(sp);
-        Orders orders = new Orders(null,null,p, LocalDateTime.now(),customer,service);
+        Order orders = new Order(null,null,p, LocalDateTime.now(),customer,service);
         customerRepository.insert(orders);
     }
+    public void changePassword(){}
 
 
 

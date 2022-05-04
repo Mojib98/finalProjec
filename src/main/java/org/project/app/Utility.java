@@ -1,6 +1,7 @@
 package org.project.app;
 
-import org.hibernate.annotations.Cache;
+import org.project.exception.InvalidName;
+import org.project.exception.InvalidPassword;
 
 import java.io.File;
 import java.io.FileInputStream;

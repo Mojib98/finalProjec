@@ -1,4 +1,4 @@
-package org.project.app;
+package org.project.exception;
 
 public class InvalidPassword extends RuntimeException{
     public InvalidPassword() {

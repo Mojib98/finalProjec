@@ -4,7 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,10 +24,10 @@ public  abstract class Person extends BaseClass{
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
-    private Statuses status;
+    private UserStatus status;
 
     public Person(Integer id, LocalDateTime Time, String firstName,
-                  String lastName, String email, String password, Statuses status) {
+                  String lastName, String email, String password, UserStatus status) {
         super(id, Time);
         this.firstName = firstName;
         this.lastName = lastName;

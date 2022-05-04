@@ -2,7 +2,7 @@ package org.project.app;
 
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 import org.project.service.interfaces.ManageServiceForSpecialist;
 import org.project.service.imp.ManagerServiceForSpecialistImpl;
 
@@ -53,7 +53,7 @@ public class ManagerForSpecialist {
             char check = scanner.next().charAt(0);
             switch (check) {
                 case 'y':
-                    request.setStatuses(Statuses.CONFIRMED);
+                    request.setStatusUser(UserStatus.CONFIRMED);
                     accept.add(request);
                     System.out.println(request.getIdS());
                     break;

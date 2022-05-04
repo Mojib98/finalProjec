@@ -1,6 +1,6 @@
 package org.project.entity.enumeration;
 
-public enum Statuses {
+public enum UserStatus {
     ACTIVE("Active"),
     INACTIVE("Inactive"),
     CONFIRMED("Confirmed"),
@@ -8,7 +8,7 @@ public enum Statuses {
     AWAITING_CONFIRMATION("awaiting confirmation");
     private final String toString;
 
-    private Statuses(String toString) {
+    private UserStatus(String toString) {
         this.toString = toString;
     }
 

@@ -5,7 +5,7 @@ import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;
 import org.project.entity.Service;
 import org.project.entity.Specialist;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 import org.project.repository.imp.ManageRepositorySpecialist;
 import org.project.repository.imp.SessionFactorySingleton;
 import org.project.service.interfaces.ManageServiceForSpecialist;
@@ -21,10 +21,10 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
     @Override
     public void changeStatus(Specialist specialist) {
-        if (specialist.getStatus().equals(Statuses.ACTIVE))
-            specialist.setStatus(Statuses.INACTIVE);
+        if (specialist.getStatus().equals(UserStatus.ACTIVE))
+            specialist.setStatus(UserStatus.INACTIVE);
         else
-            specialist.setStatus(Statuses.ACTIVE);
+            specialist.setStatus(UserStatus.ACTIVE);
         update(specialist);
 
     }
@@ -38,9 +38,9 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
                 specialist.setLastName(request1.getLastName());
                 specialist.setPassword(request1.getPassword());
                 specialist.setEmail(request1.getEmail());
-                specialist.setStatus(Statuses.CONFIRMED);
+                specialist.setStatus(UserStatus.CONFIRMED);
                 specialist.setAvatar(request1.getAvatar());
-                request1.setStatus(Statuses.CONFIRMED);
+                request1.setStatus(UserStatus.CONFIRMED);
                 request1.setAvatar(null);
 
                 insert(specialist);
@@ -61,8 +61,8 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
             try {
                 transaction.begin();
                 for (RequestForConfirmation request1 : request) {
-                    if (request1.getStatus().equals(Statuses.AWAITING_CONFIRMATION))
-                    request1.setStatus(Statuses.UNCONFIRMED);
+                    if (request1.getStatus().equals(UserStatus.AWAITING_CONFIRMATION))
+                    request1.setStatus(UserStatus.UNCONFIRMED);
                     repositorySpecialist.changeStatus(request1);
                 }
                 transaction.commit();
@@ -86,7 +86,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
             try {
                 for (RequestForNewSpecialization request1:request){
                     transaction.begin();
-                    request1.setStatuses(Statuses.UNCONFIRMED);
+                    request1.setStatusUser(UserStatus.UNCONFIRMED);
                     repositorySpecialist.unAccept(request1);
                     transaction.commit();
                 }

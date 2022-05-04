@@ -3,7 +3,7 @@ package org.project.app;
 import org.project.entity.Avatar;
 import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 import org.project.service.imp.SingUpService;
 
 import java.io.*;
@@ -39,7 +39,7 @@ public class SingUpApp {
             System.out.println("your tracking number not find ");
         } else {
             System.out.println(request);
-            if (request.getStatus().equals(Statuses.UNCONFIRMED)) {
+            if (request.getStatus().equals(UserStatus.UNCONFIRMED)) {
                 System.out.println("your request in umconfirmed please try again");
                 removeRequest(request);
             } else
@@ -56,7 +56,7 @@ public class SingUpApp {
         String lname = utility.setName();
         String email = utility.email();
         String password = utility.setPassword();
-        Customer customer = new Customer(null, null, fname, lname, email, password, Statuses.ACTIVE);
+        Customer customer = new Customer(null, null, fname, lname, email, password, UserStatus.ACTIVE);
         sing.insertCustomer(customer);
     }
 

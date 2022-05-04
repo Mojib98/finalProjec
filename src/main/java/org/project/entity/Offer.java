@@ -5,9 +5,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Data
@@ -17,11 +15,11 @@ public class Offer extends BaseClass{
     private LocalDateTime workTime;
     private Integer timeWorkPerMinute;
     @ManyToOne
-    private Orders order;
+    private Order order;
     @ManyToOne()
     private Specialist specialists;
 
-    public Offer(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime workTime, Integer timeWorkPerMinute, Orders order) {
+    public Offer(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime workTime, Integer timeWorkPerMinute, Order order) {
         super(id, Time);
         this.offerPrice = offerPrice;
         this.workTime = workTime;
@@ -29,7 +27,7 @@ public class Offer extends BaseClass{
         this.order = order;
     }
 
-    public Offer(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime workTime, Integer timeWorkPerMinute, Orders order, Specialist specialists) {
+    public Offer(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime workTime, Integer timeWorkPerMinute, Order order, Specialist specialists) {
         super(id, Time);
         this.offerPrice = offerPrice;
         this.workTime = workTime;

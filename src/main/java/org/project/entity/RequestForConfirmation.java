@@ -3,13 +3,12 @@ package org.project.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
@@ -23,7 +22,7 @@ public class RequestForConfirmation extends Person {
     @Embedded
     private Avatar avatar;
 
-    public RequestForConfirmation(Integer id, LocalDateTime Time, String firstName, String lastName, String email, String password, Statuses status, String aboutMe) {
+    public RequestForConfirmation(Integer id, LocalDateTime Time, String firstName, String lastName, String email, String password, UserStatus status, String aboutMe) {
         super(id, Time, firstName, lastName, email, password, status);
         this.aboutMe = aboutMe;
     }

@@ -2,7 +2,7 @@ package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.*;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 import org.project.repository.interfaces.ManageRepositoryForSpecialist;
 
 import javax.persistence.criteria.Predicate;
@@ -44,7 +44,7 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(RequestForNewSpecialization.class);
         var root = criteriaQuery.from(RequestForNewSpecialization.class);
-        criteriaQuery.where(criteriaBuilder.equal(root.get("statuses"),Statuses.AWAITING_CONFIRMATION));
+        criteriaQuery.where(criteriaBuilder.equal(root.get("statuses"), UserStatus.AWAITING_CONFIRMATION));
         request= session.createQuery(criteriaQuery).list();
         return request;
    /*     String hql="select new RequestForNewSpecialization (s.id,s.Time,s.name,s.Description,s.statuses,s.specialist,s.service.id) from RequestForNewSpecialization s";
@@ -91,7 +91,7 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(RequestForConfirmation.class);
         var root = criteriaQuery.from(RequestForConfirmation.class);
-        criteriaQuery.where(criteriaBuilder.equal(root.get("status"),Statuses.AWAITING_CONFIRMATION));
+        criteriaQuery.where(criteriaBuilder.equal(root.get("status"), UserStatus.AWAITING_CONFIRMATION));
         request= session.createQuery(criteriaQuery).getResultList();
         return request;
     }

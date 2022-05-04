@@ -1,7 +1,7 @@
 package org.project.entity;
 
 import lombok.*;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public class RequestForNewSpecialization extends BaseClass {
     private String name;
     private String Description;
     @Enumerated(EnumType.STRING)
-    private Statuses statuses;
+    private UserStatus statusUser;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Specialist specialist;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -24,21 +24,21 @@ public class RequestForNewSpecialization extends BaseClass {
    private Long idS;
 
     public RequestForNewSpecialization(Integer id, LocalDateTime Time, String name, String description,
-                                       Statuses statuses, Specialist specialist, Integer ids) {
+                                       UserStatus statusUser, Specialist specialist, Integer ids) {
         super(id, Time);
         this.name = name;
         Description = description;
-        this.statuses = statuses;
+        this.statusUser = statusUser;
         this.specialist = specialist;
         this.service = new Service();
         service.setId(ids);
     }
 
-    public RequestForNewSpecialization(Integer id, LocalDateTime Time, String name, String description, Statuses statuses, Specialist specialist, Service service) {
+    public RequestForNewSpecialization(Integer id, LocalDateTime Time, String name, String description, UserStatus statusUser, Specialist specialist, Service service) {
         super(id, Time);
         this.name = name;
         Description = description;
-        this.statuses = statuses;
+        this.statusUser = statusUser;
         this.specialist = specialist;
         this.service = service;
 

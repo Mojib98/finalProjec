@@ -1,4 +1,4 @@
-package org.project.app;
+package org.project.exception;
 
 public class InvalidName extends RuntimeException{
     public InvalidName() {

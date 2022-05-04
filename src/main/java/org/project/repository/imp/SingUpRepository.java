@@ -3,8 +3,7 @@ package org.project.repository.imp;
 import org.hibernate.SessionFactory;
 import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
-import org.project.entity.RequestForNewSpecialization;
-import org.project.entity.enumeration.Statuses;
+import org.project.entity.enumeration.UserStatus;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -36,7 +35,7 @@ public class SingUpRepository {
             request.setId((Integer) values[0]);
             request.setEmail((String) values[1]);
             request.setTrackingNumber((Integer) values[2]);
-            request.setStatus((Statuses) values[3]);
+            request.setStatus((UserStatus) values[3]);
 
         }
 

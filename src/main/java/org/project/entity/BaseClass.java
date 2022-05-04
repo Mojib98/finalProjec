@@ -15,9 +15,8 @@ public abstract class BaseClass {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
-//    @Column(name = "Time")
     @CreationTimestamp
-    private LocalDateTime Time;
+    private LocalDateTime time;
 
 
 }
