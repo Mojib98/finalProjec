@@ -31,8 +31,8 @@ public class SingUpService {
 
         }
     }
-    public RequestForConfirmation tracking(Integer trackNumber) {
-        RequestForConfirmation request = null;
+    public String tracking(Integer trackNumber) {
+        String request = null;
 
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();

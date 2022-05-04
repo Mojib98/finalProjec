@@ -11,15 +11,15 @@ public class SingUpRepository {
         var session = sessionFactory.getCurrentSession();
         session.save(request);
     }
-    public RequestForConfirmation findByTrackingNumber(Integer track){
+    public String findByTrackingNumber(Integer track){
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
-        var criteriaQuery = criteriaBuilder.createQuery(RequestForConfirmation.class);
+        var criteriaQuery = criteriaBuilder.createQuery(Enum.class);
         var root = criteriaQuery.from(RequestForConfirmation.class);
-        criteriaQuery.select( root ).
+        criteriaQuery.select( root.get("status") ).
       where( criteriaBuilder.equal( root.get("trackingNumber"),track));
-        var s= session.createQuery(criteriaQuery).uniqueResult();
-        return s;
+        var status= session.createQuery(criteriaQuery).uniqueResult();
+        return status.name();
     }
     public void removeRequest(RequestForConfirmation request){
         var session = sessionFactory.getCurrentSession();

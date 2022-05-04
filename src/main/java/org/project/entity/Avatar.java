@@ -10,4 +10,8 @@ import java.io.Serializable;
 @Embeddable
 public class Avatar implements Serializable {
     private byte[] image;
+
+    public Avatar(byte[] image) {
+        this.image = image;
+    }
 }
