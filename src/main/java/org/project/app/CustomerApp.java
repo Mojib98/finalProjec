@@ -43,8 +43,6 @@ public class CustomerApp {
         System.out.println( service1);
         return service1;
     }
-    public void seeOffer(){}
-    public void choseOffer(){}
     public void createOrder(){
         System.out.println("insert des");
         String describe=scanner.next();
@@ -79,6 +77,8 @@ public class CustomerApp {
         return false;
     }
     public void changePassword(){}
+    public void seeOffer(){}
+    public void choseOffer(){}
 
 
 

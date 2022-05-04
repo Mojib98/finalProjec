@@ -14,6 +14,9 @@ public class CustomerRepository extends GenericRepositoryImpl<Order> implements 
 
 
     public List<Offer> findAllOffer(Integer id){
-        return null;
+        var session = sessionFactory.getCurrentSession();
+        String sql="select * from orders o inner join offer o2 on o.id = o2.order_id where customers_id=25;";
+        var query = session.createNativeQuery(sql,"offer");
+        return (List<Offer>) query.getResultList();
     }
 }
