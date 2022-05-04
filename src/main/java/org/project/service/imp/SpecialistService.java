@@ -11,8 +11,8 @@ import java.util.List;
 public class SpecialistService extends GenericServiceImpl<BaseClass>{
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     SpecialistRepository specialistRepository = new SpecialistRepository();
-    public Orders findOrders(){
-        Orders orders = null;
+    public List<Orders> findOrders(){
+        List<Orders> orders = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {

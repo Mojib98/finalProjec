@@ -1,13 +1,12 @@
 package org.project.app;
 
 import lombok.Setter;
-import org.project.entity.RequestForNewSpecialization;
-import org.project.entity.Service;
-import org.project.entity.Specialist;
+import org.project.entity.*;
 import org.project.entity.enumeration.Statuses;
 import org.project.service.imp.ServiceForServiceImpl;
 import org.project.service.imp.SpecialistService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 @Setter
@@ -39,6 +38,23 @@ public class SpecialistApp {
                 describe, Statuses.AWAITING_CONFIRMATION,
                 specialist,service);
         specialistService.insert(request);
+    }
+    public void seeOrders(){
+        List<Orders> list = specialistService.findOrders();
+        for (Orders orders:list){
+            System.out.println(orders);
+        }
+    }
+    public void writeOffer(){
+        Orders orders = null;
+        List<Orders> list = specialistService.findOrders();
+        orders=list.get(0);
+        String des="sfsfdsdf";
+        Double offerPrice = 3000D;
+        Offer offer = new Offer(null,null,offerPrice, LocalDateTime.now(),45,orders);
+        specialistService.insert(offer);
+
+
     }
 
 

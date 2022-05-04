@@ -36,5 +36,7 @@ public class Specialist extends Person{
     }
     @OneToOne(mappedBy = "specialist")
     private RequestForNewSpecialization request;
+    @OneToMany(mappedBy = "specialists")
+    private List<Offer> offer;
 
 }

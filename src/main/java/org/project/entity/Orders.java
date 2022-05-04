@@ -2,6 +2,7 @@ package org.project.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.util.List;
 )
 @Entity
 @NoArgsConstructor
+@ToString
 public class Orders extends BaseClass {
     private Double offerPrice;
     private LocalDateTime timeForWork;
