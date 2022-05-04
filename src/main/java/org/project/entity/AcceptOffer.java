@@ -17,4 +17,6 @@ public class AcceptOffer extends BaseClass {
     private Order order;
     @ManyToOne()
     private Specialist specialists;
+    @OneToOne
+    private Comment comment;
 }

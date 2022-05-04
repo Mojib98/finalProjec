@@ -7,8 +7,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 public class Utility {
@@ -154,6 +156,28 @@ public class Utility {
                 System.out.println(e.getMessage());
 
         }
+        }
+    }
+    public LocalDateTime dateTime() {
+        while (true) {
+            System.out.println("Year:");
+            int year = input.nextInt();
+
+            System.out.println("Date-time in format: dd.MM. HH:mm");
+            input.nextLine();
+            input.findInLine("(\\d\\d)\\.(\\d\\d)\\. (\\d\\d):(\\d\\d)");
+            try {
+                MatchResult mr = input.match();
+                int month = Integer.parseInt(mr.group(2));
+                int day = Integer.parseInt(mr.group(1));
+                int hour = Integer.parseInt(mr.group(3));
+                int minute = Integer.parseInt(mr.group(4));
+                LocalDateTime dt = LocalDateTime.of(year, month, day, hour, minute);
+                return dt;
+            } catch (IllegalStateException e) {
+                System.err.println("Invalid date-time format.");
+            }
+
         }
     }
 

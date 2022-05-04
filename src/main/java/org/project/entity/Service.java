@@ -1,6 +1,7 @@
 package org.project.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@Check(constraints = "upperPrice >= lowerPrice")
 public class Service extends BaseClass{
     @Column(nullable = false,unique = true)
     private String name;
