@@ -2,9 +2,10 @@ package org.project.app;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Utility {
-    private final Scanner input = new Scanner(System.in);
+    private  final Scanner input = new Scanner(System.in);
 //    private final UserServiceImpel userServiceImpel = new UserServiceImpel();
 
     public Integer giveIntegerInput() {
@@ -108,6 +109,26 @@ public class Utility {
                     ++sign;
         if( (space == 0) || (lowerCase == 0) || (upperCase == 0) || (sign == 0) || (digit == 0) )
             throw new InvalidPassword("password should have space+lowerCase+upperCase+sign+digit!");
+    }
+    public  String email(){
+        String regexPattern="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+            while (true) {
+                try {
+                String emailAddress = input.next();
+                if (Pattern.compile(regexPattern)
+                        .matcher(emailAddress)
+                        .matches())
+                return emailAddress;
+                else
+                    throw new RuntimeException("invalid email");
+
+            }catch(RuntimeException e){
+                    System.out.println(e.getMessage());
+                continue;
+            }
+        }
     }
 
 }
