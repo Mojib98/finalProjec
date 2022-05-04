@@ -34,12 +34,15 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
         try {
             for (RequestForConfirmation request1 : request) {
                 Specialist specialist = new Specialist();
-                request1.setStatus(Statuses.CONFIRMED);
                 specialist.setFirstName(request1.getFirstName());
                 specialist.setLastName(request1.getLastName());
                 specialist.setPassword(request1.getPassword());
                 specialist.setEmail(request1.getEmail());
                 specialist.setStatus(Statuses.CONFIRMED);
+                specialist.setAvatar(request1.getAvatar());
+                request1.setStatus(Statuses.CONFIRMED);
+                request1.setAvatar(null);
+
                 insert(specialist);
 
             }
