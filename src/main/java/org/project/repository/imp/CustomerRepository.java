@@ -72,4 +72,9 @@ public class CustomerRepository extends GenericRepositoryImpl<Order> implements 
         var query = session.createQuery(hql, Customer.class).setParameter("id", id);
         return query.getSingleResult();
     }
+    public void insertComment(Comment comment){
+        var session = sessionFactory.getCurrentSession();
+        session.save(comment);
+
+    }
 }

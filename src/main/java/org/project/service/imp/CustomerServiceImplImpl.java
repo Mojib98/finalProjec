@@ -172,4 +172,21 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             }
         }
     }
+    public void addComment(AcceptOffer acceptOffer , Integer id,Comment comment){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                Customer customer = customerRepository.findCustomer(id);
+                AcceptOffer acceptOffer1 = customerRepository.findAcceptOrder(acceptOffer.getId());
+                comment.setCustomer(customer);
+                customerRepository.insertComment(comment);
+                acceptOffer1.setComment(comment);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 }

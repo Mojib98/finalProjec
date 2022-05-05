@@ -95,6 +95,9 @@ public class CustomerApp {
     }
     public void payForOrder(){
         AcceptOffer acceptOffer = customerServiceImpl.myAcceptOffer(86);
+        customerServiceImpl.paying(acceptOffer,86);
+    }
+    public void addComment(AcceptOffer acceptOffer,Integer id){
 
     }
 
