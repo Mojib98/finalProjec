@@ -1,10 +1,8 @@
 package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
-import org.project.entity.BaseClass;
-import org.project.entity.Customer;
-import org.project.entity.Order;
-import org.project.entity.Specialist;
+import org.project.entity.*;
+import org.project.entity.enumeration.WorkStatus;
 import org.project.repository.imp.SessionFactorySingleton;
 import org.project.repository.imp.SpecialistRepository;
 
@@ -70,6 +68,38 @@ public class SpecialistService extends GenericServiceImpl<BaseClass>{
             try {
                 transaction.begin();
                  specialistRepository.changeWorkFlow( order);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+//                System.out.println(e.getMessage());
+                e.printStackTrace();
+
+            }
+        }
+    }
+    public List<AcceptOffer> findMyAcceptOffer(Integer id){
+        List<AcceptOffer> list = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                list = specialistRepository.findMyAcceptOffer(id);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+//                System.out.println(e.getMessage());
+                e.printStackTrace();
+
+            }
+        }
+        return list;
+    }
+    public void changeWorkBySpecialist(Integer id, WorkStatus workStatus){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                specialistRepository.changeWorkBySpecialist(id,workStatus);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();

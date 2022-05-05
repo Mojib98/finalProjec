@@ -96,5 +96,15 @@ public class SpecialistApp {
         }
         return false;
     }
+    public void arriveOffer(){
+        List<AcceptOffer> acceptOffers =specialistService.findMyAcceptOffer(3);
+        for (AcceptOffer a:acceptOffers){
+            System.out.println(a.getId());
+            System.out.println(a.getWorkTime());
+        }
+        System.out.println("please select one of for start ");
+        Integer id = scanner.nextInt();
+        specialistService.changeWorkBySpecialist(id,WorkStatus.START);
+    }
 
 }

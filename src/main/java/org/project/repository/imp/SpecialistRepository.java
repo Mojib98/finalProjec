@@ -1,6 +1,7 @@
 package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
+import org.project.entity.AcceptOffer;
 import org.project.entity.Customer;
 import org.project.entity.Order;
 import org.project.entity.Specialist;
@@ -39,6 +40,22 @@ public class SpecialistRepository {
         String hql="update Order set workStatus =:work where id=:id";
         var query=session.createQuery(hql).setParameter("id",order.getId())
                .setParameter("work",order.getWorkStatus());
+        query.executeUpdate();
+    }
+    public List<AcceptOffer> findMyAcceptOffer(Integer id){
+        var session = sessionFactory.getCurrentSession();
+        String hql = "select new AcceptOffer(id,time,workTime)from AcceptOffer where specialists.id=:id";
+        var query = session.createQuery(hql,AcceptOffer.class)
+                .setParameter("id",id);
+       return query.getResultList();
+
+    }
+    public void changeWorkBySpecialist(Integer id,WorkStatus workStatus){
+        var session = sessionFactory.getCurrentSession();
+        String hql = "update Order set workStatus =:work where acceptOffer.id=:id";
+        var query = session.createQuery(hql)
+                .setParameter("id",id)
+                .setParameter("work",workStatus);
         query.executeUpdate();
     }
 }

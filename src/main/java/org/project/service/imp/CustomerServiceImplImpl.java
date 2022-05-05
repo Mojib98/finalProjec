@@ -62,6 +62,7 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
         }
     }
     public void choice(Offer offer,AcceptOffer acceptOffer){
+
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
@@ -74,15 +75,16 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
 
                 transaction.begin();
                 Order order = customerRepository.findOrder(offer.getOrder().getId());
-                acceptOffer.setOrder(order);
                 Specialist specialist = customerRepository.find(offer.getSpecialists().getId());
                 acceptOffer.setSpecialists(specialist);
 //                Order order = new Order();
 //                order.setId(offer.getOrder().getId());
 //                order.setWorkStatus(WorkStatus.WAIT_FOR_ARRIVE);
 //                acceptOffer1.setOrder(order);
+                order.setAcceptOffer(acceptOffer);
+                order.setWorkStatus(WorkStatus.WAIT_FOR_ARRIVE);
                 customerRepository.insertAcceptOffer(acceptOffer);
-//                customerRepository.update(order);
+                customerRepository.update(order);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
