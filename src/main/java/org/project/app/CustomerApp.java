@@ -103,8 +103,11 @@ public class CustomerApp {
         System.out.println(acceptOffer.getId());
         customerServiceImpl.paying(acceptOffer,25);
     }
-    public void addComment(AcceptOffer acceptOffer,Integer id){
-
+    public void addComment(){
+        AcceptOffer acceptOffer1 = customerServiceImpl.myAcceptOffer(86);
+        Comment comment = new Comment();
+        comment.setComment("sadfdf");
+        customerServiceImpl.addComment(acceptOffer1,25,comment);
     }
 
 
