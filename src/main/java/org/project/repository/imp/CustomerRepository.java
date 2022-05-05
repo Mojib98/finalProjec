@@ -94,4 +94,12 @@ public class CustomerRepository extends GenericRepositoryImpl<Order> implements 
         session.update(specialist);
 
     }
+    public void changeWorkBySpecialist(Integer id,WorkStatus workStatus){
+        var session = sessionFactory.getCurrentSession();
+        String hql = "update Order set workStatus =:work where acceptOffer.id=:id";
+        var query = session.createQuery(hql)
+                .setParameter("id",id)
+                .setParameter("work",workStatus);
+        query.executeUpdate();
+    }
 }

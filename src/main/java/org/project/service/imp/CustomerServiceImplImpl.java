@@ -153,6 +153,8 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
+                customerRepository.changeWorkBySpecialist(acceptOffer.getId(),WorkStatus.PAYED);
+                Order order = customerRepository.findOrder(acceptOffer.getOrder().getId());
                 Specialist specialist = customerRepository.find(acceptOffer.getSpecialists().getId());
                 System.out.println(specialist.getBudget());
                 Customer customer = customerRepository.findCustomer(id);
@@ -205,4 +207,5 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             }
         }
     }
+
 }

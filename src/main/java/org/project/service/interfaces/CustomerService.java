@@ -1,6 +1,7 @@
 package org.project.service.interfaces;
 
 import org.project.entity.*;
+import org.project.entity.enumeration.WorkStatus;
 
 import java.util.List;
 
