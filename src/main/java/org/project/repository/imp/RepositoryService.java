@@ -10,7 +10,7 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepositoryService {
+public class RepositoryService implements org.project.repository.interfaces.RepositoryService {
     private final SessionFactory sessionFactory =SessionFactorySingleton.getInstance();
     public Service findByName(String name){
         var session = sessionFactory.getCurrentSession();

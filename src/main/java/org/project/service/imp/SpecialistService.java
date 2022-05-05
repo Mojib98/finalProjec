@@ -8,7 +8,7 @@ import org.project.repository.imp.SpecialistRepository;
 
 import java.util.List;
 
-public class SpecialistService extends GenericServiceImpl<BaseClass>{
+public class SpecialistService extends GenericServiceImpl<BaseClass> implements org.project.service.interfaces.SpecialistService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     SpecialistRepository specialistRepository = new SpecialistRepository();
     public List<Order> findOrders(Specialist specialist){

@@ -9,7 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import java.util.List;
 
-public class SingUpRepository {
+public class SingUpRepository implements org.project.repository.interfaces.SingUpRepository {
     private final SessionFactory sessionFactory =SessionFactorySingleton.getInstance();
     public void requestForSpecialist(RequestForConfirmation request){
         var session = sessionFactory.getCurrentSession();

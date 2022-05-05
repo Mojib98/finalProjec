@@ -7,11 +7,12 @@ import org.project.entity.Service;
 import org.project.entity.Specialist;
 import org.project.repository.imp.RepositoryService;
 import org.project.repository.imp.SessionFactorySingleton;
+import org.project.service.interfaces.ServiceForService;
 
 import javax.imageio.spi.ServiceRegistry;
 import java.util.List;
 
-public class ServiceForServiceImpl extends GenericServiceImpl<Service> {
+public class ServiceForServiceImpl extends GenericServiceImpl<Service> implements ServiceForService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     RepositoryService serviceRegistry = new RepositoryService();
     public void addService(Service service){

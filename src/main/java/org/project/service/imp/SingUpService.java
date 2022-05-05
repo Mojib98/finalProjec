@@ -7,7 +7,7 @@ import org.project.entity.enumeration.UserStatus;
 import org.project.repository.imp.SessionFactorySingleton;
 import org.project.repository.imp.SingUpRepository;
 
-public class SingUpService {
+public class SingUpService implements org.project.service.interfaces.SingUpService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final SingUpRepository sing = new SingUpRepository();
 
