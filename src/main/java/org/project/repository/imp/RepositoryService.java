@@ -1,9 +1,13 @@
 package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
+import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.Service;
+import org.project.entity.Specialist;
 
+import javax.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepositoryService {
@@ -35,5 +39,25 @@ public class RepositoryService {
         String hql="from Service s where s.category is not null ";
         var query = session.createQuery(hql,Service.class);
         return query.getResultList();
+    }
+    public List<Customer> search(Customer customer) {
+        var session = sessionFactory.getCurrentSession();
+        var criteriaBuilder = session.getCriteriaBuilder();
+        var criteriaQuery = criteriaBuilder.createQuery(Customer.class);
+        var root = criteriaQuery.from(Customer.class); // select query
+        List<Predicate> predicates = new ArrayList<>();
+        if (customer.getFirstName() != null && !customer.getFirstName().isEmpty())
+            predicates.add(criteriaBuilder.equal(root.get("firstName"), customer.getFirstName()));
+        if (customer.getLastName() != null && !customer.getLastName().isEmpty())
+            predicates.add(criteriaBuilder.equal(root.get("lastName"), customer.getFirstName()));
+        if (customer.getEmail() != null && !customer.getEmail().isEmpty())
+            predicates.add(criteriaBuilder.equal(root.get("email"), customer.getFirstName()));
+        if (customer.getStatus() != null)
+            predicates.add(criteriaBuilder.equal(root.get("status"), customer.getFirstName()));
+        criteriaQuery
+                .where(predicates.toArray(new Predicate[0]));
+
+        return session.createQuery(criteriaQuery).list();
+
     }
 }

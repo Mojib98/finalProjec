@@ -68,14 +68,14 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
         var criteriaQuery = criteriaBuilder.createQuery(Specialist.class);
         var root = criteriaQuery.from(Specialist.class); // select query
         List<Predicate> predicates = new ArrayList<>();
-        if (specialist.getFirstName() != null && !specialist.getEmail().isEmpty())
+        if (specialist.getFirstName() != null && !specialist.getFirstName().isEmpty())
             predicates.add(criteriaBuilder.equal(root.get("firstName"), specialist.getFirstName()));
-        if (specialist.getFirstName() != null && !specialist.getEmail().isEmpty())
+        if (specialist.getLastName() != null && !specialist.getLastName().isEmpty())
             predicates.add(criteriaBuilder.equal(root.get("lastName"), specialist.getFirstName()));
-        if (specialist.getFirstName() != null && !specialist.getEmail().isEmpty())
+        if (specialist.getEmail() != null && !specialist.getEmail().isEmpty())
             predicates.add(criteriaBuilder.equal(root.get("email"), specialist.getFirstName()));
-        if (specialist.getFirstName() != null && !specialist.getEmail().isEmpty())
-            predicates.add(criteriaBuilder.equal(root.get("status"), specialist.getFirstName()));
+       /* if (specialist.getStatus() != null && !specialist.getStatus().)
+            predicates.add(criteriaBuilder.equal(root.get("status"), specialist.getFirstName()));*/
         criteriaQuery
                 .where(predicates.toArray(new Predicate[0]));
 

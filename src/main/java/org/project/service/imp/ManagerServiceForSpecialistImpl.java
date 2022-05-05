@@ -11,7 +11,6 @@ import org.project.repository.imp.SessionFactorySingleton;
 import org.project.service.interfaces.ManageServiceForSpecialist;
 
 import java.util.List;
-import java.util.Properties;
 
 public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Specialist> implements ManageServiceForSpecialist {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
@@ -151,20 +150,24 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
 
     @Override
-    public List<Properties> search(Properties properties) {
+    public List<Specialist> search(Specialist specialist) {
+        List<Specialist> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
+                list=repositorySpecialist.search(specialist);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
+                e.printStackTrace();
                 System.out.println(e.getMessage());
 
             }
 
         }
-        return null;
+        return list;
+
     }
 
     @Override

@@ -1,6 +1,9 @@
 package org.project.app;
 
+import org.project.entity.Customer;
 import org.project.entity.Service;
+import org.project.entity.Specialist;
+import org.project.entity.enumeration.UserStatus;
 import org.project.service.imp.ServiceForServiceImpl;
 
 import java.util.List;
@@ -47,5 +50,36 @@ public class ManageForSystem {
         for (Service service:serviceList){
             System.out.println(service.getName());
         }
+    }
+    public void search(){
+        Customer customer = optionForSearch();
+        System.out.println(customer);
+        var list= serviceForService.search(customer);
+        list.forEach(System.out::println);
+
+    }
+    private Customer optionForSearch(){
+        System.out.println("\t\t!!!if want add option insert request else insert  'no'");
+        System.out.println("\tfirst name");
+        String fName = checker();
+        System.out.println("\tlast name");
+        String lName = checker();
+        System.out.println("\temail");
+        String email = checker();
+        System.out.println("\tstatus");
+        String status =checker();
+        UserStatus status1 = UserStatus.valueOf(status);
+//        UserStatus status1 = UserStatus.CONFIRMED;
+
+        return new Customer(null,null,fName,lName,email,null,status1);
+
+    }
+    private String checker(){
+        String string = scanner.next();
+        if (string.equals("no"))
+            return null;
+        else
+            return string;
+
     }
 }

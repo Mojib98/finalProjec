@@ -16,5 +16,8 @@ public enum UserStatus {
     public String toString(){
         return toString;
     }
+    public Enum<UserStatus> find(String name){
+        return this.find(name);
+    }
     }
 

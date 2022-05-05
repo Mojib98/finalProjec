@@ -5,7 +5,6 @@ import org.project.entity.RequestForNewSpecialization;
 import org.project.entity.Specialist;
 
 import java.util.List;
-import java.util.Properties;
 
 public interface ManageServiceForSpecialist extends GenericService<Specialist> {
     void changeStatus(Specialist specialist);
@@ -16,7 +15,7 @@ public interface ManageServiceForSpecialist extends GenericService<Specialist> {
     void changeStatusForRequest(List<RequestForConfirmation> request);
     List<RequestForNewSpecialization> findNewRequest();
     void handleRequestForSpecialization(List<RequestForNewSpecialization> request);
-    List<Properties> search(Properties properties);
+    List<Specialist> search(Specialist specialist);
     List<RequestForConfirmation> RequestList();
 
 }

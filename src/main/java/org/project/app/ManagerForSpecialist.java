@@ -2,6 +2,7 @@ package org.project.app;
 
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;
+import org.project.entity.Specialist;
 import org.project.entity.enumeration.UserStatus;
 import org.project.service.interfaces.ManageServiceForSpecialist;
 import org.project.service.imp.ManagerServiceForSpecialistImpl;
@@ -66,7 +67,6 @@ public class ManagerForSpecialist {
         handleRequestNew(accept);
         removeFromRequestSpecialty(unAccept);
     }
-
     private void handleRequestNew(List<RequestForNewSpecialization> accept){
         forSpecialist.handleRequestForSpecialization(accept);
     }
@@ -74,6 +74,38 @@ public class ManagerForSpecialist {
                 forSpecialist.unAccept(list);
 
     }
+    public void search(){
+        Specialist specialist = optionForSearch();
+        System.out.println(specialist);
+            var list= forSpecialist.search(specialist);
+            list.forEach(System.out::println);
+
+    }
+    private Specialist optionForSearch(){
+        System.out.println("\t\t!!!if want add option insert request else insert  'no'");
+        System.out.println("\tfirst name");
+        String fName = checker();
+        System.out.println("\tlast name");
+        String lName = checker();
+        System.out.println("\temail");
+        String email = checker();
+        System.out.println("\tstatus");
+        String status =checker();
+        UserStatus status1 = UserStatus.valueOf(status);
+//        UserStatus status1 = UserStatus.CONFIRMED;
+
+        return new Specialist(null,null,fName,lName,email,null,status1);
+
+    }
+    private String checker(){
+        String string = scanner.next();
+        if (string.equals("no"))
+            return null;
+        else
+            return string;
+
+    }
+
 
 
 

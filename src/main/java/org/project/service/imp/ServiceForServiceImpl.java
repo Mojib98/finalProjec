@@ -2,7 +2,9 @@ package org.project.service.imp;
 
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.hibernate.SessionFactory;
+import org.project.entity.Customer;
 import org.project.entity.Service;
+import org.project.entity.Specialist;
 import org.project.repository.imp.RepositoryService;
 import org.project.repository.imp.SessionFactorySingleton;
 
@@ -140,4 +142,24 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> {
             e.getMessage();;
         }
     }
+    public List<Customer> search(Customer customer) {
+        List<Customer> list = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                list=serviceRegistry.search(customer);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                e.printStackTrace();
+                System.out.println(e.getMessage());
+
+            }
+
+        }
+        return list;
+
+    }
+
 }
