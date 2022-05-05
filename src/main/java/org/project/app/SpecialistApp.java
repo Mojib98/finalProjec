@@ -96,6 +96,12 @@ public class SpecialistApp {
         }
         return false;
     }
+    private boolean isCurrentTime(LocalDateTime orderTime,LocalDateTime offerTime){
+        if (offerTime.equals(orderTime)){
+            return true;
+        }
+        return false;
+    }
     public void arriveOffer(){
         List<AcceptOffer> acceptOffers =specialistService.findMyAcceptOffer(3);
         for (AcceptOffer a:acceptOffers){
