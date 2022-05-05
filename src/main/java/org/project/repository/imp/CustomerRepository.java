@@ -88,4 +88,10 @@ public class CustomerRepository extends GenericRepositoryImpl<Order> implements 
                 .setParameter("newPassword",password)
                 .executeUpdate();
     }
+    public void payIng(Customer customer,Specialist specialist){
+        var session = sessionFactory.getCurrentSession();
+        session.update(customer);
+        session.update(specialist);
+
+    }
 }

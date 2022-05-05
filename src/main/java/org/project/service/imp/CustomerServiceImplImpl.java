@@ -154,7 +154,9 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             try {
                 transaction.begin();
                 Specialist specialist = customerRepository.find(acceptOffer.getSpecialists().getId());
+                System.out.println(specialist.getBudget());
                 Customer customer = customerRepository.findCustomer(id);
+                System.out.println(customer.getBudget());
                 int a=customer.getBudget().getBudget().compareTo(acceptOffer.getOfferPrice());
                 if (a<0){
 
@@ -164,6 +166,7 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
                     customer.getBudget().setBudget(c-price); ;
                    Double s= specialist.getBudget().getBudget();
                    specialist.getBudget().setBudget(s+price);
+                   customerRepository.payIng(customer,specialist);
                 }
                 transaction.commit();
             } catch (Exception e) {

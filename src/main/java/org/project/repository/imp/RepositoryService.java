@@ -2,9 +2,7 @@ package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.Customer;
-import org.project.entity.RequestForConfirmation;
 import org.project.entity.Service;
-import org.project.entity.Specialist;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;

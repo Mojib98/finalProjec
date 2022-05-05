@@ -3,6 +3,7 @@ package org.project.entity;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
@@ -17,11 +18,11 @@ public class AcceptOffer extends BaseClass {
     private Double offerPrice;
     private LocalDateTime workTime;
     private Integer timeWorkPerMinute;
-    @OneToOne(mappedBy = "acceptOffer")
+    @OneToOne(mappedBy = "acceptOffer",fetch = FetchType.EAGER)
     private Order order;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     private Specialist specialists;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Comment comment;
 
     public AcceptOffer(Integer id, LocalDateTime time) {
