@@ -19,4 +19,8 @@ public class AcceptOffer extends BaseClass {
     private Specialist specialists;
     @OneToOne
     private Comment comment;
+
+    public AcceptOffer(Integer id, LocalDateTime time) {
+        super(id, time);
+    }
 }

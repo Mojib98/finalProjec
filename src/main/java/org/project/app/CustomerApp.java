@@ -1,9 +1,7 @@
 package org.project.app;
 
 import lombok.Setter;
-import org.project.entity.Customer;
-import org.project.entity.Order;
-import org.project.entity.Service;
+import org.project.entity.*;
 import org.project.entity.enumeration.WorkStatus;
 import org.project.service.imp.CustomerServiceImplImpl;
 import org.project.service.imp.ServiceForServiceImpl;
@@ -15,7 +13,7 @@ import java.util.Scanner;
 public class CustomerApp {
     Customer customer;
     ServiceForServiceImpl service = new ServiceForServiceImpl();
-    CustomerServiceImplImpl customerRepository = new CustomerServiceImplImpl();
+    CustomerServiceImplImpl customerServiceImpl = new CustomerServiceImplImpl();
     Scanner scanner = new Scanner(System.in);
     Utility utility = new Utility();
     public void seeCategory(){
@@ -61,7 +59,7 @@ public class CustomerApp {
             order.setWorkStatus(WorkStatus.WAIT_FOR_OFFER);
             order.setDescribe(describe);
             order.setAddress(address);
-            customerRepository.insert(order);
+            customerServiceImpl.insert(order);
         }else{
             System.out.println("price is bad try again");
         }
@@ -78,7 +76,23 @@ public class CustomerApp {
     }
     public void changePassword(){}
     public void seeOffer(){}
-    public void choseOffer(){}
+    public void choseOffer(){
+        Integer id = scanner.nextInt();
+        Offer offer = customerServiceImpl.findOfferById(id);
+        System.out.println(offer);
+        Integer idSpecialist=offer.getSpecialists().getId();
+        Integer idOrder = offer.getOrder().getId();
+        System.out.println(idSpecialist+" "+idOrder);
+     /*   Order order = customerServiceImpl.findOrderById(idOrder);
+        System.out.println(order);*/
+        AcceptOffer acceptOffer = new AcceptOffer(null,null);
+        acceptOffer.setOfferPrice(offer.getOfferPrice());
+        acceptOffer.setWorkTime(offer.getWorkTime());
+        customerServiceImpl.choice(offer,acceptOffer);
+
+
+
+    }
 
 
 

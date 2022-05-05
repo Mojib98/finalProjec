@@ -19,7 +19,7 @@ public class Customer extends Person{
                     UserStatus status) {
         super(id, Time, firstName, lastName, email, password, status);
     }
-    @OneToMany
+    @OneToMany(mappedBy = "customers")
     private List<Order> orders;
     @OneToOne
     private Budget budget;

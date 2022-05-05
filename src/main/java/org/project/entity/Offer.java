@@ -45,13 +45,15 @@ public class Offer extends BaseClass{
         this.order = order;
     }
 
-    public Offer(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime workTime, Integer timeWorkPerMinute, Order order, Specialist specialists) {
+    public Offer(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime workTime, Integer timeWorkPerMinute, Integer order, Integer specialists) {
         super(id, Time);
         this.offerPrice = offerPrice;
         this.workTime = workTime;
         this.timeWorkPerMinute = timeWorkPerMinute;
-        this.order = order;
-        this.specialists = specialists;
+        this.order = new Order();
+        this.order.setId(order);
+        this.specialists = new Specialist();
+        this.specialists.setId(specialists);
     }
 
     public Offer() {
@@ -66,5 +68,14 @@ public class Offer extends BaseClass{
         order.setId(idOrder);
         this.specialists = new Specialist();
         specialists.setId(idSpecialty);
+    }
+
+    public Offer(Integer id, LocalDateTime time, Double offerPrice, LocalDateTime workTime, Integer timeWorkPerMinute, Order order, Specialist specialists) {
+        super(id, time);
+        this.offerPrice = offerPrice;
+        this.workTime = workTime;
+        this.timeWorkPerMinute = timeWorkPerMinute;
+        this.order = order;
+        this.specialists = specialists;
     }
 }
