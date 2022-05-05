@@ -23,4 +23,9 @@ public class Customer extends Person{
     private List<Order> orders;
     @OneToOne
     private Budget budget;
+
+    public Customer(Integer id, LocalDateTime Time, String firstName, String lastName, String email, String password, UserStatus status, Budget budget) {
+        super(id, Time, firstName, lastName, email, password, status);
+        this.budget = budget;
+    }
 }

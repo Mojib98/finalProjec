@@ -13,6 +13,7 @@ import java.util.List;
 public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implements CustomerService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final CustomerRepository customerRepository = new CustomerRepository();
+
     public List<Customer> search(Customer customer) {
         List<Customer> list = new ArrayList<>();
         try (var session = sessionFactory.getCurrentSession()) {
@@ -29,13 +30,14 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             return list;
         }
     }
-    public List<Offer> AllOffer(Integer id){
+
+    public List<Offer> AllOffer(Integer id) {
         List<Offer> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                list=customerRepository.findAllOffer(25);
+                list = customerRepository.findAllOffer(25);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -45,13 +47,14 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             return list;
         }
     }
-    public Offer findOfferById(Integer id){
+
+    public Offer findOfferById(Integer id) {
         Offer offer = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                offer=customerRepository.findOfferById(id);
+                offer = customerRepository.findOfferById(id);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -61,7 +64,8 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             return offer;
         }
     }
-    public void choice(Offer offer,AcceptOffer acceptOffer){
+
+    public void choice(Offer offer, AcceptOffer acceptOffer) {
 
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
@@ -92,13 +96,14 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             }
         }
     }
-    public Order findOrderById(Integer id){
+
+    public Order findOrderById(Integer id) {
         Order order = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                order=customerRepository.findOrder(id);
+                order = customerRepository.findOrder(id);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -109,4 +114,62 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
         }
     }
 
+    public List<Order> findDownOrder(Integer id) {
+        List<Order> list = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                list = customerRepository.findDownOrder(25);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+                return null;
+            }
+            return list;
+        }
+    }
+
+    public AcceptOffer myAcceptOffer(Integer id) {
+        AcceptOffer acceptOffer = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                acceptOffer = customerRepository.findAcceptOrder(id);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+                return null;
+            }
+            return acceptOffer;
+        }
+    }
+
+    public void paying(AcceptOffer acceptOffer,Integer id) {
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                Specialist specialist = customerRepository.find(acceptOffer.getSpecialists().getId());
+                Customer customer = customerRepository.findCustomer(id);
+                int a=customer.getBudget().getBudget().compareTo(acceptOffer.getOfferPrice());
+                if (a<0){
+
+                }else {
+                    Double c = customer.getBudget().getBudget();
+                    Double price = acceptOffer.getOfferPrice();
+                    customer.getBudget().setBudget(c-price); ;
+                   Double s= specialist.getBudget().getBudget();
+                   specialist.getBudget().setBudget(s+price);
+                }
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 }

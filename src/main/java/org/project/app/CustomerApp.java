@@ -93,6 +93,10 @@ public class CustomerApp {
 
 
     }
+    public void payForOrder(){
+        AcceptOffer acceptOffer = customerServiceImpl.myAcceptOffer(86);
+
+    }
 
 
 
