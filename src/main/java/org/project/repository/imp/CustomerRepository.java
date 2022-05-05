@@ -77,4 +77,15 @@ public class CustomerRepository extends GenericRepositoryImpl<Order> implements 
         session.save(comment);
 
     }
+    public void changePassword(Customer customer,String password){
+
+        var session = sessionFactory.getCurrentSession();
+        String hql = "update Customer set password=:newPassword " +
+                " where email=:email and password=:oldPass";
+        var query = session.createQuery(hql)
+                .setParameter("email", customer.getEmail())
+                .setParameter("oldPass", customer.getPassword())
+                .setParameter("newPassword",password)
+                .executeUpdate();
+    }
 }

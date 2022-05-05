@@ -74,7 +74,12 @@ public class CustomerApp {
 //        return price >= lowerPrice && price <= upperPrice;
         return false;
     }
-    public void changePassword(){}
+    public void changePassword(){
+        String newPassword=utility.setPassword();
+
+
+
+    }
     public void seeOffer(){}
     public void choseOffer(){
         Integer id = scanner.nextInt();
@@ -100,6 +105,7 @@ public class CustomerApp {
     public void addComment(AcceptOffer acceptOffer,Integer id){
 
     }
+
 
 
 

@@ -58,4 +58,15 @@ public class SpecialistRepository {
                 .setParameter("work",workStatus);
         query.executeUpdate();
     }
+    public void changePassword(Specialist specialist,String password){
+
+        var session = sessionFactory.getCurrentSession();
+        String hql = "update Specialist set password=:newPassword " +
+                " where email=:email and password=:oldPass";
+        var query = session.createQuery(hql)
+                .setParameter("email", specialist.getEmail())
+                .setParameter("oldPass", specialist.getPassword())
+                .setParameter("newPassword",password)
+                .executeUpdate();
+    }
 }

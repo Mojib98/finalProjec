@@ -109,5 +109,18 @@ public class SpecialistService extends GenericServiceImpl<BaseClass>{
             }
         }
     }
+    public void changePassword(Specialist specialist,String newPassword){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                specialistRepository.changePassword(specialist,newPassword);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
 }

@@ -189,4 +189,17 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             }
         }
     }
+    public void changePassword(Customer customer,String newPassword){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                 customerRepository.changePassword(customer,newPassword);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 }
