@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
 @Setter
 @Getter
 @AllArgsConstructor
@@ -40,4 +39,11 @@ public class Specialist extends Person{
     @OneToOne
     private Budget budget;
 
+    public Specialist(Integer id, LocalDateTime Time, String firstName, String lastName, String email, String password, UserStatus status, Budget budget) {
+        super(id, Time, firstName, lastName, email, password, status);
+        this.budget = budget;
+    }
+
+    public Specialist() {
+    }
 }

@@ -34,8 +34,8 @@ public class ManagerForSpecialist {
                 default:
             }
         }
-        acceptList(accept);
-        unAcceptList(unAccept);
+        forSpecialist.acceptRequest(accept);
+       // unAcceptList(unAccept);
     }
     private void acceptList(List<RequestForConfirmation> request){
         forSpecialist.acceptRequest(request);
@@ -48,7 +48,7 @@ public class ManagerForSpecialist {
         List<RequestForNewSpecialization> accept = new ArrayList<>();
         List<RequestForNewSpecialization> unAccept = new ArrayList<>();
         for (RequestForNewSpecialization request : list) {
-            System.out.println(request.getSpecialist());
+//            System.out.println(request.getSpecialist());
             System.out.println(request.getService().getName());
             System.out.println("if confirmation insert 'y' or insert 'n'");
             char check = scanner.next().charAt(0);

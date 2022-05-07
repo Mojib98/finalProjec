@@ -1,6 +1,7 @@
 package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
+import org.project.entity.Budget;
 import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.enumeration.UserStatus;
@@ -70,7 +71,11 @@ public class SingUpService implements org.project.service.interfaces.SingUpServi
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
+                Budget budget = new Budget(null,null,20000D);
+
                 sing.insertCustomer(customer);
+                sing.insertBudget(budget);
+                customer.setBudget(budget);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -80,4 +85,5 @@ public class SingUpService implements org.project.service.interfaces.SingUpServi
             }
         }
     }
+
 }

@@ -17,6 +17,7 @@ public class SpecialistService extends GenericServiceImpl<BaseClass> implements 
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
+                System.out.println(specialist.getId());
                 orders = specialistRepository.findOrders(specialist.getId());
                 transaction.commit();
             } catch (Exception e) {

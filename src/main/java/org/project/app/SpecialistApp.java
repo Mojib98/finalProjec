@@ -41,7 +41,7 @@ public class SpecialistApp {
                 specialist,service);*/
         RequestForNewSpecialization request = new RequestForNewSpecialization(null,null,name,
                 describe, UserStatus.AWAITING_CONFIRMATION,
-                specialist,service);
+                this.specialist,service);
         specialistService.insert(request);
     }
     public void seeOrders(){
@@ -56,7 +56,7 @@ public class SpecialistApp {
     }
     public void writeOffer(){
         Order order = null;
-        List<Order> list = specialistService.findOrders(specialist);
+        List<Order> list = specialistService.findOrders(this.specialist);
         list.stream().forEach(System.out::println);
         System.out.println("insert id");
         Integer id=utility.giveIntegerInput();

@@ -15,8 +15,8 @@ public class SpecialistRepository {
     public List<Order> findOrders(Integer id){
         var session = sessionFactory.getCurrentSession();
         String sql="select * from orders e inner join service s on s.id = e.service_id " +
-                "inner join specialist_service ss on s.id = ss.services_id where ss.specialists_id=?";
-        var query = session.createNativeQuery(sql,"orders").setParameter(1,id);
+                "inner join specialist_service ss on s.id = ss.services_id where ss.specialists_id=:id";
+        var query = session.createNativeQuery(sql,"orders").setParameter("id",id);
         return (List<Order>) query.getResultList();
 
     }

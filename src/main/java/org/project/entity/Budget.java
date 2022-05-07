@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Check;
 
 import javax.persistence.Entity;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -15,4 +16,8 @@ import javax.persistence.Entity;
 public class Budget extends BaseClass{
     private Double budget;
 
+    public Budget(Integer id, LocalDateTime time, Double budget) {
+        super(id, time);
+        this.budget = budget;
+    }
 }

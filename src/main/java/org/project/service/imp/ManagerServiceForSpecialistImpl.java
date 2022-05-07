@@ -1,10 +1,7 @@
 package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
-import org.project.entity.RequestForConfirmation;
-import org.project.entity.RequestForNewSpecialization;
-import org.project.entity.Service;
-import org.project.entity.Specialist;
+import org.project.entity.*;
 import org.project.entity.enumeration.UserStatus;
 import org.project.repository.imp.ManageRepositorySpecialist;
 import org.project.repository.imp.SessionFactorySingleton;
@@ -30,28 +27,35 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
     @Override
     public void acceptRequest(List<RequestForConfirmation> request) {
-        try {
-            for (RequestForConfirmation request1 : request) {
-                Specialist specialist = new Specialist();
-                specialist.setFirstName(request1.getFirstName());
-                specialist.setLastName(request1.getLastName());
-                specialist.setPassword(request1.getPassword());
-                specialist.setEmail(request1.getEmail());
-                specialist.setStatus(UserStatus.CONFIRMED);
-                specialist.setAvatar(request1.getAvatar());
-                request1.setStatus(UserStatus.CONFIRMED);
-                request1.setAvatar(null);
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                for (RequestForConfirmation request1 : request) {
+                    Budget budget = new Budget(null, null, 0D);
+                    Specialist specialist = new Specialist();
+                    specialist.setFirstName(request1.getFirstName());
+                    specialist.setLastName(request1.getLastName());
+                    specialist.setPassword(request1.getPassword());
+                    specialist.setEmail(request1.getEmail());
+                    specialist.setStatus(UserStatus.CONFIRMED);
+                    specialist.setAvatar(request1.getAvatar());
+                    request1.setStatus(UserStatus.CONFIRMED);
+                    request1.setAvatar(null);
+                    repositorySpecialist.insertBudget(budget);
+                    specialist.setBudget(budget);
+                   repositorySpecialist.insertSpecial(specialist);
 
-                insert(specialist);
+//                    changeStatusForRequest(request);
+                    transaction.commit();
 
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                transaction.rollback();
             }
-            changeStatusForRequest(request);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
 
         }
-
-
     }
 
     public void changeStatusForRequest(List<RequestForConfirmation> request) {
@@ -127,8 +131,8 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
-                transaction.begin();
                 for (RequestForNewSpecialization request1 : request) {
+                    transaction.begin();
                     System.out.println(request1.getService());
                     Service service = new Service(request1.getService().getId(), null, request1.getService().getName());
                     Specialist specialist = request1.getSpecialist();

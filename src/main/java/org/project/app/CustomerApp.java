@@ -99,9 +99,9 @@ public class CustomerApp {
 
     }
     public void payForOrder(){
-        AcceptOffer acceptOffer = customerServiceImpl.myAcceptOffer(86);
+        AcceptOffer acceptOffer = customerServiceImpl.myAcceptOffer(120);
         System.out.println(acceptOffer.getId());
-        customerServiceImpl.paying(acceptOffer,25);
+        customerServiceImpl.paying(acceptOffer,91);
     }
     public void addComment(){
         AcceptOffer acceptOffer1 = customerServiceImpl.myAcceptOffer(86);

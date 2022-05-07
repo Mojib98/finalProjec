@@ -1,6 +1,7 @@
 package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
+import org.project.entity.Budget;
 import org.project.entity.Customer;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.enumeration.UserStatus;
@@ -55,5 +56,9 @@ public class SingUpRepository implements org.project.repository.interfaces.SingU
     public void insertCustomer(Customer customer){
         var session = sessionFactory.getCurrentSession();
         session.save(customer);
+    }
+    public void insertBudget(Budget budget){
+        var session = sessionFactory.getCurrentSession();
+        session.save(budget);
     }
 }

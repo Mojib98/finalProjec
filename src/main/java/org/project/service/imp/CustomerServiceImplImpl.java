@@ -155,21 +155,21 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
                 transaction.begin();
                 customerRepository.changeWorkBySpecialist(acceptOffer.getId(),WorkStatus.PAYED);
                 Order order = customerRepository.findOrder(acceptOffer.getOrder().getId());
-                Specialist specialist = customerRepository.find(acceptOffer.getSpecialists().getId());
+                Specialist specialist = customerRepository.find(110);
                 System.out.println(specialist.getBudget());
                 Customer customer = customerRepository.findCustomer(id);
                 System.out.println(customer.getBudget());
                 int a=customer.getBudget().getBudget().compareTo(acceptOffer.getOfferPrice());
-                if (a<0){
+//                if (a<0){
 
-                }else {
+//                }else {
                     Double c = customer.getBudget().getBudget();
                     Double price = acceptOffer.getOfferPrice();
                     customer.getBudget().setBudget(c-price); ;
                    Double s= specialist.getBudget().getBudget();
                    specialist.getBudget().setBudget(s+price);
                    customerRepository.payIng(customer,specialist);
-                }
+
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
