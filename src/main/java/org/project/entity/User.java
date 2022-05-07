@@ -15,7 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public  abstract class Person extends BaseClass{
+public class User extends BaseClass{
     @NotNull
     private String firstName;
     @NotNull
@@ -26,22 +26,12 @@ public  abstract class Person extends BaseClass{
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    public Person(Integer id, LocalDateTime Time, String firstName,
-                  String lastName, String email, String password, UserStatus status) {
-        super(id, Time);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.status = status;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Person person = (Person) o;
+        User person = (User) o;
         return Objects.equals(email, person.email);
     }
 

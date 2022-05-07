@@ -1,15 +1,12 @@
 package org.project.service.imp;
 
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.hibernate.SessionFactory;
 import org.project.entity.Customer;
 import org.project.entity.Service;
-import org.project.entity.Specialist;
 import org.project.repository.imp.RepositoryService;
 import org.project.repository.imp.SessionFactorySingleton;
 import org.project.service.interfaces.ServiceForService;
 
-import javax.imageio.spi.ServiceRegistry;
 import java.util.List;
 
 public class ServiceForServiceImpl extends GenericServiceImpl<Service> implements ServiceForService {
@@ -135,7 +132,7 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
     }
     public void insertSpecialty(Service service){
         try {
-            if (service.getCategory() == null)
+            if (service == null)
                 throw new RuntimeException("dont have cateGury");
             checkUniqueService(service);
             insert(service);

@@ -1,8 +1,8 @@
+/*
 package org.project.app;
 
 import org.project.entity.Customer;
 import org.project.entity.Service;
-import org.project.entity.Specialist;
 import org.project.entity.enumeration.UserStatus;
 import org.project.service.imp.ServiceForServiceImpl;
 
@@ -83,3 +83,4 @@ public class ManageForSystem {
 
     }
 }
+*/

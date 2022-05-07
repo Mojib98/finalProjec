@@ -1,8 +1,9 @@
+/*
 package org.project.app;
 
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.RequestForNewSpecialization;
-import org.project.entity.Specialist;
+import org.project.entity.Expert;
 import org.project.entity.enumeration.UserStatus;
 import org.project.service.interfaces.ManageServiceForSpecialist;
 import org.project.service.imp.ManagerServiceForSpecialistImpl;
@@ -75,13 +76,13 @@ public class ManagerForSpecialist {
 
     }
     public void search(){
-        Specialist specialist = optionForSearch();
+        Expert specialist = optionForSearch();
         System.out.println(specialist);
             var list= forSpecialist.search(specialist);
             list.forEach(System.out::println);
 
     }
-    private Specialist optionForSearch(){
+    private Expert optionForSearch(){
         System.out.println("\t\t!!!if want add option insert request else insert  'no'");
         System.out.println("\tfirst name");
         String fName = checker();
@@ -94,7 +95,7 @@ public class ManagerForSpecialist {
         UserStatus status1 = UserStatus.valueOf(status);
 //        UserStatus status1 = UserStatus.CONFIRMED;
 
-        return new Specialist(null,null,fName,lName,email,null,status1);
+        return new Expert(null,null,fName,lName,email,null,status1);
 
     }
     private String checker(){
@@ -110,3 +111,4 @@ public class ManagerForSpecialist {
 
 
 }
+*/

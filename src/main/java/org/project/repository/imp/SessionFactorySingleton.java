@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.project.entity.*;
+import org.project.entity.Budget;
 
 public class SessionFactorySingleton {
 
@@ -23,9 +24,9 @@ public class SessionFactorySingleton {
             // SessionFactory is immutable.
             INSTANCE = new MetadataSources(registry)
                     .addAnnotatedClass(BaseClass.class)
-                    .addAnnotatedClass(Person.class)
+                    .addAnnotatedClass(User.class)
                     .addAnnotatedClass(Customer.class)
-                    .addAnnotatedClass(Specialist.class)
+                    .addAnnotatedClass(Expert.class)
                     .addAnnotatedClass(BaseClass.class)
                     .addAnnotatedClass(RequestForConfirmation.class)
                     .addAnnotatedClass(RequestForNewSpecialization.class)

@@ -1,12 +1,10 @@
 package org.project.service.interfaces;
 
 import org.project.entity.BaseClass;
-import org.project.entity.Customer;
-import org.project.entity.Specialist;
+import org.project.entity.Expert;
 
 
 import java.util.List;
-import java.util.Properties;
 
 public interface ManagerService {
 
@@ -18,6 +16,6 @@ public interface ManagerService {
     void insertSpecial(String name);
     Boolean isServiceExists();
     Boolean isSpecialExists();
-    List<Specialist> search(Specialist specialist);
+    List<Expert> search(Expert specialist);
 
 }

@@ -25,10 +25,10 @@ public class SingUpApp {
         String about = scanner.next();
         System.out.println();
         InputStream picture = utility.pathOfPicture();
-        RequestForConfirmation request = new RequestForConfirmation(null, null, fname, lname, email, password, null, about);
-        request.setAvatar(new Avatar(picture.readAllBytes()));
-        Integer track = sing.requestForSingUp(request);
-        System.out.println("your trackNumber is " + track);
+//        RequestForConfirmation request = new RequestForConfirmation(null, null, fname, lname, email, password, null, about);
+//        request.setAvatar(new Avatar(picture.readAllBytes()));
+//        Integer track = sing.requestForSingUp(request);
+//        System.out.println("your trackNumber is " + track);
     }
 
     public void tracking() {
@@ -56,8 +56,8 @@ public class SingUpApp {
         String lname = utility.setName();
         String email = utility.email();
         String password = utility.setPassword();
-        Customer customer = new Customer(null, null, fname, lname, email, password, UserStatus.ACTIVE);
-        sing.insertCustomer(customer);
+//        Customer customer = new Customer(null, null, fname, lname, email, password, UserStatus.ACTIVE);
+//        sing.insertCustomer(customer);
     }
 
 }

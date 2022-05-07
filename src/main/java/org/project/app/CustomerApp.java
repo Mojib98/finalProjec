@@ -1,3 +1,4 @@
+/*
 package org.project.app;
 
 import lombok.Setter;
@@ -88,8 +89,10 @@ public class CustomerApp {
         Integer idSpecialist=offer.getSpecialists().getId();
         Integer idOrder = offer.getOrder().getId();
         System.out.println(idSpecialist+" "+idOrder);
-     /*   Order order = customerServiceImpl.findOrderById(idOrder);
-        System.out.println(order);*/
+     */
+/*   Order order = customerServiceImpl.findOrderById(idOrder);
+        System.out.println(order);*//*
+
         AcceptOffer acceptOffer = new AcceptOffer(null,null);
         acceptOffer.setOfferPrice(offer.getOfferPrice());
         acceptOffer.setWorkTime(offer.getWorkTime());
@@ -114,3 +117,4 @@ public class CustomerApp {
 
 
 }
+*/

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.project.entity.enumeration.UserStatus;
 import org.project.entity.enumeration.WorkStatus;
 
 import javax.persistence.*;
@@ -15,7 +14,7 @@ import java.util.List;
         classes = @ConstructorResult(
                 targetClass = Order.class,
                 columns = {
-                        @ColumnResult(name = "id",type = Integer.class),
+                        @ColumnResult(name = "id",type = Budget.class),
                         @ColumnResult(name = "time",type = LocalDateTime.class),
                         @ColumnResult(name = "offerprice",type = Double.class),
                         @ColumnResult(name = "timeforwork",type = LocalDateTime.class),
@@ -32,7 +31,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "orders")
 public class Order extends BaseClass {
-    private Double offerPrice;
+    private Integer offerPrice;
     private LocalDateTime timeForWork;
     private String address;
     private String describe;
@@ -40,48 +39,9 @@ public class Order extends BaseClass {
     private WorkStatus workStatus;
     @ManyToOne
     private Customer customers;
-    @ManyToOne
-    private Service service;
     @OneToMany(mappedBy = "order")
     private List<Offer> offers;
-    @OneToOne
-    private AcceptOffer acceptOffer;
+    @ManyToOne
+    private SubService service;
 
-    public Order(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime timeForWork) {
-        super(id, Time);
-        this.offerPrice = offerPrice;
-        this.timeForWork = timeForWork;
-
-    }
-
-    public Order(Integer id, LocalDateTime Time, Double offerPrice, LocalDateTime timeForWork, Customer customers, Service service) {
-        super(id, Time);
-        this.offerPrice = offerPrice;
-        this.timeForWork = timeForWork;
-        this.customers = customers;
-        this.service = service;
-    }
-
-    public Order(Integer id, LocalDateTime Time) {
-        super(id, Time);
-    }
-
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "offerPrice=" + offerPrice +
-                ", timeForWork=" + timeForWork +
-                ", customers=" + customers +
-                ", service=" + service +
-                "} " + super.toString();
-    }
-
-    public Order(Integer id, LocalDateTime time, Double offerPrice, LocalDateTime timeForWork, String describe, Integer customers) {
-        super(id, time);
-        this.offerPrice = offerPrice;
-        this.timeForWork = timeForWork;
-        this.describe = describe;
-        this.customers = new Customer();
-        this.customers.setId(customers);
-    }
 }

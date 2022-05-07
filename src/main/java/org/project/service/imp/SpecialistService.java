@@ -11,7 +11,7 @@ import java.util.List;
 public class SpecialistService extends GenericServiceImpl<BaseClass> implements org.project.service.interfaces.SpecialistService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     SpecialistRepository specialistRepository = new SpecialistRepository();
-    public List<Order> findOrders(Specialist specialist){
+    public List<Order> findOrders(Expert specialist){
         List<Order> orders = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
@@ -29,8 +29,8 @@ public class SpecialistService extends GenericServiceImpl<BaseClass> implements 
         }
         return orders;
     }
-    public Specialist findByEmail(String email){
-        Specialist specialist = null;
+    public Expert findByEmail(String email){
+        Expert specialist = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
@@ -110,7 +110,7 @@ public class SpecialistService extends GenericServiceImpl<BaseClass> implements 
             }
         }
     }
-    public void changePassword(Specialist specialist,String newPassword){
+    public void changePassword(Expert specialist, String newPassword){
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {

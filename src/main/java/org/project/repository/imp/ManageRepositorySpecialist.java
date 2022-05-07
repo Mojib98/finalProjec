@@ -2,6 +2,7 @@ package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.*;
+import org.project.entity.Budget;
 import org.project.entity.enumeration.UserStatus;
 import org.project.repository.interfaces.ManageRepositoryForSpecialist;
 
@@ -27,7 +28,7 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
     }
 
     @Override
-    public void insertSpecial(Specialist specialist) {
+    public void insertSpecial(Expert specialist) {
         var session = sessionFactory.getCurrentSession();
             session.save(specialist);
     }
@@ -54,20 +55,20 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
     }
 
     @Override
-    public void handleRequestForSpecialization(Service service,Specialist specialist) {
+    public void handleRequestForSpecialization(Service service, Expert specialist) {
         var session = sessionFactory.getCurrentSession();
 //        session.persist(specialist);
-      var s=  session.find(Specialist.class,specialist.getId());
+      var s=  session.find(Expert.class,specialist.getId());
         s.addService(service);
         session.update(s);
     }
 
     @Override
-    public List<Specialist> search(Specialist specialist) {
+    public List<Expert> search(Expert specialist) {
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
-        var criteriaQuery = criteriaBuilder.createQuery(Specialist.class);
-        var root = criteriaQuery.from(Specialist.class); // select query
+        var criteriaQuery = criteriaBuilder.createQuery(Expert.class);
+        var root = criteriaQuery.from(Expert.class); // select query
         List<Predicate> predicates = new ArrayList<>();
         if (specialist.getFirstName() != null && !specialist.getFirstName().isEmpty())
             predicates.add(criteriaBuilder.equal(root.get("firstName"), specialist.getFirstName()));

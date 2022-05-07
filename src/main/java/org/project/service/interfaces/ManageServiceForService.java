@@ -1,7 +1,7 @@
 package org.project.service.interfaces;
 
 import org.project.entity.BaseClass;
-import org.project.entity.Specialist;
+import org.project.entity.Expert;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface ManageServiceForService {
     void insertSpecial(String name);
     Boolean isServiceExists();
     Boolean isSpecialExists();
-    List<Specialist> search(Specialist specialist);
+    List<Expert> search(Expert specialist);
 }

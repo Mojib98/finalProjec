@@ -10,22 +10,17 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
-@Entity
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class RequestForConfirmation extends Person {
-    @Column(length = 300)
+public class RequestForConfirmation extends User {
+//    @Column(length = 300)
     private String aboutMe;
+/*
     @Column(unique = true,nullable = false)
-    private  Integer trackingNumber;
-    @Embedded
-    private Avatar avatar;
+*/
 
-    public RequestForConfirmation(Integer id, LocalDateTime Time, String firstName, String lastName, String email, String password, UserStatus status, String aboutMe) {
-        super(id, Time, firstName, lastName, email, password, status);
-        this.aboutMe = aboutMe;
-    }
   /*    @Override
     public boolean equals(Object o) {
         if (this == o) return true;

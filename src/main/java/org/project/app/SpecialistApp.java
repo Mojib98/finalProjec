@@ -1,10 +1,10 @@
+/*
 package org.project.app;
 
 import lombok.Setter;
 import org.project.entity.*;
 import org.project.entity.enumeration.UserStatus;
 import org.project.entity.enumeration.WorkStatus;
-import org.project.service.imp.GenericServiceImpl;
 import org.project.service.imp.ServiceForServiceImpl;
 import org.project.service.imp.SpecialistService;
 
@@ -14,7 +14,7 @@ import java.util.Scanner;
 @Setter
 public class SpecialistApp {
     Integer id;
-    Specialist specialist;
+    Expert specialist;
     List<Service> serviceList;
     Scanner scanner = new Scanner(System.in);
     ServiceForServiceImpl service = new ServiceForServiceImpl();
@@ -36,9 +36,9 @@ public class SpecialistApp {
         System.out.println(service);
         String name = scanner.next();
         String describe = scanner.next();
-      /*  RequestForNewSpecialization request = new RequestForNewSpecialization(name,
+        RequestForNewSpecialization request = new RequestForNewSpecialization(name,
                 describe, Statuses.AWAITING_CONFIRMATION,
-                specialist,service);*/
+                specialist,service);
         RequestForNewSpecialization request = new RequestForNewSpecialization(null,null,name,
                 describe, UserStatus.AWAITING_CONFIRMATION,
                 this.specialist,service);
@@ -124,3 +124,4 @@ public class SpecialistApp {
     }
 
 }
+*/

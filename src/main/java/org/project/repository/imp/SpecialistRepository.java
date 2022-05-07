@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.project.entity.AcceptOffer;
 import org.project.entity.Customer;
 import org.project.entity.Order;
-import org.project.entity.Specialist;
+import org.project.entity.Expert;
 import org.project.entity.enumeration.WorkStatus;
 
 import java.util.List;
@@ -20,11 +20,11 @@ public class SpecialistRepository {
         return (List<Order>) query.getResultList();
 
     }
-    public Specialist findByEmail(String email){
+    public Expert findByEmail(String email){
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
-        var criteriaQuery = criteriaBuilder.createQuery(Specialist.class);
-        var root = criteriaQuery.from(Specialist.class);
+        var criteriaQuery = criteriaBuilder.createQuery(Expert.class);
+        var root = criteriaQuery.from(Expert.class);
         criteriaQuery.select( root ).
                 where( criteriaBuilder.equal( root.get("email"),email));
         return session.createQuery(criteriaQuery).uniqueResult();
@@ -58,10 +58,10 @@ public class SpecialistRepository {
                 .setParameter("work",workStatus);
         query.executeUpdate();
     }
-    public void changePassword(Specialist specialist,String password){
+    public void changePassword(Expert specialist, String password){
 
         var session = sessionFactory.getCurrentSession();
-        String hql = "update Specialist set password=:newPassword " +
+        String hql = "update Expert set password=:newPassword " +
                 " where email=:email and password=:oldPass";
         var query = session.createQuery(hql)
                 .setParameter("email", specialist.getEmail())

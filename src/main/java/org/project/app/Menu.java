@@ -1,3 +1,4 @@
+/*
 package org.project.app;
 
 import java.io.IOException;
@@ -76,3 +77,4 @@ public class Menu {
         }
     }
 }
+*/

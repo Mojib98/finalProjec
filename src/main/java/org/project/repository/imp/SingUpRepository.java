@@ -16,16 +16,16 @@ public class SingUpRepository implements org.project.repository.interfaces.SingU
         var session = sessionFactory.getCurrentSession();
         session.save(request);
     }
-    public RequestForConfirmation findByTrackingNumber(Integer track){
+    public RequestForConfirmation findByTrackingNumber(java.lang.Integer track){
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery( Object[].class );
 //        var criteriaQuery = criteriaBuilder.createQuery(Enum.class);
         var root = criteriaQuery.from(RequestForConfirmation.class);
-        Path<Integer> idPath = root.get("id");
+        Path<java.lang.Integer> idPath = root.get("id");
         Path<String> emailPath = root.get("email");
-        Path<Integer> idTrack = root.get("trackingNumber");
-        Path<Integer> enumPath = root.get("status");
+        Path<java.lang.Integer> idTrack = root.get("trackingNumber");
+        Path<java.lang.Integer> enumPath = root.get("status");
         criteriaQuery.select(criteriaBuilder.array( idPath, emailPath,idTrack,enumPath )).
          where( criteriaBuilder.equal( root.get("trackingNumber"),track));
         List<Object[]> valueArray = session.createQuery( criteriaQuery ).getResultList();
@@ -33,9 +33,9 @@ public class SingUpRepository implements org.project.repository.interfaces.SingU
         RequestForConfirmation request = new RequestForConfirmation();
 
         for ( Object[] values : valueArray ) {
-            request.setId((Integer) values[0]);
+            request.setId((java.lang.Integer) values[0]);
             request.setEmail((String) values[1]);
-            request.setTrackingNumber((Integer) values[2]);
+            request.setTrackingNumber((java.lang.Integer) values[2]);
             request.setStatus((UserStatus) values[3]);
 
         }

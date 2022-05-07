@@ -2,6 +2,7 @@ package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.*;
+import org.project.entity.Budget;
 import org.project.entity.enumeration.UserStatus;
 import org.project.repository.imp.ManageRepositorySpecialist;
 import org.project.repository.imp.SessionFactorySingleton;
@@ -9,14 +10,14 @@ import org.project.service.interfaces.ManageServiceForSpecialist;
 
 import java.util.List;
 
-public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Specialist> implements ManageServiceForSpecialist {
+public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Expert> implements ManageServiceForSpecialist {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final ManageRepositorySpecialist repositorySpecialist = new ManageRepositorySpecialist();
     ServiceForServiceImpl service = new ServiceForServiceImpl();
 
 
     @Override
-    public void changeStatus(Specialist specialist) {
+    public void changeStatus(Expert specialist) {
         if (specialist.getStatus().equals(UserStatus.ACTIVE))
             specialist.setStatus(UserStatus.INACTIVE);
         else
@@ -31,20 +32,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                for (RequestForConfirmation request1 : request) {
-                    Budget budget = new Budget(null, null, 0D);
-                    Specialist specialist = new Specialist();
-                    specialist.setFirstName(request1.getFirstName());
-                    specialist.setLastName(request1.getLastName());
-                    specialist.setPassword(request1.getPassword());
-                    specialist.setEmail(request1.getEmail());
-                    specialist.setStatus(UserStatus.CONFIRMED);
-                    specialist.setAvatar(request1.getAvatar());
-                    request1.setStatus(UserStatus.CONFIRMED);
-                    request1.setAvatar(null);
-                    repositorySpecialist.insertBudget(budget);
-                    specialist.setBudget(budget);
-                   repositorySpecialist.insertSpecial(specialist);
+
 
 //                    changeStatusForRequest(request);
                     transaction.commit();
@@ -135,7 +123,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
                     transaction.begin();
                     System.out.println(request1.getService());
                     Service service = new Service(request1.getService().getId(), null, request1.getService().getName());
-                    Specialist specialist = request1.getSpecialist();
+                    Expert specialist = request1.getSpecialist();
                     repositorySpecialist.handleRequestForSpecialization(service,specialist);
                     transaction.commit();
                  }
@@ -154,8 +142,8 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
 
 
     @Override
-    public List<Specialist> search(Specialist specialist) {
-        List<Specialist> list = null;
+    public List<Expert> search(Expert specialist) {
+        List<Expert> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
@@ -194,12 +182,12 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
     }
 
     @Override
-    public Specialist insert(Specialist specialist) {
+    public Expert insert(Expert specialist) {
         return super.insert(specialist);
     }
 
     @Override
-    public Specialist update(Specialist specialist) {
+    public Expert update(Expert specialist) {
         return super.update(specialist);
     }
 
@@ -222,7 +210,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Speciali
     }
 
     @Override
-    public Specialist findById(Integer id) {
+    public Expert findById(java.lang.Integer id) {
         return super.findById(id);
     }
 }

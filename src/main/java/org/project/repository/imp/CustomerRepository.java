@@ -42,11 +42,11 @@ public class CustomerRepository extends GenericRepositoryImpl<Order> implements 
         return query.getSingleResult();
     }
 
-    public Specialist find(Integer id) {
+    public Expert find(Integer id) {
         var session = sessionFactory.getCurrentSession();
-        String hql = "from Specialist o " +
+        String hql = "from Expert o " +
                 " where o.id=:id";
-        var query = session.createQuery(hql, Specialist.class).setParameter("id", id);
+        var query = session.createQuery(hql, Expert.class).setParameter("id", id);
         return query.getSingleResult();
     }
 
@@ -88,7 +88,7 @@ public class CustomerRepository extends GenericRepositoryImpl<Order> implements 
                 .setParameter("newPassword",password)
                 .executeUpdate();
     }
-    public void payIng(Customer customer,Specialist specialist){
+    public void payIng(Customer customer, Expert specialist){
         var session = sessionFactory.getCurrentSession();
         session.update(customer);
         session.update(specialist);

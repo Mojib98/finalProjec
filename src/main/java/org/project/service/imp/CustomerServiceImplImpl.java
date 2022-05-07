@@ -79,7 +79,7 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
 
                 transaction.begin();
                 Order order = customerRepository.findOrder(offer.getOrder().getId());
-                Specialist specialist = customerRepository.find(offer.getSpecialists().getId());
+                Expert specialist = customerRepository.find(offer.getSpecialists().getId());
                 acceptOffer.setSpecialists(specialist);
 //                Order order = new Order();
 //                order.setId(offer.getOrder().getId());
@@ -155,7 +155,7 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
                 transaction.begin();
                 customerRepository.changeWorkBySpecialist(acceptOffer.getId(),WorkStatus.PAYED);
                 Order order = customerRepository.findOrder(acceptOffer.getOrder().getId());
-                Specialist specialist = customerRepository.find(110);
+                Expert specialist = customerRepository.find(110);
                 System.out.println(specialist.getBudget());
                 Customer customer = customerRepository.findCustomer(id);
                 System.out.println(customer.getBudget());
