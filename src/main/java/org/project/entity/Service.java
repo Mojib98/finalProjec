@@ -14,5 +14,7 @@ import java.util.List;
 public class Service extends BaseClass{
     @Column(nullable = false,unique = true)
     private String name;
-
+   /* @OneToMany(mappedBy = "service")
+    private List<Specialty> specialty;
+*/
 }

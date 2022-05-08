@@ -42,6 +42,14 @@ public class Order extends BaseClass {
     @OneToMany(mappedBy = "order")
     private List<Offer> offers;
     @ManyToOne
-    private SubService service;
+    private SubService subService;
 
+    public Order(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime timeForWork, String address, String describe, Customer customers) {
+        super(id, time);
+        this.offerPrice = offerPrice;
+        this.timeForWork = timeForWork;
+        this.address = address;
+        this.describe = describe;
+        this.customers = customers;
+    }
 }

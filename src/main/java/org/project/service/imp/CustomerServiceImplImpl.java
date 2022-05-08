@@ -1,3 +1,4 @@
+/*
 package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
@@ -10,7 +11,9 @@ import org.project.service.interfaces.CustomerService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implements CustomerService {
+public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implements Cust*/
+/**//*
+omerService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final CustomerRepository customerRepository = new CustomerRepository();
 
@@ -71,10 +74,11 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
             var transaction = session.getTransaction();
             try {
 //                AcceptOffer acceptOffer1 = new AcceptOffer(null,null);
-                /*Specialist specialist = new Specialist();
+Specialist specialist = new Specialist();
                 acceptOffer1.setOfferPrice(offer.getOfferPrice());
                 acceptOffer.setSpecialists(specialist);
-                specialist.setId(offer.getSpecialists().getId());*/
+                specialist.setId(offer.getSpecialists().getId());
+
 //                acceptOffer1.setOfferPrice(13213D);
 
                 transaction.begin();
@@ -209,3 +213,4 @@ public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implement
     }
 
 }
+*/

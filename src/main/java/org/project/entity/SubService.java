@@ -6,6 +6,7 @@ import org.hibernate.annotations.Check;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @Data
@@ -17,4 +18,5 @@ public class SubService extends BaseClass {
     private String describe;
     @ManyToOne
     private Service service;
+
 }
