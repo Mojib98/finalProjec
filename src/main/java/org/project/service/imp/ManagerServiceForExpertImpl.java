@@ -2,6 +2,7 @@ package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.*;
+import org.project.entity.enumeration.UserStatus;
 import org.project.repository.imp.ManageRepositoryExpert;
 import org.project.repository.imp.SessionFactorySingleton;
 import org.project.service.interfaces.ManageServiceForExpert;
@@ -15,22 +16,61 @@ public class ManagerServiceForExpertImpl extends GenericServiceImpl<Expert> impl
 
     @Override
     public void changeStatusExpert(Expert expert) {
-
+            update(expert);
     }
 
     @Override
     public void handleRequestForExpert(List<Expert> accepted, List<Expert> unAccepted) {
+        for (Expert accept:accepted){
+            accept.setStatus(UserStatus.CONFIRMED);
+            changeStatusExpert(accept);
+        }
+        for (Expert unAccept:unAccepted){
+            unAccept.setStatus(UserStatus.UNCONFIRMED);
+            changeStatusExpert(unAccept);
 
-    }
+        }
+           }
 
     @Override
     public List<Expert> search(Expert expert) {
-        return null;
+        List<Expert> list = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                list=repositorySpecialist.search(expert);
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                e.printStackTrace();
+                System.out.println(e.getMessage());
+
+            }
+
+        }
+        return list;
     }
 
     @Override
     public List<Expert> RequestList() {
-        return null;
+        List<Expert> list = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                list=repositorySpecialist.RequestList();
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                e.printStackTrace();
+                System.out.println(e.getMessage());
+
+            }
+
+        }
+        return list;
+
     }
 
 

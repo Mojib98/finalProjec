@@ -1,8 +1,6 @@
 package org.project.repository.interfaces;
 
 import org.project.entity.Expert;
-import org.project.entity.RequestForNewSpecialization;
-import org.project.entity.Specialty;
 
 import java.util.List;
 
