@@ -1,8 +1,11 @@
 package org.project.entity;
 
 import lombok.Data;
+import org.project.entity.enumeration.UserStatus;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,5 +15,8 @@ public class Specialty extends BaseClass{
     private Expert expert;
     @ManyToOne
     private Service service;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
 }
+

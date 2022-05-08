@@ -2,20 +2,39 @@ package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.*;
-import org.project.entity.enumeration.UserStatus;
-import org.project.repository.imp.ManageRepositorySpecialist;
+import org.project.repository.imp.ManageRepositoryExpert;
 import org.project.repository.imp.SessionFactorySingleton;
-import org.project.service.interfaces.ManageServiceForSpecialist;
+import org.project.service.interfaces.ManageServiceForExpert;
 
 import java.util.List;
 
-public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Expert> implements ManageServiceForSpecialist {
+public class ManagerServiceForExpertImpl extends GenericServiceImpl<Expert> implements ManageServiceForExpert {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
-    private final ManageRepositorySpecialist repositorySpecialist = new ManageRepositorySpecialist();
+    private final ManageRepositoryExpert repositorySpecialist = new ManageRepositoryExpert();
     ServiceForServiceImpl service = new ServiceForServiceImpl();
 
+    @Override
+    public void changeStatusExpert(Expert expert) {
+
+    }
 
     @Override
+    public void handleRequestForExpert(List<Expert> accepted, List<Expert> unAccepted) {
+
+    }
+
+    @Override
+    public List<Expert> search(Expert expert) {
+        return null;
+    }
+
+    @Override
+    public List<Expert> RequestList() {
+        return null;
+    }
+
+
+   /* @Override
     public void changeStatus(Expert specialist) {
         if (specialist.getStatus().equals(UserStatus.ACTIVE))
             specialist.setStatus(UserStatus.INACTIVE);
@@ -91,7 +110,7 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Expert> 
     }
 
     @Override
-    public List<RequestForNewSpecialization> findNewRequest() {
+    public List<Expert> findNewRequest() {
         List<RequestForNewSpecialization> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
@@ -181,13 +200,13 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Expert> 
     }
 
     @Override
-    public Expert insert(Expert specialist) {
+    public Expert insert(Expert expert) {
         return super.insert(specialist);
     }
 
     @Override
-    public Expert update(Expert specialist) {
-        return super.update(specialist);
+    public Expert update(Expert e) {
+        return super.update(findNewRequest());
     }
 
     private void removeRequest(List<RequestForNewSpecialization> request) {
@@ -211,5 +230,5 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Expert> 
     @Override
     public Expert findById(java.lang.Integer id) {
         return super.findById(id);
-    }
+    }*/
 }
