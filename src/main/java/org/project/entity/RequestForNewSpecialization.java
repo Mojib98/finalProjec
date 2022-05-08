@@ -4,13 +4,12 @@ import lombok.*;
 import org.project.entity.enumeration.UserStatus;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class RequestForNewSpecialization extends BaseClass {
+public class Specialty extends BaseClass {
     private String name;
     private String Description;
     @Enumerated(EnumType.STRING)

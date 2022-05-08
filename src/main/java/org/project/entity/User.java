@@ -1,9 +1,7 @@
 package org.project.entity;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.project.entity.enumeration.UserStatus;
 
 import javax.persistence.*;
@@ -11,9 +9,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Data
 @AllArgsConstructor
-@NoArgsConstructor
+@Setter
+@Getter
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User extends BaseClass{
     @NotNull
@@ -26,6 +24,10 @@ public class User extends BaseClass{
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
+    public User() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,6 +35,15 @@ public class User extends BaseClass{
         if (!super.equals(o)) return false;
         User person = (User) o;
         return Objects.equals(email, person.email);
+    }
+
+    public User(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status) {
+        super(id, time);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.status = status;
     }
 
     @Override

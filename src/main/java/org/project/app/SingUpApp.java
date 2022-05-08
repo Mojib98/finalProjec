@@ -2,6 +2,7 @@ package org.project.app;
 
 import org.project.entity.Avatar;
 import org.project.entity.Customer;
+import org.project.entity.Expert;
 import org.project.entity.RequestForConfirmation;
 import org.project.entity.enumeration.UserStatus;
 import org.project.service.imp.SingUpService;
@@ -24,11 +25,10 @@ public class SingUpApp {
         System.out.print("please insert about u");
         String about = scanner.next();
         System.out.println();
-        InputStream picture = utility.pathOfPicture();
-//        RequestForConfirmation request = new RequestForConfirmation(null, null, fname, lname, email, password, null, about);
-//        request.setAvatar(new Avatar(picture.readAllBytes()));
-//        Integer track = sing.requestForSingUp(request);
-//        System.out.println("your trackNumber is " + track);
+        InputStream image = utility.pathOfPicture();
+        Avatar avatar = new Avatar(image.readAllBytes());
+        Expert expert = new Expert(null,null,fname,lname,email,password,null,avatar);
+        sing.requestForSingUp(expert);
     }
 
     public void tracking() {

@@ -18,6 +18,12 @@ import java.util.Set;
 public class Expert extends User {
     @Embedded
     private Avatar avatar;
- /*   @OneToMany(mappedBy = "service")
+
+    public Expert(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status, Avatar avatar) {
+        super(id, time, firstName, lastName, email, password, status);
+        this.avatar = avatar;
+    }
+
+  /*   @OneToMany(mappedBy = "service")
     private List<Specialty> specialties;*/
 }

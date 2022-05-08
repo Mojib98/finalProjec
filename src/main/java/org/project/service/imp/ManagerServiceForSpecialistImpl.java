@@ -2,7 +2,6 @@ package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.*;
-import org.project.entity.Budget;
 import org.project.entity.enumeration.UserStatus;
 import org.project.repository.imp.ManageRepositorySpecialist;
 import org.project.repository.imp.SessionFactorySingleton;
@@ -68,17 +67,17 @@ public class ManagerServiceForSpecialistImpl extends GenericServiceImpl<Expert> 
 
 
     @Override
-    public void unAccept(List<RequestForNewSpecialization> request) {
-        if (request == null){
+    public void unAccept(List<Expert> experts) {
+        if (experts == null){
             throw new RuntimeException("list is empty");
         }
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
-                for (RequestForNewSpecialization request1:request){
+                for (Expert expert:experts){
                     transaction.begin();
-                    request1.setStatusUser(UserStatus.UNCONFIRMED);
-                    repositorySpecialist.unAccept(request1);
+                    expert.setStatus(UserStatus.UNCONFIRMED);
+                    repositorySpecialist.unAccept(expert);
                     transaction.commit();
                 }
             } catch (Exception e) {

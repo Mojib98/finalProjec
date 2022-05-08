@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist {
+public class ManageRepositorySpecialist {
     private final SessionFactory sessionFactory =SessionFactorySingleton.getInstance();
 
     @Override
@@ -34,9 +34,9 @@ public class ManageRepositorySpecialist implements ManageRepositoryForSpecialist
     }
 
     @Override
-    public void unAccept(RequestForNewSpecialization request) {
+    public void unAccept(Expert expert) {
         var session = sessionFactory.getCurrentSession();
-        session.update(request);
+        session.update(expert);
     }
 
     @Override
