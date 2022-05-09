@@ -1,35 +1,17 @@
-/*
 package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.*;
-import org.project.entity.enumeration.WorkStatus;
+import org.project.entity.enumeration.UserStatus;
+import org.project.repository.imp.ExpertRepositoryImpl;
 import org.project.repository.imp.SessionFactorySingleton;
-import org.project.repository.imp.SpecialistRepository;
 
 import java.util.List;
 
-public class SpecialistService extends GenericServiceImpl<BaseClass> implements org.project.service.interfaces.SpecialistService {
+public class ExpertService extends GenericServiceImpl<BaseClass>  {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
-    SpecialistRepository specialistRepository = new SpecialistRepository();
-    public List<Order> findOrders(Expert specialist){
-        List<Order> orders = null;
-        try (var session = sessionFactory.getCurrentSession()) {
-            var transaction = session.getTransaction();
-            try {
-                transaction.begin();
-                System.out.println(specialist.getId());
-                orders = specialistRepository.findOrders(specialist.getId());
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-//                System.out.println(e.getMessage());
-                e.printStackTrace();
-
-            }
-        }
-        return orders;
-    }
+    ExpertRepositoryImpl expertRepository = new ExpertRepositoryImpl();
+ /*
     public Expert findByEmail(String email){
         Expert specialist = null;
         try (var session = sessionFactory.getCurrentSession()) {
@@ -123,7 +105,39 @@ public class SpecialistService extends GenericServiceImpl<BaseClass> implements 
                 System.out.println(e.getMessage());
             }
         }
-    }
+    }*/
+ public List<Orders> findOrders(Expert expert){
+     List<Orders> orders = null;
+     try (var session = sessionFactory.getCurrentSession()) {
+         var transaction = session.getTransaction();
+         try {
+             transaction.begin();
+             System.out.println(expert.getId());
+             orders = expertRepository.findOrders(expert);
+             transaction.commit();
+         } catch (Exception e) {
+             transaction.rollback();
+//                System.out.println(e.getMessage());
+             e.printStackTrace();
 
-}
-*/
+         }
+     }
+     return orders;
+ }
+ public void requestForSpecialty(Specialty specialty){
+     specialty.setStatus(UserStatus.AWAITING_CONFIRMATION);
+     try (var session = sessionFactory.getCurrentSession()) {
+         var transaction = session.getTransaction();
+         try {
+             transaction.begin();
+             expertRepository.requestForSpecialty(specialty);
+             transaction.commit();
+         } catch (Exception e) {
+             transaction.rollback();
+             System.out.println(e.getMessage());
+         }
+     }
+ }
+ }
+
+

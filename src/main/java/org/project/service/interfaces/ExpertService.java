@@ -5,7 +5,7 @@ import org.project.entity.enumeration.WorkStatus;
 
 import java.util.List;
 
-public interface ExpertService extends GenericService<Offer>{
+public interface ExpertService extends GenericService<BaseClass>{
     List<Orders> findOrders(Expert expert);
     Expert findByEmail(String email);
     Customer findByIdCustomer(Integer id);

@@ -1,10 +1,8 @@
 package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
-import org.project.entity.Customer;
-import org.project.entity.Expert;
-import org.project.entity.Offer;
-import org.project.entity.Orders;
+import org.project.entity.*;
+import org.project.entity.enumeration.UserStatus;
 import org.project.entity.enumeration.WorkStatus;
 import org.project.repository.imp.ExpertRepositoryImpl;
 import org.project.repository.imp.SessionFactorySingleton;
@@ -12,7 +10,7 @@ import org.project.service.interfaces.ExpertService;
 
 import java.util.List;
 
-public class ExpertServiceImpl extends GenericServiceImpl<Offer>  implements ExpertService {
+public class ExpertServiceImpl extends GenericServiceImpl<BaseClass>  implements ExpertService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final ExpertRepositoryImpl repository=new ExpertRepositoryImpl();
 
@@ -132,5 +130,9 @@ public class ExpertServiceImpl extends GenericServiceImpl<Offer>  implements Exp
 
             }
         }
+    }
+    public void requestForSpecialty(Specialty specialty){
+        specialty.setStatus(UserStatus.AWAITING_CONFIRMATION);
+                insert(specialty);
     }
 }

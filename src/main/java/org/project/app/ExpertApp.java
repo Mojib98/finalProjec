@@ -1,27 +1,23 @@
-/*
 package org.project.app;
 
 import lombok.Setter;
 import org.project.entity.*;
-import org.project.entity.enumeration.UserStatus;
-import org.project.entity.enumeration.WorkStatus;
+import org.project.repository.imp.ExpertRepositoryImpl;
+import org.project.service.imp.ExpertServiceImpl;
 import org.project.service.imp.ServiceForServiceImpl;
-import org.project.service.imp.SpecialistService;
-
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 @Setter
-public class SpecialistApp {
+public class ExpertApp {
     Integer id;
-    Expert specialist;
+    Expert expert;
     List<Service> serviceList;
     Scanner scanner = new Scanner(System.in);
-    ServiceForServiceImpl service = new ServiceForServiceImpl();
-    SpecialistService specialistService = new SpecialistService();
+    ExpertServiceImpl expertService = new ExpertServiceImpl();
+    ServiceForServiceImpl service  = new ServiceForServiceImpl();
     Utility utility = new Utility();
     public void showListOfSpecialty(){
-        this.serviceList = service.showAllSpecialty();
+        this.serviceList = service.findAllService();
         for (Service service:serviceList){
             System.out.println(service.getName());
         }
@@ -34,17 +30,12 @@ public class SpecialistApp {
                 .filter(p -> p.getName().equals(serviceName))
                 .findFirst().get();
         System.out.println(service);
-        String name = scanner.next();
-        String describe = scanner.next();
-        RequestForNewSpecialization request = new RequestForNewSpecialization(name,
-                describe, Statuses.AWAITING_CONFIRMATION,
-                specialist,service);
-        RequestForNewSpecialization request = new RequestForNewSpecialization(null,null,name,
-                describe, UserStatus.AWAITING_CONFIRMATION,
-                this.specialist,service);
-        specialistService.insert(request);
+        Specialty specialty = new Specialty(null,null,this.expert,service);
+        expertService.requestForSpecialty(specialty);
+
+
     }
-    public void seeOrders(){
+  /*  public void seeOrders(){
         List<Order> list = specialistService.findOrders(specialist);
         for (Order orders:list){
             System.out.println(orders.getDescribe());
@@ -56,7 +47,7 @@ public class SpecialistApp {
     }
     public void writeOffer(){
         Order order = null;
-        List<Order> list = specialistService.findOrders(this.specialist);
+        List<Order> list = expertRepository.findOrders(this.specialist);
         list.stream().forEach(System.out::println);
         System.out.println("insert id");
         Integer id=utility.giveIntegerInput();
@@ -121,7 +112,6 @@ public class SpecialistApp {
         System.out.println("please select one of for start ");
         Integer id = scanner.nextInt();
         specialistService.changeWorkBySpecialist(id,WorkStatus.DONE);
-    }
+    }*/
 
 }
-*/
