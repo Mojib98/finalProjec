@@ -39,7 +39,7 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T> {
 
     @Override
     public List<T> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("from " + clazz.getSimpleName(), clazz)
+        return sessionFactory.getCurrentSession().createQuery("from org.project.entity." + clazz.getSimpleName(), clazz)
                 .getResultList();
     }
 }

@@ -9,7 +9,7 @@ import org.project.service.interfaces.GenericService;
 
 import java.util.List;
 
-public abstract class GenericServiceImpl<T extends BaseClass> implements GenericService<T> {
+public abstract class GenericServiceImpl<T> implements GenericService<T> {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final GenericRepository<T> genericRepository = new GenericRepositoryImpl<>();
 

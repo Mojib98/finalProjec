@@ -10,82 +10,49 @@ import org.project.service.interfaces.ServiceForService;
 
 import java.util.List;
 
-public class ServiceForServiceImpl extends GenericServiceImpl<Service> implements ServiceForService {
+public class ServiceForServiceImpl extends GenericServiceImpl<Service>{
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     RepositoryService serviceRegistry = new RepositoryService();
     public void addService(Service service){
-//        try (var session = sessionFactory.getCurrentSession()){
-//            var transaction = session.getTransaction();
             try {
-//                transaction.begin();
-
                 checkUniqueService(service);
                 insert(service);
-//                transaction.commit();
             } catch (Exception e) {
-//                transaction.rollback();
                 System.out.println(e.getMessage());
 
             }
         }
 
-    @Override
-    public void addSubService(SubService service) {
 
+    public void addSubService(SubService subService) {
+        Service service = findServiceByName(subService.getService().getName());
+        if (service == null) {
+            throw new RuntimeException("not find");
+
+        }
+        try (var session = sessionFactory.getCurrentSession()){
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                serviceRegistry.insertSubService(subService);
+            transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+
+            }
+        }
     }
 
     //    }
     private void checkUniqueService(Service service){
-        Service service1 = null;
-        try (var session = sessionFactory.getCurrentSession()){
-            var transaction = session.getTransaction();
-            try {
-                transaction.begin();
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.out.println(e.getMessage());
+                Service service1=null;
+                service1 = findServiceByName(service.getName());
+                if (service1 !=null)
+                    throw new RuntimeException("this class exist");
 
-            }
-        }
-  /*      if (service1 !=null)
-        throw new RuntimeException("this service is have");*/
     }
 
-    @Override
-    public Service insert(Service service) {
-        return super.insert(service);
-    }
-
-    @Override
-    public Service update(Service service) {
-        return super.update(service);
-    }
-
-    @Override
-    public void remove(Service service) {
-        super.remove(service);
-    }
-
-
-
-    @Override
-    public List<Service> findAll() {
-        return super.findAll();
-    }
-    public Service findByName(String name){
-        try (var session = sessionFactory.getCurrentSession()){
-            var transaction = session.getTransaction();
-            try {
-                transaction.begin();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.out.println(e.getMessage());
-                return null;
-            }
-        }
-        return null;
-    }
     public List<SubService> findByCategory(String categoryName){
         List<SubService> serviceList = null;
         try (var session = sessionFactory.getCurrentSession()){
@@ -102,29 +69,13 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
         }
         return serviceList;
     }
-    public List<Service> findJustCategory(){
-        List<Service> category = null;
-        try (var session = sessionFactory.getCurrentSession()){
-            var transaction = session.getTransaction();
-            try {
-                transaction.begin();
-                category=serviceRegistry.findJustCategory();
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.out.println(e.getMessage());
-
-            }
-        }
-        return category;
-    }
     public List<SubService> showAllSubService(){
         List<SubService> subServices = null;
         try (var session = sessionFactory.getCurrentSession()){
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-//                subServices=serviceRegistry.findJustSpecialty();
+                subServices=serviceRegistry.findAll();
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -135,33 +86,40 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
         return subServices;
 
     }
-    public void insertSpecialty(Service service){
-        try {
-            if (service == null)
-                throw new RuntimeException("dont have cateGury");
-            checkUniqueService(service);
-            insert(service);
-        }catch (Exception e){
-            e.getMessage();;
-        }
-    }
-    public List<Customer> search(Customer customer) {
-        List<Customer> list = null;
-        try (var session = sessionFactory.getCurrentSession()) {
+    public List<Service> findAllService(){
+        List<Service> services = null;
+        try (var session = sessionFactory.getCurrentSession()){
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
+                services=serviceRegistry.findAllService();
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
-                e.printStackTrace();
                 System.out.println(e.getMessage());
 
             }
-
         }
-        return list;
-
+        return services;
     }
+    public Service findServiceByName(String name){
+        Service service = null;
+        try (var session = sessionFactory.getCurrentSession()){
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                service = serviceRegistry.findServiceByName(name);
+
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                System.out.println(e.getMessage());
+                throw e;
+
+            }
+        }
+        return service;
+    }
+
 
 }

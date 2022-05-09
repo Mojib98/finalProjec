@@ -9,7 +9,4 @@ import java.util.List;
 public interface RepositoryService {
     SubService findByName(String name);
     List<SubService> findByCategory(String name);
-    List<Service> findJustCategory();
-    List<SubService> findJustSpecialty();
-//    List<Customer> search(Customer customer);
 }

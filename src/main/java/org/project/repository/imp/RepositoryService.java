@@ -9,9 +9,9 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepositoryService implements org.project.repository.interfaces.RepositoryService {
+public class RepositoryService{
     private final SessionFactory sessionFactory =SessionFactorySingleton.getInstance();
-    public SubService findByName(String name){
+    public SubService findSubServiceByName(String name){
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(SubService.class);
@@ -27,18 +27,36 @@ public class RepositoryService implements org.project.repository.interfaces.Repo
                 .setParameter("name",name);
         return query.getResultList();
     }
-    public List<Service> findJustCategory(){
+    public void insertSubService(SubService subService){
         var session = sessionFactory.getCurrentSession();
-        String hql="from Service   ";
-        var query = session.createQuery(hql,Service.class);
-        return query.getResultList();
+        session.save(subService);
     }
-    public List<SubService> findJustSpecialty(){
+    public Service findServiceByName(String name){
         var session = sessionFactory.getCurrentSession();
-        String hql="from SubService  ";
-        var query = session.createQuery(hql,SubService.class);
-        return query.getResultList();
+        var criteriaBuilder = session.getCriteriaBuilder();
+        var criteriaQuery = criteriaBuilder.createQuery(Service.class);
+        var root = criteriaQuery.from(Service.class);
+        criteriaQuery.select( root ).
+                where( criteriaBuilder.equal( root.get("name"),name));
+        return session.createQuery(criteriaQuery).uniqueResult();
     }
+    public List<SubService> findAll(){
+        var session = sessionFactory.getCurrentSession();
+        var criteriaBuilder = session.getCriteriaBuilder();
+        var criteriaQuery = criteriaBuilder.createQuery(SubService.class);
+        var root = criteriaQuery.from(SubService.class);
+        criteriaQuery.select( root );
+        return session.createQuery(criteriaQuery).getResultList();
+    }
+    public List<Service> findAllService(){
+        var session = sessionFactory.getCurrentSession();
+        var criteriaBuilder = session.getCriteriaBuilder();
+        var criteriaQuery = criteriaBuilder.createQuery(Service.class);
+        var root = criteriaQuery.from(Service.class);
+        criteriaQuery.select( root );
+        return session.createQuery(criteriaQuery).getResultList();
+    }
+
    /* public List<Customer> search(Customer customer) {
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();

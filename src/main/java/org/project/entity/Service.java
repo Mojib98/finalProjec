@@ -17,4 +17,9 @@ public class Service extends BaseClass{
    /* @OneToMany(mappedBy = "service")
     private List<Specialty> specialty;
 */
+
+    public Service(Integer id, LocalDateTime time, String name) {
+        super(id, time);
+        this.name = name;
+    }
 }

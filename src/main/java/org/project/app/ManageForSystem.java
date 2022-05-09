@@ -1,8 +1,8 @@
-/*
 package org.project.app;
 
 import org.project.entity.Customer;
 import org.project.entity.Service;
+import org.project.entity.SubService;
 import org.project.entity.enumeration.UserStatus;
 import org.project.service.imp.ServiceForServiceImpl;
 
@@ -16,47 +16,48 @@ public class ManageForSystem {
     public void addService(){
         System.out.println("enter name");
         String name = scanner.next();
-        System.out.println("enter price");
-        Double pl=scanner.nextDouble();
-        System.out.println("enter prU");
-        Double pu=scanner.nextDouble();
-        System.out.println("enter name");
-        Service service = new Service(null,null,name,pu,pl,null);
+        Service service = new Service(null,null,name);
         serviceForService.addService(service);
 
-    }
-    public void addSpecialty(){
-        System.out.println("enter name of category");
-        String name = scanner.next();
-        Service service = serviceForService.findByName(name);
-        System.out.println("Enter name ");
-        String name1 = scanner.next();
-        System.out.println("Enter pu ");
-        Double pu = scanner.nextDouble();
-        System.out.println("Enter pl ");
-        Double pl = scanner.nextDouble();
-        Service service1 = new Service(null,null,name1,pl,pu,service);
-        serviceForService.insertSpecialty(service1);
 
     }
-    public void showListOfSpecialty(){
-        List<Service> serviceList = serviceForService.showAllSpecialty();
+    public void addSubService(){
+        List<Service> serviceList;
+        serviceList = serviceForService.findAllService();
+        for (Service service:serviceList){
+            System.out.println(service.getName());
+        }
+        System.out.println("enter name of category");
+        String serviceName = scanner.next();
+        Service service = serviceList.stream()
+                .filter(p -> p.getName().equals(serviceName))
+                .findFirst().get();
+        System.out.println("Enter name ");
+        String name = scanner.next();
+        System.out.println("Enter Base price ");
+        Integer price = scanner.nextInt();
+        System.out.println("please insert describr");
+        String des =scanner.next();
+        SubService subService = new SubService(null,null,name,price,des,service);
+        serviceForService.addSubService(subService);
+
+    }
+    public void showListOfService(){
+        List<Service> serviceList;
+        serviceList = serviceForService.findAllService();
         for (Service service:serviceList){
             System.out.println(service.getName());
         }
     }
-    public void showListOfService(){
-         serviceList = serviceForService.findJustCategory();
-        for (Service service:serviceList){
+    public void showListOfSubService(){
+         List<SubService> subService = serviceForService.showAllSubService();
+        for (SubService service:subService){
             System.out.println(service.getName());
         }
     }
     public void search(){
         Customer customer = optionForSearch();
         System.out.println(customer);
-        var list= serviceForService.search(customer);
-        list.forEach(System.out::println);
-
     }
     private Customer optionForSearch(){
         System.out.println("\t\t!!!if want add option insert request else insert  'no'");
@@ -83,4 +84,3 @@ public class ManageForSystem {
 
     }
 }
-*/
