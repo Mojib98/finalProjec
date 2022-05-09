@@ -1,6 +1,7 @@
 package org.project.app;
 
 import org.project.entity.Expert;
+import org.project.entity.Specialty;
 import org.project.entity.enumeration.UserStatus;
 import org.project.service.imp.ManagerServiceForExpertImpl;
 
@@ -12,7 +13,7 @@ public class ManagerForExpert {
     Scanner scanner = new Scanner(System.in);
     ManagerServiceForExpertImpl manager = new ManagerServiceForExpertImpl();
     public void determineSingUp(){
-        List<Expert> list = manager.requestList();
+        List<Expert> list = manager.requestListSingUp();
         List<Expert> accept = new ArrayList<>();
         List<Expert> unAccept = new ArrayList<>();
         for(Expert request:list){
@@ -34,20 +35,19 @@ public class ManagerForExpert {
         }
         manager.handleRequestForExpert(accept,unAccept);
     }
-  /*  public void determineForRequestSpecialty() {
-        List<RequestForNewSpecialization> list = forSpecialist.findNewRequest();
-        List<RequestForNewSpecialization> accept = new ArrayList<>();
-        List<RequestForNewSpecialization> unAccept = new ArrayList<>();
-        for (RequestForNewSpecialization request : list) {
+    public void determineForRequestSpecialty() {
+        List<Specialty> list = manager.requestListSpecialty();
+        List<Specialty> accept = new ArrayList<>();
+        List<Specialty> unAccept = new ArrayList<>();
+        for (Specialty request : list) {
 //            System.out.println(request.getSpecialist());
             System.out.println(request.getService().getName());
+            System.out.println(request.getExpert().getFirstName());
             System.out.println("if confirmation insert 'y' or insert 'n'");
             char check = scanner.next().charAt(0);
             switch (check) {
                 case 'y':
-                    request.setStatusUser(UserStatus.CONFIRMED);
                     accept.add(request);
-                    System.out.println(request.getIdS());
                     break;
                 case 'n':
                     unAccept.add(request);
@@ -55,16 +55,9 @@ public class ManagerForExpert {
                 default:
             }
         }
-        handleRequestNew(accept);
-        removeFromRequestSpecialty(unAccept);
+     manager.handelRequestForSpecialty(accept,unAccept);
     }
-    private void handleRequestNew(List<RequestForNewSpecialization> accept){
-        forSpecialist.handleRequestForSpecialization(accept);
-    }
-    private void removeFromRequestSpecialty(List<RequestForNewSpecialization> list){
-                forSpecialist.unAccept(list);
 
-    }*/
     public void search(){
         Expert specialist = optionForSearch();
         System.out.println(specialist);

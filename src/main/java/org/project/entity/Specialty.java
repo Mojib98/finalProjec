@@ -24,5 +24,9 @@ public class Specialty extends BaseClass{
         this.expert = expert;
         this.service = service;
     }
+
+    public Specialty() {
+
+    }
 }
 

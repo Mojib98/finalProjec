@@ -2,6 +2,7 @@ package org.project.repository.imp;
 
 import org.hibernate.SessionFactory;
 import org.project.entity.Expert;
+import org.project.entity.Specialty;
 import org.project.entity.enumeration.UserStatus;
 import org.project.repository.interfaces.ManageRepositoryForExpert;
 
@@ -9,15 +10,13 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageRepositoryExpert implements ManageRepositoryForExpert {
+public class ManageRepositoryExpert {
     private final SessionFactory sessionFactory =SessionFactorySingleton.getInstance();
 
-    @Override
     public void changeStatusExpert(Expert expert) {
 
     }
 
-    @Override
     public List<Expert> search(Expert expert) {
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
@@ -39,13 +38,22 @@ public class ManageRepositoryExpert implements ManageRepositoryForExpert {
 
     }
 
-    @Override
     public List<Expert> requestList() {
         List<Expert> request;
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(Expert.class);
         var root = criteriaQuery.from(Expert.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("status"), UserStatus.AWAITING_CONFIRMATION));
+        request= session.createQuery(criteriaQuery).list();
+        return request;
+    }
+    public List<Specialty> requestForSpecialty() {
+        List<Specialty> request;
+        var session = sessionFactory.getCurrentSession();
+        var criteriaBuilder = session.getCriteriaBuilder();
+        var criteriaQuery = criteriaBuilder.createQuery(Specialty.class);
+        var root = criteriaQuery.from(Specialty.class);
         criteriaQuery.where(criteriaBuilder.equal(root.get("status"), UserStatus.AWAITING_CONFIRMATION));
         request= session.createQuery(criteriaQuery).list();
         return request;

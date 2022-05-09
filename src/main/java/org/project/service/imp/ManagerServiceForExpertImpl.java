@@ -9,7 +9,7 @@ import org.project.service.interfaces.ManageServiceForExpert;
 
 import java.util.List;
 
-public class ManagerServiceForExpertImpl extends GenericServiceImpl<Expert> implements ManageServiceForExpert {
+public class ManagerServiceForExpertImpl extends GenericServiceImpl<BaseClass> implements ManageServiceForExpert {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final ManageRepositoryExpert repositorySpecialist = new ManageRepositoryExpert();
     ServiceForServiceImpl service = new ServiceForServiceImpl();
@@ -53,7 +53,7 @@ public class ManagerServiceForExpertImpl extends GenericServiceImpl<Expert> impl
     }
 
     @Override
-    public List<Expert> requestList() {
+    public List<Expert> requestListSingUp() {
         List<Expert> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
@@ -72,7 +72,40 @@ public class ManagerServiceForExpertImpl extends GenericServiceImpl<Expert> impl
         return list;
 
     }
+    public List<Specialty> requestListSpecialty(){
+        List<Specialty> list = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var transaction = session.getTransaction();
+            try {
+                transaction.begin();
+                list=repositorySpecialist.requestForSpecialty();
+                transaction.commit();
+            } catch (Exception e) {
+                transaction.rollback();
+                e.printStackTrace();
+                System.out.println(e.getMessage());
 
+            }
+
+        }
+        return list;
+    }
+    public void handelRequestForSpecialty(List<Specialty> accepted, List<Specialty> unAccepted) {
+        for (Specialty accept:accepted){
+            accept.setStatus(UserStatus.CONFIRMED);
+            update(accept);
+        }
+        for (Specialty unAccept:unAccepted){
+            unAccept.setStatus(UserStatus.UNCONFIRMED);
+            update(unAccept);
+//            removeSpecialty(unAccept);
+
+
+        }
+    }
+    public void removeSpecialty(Specialty specialty){
+        remove(specialty);
+    }
 
    /* @Override
     public void changeStatus(Expert specialist) {
@@ -149,25 +182,7 @@ public class ManagerServiceForExpertImpl extends GenericServiceImpl<Expert> impl
 
     }
 
-    @Override
-    public List<Expert> findNewRequest() {
-        List<RequestForNewSpecialization> list = null;
-        try (var session = sessionFactory.getCurrentSession()) {
-            var transaction = session.getTransaction();
-            try {
-                transaction.begin();
-                list = repositorySpecialist.findNewRequest();
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.out.println(e.getMessage());
 
-            }
-
-        }
-        return list;
-
-    }
 
     @Override
     public void handleRequestForSpecialization(List<RequestForNewSpecialization> request) {
@@ -220,52 +235,8 @@ public class ManagerServiceForExpertImpl extends GenericServiceImpl<Expert> impl
 
     }
 
-    @Override
-    public List<RequestForConfirmation> RequestList() {
-        List<RequestForConfirmation> request = null;
-        try (var session = sessionFactory.getCurrentSession()) {
-            var transaction = session.getTransaction();
-            try {
-                transaction.begin();
-                request = repositorySpecialist.requestList();
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.out.println(e.getMessage());
 
-            }
 
-        }
-        return request;
-    }
-
-    @Override
-    public Expert insert(Expert expert) {
-        return super.insert(specialist);
-    }
-
-    @Override
-    public Expert update(Expert e) {
-        return super.update(findNewRequest());
-    }
-
-    private void removeRequest(List<RequestForNewSpecialization> request) {
-        try (var session = sessionFactory.getCurrentSession()) {
-            var transaction = session.getTransaction();
-            try {
-                transaction.begin();
-                for (RequestForNewSpecialization request1 : request) {
-                    repositorySpecialist.removeRequestForNewSpec(request1);
-                }
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.out.println(e.getMessage());
-
-            }
-        }
-
-    }
 
     @Override
     public Expert findById(java.lang.Integer id) {
