@@ -9,7 +9,7 @@ import org.project.entity.enumeration.WorkStatus;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-@SqlResultSetMapping(
+/*@SqlResultSetMapping(
         name = "orders",
         classes = @ConstructorResult(
                 targetClass = Order.class,
@@ -23,14 +23,16 @@ import java.util.List;
 
                 })
 
-)
+)*/
 @Entity
 @NoArgsConstructor
 @Setter
 @Getter
 @AllArgsConstructor
-@Table(name = "orders")
-public class Order extends BaseClass {
+/*
+@Table(name = "ord")
+*/
+public class Orders extends BaseClass {
     private Integer offerPrice;
     private LocalDateTime timeForWork;
     private String address;
@@ -39,12 +41,12 @@ public class Order extends BaseClass {
     private WorkStatus workStatus;
     @ManyToOne
     private Customer customers;
-    @OneToMany(mappedBy = "order")
-    private List<Offer> offers;
+   /* @OneToMany(mappedBy = "order")
+    private List<Offer> offers;*/
     @ManyToOne
     private SubService subService;
 
-    public Order(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime timeForWork, String address, String describe, Customer customers) {
+    public Orders(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime timeForWork, String address, String describe, Customer customers) {
         super(id, time);
         this.offerPrice = offerPrice;
         this.timeForWork = timeForWork;

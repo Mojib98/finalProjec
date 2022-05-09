@@ -3,6 +3,7 @@ package org.project.repository.imp;
 import org.hibernate.SessionFactory;
 import org.project.entity.Customer;
 import org.project.entity.Service;
+import org.project.entity.SubService;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
@@ -10,35 +11,35 @@ import java.util.List;
 
 public class RepositoryService implements org.project.repository.interfaces.RepositoryService {
     private final SessionFactory sessionFactory =SessionFactorySingleton.getInstance();
-    public Service findByName(String name){
+    public SubService findByName(String name){
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
-        var criteriaQuery = criteriaBuilder.createQuery(Service.class);
-        var root = criteriaQuery.from(Service.class);
+        var criteriaQuery = criteriaBuilder.createQuery(SubService.class);
+        var root = criteriaQuery.from(SubService.class);
         criteriaQuery.select( root ).
                 where( criteriaBuilder.equal( root.get("name"),name));
         return session.createQuery(criteriaQuery).uniqueResult();
     }
-    public List<Service> findByCategory(String name){
+    public List<SubService> findByCategory(String name){
         var session = sessionFactory.getCurrentSession();
-        String hql="from Service s where s.category.name=:name";
-        var query = session.createQuery(hql,Service.class)
+        String hql="from SubService s where s.service.name=:name";
+        var query = session.createQuery(hql,SubService.class)
                 .setParameter("name",name);
         return query.getResultList();
     }
     public List<Service> findJustCategory(){
         var session = sessionFactory.getCurrentSession();
-        String hql="from Service s where s.category is NULL ";
+        String hql="from Service   ";
         var query = session.createQuery(hql,Service.class);
         return query.getResultList();
     }
-    public List<Service> findJustSpecialty(){
+    public List<SubService> findJustSpecialty(){
         var session = sessionFactory.getCurrentSession();
-        String hql="from Service s where s.category is not null ";
-        var query = session.createQuery(hql,Service.class);
+        String hql="from SubService  ";
+        var query = session.createQuery(hql,SubService.class);
         return query.getResultList();
     }
-    public List<Customer> search(Customer customer) {
+   /* public List<Customer> search(Customer customer) {
         var session = sessionFactory.getCurrentSession();
         var criteriaBuilder = session.getCriteriaBuilder();
         var criteriaQuery = criteriaBuilder.createQuery(Customer.class);
@@ -55,7 +56,7 @@ public class RepositoryService implements org.project.repository.interfaces.Repo
         criteriaQuery
                 .where(predicates.toArray(new Predicate[0]));
 
-        return session.createQuery(criteriaQuery).list();
+        return session.createQuery(criteriaQuery).list();*/
 
     }
-}
+

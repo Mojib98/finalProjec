@@ -11,29 +11,9 @@ import org.project.service.interfaces.CustomerService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implements Cust*/
-/**//*
-omerService {
+public class CustomerServiceImplImpl extends GenericServiceImpl<Order> implements CustomerService {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
     private final CustomerRepository customerRepository = new CustomerRepository();
-
-    public List<Customer> search(Customer customer) {
-        List<Customer> list = new ArrayList<>();
-        try (var session = sessionFactory.getCurrentSession()) {
-            var transaction = session.getTransaction();
-            try {
-                transaction.begin();
-
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.out.println(e.getMessage());
-                return null;
-            }
-            return list;
-        }
-    }
-
     public List<Offer> AllOffer(Integer id) {
         List<Offer> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
@@ -68,38 +48,12 @@ omerService {
         }
     }
 
-    public void choice(Offer offer, AcceptOffer acceptOffer) {
+    @Override
+    public void choice(Offer offer, Order order) {
 
-        try (var session = sessionFactory.getCurrentSession()) {
-            var transaction = session.getTransaction();
-            try {
-//                AcceptOffer acceptOffer1 = new AcceptOffer(null,null);
-Specialist specialist = new Specialist();
-                acceptOffer1.setOfferPrice(offer.getOfferPrice());
-                acceptOffer.setSpecialists(specialist);
-                specialist.setId(offer.getSpecialists().getId());
-
-//                acceptOffer1.setOfferPrice(13213D);
-
-                transaction.begin();
-                Order order = customerRepository.findOrder(offer.getOrder().getId());
-                Expert specialist = customerRepository.find(offer.getSpecialists().getId());
-                acceptOffer.setSpecialists(specialist);
-//                Order order = new Order();
-//                order.setId(offer.getOrder().getId());
-//                order.setWorkStatus(WorkStatus.WAIT_FOR_ARRIVE);
-//                acceptOffer1.setOrder(order);
-                order.setAcceptOffer(acceptOffer);
-                order.setWorkStatus(WorkStatus.WAIT_FOR_ARRIVE);
-                customerRepository.insertAcceptOffer(acceptOffer);
-                customerRepository.update(order);
-                transaction.commit();
-            } catch (Exception e) {
-                transaction.rollback();
-                System.out.println(e.getMessage());
-            }
-        }
     }
+
+
 
     public Order findOrderById(Integer id) {
         Order order = null;
@@ -135,13 +89,12 @@ Specialist specialist = new Specialist();
         }
     }
 
-    public AcceptOffer myAcceptOffer(Integer id) {
-        AcceptOffer acceptOffer = null;
+    public Offer myAcceptOffer(Integer id) {
+        Offer acceptOffer = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                acceptOffer = customerRepository.findAcceptOrder(id);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -152,7 +105,13 @@ Specialist specialist = new Specialist();
         }
     }
 
-    public void paying(AcceptOffer acceptOffer,Integer id) {
+    @Override
+    public void paying(Offer offer, Integer price) {
+
+    }
+
+  */
+/*  public void paying(AcceptOffer acceptOffer,Integer id) {
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
@@ -180,7 +139,8 @@ Specialist specialist = new Specialist();
                 System.out.println(e.getMessage());
             }
         }
-    }
+    }*//*
+
     public void addComment(AcceptOffer acceptOffer , Integer id,Comment comment){
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();

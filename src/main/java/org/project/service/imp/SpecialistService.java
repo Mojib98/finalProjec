@@ -1,3 +1,4 @@
+/*
 package org.project.service.imp;
 
 import org.hibernate.SessionFactory;
@@ -125,3 +126,4 @@ public class SpecialistService extends GenericServiceImpl<BaseClass> implements 
     }
 
 }
+*/

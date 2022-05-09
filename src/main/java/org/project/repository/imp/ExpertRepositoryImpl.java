@@ -4,11 +4,9 @@ import org.hibernate.SessionFactory;
 import org.project.entity.Customer;
 import org.project.entity.Expert;
 import org.project.entity.Offer;
-import org.project.entity.Order;
+import org.project.entity.Orders;
 import org.project.entity.enumeration.WorkStatus;
 import org.project.repository.interfaces.ExpertRepository;
-import org.project.service.imp.GenericServiceImpl;
-import org.project.service.interfaces.ExpertService;
 
 import java.util.List;
 
@@ -17,11 +15,11 @@ public class ExpertRepositoryImpl implements ExpertRepository {
 
 
     @Override
-    public List<Order> findOrders(Expert expert) {
+    public List<Orders> findOrders(Expert expert) {
         var session = sessionFactory.getCurrentSession();
-        String hql="from Order o inner join Service s " +
+        String hql="from Orders o inner join Service s " +
                 "inner join Specialty p where p.id=:id and o.workStatus='WAIT_FOR_ARRIVE' or o.workStatus=:work";
-        var query = session.createQuery(hql,Order.class)
+        var query = session.createQuery(hql, Orders.class)
                 .setParameter("id",expert.getId())
                 .setParameter("work",WorkStatus.WAIT_FOR_OFFER);
         return null;
@@ -31,7 +29,7 @@ public class ExpertRepositoryImpl implements ExpertRepository {
     public Expert findByEmail(String email) {
         var session = sessionFactory.getCurrentSession();
         String hql="from Expert where email=:email";
-        var query = session.createQuery(hql,Order.class)
+        var query = session.createQuery(hql, Orders.class)
                 .setParameter("email",email) ;
         return null;
     }
@@ -44,11 +42,11 @@ public class ExpertRepositoryImpl implements ExpertRepository {
     }
 
     @Override
-    public void changeWorkFlow(Order order) {
+    public void changeWorkFlow(Orders order) {
 
         var session = sessionFactory.getCurrentSession();
-        String hql="update Order set workStatus=:work where id=:id";
-        var query = session.createQuery(hql,Order.class)
+        String hql="update Orders set workStatus=:work where id=:id";
+        var query = session.createQuery(hql, Orders.class)
                 .setParameter("work",order.getWorkStatus())
                 .setParameter("id",order.getId())
                 .executeUpdate();
@@ -57,9 +55,9 @@ public class ExpertRepositoryImpl implements ExpertRepository {
     @Override
     public List<Offer> findMyAcceptOffer(Expert expert) {
         var session = sessionFactory.getCurrentSession();
-        String hql="from Order o inner join Offer f where " +
+        String hql="from Orders o inner join Offer f where " +
                 "f.expert.id=:id and o.workStatus=:work";
-        var query = session.createQuery(hql,Order.class)
+        var query = session.createQuery(hql, Orders.class)
                 .setParameter("id",expert.getId())
                 .setParameter("work",WorkStatus.WAIT_FOR_ARRIVE);
         return null;
@@ -68,9 +66,9 @@ public class ExpertRepositoryImpl implements ExpertRepository {
     @Override
     public void changeWorkByExpert(Integer id, WorkStatus workStatus) {
         var session = sessionFactory.getCurrentSession();
-        String hql="update Order set workStatus=:work " +
+        String hql="update Orders set workStatus=:work " +
                 "where id=:id";
-        var query = session.createQuery(hql,Order.class)
+        var query = session.createQuery(hql, Orders.class)
                 .setParameter("id",id)
                 .setParameter("work",workStatus)
                 .executeUpdate();

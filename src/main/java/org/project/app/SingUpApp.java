@@ -3,7 +3,6 @@ package org.project.app;
 import org.project.entity.Avatar;
 import org.project.entity.Customer;
 import org.project.entity.Expert;
-import org.project.entity.RequestForConfirmation;
 import org.project.entity.enumeration.UserStatus;
 import org.project.service.imp.SingUpService;
 
@@ -31,33 +30,14 @@ public class SingUpApp {
         sing.requestForSingUp(expert);
     }
 
-    public void tracking() {
-        System.out.println("please inseert number");
-        Integer track = utility.giveIntegerInput();
-        RequestForConfirmation request = sing.tracking(track);
-        if (request == null) {
-            System.out.println("your tracking number not find ");
-        } else {
-            System.out.println(request);
-            if (request.getStatus().equals(UserStatus.UNCONFIRMED)) {
-                System.out.println("your request in umconfirmed please try again");
-                removeRequest(request);
-            } else
-                System.out.println("your request is " + request.getStatus());
-        }
-    }
-
-    private void removeRequest(RequestForConfirmation request) {
-        sing.removeRequest(request);
-    }
-
     public void singUpForCustomer() {
-        String fname = utility.setName();
-        String lname = utility.setName();
+        String fName = utility.setName();
+        String lName = utility.setName();
         String email = utility.email();
         String password = utility.setPassword();
-//        Customer customer = new Customer(null, null, fname, lname, email, password, UserStatus.ACTIVE);
-//        sing.insertCustomer(customer);
+        Customer customer = new Customer(null, null,
+                fName, lName, email, password, UserStatus.ACTIVE);
+        sing.insertCustomer(customer);
     }
 
 }

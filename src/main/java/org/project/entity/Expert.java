@@ -18,6 +18,7 @@ import java.util.Set;
 public class Expert extends User {
     @Embedded
     private Avatar avatar;
+    private Integer budget;
 
     public Expert(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status, Avatar avatar) {
         super(id, time, firstName, lastName, email, password, status);

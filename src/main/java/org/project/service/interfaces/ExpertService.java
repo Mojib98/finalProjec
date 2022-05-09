@@ -6,10 +6,10 @@ import org.project.entity.enumeration.WorkStatus;
 import java.util.List;
 
 public interface ExpertService extends GenericService<Offer>{
-    List<Order> findOrders(Expert expert);
+    List<Orders> findOrders(Expert expert);
     Expert findByEmail(String email);
     Customer findByIdCustomer(Integer id);
-    void changeWorkFlow(Order order);
+    void changeWorkFlow(Orders order);
     List<Offer> findMyAcceptOffer(Expert expert);
     void changeWorkByExpert(Integer id, WorkStatus workStatus);
     void changePassword(Expert specialist, String newPassword);

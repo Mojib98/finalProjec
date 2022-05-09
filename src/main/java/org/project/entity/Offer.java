@@ -3,13 +3,14 @@ package org.project.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.project.entity.enumeration.WorkStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-@SqlResultSetMapping(
+/*@SqlResultSetMapping(
         name = "offer",
         classes = @ConstructorResult(
                 targetClass = Offer.class,
@@ -23,9 +24,8 @@ import java.time.LocalTime;
 
                 })
 
-)
+)*/
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Offer extends BaseClass{
@@ -34,6 +34,8 @@ public class Offer extends BaseClass{
     private LocalDate date;
 //    private LocalTime time;
     private LocalDateTime workTime;
+    @Enumerated(EnumType.STRING)
+    private WorkStatus workStatus;
     @OneToOne
     private Comment comment;
     @ManyToOne()

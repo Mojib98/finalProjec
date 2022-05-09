@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Customer extends User {
     @OneToMany(mappedBy = "customers")
-    private List<Order> orders;
+    private List<Orders> orders;
     private Integer budget;
 
 

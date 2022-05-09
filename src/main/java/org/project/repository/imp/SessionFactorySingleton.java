@@ -4,7 +4,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.project.entity.*;
-import org.project.entity.Budget;
 
 public class SessionFactorySingleton {
 
@@ -27,16 +26,13 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(User.class)
                     .addAnnotatedClass(Customer.class)
                     .addAnnotatedClass(Expert.class)
-                    .addAnnotatedClass(BaseClass.class)
-                    .addAnnotatedClass(RequestForConfirmation.class)
-                    .addAnnotatedClass(RequestForNewSpecialization.class)
                     .addAnnotatedClass(Avatar.class)
                     .addAnnotatedClass(Service.class)
-                    .addAnnotatedClass(Order.class)
+                    .addAnnotatedClass(SubService.class)
+                    .addAnnotatedClass(Orders.class)
                     .addAnnotatedClass(Offer.class)
                     .addAnnotatedClass(Comment.class)
-                    .addAnnotatedClass(AcceptOffer.class)
-                    .addAnnotatedClass(Budget.class)
+                    .addAnnotatedClass(Specialty.class)
                     .buildMetadata()
                     .buildSessionFactory();
         }

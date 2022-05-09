@@ -3,6 +3,7 @@ package org.project.service.imp;
 import org.hibernate.SessionFactory;
 import org.project.entity.Customer;
 import org.project.entity.Service;
+import org.project.entity.SubService;
 import org.project.repository.imp.RepositoryService;
 import org.project.repository.imp.SessionFactorySingleton;
 import org.project.service.interfaces.ServiceForService;
@@ -28,14 +29,18 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
             }
         }
 
-//    }
+    @Override
+    public void addSubService(SubService service) {
+
+    }
+
+    //    }
     private void checkUniqueService(Service service){
         Service service1 = null;
         try (var session = sessionFactory.getCurrentSession()){
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                 service1 = serviceRegistry.findByName(service.getName());
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -43,8 +48,8 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
 
             }
         }
-        if (service1 !=null)
-        throw new RuntimeException("this service is have");
+  /*      if (service1 !=null)
+        throw new RuntimeException("this service is have");*/
     }
 
     @Override
@@ -73,16 +78,16 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                return serviceRegistry.findByName(name);
             } catch (Exception e) {
                 transaction.rollback();
                 System.out.println(e.getMessage());
                 return null;
             }
         }
+        return null;
     }
-    public List<Service> findByCategory(String categoryName){
-        List<Service> serviceList = null;
+    public List<SubService> findByCategory(String categoryName){
+        List<SubService> serviceList = null;
         try (var session = sessionFactory.getCurrentSession()){
             var transaction = session.getTransaction();
             try {
@@ -113,13 +118,13 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
         }
         return category;
     }
-    public List<Service> showAllSpecialty(){
-        List<Service> specialty = null;
+    public List<SubService> showAllSubService(){
+        List<SubService> subServices = null;
         try (var session = sessionFactory.getCurrentSession()){
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                specialty=serviceRegistry.findJustSpecialty();
+//                subServices=serviceRegistry.findJustSpecialty();
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
@@ -127,7 +132,7 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
 
             }
         }
-        return specialty;
+        return subServices;
 
     }
     public void insertSpecialty(Service service){
@@ -146,7 +151,6 @@ public class ServiceForServiceImpl extends GenericServiceImpl<Service> implement
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                list=serviceRegistry.search(customer);
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
