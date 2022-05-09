@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class Expert extends User {
+public class Expert extends Users {
     @Embedded
     private Avatar avatar;
     private Integer budget;

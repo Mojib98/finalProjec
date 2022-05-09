@@ -53,13 +53,13 @@ public class ManagerServiceForExpertImpl extends GenericServiceImpl<Expert> impl
     }
 
     @Override
-    public List<Expert> RequestList() {
+    public List<Expert> requestList() {
         List<Expert> list = null;
         try (var session = sessionFactory.getCurrentSession()) {
             var transaction = session.getTransaction();
             try {
                 transaction.begin();
-                list=repositorySpecialist.RequestList();
+                list=repositorySpecialist.requestList();
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();

@@ -13,7 +13,7 @@ import java.util.Objects;
 @Setter
 @Getter
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class User extends BaseClass{
+public class Users extends BaseClass{
     @NotNull
     private String firstName;
     @NotNull
@@ -24,7 +24,7 @@ public class User extends BaseClass{
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    public User() {
+    public Users() {
 
     }
 
@@ -33,11 +33,11 @@ public class User extends BaseClass{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        User person = (User) o;
+        Users person = (Users) o;
         return Objects.equals(email, person.email);
     }
 
-    public User(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status) {
+    public Users(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status) {
         super(id, time);
         this.firstName = firstName;
         this.lastName = lastName;

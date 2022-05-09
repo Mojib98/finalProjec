@@ -7,5 +7,5 @@ import java.util.List;
 public interface ManageRepositoryForExpert {
     void changeStatusExpert(Expert expert);
     List<Expert> search(Expert expert);
-    List<Expert> RequestList();
+    List<Expert> requestList();
 }

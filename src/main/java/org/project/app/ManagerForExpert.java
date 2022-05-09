@@ -1,50 +1,40 @@
-/*
 package org.project.app;
 
-import org.project.entity.RequestForConfirmation;
-import org.project.entity.RequestForNewSpecialization;
 import org.project.entity.Expert;
 import org.project.entity.enumeration.UserStatus;
-import org.project.service.interfaces.ManageServiceForSpecialist;
-import org.project.service.imp.ManagerServiceForSpecialistImpl;
+import org.project.service.imp.ManagerServiceForExpertImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ManagerForSpecialist {
+public class ManagerForExpert {
     Scanner scanner = new Scanner(System.in);
-    ManageServiceForSpecialist forSpecialist = new ManagerServiceForSpecialistImpl();
+    ManagerServiceForExpertImpl manager = new ManagerServiceForExpertImpl();
     public void determineSingUp(){
-        List<RequestForConfirmation> list = forSpecialist.RequestList();
-        List<RequestForConfirmation> accept = new ArrayList<>();
-        List<RequestForConfirmation> unAccept = new ArrayList<>();
-        for(RequestForConfirmation request:list){
+        List<Expert> list = manager.requestList();
+        List<Expert> accept = new ArrayList<>();
+        List<Expert> unAccept = new ArrayList<>();
+        for(Expert request:list){
             System.out.print(request.getId()+"  ");
             System.out.print(request.getFirstName()+"  ");
             System.out.print(request.getLastName()+"  ");
-            System.out.print(request.getAboutMe()+"  ");
             System.out.print(request.getTime()+"  ");
             System.out.println("if confirmation insert 'y' or insert 'n'");
             char check=scanner.next().charAt(0);
             switch (check){
                 case 'y':
                     accept.add(request);
+                    break;
                 case 'n':
                     unAccept.add(request);
+                    break;
                 default:
             }
         }
-        forSpecialist.acceptRequest(accept);
-       // unAcceptList(unAccept);
+        manager.handleRequestForExpert(accept,unAccept);
     }
-    private void acceptList(List<RequestForConfirmation> request){
-        forSpecialist.acceptRequest(request);
-    }
-    private void unAcceptList(List<RequestForConfirmation> request){
-            forSpecialist.changeStatusForRequest(request);
-    }
-    public void determineForRequestSpecialty() {
+  /*  public void determineForRequestSpecialty() {
         List<RequestForNewSpecialization> list = forSpecialist.findNewRequest();
         List<RequestForNewSpecialization> accept = new ArrayList<>();
         List<RequestForNewSpecialization> unAccept = new ArrayList<>();
@@ -74,12 +64,10 @@ public class ManagerForSpecialist {
     private void removeFromRequestSpecialty(List<RequestForNewSpecialization> list){
                 forSpecialist.unAccept(list);
 
-    }
+    }*/
     public void search(){
         Expert specialist = optionForSearch();
         System.out.println(specialist);
-            var list= forSpecialist.search(specialist);
-            list.forEach(System.out::println);
 
     }
     private Expert optionForSearch(){
@@ -95,8 +83,7 @@ public class ManagerForSpecialist {
         UserStatus status1 = UserStatus.valueOf(status);
 //        UserStatus status1 = UserStatus.CONFIRMED;
 
-        return new Expert(null,null,fName,lName,email,null,status1);
-
+return null;
     }
     private String checker(){
         String string = scanner.next();
@@ -111,4 +98,3 @@ public class ManagerForSpecialist {
 
 
 }
-*/

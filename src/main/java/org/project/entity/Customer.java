@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Customer extends User {
+public class Customer extends  Users{
     @OneToMany(mappedBy = "customers")
     private List<Orders> orders;
     private Integer budget;
