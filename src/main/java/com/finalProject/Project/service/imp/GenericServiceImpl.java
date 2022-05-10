@@ -1,3 +1,4 @@
+/*
 package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.BaseClass;
@@ -6,7 +7,6 @@ import com.finalProject.Project.service.interfaces.GenericService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
 public class GenericServiceImpl<T> implements GenericService<T> {
     GenericRepository<T> genericRepository;
 
@@ -45,3 +45,4 @@ public class GenericServiceImpl<T> implements GenericService<T> {
         return null;
     }
 }
+*/

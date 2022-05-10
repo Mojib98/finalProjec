@@ -8,6 +8,7 @@ import com.finalProject.Project.repository.interfaces.SpecialtyRepository;
 import com.finalProject.Project.service.interfaces.ManageServiceForExpert;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 @Service
 public class ManageExpertService implements ManageServiceForExpert {
@@ -20,14 +21,17 @@ public class ManageExpertService implements ManageServiceForExpert {
     }
 
     @Override
+    @Transactional
     public void changeStatusExpert(Expert expert) {
         manageRepositoryForExpert.updateWorkStatus(expert.getId(),expert.getStatus());
     }
 
     @Override
+    @Transactional
     public void handleRequestForExpert(List<Expert> accepted, List<Expert> unAccepted) {
         for (Expert expert:accepted){
             expert.setStatus(UserStatus.CONFIRMED);
+            System.out.println(expert);
             changeStatusExpert(expert);
         }
         for (Expert expert:unAccepted){
@@ -42,12 +46,14 @@ public class ManageExpertService implements ManageServiceForExpert {
     }
 
     @Override
+    @Transactional
     public List<Expert> requestListSingUp() {
         List<Expert> list = manageRepositoryForExpert.findAllByStatus(UserStatus.AWAITING_CONFIRMATION);
         return list;
     }
 
     @Override
+    @Transactional
     public void handelRequestForSpecialty(List<Specialty> accepted, List<Specialty> unAccepted) {
         for (Specialty accept:accepted){
             accept.setStatus(UserStatus.CONFIRMED);
@@ -64,6 +70,7 @@ public class ManageExpertService implements ManageServiceForExpert {
     }
 
     @Override
+    @Transactional
     public void removeSpecialty(Specialty specialty) {
 
     }

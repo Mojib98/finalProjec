@@ -1,8 +1,11 @@
 package com.finalProject.Project;
 
+import com.finalProject.Project.app.ManageForSystem;
+import com.finalProject.Project.app.ManagerForExpert;
 import com.finalProject.Project.app.SingUpApp;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.service.interfaces.SingUpService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,17 +19,18 @@ public class ProjectApplication {
 	}
 	@Component
 	class Start implements ApplicationRunner {
+		@Autowired
+		ManageForSystem manageForSystem;
+		@Autowired
 		SingUpApp sing;
+		@Autowired
+		ManagerForExpert manager;
 
-		public Start(SingUpApp sing) {
-			this.sing = sing;
-		}
 
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
-			Customer customer = new Customer(null,null,"majid2","majid","majaaapiuoid","nnnn",null);
-			sing.singUpForCustomer();
-			sing.requestForSingUp();
+			while (true)
+				manager.determineSingUp();
 		}
 	}
 

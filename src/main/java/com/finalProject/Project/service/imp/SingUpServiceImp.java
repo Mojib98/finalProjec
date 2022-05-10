@@ -4,7 +4,6 @@ import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.Users;
 import com.finalProject.Project.entity.enumeration.UserStatus;
-import com.finalProject.Project.repository.interfaces.GenericRepository;
 import com.finalProject.Project.repository.interfaces.SingUpRepository;
 import com.finalProject.Project.service.interfaces.SingUpService;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import java.beans.Transient;
 @Service
 public class SingUpServiceImp  implements SingUpService {
    private SingUpRepository sing;
-   private GenericRepository<Users> repository;
 
     public SingUpServiceImp(SingUpRepository sing) {
         this.sing = sing;
@@ -24,6 +22,7 @@ public class SingUpServiceImp  implements SingUpService {
     @Override
     public void requestForSingUp(Expert expert) {
         expert.setStatus(UserStatus.AWAITING_CONFIRMATION);
+        expert.setBudget(0);
         sing.save(expert);
     }
 
@@ -31,6 +30,7 @@ public class SingUpServiceImp  implements SingUpService {
     @Transactional
     public void insertCustomer(Customer customer) {
         customer.setStatus(UserStatus.ACTIVE);
-        repository.save(customer);
+        customer.setBudget(50000);
+        sing.save(customer);
     }
 }
