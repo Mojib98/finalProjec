@@ -63,7 +63,6 @@ public class ManagerForExpert {
         }
      manager.handelRequestForSpecialty(accept,unAccept);
     }
-
     public void search(){
         Expert specialist = optionForSearch();
         System.out.println(specialist);

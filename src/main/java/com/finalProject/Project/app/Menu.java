@@ -1,32 +1,41 @@
-/*
-package org.project.app;
+package com.finalProject.Project.app;
+
+import com.finalProject.Project.app.ManageForSystem;
+import com.finalProject.Project.app.ManagerForExpert;
+import com.finalProject.Project.app.SingUpApp;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
-
+@Component
 public class Menu {
     Scanner scanner = new Scanner(System.in);
-    SingUpApp sing = new SingUpApp();
-    ManagerForSpecialist managerForSpecialist = new ManagerForSpecialist();
-    ManageForSystem manageForSystem = new ManageForSystem();
+
+    public Menu(SingUpApp sing, ManageForSystem manageForSystem, ManagerForExpert managerForExpert) {
+        this.sing = sing;
+        this.manageForSystem = manageForSystem;
+        this.managerForExpert = managerForExpert;
+    }
+
+    SingUpApp sing;
+    ManageForSystem manageForSystem;
+    ManagerForExpert managerForExpert;
+    ExpertApp expertApp;
+    CustomerApp customerApp;
     public void singUp() throws IOException {
         System.out.println("\t\tWelcome\n\t\t" +
                 "for request for specialist insert 'new specialist \n" +
-                "\t\tfor tracking your request insert 'track\n" +
                 "\t\tif Customer insert 'customer'");
         String choice = scanner.next();
         switch (choice){
-            case "new specialist":
+            case "new":
                 sing.requestForSingUp();
                 break;
             case "customer":
                 sing.singUpForCustomer();
                 break;
-            case "track":
-                sing.tracking();
-            default:
-                break;
+
         }
 
     }
@@ -37,10 +46,10 @@ public class Menu {
         String choice = scanner.next().toLowerCase(Locale.ROOT);
         switch (choice){
             case "newsing":
-                managerForSpecialist.determineSingUp();
+                managerForExpert.determineSingUp();
                 break;
             case "check":
-                managerForSpecialist.determineForRequestSpecialty();
+                managerForExpert.determineForRequestSpecialty();
                 break;
             case "search":
         }
@@ -52,6 +61,24 @@ public class Menu {
                 "\n\t\tfor request for new speciali insert 's'" +
                 "\n\t\tfor see your budget insert " +
                 "\n\t\tfor see your comment insert ");
+        String choice = scanner.next().toLowerCase(Locale.ROOT);
+        switch (choice){
+            case "order":
+                expertApp.seeOrders();
+                break;
+            case "check":
+                expertApp.writeOffer();
+                break;
+            case "s":
+                expertApp.requestForSpecialty();
+                break;
+            case "budget":
+                break;
+            case "comment":
+            case "start":
+            case "down":
+
+        }
     }
     public void mangeManagerSystem(){
         System.out.println("\t\twelcome\n" +
@@ -66,15 +93,30 @@ public class Menu {
                 manageForSystem.addService();
                 break;
             case "sub":
-                manageForSystem.addSpecialty();
+                manageForSystem.addSubService();
                 break;
             case "search":
             case "s":
-                manageForSystem.showListOfSpecialty();
                 break;
             case "c":
                 manageForSystem.showListOfService();
         }
     }
+    public void customerMenu(){
+        System.out.println("\t\tWelcome" +
+                "\n\t\tfor see new request for singUp insert 'newsing'" +
+                "\n\t\tfor see new request for specialty insert 'check'");
+        String choice = scanner.next().toLowerCase(Locale.ROOT);
+        switch (choice){
+            case "order":
+                customerApp.createOrder();
+                break;
+            case "offer":
+                customerApp.seeMyOrder();
+                break;
+            case "search":
+                customerApp.choiceOffer();
+            case "change":
+        }
+    }
 }
-*/

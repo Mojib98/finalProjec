@@ -28,7 +28,8 @@ public class ProjectApplication {
 		ExpertApp expertApp;
 		@Autowired
 		CustomerApp customerApp;
-
+		@Autowired
+		Menu menu;
 
 		Expert expert = new Expert();
 		Customer customer = new Customer();
@@ -36,12 +37,14 @@ public class ProjectApplication {
 
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
-			expert.setId(17);
+		/*	expert.setId(17);
 			expertApp.setExpert(expert);
 			customer.setId(12);
 			customerApp.setCustomer(customer);
 //			expertApp.writeOffer();
-			customerApp.choiceOffer();
+			customerApp.choiceOffer();*/
+			while (true)
+			menu.MangeSpecialist();
 
 //			while (true)
 //				expertApp.writeOffer();

@@ -112,6 +112,15 @@ public class CustomerApp {
         customerServiceImpl.choiceOffer(offers,orders);*/
         }
     }
+    public void payForOrder(){
+        List<Order> acceptOffer = service.myDownOrder(customer.getId());
+        Integer orderId=scanner.nextInt();
+        Order order = acceptOffer.stream()
+                .filter(p -> p.getId().equals(orderId))
+                .findFirst().get();
+        service.paying(order);
+
+    }
   /*
    public void seeAllSpecialty(){
         List<Service> list=
@@ -140,11 +149,7 @@ public class CustomerApp {
 
 
     }
-    public void payForOrder(){
-        AcceptOffer acceptOffer = customerServiceImpl.myAcceptOffer(120);
-        System.out.println(acceptOffer.getId());
-        customerServiceImpl.paying(acceptOffer,91);
-    }
+
     public void addComment(){
         AcceptOffer acceptOffer1 = customerServiceImpl.myAcceptOffer(86);
         Comment comment = new Comment();

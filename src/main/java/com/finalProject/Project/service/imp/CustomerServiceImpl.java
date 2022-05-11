@@ -1,5 +1,6 @@
 package com.finalProject.Project.service.imp;
 
+import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Offer;
 import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.SubService;
@@ -40,6 +41,15 @@ public class CustomerServiceImpl {
         orderRepository.save(order);
         offerService.removeOffer(offers);
 
+
+    }
+    public List<Order> myDownOrder(Integer id){
+        return orderRepository.findAllByCustomersIdAndWorkStatusEquals(id,WorkStatus.DONE);
+    }
+    public void paying(Order order){
+        Order order1 = orderRepository.findById(order.getId()).get();
+        Offer offer = offerService.findById(order1.getOffer().getId());
+//        Customer customer
 
     }
 
