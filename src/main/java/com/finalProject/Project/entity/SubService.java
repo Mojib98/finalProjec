@@ -9,6 +9,12 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 //@Check(constraints = "basePrice > 0")
+/*select new com.finalProject.Project.entity.Order(o.id,o.time,o.offerPrice,o.timeForWork,o.address,
+        o.describe,o.customers,o.Service)
+        from Order o inner join SubService p on o.Service.id=p.id
+        inner join Specialty s on s.service.id=p.category.id
+        where s.expert.id=19*/
+@Table(name = "sub_service")
 public class SubService extends BaseClass {
     @Column(nullable = false, unique = true)
     private String name;

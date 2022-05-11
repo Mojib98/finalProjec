@@ -77,4 +77,7 @@ public class ServicesServiceImpl implements ManageServiceForService {
             throw new RuntimeException("this class exists");
         }
     }
+    public List<SubService> showAllSubService(){
+        return (List<SubService>) subServiceRepository.findAll();
+    }
 }

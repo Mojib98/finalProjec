@@ -5,21 +5,32 @@ import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.service.imp.ExpertService;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 @Setter
+@Component
 public class ExpertApp {
+
+
     Integer id;
     Expert expert;
     List<Service> serviceList;
     Scanner scanner = new Scanner(System.in);
+
+    public ExpertApp(ExpertService expertService, ServicesServiceImpl servicesService) {
+        this.expertService = expertService;
+        this.servicesService = servicesService;
+    }
+
     ExpertService expertService;
-    ServicesServiceImpl service;
+    ServicesServiceImpl servicesService;
     Utility utility = new Utility();
     public void showListOfSpecialty(){
-        this.serviceList = service.showAllService();
+        this.serviceList = servicesService.showAllService();
         for (Service service:serviceList){
             System.out.println(service.getName());
         }
@@ -33,7 +44,7 @@ public class ExpertApp {
                 .findFirst().get();
         System.out.println(service);
         Specialty specialty = new Specialty(null,null,this.expert,service);
-//        expertService(specialty);
+        expertService.requestForSpecialty(specialty);
 
 
     }
@@ -73,7 +84,7 @@ public class ExpertApp {
         }
        Offer offer = new Offer(null,null,offerPrice,dateTime, WorkStatus.WAIT_FOR_CHOICE,expert,order);
 
-//        expertService.(offer,order);
+        expertService.insertOffer(offer,order);
 
 
 
@@ -112,25 +123,25 @@ public class ExpertApp {
         }
         return false;
     }
-    public void arriveOffer(){
-      /*  List<AcceptOffer> acceptOffers =specialistService.findMyAcceptOffer(3);
-        for (AcceptOffer a:acceptOffers){
+    public void startWork(){
+        List<Offer> acceptOffers =expertService.findOfferForAction(expert.getId(),WorkStatus.WAIT_FOR_ARRIVE);
+        for (Offer a:acceptOffers){
             System.out.println(a.getId());
             System.out.println(a.getWorkTime());
         }
         System.out.println("please select one of for start ");
         Integer id = scanner.nextInt();
-        specialistService.changeWorkBySpecialist(id,WorkStatus.START);*/
+        expertService.changeWorkByExpert(id,WorkStatus.START);
     }
     public void downWork(){
-      /*  List<AcceptOffer> acceptOffers =specialistService.findMyAcceptOffer(3);
-        for (AcceptOffer a:acceptOffers){
+        List<Offer> acceptOffers =expertService.findOfferForAction(expert.getId(),WorkStatus.START);
+        for (Offer a:acceptOffers){
             System.out.println(a.getId());
             System.out.println(a.getWorkTime());
         }
         System.out.println("please select one of for start ");
         Integer id = scanner.nextInt();
-        specialistService.changeWorkBySpecialist(id,WorkStatus.DONE);*/
+        expertService.changeWorkByExpert(id,WorkStatus.DONE);
     }
 
 

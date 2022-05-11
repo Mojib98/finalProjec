@@ -1,110 +1,127 @@
-/*
 package com.finalProject.Project.app;
 
-import com.finalProject.Project.entity.Customer;
+import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.enumeration.WorkStatus;
+import com.finalProject.Project.service.imp.CustomerServiceImpl;
+import com.finalProject.Project.service.imp.OfferServiceImpl;
+import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 @Setter
+@Component
 public class CustomerApp {
+    @Autowired
+    CustomerServiceImpl service;
+    @Autowired
+    ServicesServiceImpl servicesService;
+    @Autowired
+    OfferServiceImpl offerService;
     Customer customer;
-    org.project.service.imp.ServiceForServiceImpl service = new ServiceForServiceImpl();
-    CustomerServiceImplImpl customerServiceImpl = new CustomerServiceImplImpl();
     Scanner scanner = new Scanner(System.in);
     Utility utility = new Utility();
-*/
 /*    public void seeCategory(){
        for (Service service : list )
            System.out.println(list);
     }
-  *//*
 
-  */
-/*  public void seeSpecialtyByCategory(){
+
+  public void seeSpecialtyByCategory(){
         String name = scanner.next();
         List<Service> list= service.findByCategory(name);
         for (Service service : list )
             System.out.println(list);
-    }
-    public Service findSpecialtyByName(String name){
+    }*/
+/*    public Service findSpecialtyByName(String name){
         Service service1=service.findServiceByName(name);
         if (service1==null)
             throw new RuntimeException("your service not find");
         System.out.println( service1);
         return service1;
-    }*//*
+    }*/
 
-    public void createOrder(){
+    public void createOrder() {
         System.out.println("insert des");
-        String describe=scanner.next();
+        String describe = scanner.next();
         System.out.println("adress");
         String address = scanner.next();
 
-        List<SubService> services = service.showAllSubService();
-        for (SubService service:services){
-            System.out.println(service.getName()+"  ");
+        List<SubService> services = servicesService.showAllSubService();
+        for (SubService service : services) {
+            System.out.print(service.getName() + "  ");
             System.out.print(service.getBasePrice());
         }
         System.out.println("insert name service for order");
-        String nameService  =scanner.next();
-        System.out.println("please insert offer price");
-        Integer price=scanner.nextInt();
-        LocalDateTime time = utility.dateTime();
+        String nameService = scanner.next();
         SubService subService = services.stream()
                 .filter(p -> p.getName().equals(nameService))
                 .findFirst().get();
-        checkPrice(subService,price);
-        Orders orders = new Orders(null,null,price,time,address,describe,customer,subService);
-        customerServiceImpl.insertOrder(orders);
-
-
-
-
+        System.out.println("please insert offer price");
+        Integer price = scanner.nextInt();
+        checkPrice(subService, price);
+        LocalDateTime time = utility.dateTime();
+        com.finalProject.Project.entity.Order order = new com.finalProject.Project.entity.Order(null, null, price, time, address, describe, customer, subService);
+        service.insertOrder(order);
 
 
     }
-    private void checkPrice(SubService service,Integer price){
+
+    private void checkPrice(SubService service, Integer price) {
         if (service.getBasePrice() >= price)
-        throw new RuntimeException("bad price");
+            throw new RuntimeException("bad price");
     }
-    public void changePassword(){
-        String newPassword=utility.setPassword();
 
-
+    public void changePassword() {
+        String newPassword = utility.setPassword();
 
     }
-    public void seeMyOffer(){
-        List<Orders> orders =customerServiceImpl.myOrder(customer.getId());
-        for (Orders orders1 : orders){
+
+    public void seeMyOrder() {
+        List<Order> order = service.findMyOrder(customer.getId());
+        for (com.finalProject.Project.entity.Order orders1 : order) {
             System.out.println(orders1);
         }
+
     }
-    public void choiceOffer(){
-        Integer id=scanner.nextInt();
-        List<Offer> offers=customerServiceImpl.offerForOrder(id);
-        offers.stream().forEach(System.out::println);
-        Integer idOffer = scanner.nextInt();
-        Offer offer = offers.stream()
-                .filter(p -> p.getId().equals(idOffer))
-                .findFirst().get();
-        Orders orders =customerServiceImpl.findOrderById(id);
+
+    public void choiceOffer() {
+        List<Order> order = service.findMyOrder(customer.getId());
+        for (com.finalProject.Project.entity.Order orders1 : order) {
+            System.out.println(orders1);
+            Integer id = scanner.nextInt();
+            List<Offer> offers = offerService.findByOrderId(id);
+            offers.stream().forEach(System.out::println);
+            Integer idOffer = scanner.nextInt();
+            Offer offer = offers.stream()
+                    .filter(p -> p.getId().equals(idOffer))
+                    .findFirst().get();
+            Order order1 = order.stream()
+                    .filter(p -> p.getId().equals(id))
+                    .findFirst().get();
+            offers.remove(offer);
+            service.choiceOffer(order1,offer,offers);
+
+
+     /*   Orders orders =customerServiceImpl.findOrderById(id);
         orders.setAcceptOffer(offer);
         orders.setWorkStatus(WorkStatus.WAIT_FOR_ARRIVE);
-        customerServiceImpl.choiceOffer(offers,orders);
+        customerServiceImpl.choiceOffer(offers,orders);*/
+        }
     }
- */
-/*   public void seeAllSpecialty(){
+  /*
+   public void seeAllSpecialty(){
         List<Service> list=
         for (Service service : list ) {
             System.out.println(service.getName());
 
         }
-    }*//*
+    }
 
-   */
-/* public void seeOffer(){}
+ public void seeOffer(){}
     public void choseOffer(){
         Integer id = scanner.nextInt();
         Offer offer = customerServiceImpl.findOfferById(id);
@@ -133,11 +150,9 @@ public class CustomerApp {
         Comment comment = new Comment();
         comment.setComment("sadfdf");
         customerServiceImpl.addComment(acceptOffer1,25,comment);
-    }
-*//*
-
-
+    }*/
 
 
 }
-*/
+
+

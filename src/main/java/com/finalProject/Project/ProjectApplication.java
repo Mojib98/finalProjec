@@ -1,9 +1,8 @@
 package com.finalProject.Project;
 
-import com.finalProject.Project.app.ManageForSystem;
-import com.finalProject.Project.app.ManagerForExpert;
-import com.finalProject.Project.app.SingUpApp;
+import com.finalProject.Project.app.*;
 import com.finalProject.Project.entity.Customer;
+import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.service.interfaces.SingUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -25,12 +24,27 @@ public class ProjectApplication {
 		SingUpApp sing;
 		@Autowired
 		ManagerForExpert manager;
+		@Autowired
+		ExpertApp expertApp;
+		@Autowired
+		CustomerApp customerApp;
+
+
+		Expert expert = new Expert();
+		Customer customer = new Customer();
 
 
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
-			while (true)
-				manager.determineSingUp();
+			expert.setId(17);
+			expertApp.setExpert(expert);
+			customer.setId(12);
+			customerApp.setCustomer(customer);
+//			expertApp.writeOffer();
+			customerApp.choiceOffer();
+
+//			while (true)
+//				expertApp.writeOffer();
 		}
 	}
 

@@ -63,7 +63,7 @@ public class ManageExpertService implements ManageServiceForExpert {
             unAccept.setStatus(UserStatus.UNCONFIRMED);
             specialtyRepository.save(unAccept);
             specialtyRepository.delete(unAccept);
-//            removeSpecialty(unAccept);
+            removeSpecialty(unAccept);
 
 
         }

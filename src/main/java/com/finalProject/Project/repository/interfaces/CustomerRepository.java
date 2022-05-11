@@ -2,11 +2,12 @@ package com.finalProject.Project.repository.interfaces;
 
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface CustomerRepository<T extends BaseClass> {
-    List<Offer> findAllOffer(Integer id);
+public interface CustomerRepository {
+  /*  List<Offer> findAllOffer(Integer id);
     Offer findOfferById(Integer id);
 //    AcceptOffer insertAcceptOfferAcceptOffer acceptOffer);
     Order findOrder(Integer id);
@@ -17,7 +18,7 @@ public interface CustomerRepository<T extends BaseClass> {
     void insertComment(Comment comment);
     void changePassword(Customer customer,String password);
     void changeWorkBySpecialist(Integer id, WorkStatus workStatus);
-    void payIng(Customer customer, Expert specialist);
+    void payIng(Customer customer, Expert specialist);*/
 
 
     
