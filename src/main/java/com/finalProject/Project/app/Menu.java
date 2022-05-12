@@ -20,7 +20,7 @@ public class Menu {
     ManageForSystem manageForSystem;
     ManagerForExpert managerForExpert;
     ExpertApp expertApp;
-    CustomerApp customerApp;
+    CustomerAppImpl customerApp;
     public void singUp() throws IOException {
         System.out.println("\t\tWelcome\n\t\t" +
                 "for request for specialist insert 'new specialist \n" +
@@ -117,4 +117,30 @@ public class Menu {
             case "change":
         }
     }
+    public void expertMenu() {
+        System.out.println("\t\twelcome for see order for you insert 'order'" +
+                "\n\t\tfor write offer insert 'offer" +
+                "\n\t\tfor see your accept offer insert 'work'" +
+                "\n\t\tfor start your work insert 'start'" +
+                "\n\t\tfor down your work insert 'down'" +
+                "\n\t\tfor request new spacialist insert 'new'" +
+                "\n\t\t");
+
+        String choice = scanner.next().toLowerCase(Locale.ROOT);
+        switch (choice) {
+            case "order":
+                customerApp.createOrder();
+                break;
+            case "offer":
+                customerApp.seeMyOrder();
+                break;
+            case "work":
+                customerApp.choiceOffer();
+            case "start":
+            case "new":
+            case "down":
+
+        }
+    }
+
 }

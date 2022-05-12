@@ -4,6 +4,8 @@ import com.finalProject.Project.app.*;
 import com.finalProject.Project.app.impl.SingUpAppImpl;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
+import com.finalProject.Project.entity.enumeration.UserStatus;
+import com.finalProject.Project.service.imp.ManageExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -27,9 +29,11 @@ public class ProjectApplication {
 		@Autowired
 		ExpertApp expertApp;
 		@Autowired
-		CustomerApp customerApp;
+        CustomerAppImpl customerApp;
 		@Autowired
 		Menu menu;
+		@Autowired
+		ManageExpertService expertService;
 
 		Expert expert = new Expert();
 		Customer customer = new Customer();
@@ -43,9 +47,16 @@ public class ProjectApplication {
 			customerApp.setCustomer(customer);
 //			expertApp.writeOffer();
 			customerApp.choiceOffer();*/
-			while (true)
-			menu.MangeSpecialist();
-
+//			while (true)
+//			menu.MangeSpecialist();
+			Expert expert = new Expert();
+//
+			expert.setStatus(UserStatus.UNCONFIRMED);
+		var s=	expertService.searchs(expert);
+//			s.stream().forEach(System.out::println);
+			for (Expert expert1:s){
+				System.out.println(expert1.getFirstName());
+			}
 //			while (true)
 //				expertApp.writeOffer();
 		}

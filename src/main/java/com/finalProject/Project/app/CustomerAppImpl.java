@@ -1,7 +1,6 @@
 package com.finalProject.Project.app;
 
 import com.finalProject.Project.entity.*;
-import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.service.imp.CustomerServiceImpl;
 import com.finalProject.Project.service.imp.OfferServiceImpl;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 @Setter
 @Component
-public class CustomerApp {
+public class CustomerAppImpl {
     @Autowired
     CustomerServiceImpl service;
     @Autowired
@@ -121,6 +120,19 @@ public class CustomerApp {
         service.paying(order);
 
     }
+    public void addComment(Order order){
+        List<Order> acceptOffer = service.myDownOrder(customer.getId());
+        Integer orderId=scanner.nextInt();
+        String comment = scanner.nextLine();
+        Comment comment1  = new Comment(null,null,comment,this.customer);
+       Offer offer = order.getOffer();
+
+        service.paying(order);
+    }
+    public void sortOfferByPrice(){
+
+    }
+
   /*
    public void seeAllSpecialty(){
         List<Service> list=
@@ -150,12 +162,7 @@ public class CustomerApp {
 
     }
 
-    public void addComment(){
-        AcceptOffer acceptOffer1 = customerServiceImpl.myAcceptOffer(86);
-        Comment comment = new Comment();
-        comment.setComment("sadfdf");
-        customerServiceImpl.addComment(acceptOffer1,25,comment);
-    }*/
+*/
 
 
 }
