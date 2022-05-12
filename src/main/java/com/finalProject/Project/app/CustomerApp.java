@@ -59,6 +59,7 @@ public class CustomerApp {
 
     public void changePassword() {
         String newPassword = utility.setPassword();
+        service.changePassword(this.customer,newPassword);
 
     }
 
