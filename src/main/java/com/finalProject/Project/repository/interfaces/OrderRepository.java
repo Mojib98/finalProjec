@@ -1,5 +1,6 @@
 package com.finalProject.Project.repository.interfaces;
 
+import com.finalProject.Project.entity.Comment;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
@@ -21,6 +22,7 @@ public interface OrderRepository extends CrudRepository<Order,Integer> {
     @Query("update Order set workStatus=:work where offer.id=:id")
     void updateStatusByOfferId(@Param("work") WorkStatus workStatus,@Param("id") Integer id);
     List<Order> findAllByCustomersIdAndWorkStatusEquals(Integer id,WorkStatus workStatus);
+
 
  /*   @Query("select new com.finalProject.Project.entity.Order(o.id,o.time,o.offerPrice,o.timeForWork,o.address," +
             "o.describe,o.customers,o.subService)" +

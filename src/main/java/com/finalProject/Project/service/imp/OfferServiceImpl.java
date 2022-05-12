@@ -16,7 +16,7 @@ public class OfferServiceImpl {
         this.offerRepository = offerRepository;
     }
     public void insertOffer(Offer offer){
-        if (offer.getExpert() !=null)
+//        if (offer.getExpert() !=null)
             offerRepository.save(offer);
             System.err.println(offerRepository);
     }

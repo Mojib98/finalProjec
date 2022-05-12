@@ -119,13 +119,14 @@ public class CustomerAppImpl {
 
     }
     public void addComment(Order order){
-        List<Order> acceptOffer = service.myDownOrder(customer.getId());
-        Integer orderId=scanner.nextInt();
+      /*  List<Order> acceptOffer = service.myDownOrder(customer.getId());
+        Integer orderId=scanner.nextInt();*/
         String comment = scanner.nextLine();
         Comment comment1  = new Comment(null,null,comment,this.customer);
        Offer offer = order.getOffer();
+//       offer.setComment(comment1);
 
-        service.paying(order);
+        service.addComment(offer,comment1);
     }
     public void sortOfferByPrice(){
 

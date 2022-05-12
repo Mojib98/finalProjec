@@ -13,6 +13,7 @@ import java.util.Objects;
 @Setter
 @Getter
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@MappedSuperclass
 public class Users extends BaseClass{
     @NotNull
     private String firstName;

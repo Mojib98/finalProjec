@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface ManageRepositoryForExpert extends CrudRepository<Expert,Integer>, JpaSpecificationExecutor<Expert> {

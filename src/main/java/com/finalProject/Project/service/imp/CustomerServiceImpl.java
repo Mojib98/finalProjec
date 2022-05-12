@@ -2,6 +2,7 @@ package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
+import com.finalProject.Project.repository.interfaces.CommentRepository;
 import com.finalProject.Project.repository.interfaces.CustomerRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class CustomerServiceImpl {
     CustomerRepository customerRepository;
     @Autowired
     ManageExpertService expertService;
+    @Autowired
+    CommentRepository commentRepository;
 
 
     public CustomerServiceImpl(OfferServiceImpl offerService, OrderRepository orderRepository, ServicesServiceImpl servicesService) {
@@ -63,6 +66,7 @@ public class CustomerServiceImpl {
         customer.setBudget(p-g);
         expert.setBudget(e+g);
 
+
 //        Customer customer
 
     }
@@ -71,5 +75,12 @@ public class CustomerServiceImpl {
     }
     public List<Offer> findOfferByOrderId(Integer id){
         return offerService.findMyOffers(id);
+    }
+    @Transactional
+    public void addComment(Offer offer,Comment comment){
+        commentRepository.save(comment);
+        Offer offer1 = offerService.findOfferById(offer.getId());
+        offer1.setComment(comment);
+//        offerService.insertOffer(offer);
     }
 }
