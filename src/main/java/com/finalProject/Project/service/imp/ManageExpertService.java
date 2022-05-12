@@ -79,4 +79,19 @@ public class ManageExpertService implements ManageServiceForExpert {
         list=specialtyRepository.findAllByStatus(UserStatus.AWAITING_CONFIRMATION);
         return list;
     }
-}
+    @Transactional
+    public void remove(Expert expert){
+        manageRepositoryForExpert.delete(expert);
+    }
+    public void update(Expert expert){
+
+    }
+    public void insert(Expert expert){
+        manageRepositoryForExpert.save(expert);
+    }
+    public Expert findById(Integer id){
+//        return manageRepositoryForExpert.findById(id);
+        return null;
+    }
+    }
+

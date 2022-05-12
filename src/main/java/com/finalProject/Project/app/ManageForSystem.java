@@ -28,6 +28,7 @@ public class ManageForSystem {
 
     }
     public void addSubService(){
+
         List<Service> serviceList;
         serviceList = serviceForService.showAllService();
         for (Service service:serviceList){
@@ -39,14 +40,13 @@ public class ManageForSystem {
         Service service = serviceList.stream()
                 .filter(p -> p.getName().equals(serviceName))
                 .findFirst().get();
-//        Service service = serviceForService.findServiceByName(serviceName);
         System.out.println(service);
         System.out.println("Enter name ");
         String name = scanner.next();
         System.out.println("Enter Base price ");
         Integer price = scanner.nextInt();
-        System.out.println("please insert describr");
-        String des =scanner.next();
+        System.out.println("please insert describer");
+        String des =scanner.nextLine();
         SubService subService = new SubService(null,null,name,price,des,service);
         System.out.println(subService);
         serviceForService.insertSubService(subService);

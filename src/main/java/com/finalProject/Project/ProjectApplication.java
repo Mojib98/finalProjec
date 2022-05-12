@@ -1,9 +1,9 @@
 package com.finalProject.Project;
 
 import com.finalProject.Project.app.*;
+import com.finalProject.Project.app.impl.SingUpAppImpl;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
-import com.finalProject.Project.service.interfaces.SingUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -21,7 +21,7 @@ public class ProjectApplication {
 		@Autowired
 		ManageForSystem manageForSystem;
 		@Autowired
-		SingUpApp sing;
+		SingUpAppImpl sing;
 		@Autowired
 		ManagerForExpert manager;
 		@Autowired

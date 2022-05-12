@@ -1,8 +1,6 @@
 package com.finalProject.Project.app;
 
-import com.finalProject.Project.app.ManageForSystem;
-import com.finalProject.Project.app.ManagerForExpert;
-import com.finalProject.Project.app.SingUpApp;
+import com.finalProject.Project.app.impl.SingUpAppImpl;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -12,13 +10,13 @@ import java.util.Scanner;
 public class Menu {
     Scanner scanner = new Scanner(System.in);
 
-    public Menu(SingUpApp sing, ManageForSystem manageForSystem, ManagerForExpert managerForExpert) {
+    public Menu(SingUpAppImpl sing, ManageForSystem manageForSystem, ManagerForExpert managerForExpert) {
         this.sing = sing;
         this.manageForSystem = manageForSystem;
         this.managerForExpert = managerForExpert;
     }
 
-    SingUpApp sing;
+    SingUpAppImpl sing;
     ManageForSystem manageForSystem;
     ManagerForExpert managerForExpert;
     ExpertApp expertApp;

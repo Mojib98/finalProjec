@@ -1,9 +1,11 @@
 package com.finalProject.Project.app;
 
 import com.finalProject.Project.entity.Expert;
+import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.Specialty;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ManageExpertService;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -89,6 +91,22 @@ return null;
             return null;
         else
             return string;
+
+    }
+    public void removeExpert() {
+        List<Expert> list = manager.requestListSingUp();
+        for (Expert request : list) {
+            System.out.print(request.getId() + "  ");
+            System.out.print(request.getFirstName() + "  ");
+            System.out.print(request.getLastName() + "  ");
+            System.out.print(request.getTime() + "  ");
+        }
+        System.out.println("please insert number id");
+        Integer id = scanner.nextInt();
+        Expert expert = list.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst().get();
+        manager.remove(expert);
 
     }
 

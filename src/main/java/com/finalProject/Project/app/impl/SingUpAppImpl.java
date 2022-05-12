@@ -1,22 +1,22 @@
-package com.finalProject.Project.app;
+package com.finalProject.Project.app.impl;
 
+import com.finalProject.Project.app.Utility;
+import com.finalProject.Project.app.interfaces.SingApp;
 import com.finalProject.Project.entity.Avatar;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.enumeration.UserStatus;
-import com.finalProject.Project.service.imp.SingUpServiceImp;
 import com.finalProject.Project.service.interfaces.SingUpService;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
 import java.io.*;
 import java.util.Scanner;
 @Component
-public class SingUpApp {
+public class SingUpAppImpl implements SingApp {
     Scanner scanner = new Scanner(System.in);
     SingUpService sing;
 
-    public SingUpApp(SingUpService sing) {
+    public SingUpAppImpl(SingUpService sing) {
         this.sing = sing;
     }
 

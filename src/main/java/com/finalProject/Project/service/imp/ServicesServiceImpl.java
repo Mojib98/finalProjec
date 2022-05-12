@@ -39,7 +39,7 @@ public class ServicesServiceImpl implements ManageServiceForService {
     @Override
     @Transactional
     public void insertSubService(SubService service) {
-//        checkUniqSubService(service);
+        checkUniqSubService(service);
         subServiceRepository.save(service);
     }
 
