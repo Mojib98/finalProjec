@@ -85,7 +85,7 @@ public class CustomerAppImpl {
 
     public void choiceOffer() {
         List<Order> order = service.findMyOrder(customer.getId());
-        for (com.finalProject.Project.entity.Order orders1 : order) {
+        for (com.finalProject.Project.entity.Order orders1 : order)
             System.out.println(orders1);
             Integer id = scanner.nextInt();
             List<Offer> offers = service.findOfferByOrderId(id);
@@ -105,15 +105,17 @@ public class CustomerAppImpl {
         orders.setAcceptOffer(offer);
         orders.setWorkStatus(WorkStatus.WAIT_FOR_ARRIVE);
         customerServiceImpl.choiceOffer(offers,orders);*/
-        }
+
     }
     public void payForOrder(){
         List<Order> acceptOffer = service.myDownOrder(customer.getId());
+        acceptOffer.stream().forEach(System.out::println);
         Integer orderId=scanner.nextInt();
         Order order = acceptOffer.stream()
                 .filter(p -> p.getId().equals(orderId))
                 .findFirst().get();
         service.paying(order);
+        addComment(order);
 
     }
     public void addComment(Order order){

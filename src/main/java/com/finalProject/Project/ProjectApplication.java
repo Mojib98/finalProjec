@@ -46,9 +46,12 @@ public class ProjectApplication {
 			customer.setId(13);
 			customerApp.setCustomer(customer);
 //			customerApp.choiceOffer();
-			while (true)
-				expertApp.writeOffer();
-//				customerApp.createOrder();
+//			while (true)
+//				expertApp.writeOffer();
+//				customerApp.choiceOffer();
+//			expertApp.downWork();
+
+				customerApp.payForOrder();
 //			menu.MangeSpecialist();
 
 		}

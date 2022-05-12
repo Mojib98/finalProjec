@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface CustomerRepository {
+public interface CustomerRepository extends CrudRepository<Customer,Integer> {
   /*  List<Offer> findAllOffer(Integer id);
     Offer findOfferById(Integer id);
 //    AcceptOffer insertAcceptOfferAcceptOffer acceptOffer);

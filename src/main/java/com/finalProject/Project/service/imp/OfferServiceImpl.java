@@ -1,6 +1,7 @@
 package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.Offer;
+import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.repository.interfaces.OfferRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,11 +27,18 @@ public class OfferServiceImpl {
     public List<Offer> findByOrderId(Integer id){
         return offerRepository.findAllByOrdersId(id);
     }
-    public Offer findById(Integer id){
-        return (Offer) offerRepository.find(id);
+    public List<Offer> findById(Integer id){
+        return  offerRepository.find(id);
     }
     public void removeOffer(List<Offer> offers){
             offerRepository.deleteAll(offers);
+    }
+    @Transactional
+    public List<Offer> findExpertOfferForAction(Integer id,WorkStatus workStatus){
+        return offerRepository.findListOffer(id, workStatus);
+    }
+    public Offer findOfferById(Integer id){
+        return offerRepository.findById(id).get();
     }
 
 }

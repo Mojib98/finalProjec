@@ -104,8 +104,8 @@ public class ManageExpertService implements ManageServiceForExpert {
     }
 
     public Expert findById(Integer id) {
-//        return manageRepositoryForExpert.findById(id);
-        return null;
+        return manageRepositoryForExpert.findById(id).get();
+
     }
     public Specification<Expert> searching(Expert expert){
         Predicate predicate;

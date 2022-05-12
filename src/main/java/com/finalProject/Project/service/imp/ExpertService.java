@@ -6,6 +6,9 @@ import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.repository.interfaces.OfferRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
 import com.finalProject.Project.repository.interfaces.SpecialtyRepository;
+import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.Or;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +18,9 @@ public class ExpertService implements com.finalProject.Project.service.interface
     OrderRepository orderRepository;
     SpecialtyRepository specialistRepository;
     OfferRepository offerRepository;
+    @Autowired
+    OfferServiceImpl offerService;
+
 
     public ExpertService(OrderRepository orderRepository, SpecialtyRepository specialistRepository, OfferRepository offerRepository) {
         this.orderRepository = orderRepository;
@@ -50,6 +56,7 @@ public class ExpertService implements com.finalProject.Project.service.interface
     }
 
     @Override
+    @Transactional
     public void changeWorkByExpert(Integer id, WorkStatus workStatus) {
         orderRepository.updateStatusByOfferId(workStatus,id);
     }
@@ -70,9 +77,11 @@ public class ExpertService implements com.finalProject.Project.service.interface
         orderRepository.updateStatus(WorkStatus.WAIT_FOR_CHOICE,order.getId());
 
     }
-    public List<Offer> findOfferForAction(Integer id,WorkStatus workStatus){
-        List<Offer> list = offerRepository.findListOffer(id,workStatus);
-        return list;
 
+    public List<Offer> findOfferForAction(Integer id,WorkStatus workStatus){
+        return offerService.findExpertOfferForAction(id,workStatus);
     }
+ /*   public List<Order> findOrderForStart(Expert expert){
+
+    }*/
 }

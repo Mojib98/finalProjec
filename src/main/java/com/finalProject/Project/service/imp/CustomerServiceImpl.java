@@ -1,11 +1,10 @@
 package com.finalProject.Project.service.imp;
 
-import com.finalProject.Project.entity.Customer;
-import com.finalProject.Project.entity.Offer;
-import com.finalProject.Project.entity.Order;
-import com.finalProject.Project.entity.SubService;
+import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
+import com.finalProject.Project.repository.interfaces.CustomerRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +15,11 @@ public class CustomerServiceImpl {
     OfferServiceImpl offerService;
     OrderRepository orderRepository;
     ServicesServiceImpl servicesService;
+    @Autowired
+    CustomerRepository customerRepository;
+    @Autowired
+    ManageExpertService expertService;
+
 
     public CustomerServiceImpl(OfferServiceImpl offerService, OrderRepository orderRepository, ServicesServiceImpl servicesService) {
         this.offerService = offerService;
@@ -46,9 +50,19 @@ public class CustomerServiceImpl {
     public List<Order> myDownOrder(Integer id){
         return orderRepository.findAllByCustomersIdAndWorkStatusEquals(id,WorkStatus.DONE);
     }
+    @Transactional
     public void paying(Order order){
         Order order1 = orderRepository.findById(order.getId()).get();
-        Offer offer = offerService.findById(order1.getOffer().getId());
+        Offer offer = offerService.findOfferById(order1.getOffer().getId());
+        System.out.println(offer);
+        Customer customer =customerRepository.findById(order1.getCustomers().getId()).get();
+        Expert expert=expertService.findById(offer.getExpert().getId());
+        Integer p=customer.getBudget();
+        Integer g = offer.getOfferPrice();
+        Integer e = expert.getBudget();
+        customer.setBudget(p-g);
+        expert.setBudget(e+g);
+
 //        Customer customer
 
     }

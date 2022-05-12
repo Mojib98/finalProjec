@@ -13,7 +13,7 @@ public interface OfferRepository extends CrudRepository<Offer,Integer> {
     List<Offer> find( @Param("id") Integer id);
     List<Offer> findAllByOrdersId(Integer id);
     @Query("from Offer where orders.workStatus=:work and expert.id=:id")
-    List<Offer> findListOffer( @Param("id") Integer id,@Param("work") WorkStatus workStatus);
+    List<Offer> findListOffer( @Param("id") Integer id, @Param("work") WorkStatus workStatus);
 //    Offer findById(Integer id);
 //    @Param("work") WorkStatus workStatus,
 
