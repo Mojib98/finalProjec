@@ -20,9 +20,8 @@ import java.util.List;
 
 @Service
 public class ManageExpertService implements ManageServiceForExpert {
-    ManageRepositoryForExpert manageRepositoryForExpert;
-    SpecialtyRepository specialtyRepository;
-    EntityManager entityManager;
+    private final ManageRepositoryForExpert manageRepositoryForExpert;
+    private final SpecialtyRepository specialtyRepository;
 
     public ManageExpertService(ManageRepositoryForExpert manageRepositoryForExpert, SpecialtyRepository specialtyRepository) {
         this.manageRepositoryForExpert = manageRepositoryForExpert;
@@ -77,7 +76,7 @@ public class ManageExpertService implements ManageServiceForExpert {
     @Override
     @Transactional
     public void removeSpecialty(Specialty specialty) {
-
+        specialtyRepository.delete(specialty);
     }
 
     public List<Specialty> requestListSpecialty() {
@@ -105,7 +104,8 @@ public class ManageExpertService implements ManageServiceForExpert {
         return manageRepositoryForExpert.findById(id).get();
 
     }
-    public Specification<Expert> option(Expert expert){
+
+    public Specification<Expert> option(Expert expert) {
         Predicate predicate;
         Specification<Expert> specification = new Specification<Expert>() {
             @Override
@@ -129,10 +129,10 @@ public class ManageExpertService implements ManageServiceForExpert {
         };
 
 
-
         return specification;
     }
-    public List<Expert> search(Expert expert){
+
+    public List<Expert> search(Expert expert) {
         Specification<Expert> specification = option(expert);
         return manageRepositoryForExpert.findAll(specification);
     }

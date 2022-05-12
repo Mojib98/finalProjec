@@ -6,6 +6,8 @@ import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ManageExpertService;
+import com.finalProject.Project.service.imp.OfferServiceImpl;
+import com.finalProject.Project.service.interfaces.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -34,6 +36,8 @@ public class ProjectApplication {
 		Menu menu;
 		@Autowired
 		ManageExpertService expertService;
+		@Autowired
+		OfferServiceImpl offerService;
 
 		Expert expert = new Expert();
 		Customer customer = new Customer();
@@ -45,13 +49,16 @@ public class ProjectApplication {
 			expertApp.setExpert(expert);
 			customer.setId(13);
 			customerApp.setCustomer(customer);
-//			customerApp.choiceOffer();
+	/*		customerApp.choiceOffer();
+			expertApp.writeOffer();*/
 //			while (true)
 //				expertApp.writeOffer();
 //				customerApp.choiceOffer();
 //			expertApp.downWork();
 
-				customerApp.choiceOffer();
+//
+		var s=	offerService.sortByRateAndPrice(13);
+			System.out.println(s);
 //			menu.MangeSpecialist();
 
 		}

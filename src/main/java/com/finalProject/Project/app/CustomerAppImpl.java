@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 public class CustomerAppImpl {
     @Autowired
     CustomerServiceImpl service;
-   private Customer customer;
-   private Scanner scanner = new Scanner(System.in);
-   private Utility utility = new Utility();
+    private Customer customer;
+    private Scanner scanner = new Scanner(System.in);
+    private Utility utility = new Utility();
 /*    public void seeCategory(){
        for (Service service : list )
            System.out.println(list);
@@ -90,19 +90,19 @@ public class CustomerAppImpl {
         List<Order> order = service.findMyOrder(customer.getId());
         for (com.finalProject.Project.entity.Order orders1 : order)
             System.out.println(orders1);
-            Integer id = scanner.nextInt();
-            List<Offer> offers = service.findOfferByOrderId(id);
-            offers.stream().forEach(System.out::println);
-            sortOfferByPrice(offers);
-            Integer idOffer = scanner.nextInt();
-            Offer offer = offers.stream()
-                    .filter(p -> p.getId().equals(idOffer))
-                    .findFirst().get();
-            Order order1 = order.stream()
-                    .filter(p -> p.getId().equals(id))
-                    .findFirst().get();
-            offers.remove(offer);
-            service.choiceOffer(order1,offer,offers);
+        Integer id = scanner.nextInt();
+        List<Offer> offers = service.findOfferByOrderId(id);
+        offers.stream().forEach(System.out::println);
+        sortOfferByPrice(offers);
+        Integer idOffer = scanner.nextInt();
+        Offer offer = offers.stream()
+                .filter(p -> p.getId().equals(idOffer))
+                .findFirst().get();
+        Order order1 = order.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst().get();
+        offers.remove(offer);
+        service.choiceOffer(order1, offer, offers);
 
 
      /*   Orders orders =customerServiceImpl.findOrderById(id);
@@ -111,39 +111,41 @@ public class CustomerAppImpl {
         customerServiceImpl.choiceOffer(offers,orders);*/
 
     }
-    public void payForOrder(){
+
+    public void payForOrder() {
         List<Order> acceptOffer = service.myDownOrder(customer.getId());
         acceptOffer.stream().forEach(System.out::println);
-        Integer orderId=scanner.nextInt();
+        Integer orderId = scanner.nextInt();
         Order order = acceptOffer.stream()
                 .filter(p -> p.getId().equals(orderId))
                 .findFirst().get();
-        service.paying(order);
+        System.out.println("insert rate");
+        Integer rate = scanner.nextInt();
+        service.paying(order,rate);
         addComment(order);
 
     }
-    public void addComment(Order order){
-      /*  List<Order> acceptOffer = service.myDownOrder(customer.getId());
-        Integer orderId=scanner.nextInt();*/
-        String comment = scanner.nextLine();
-        Comment comment1  = new Comment(null,null,comment,this.customer);
-       Offer offer = order.getOffer();
-//       offer.setComment(comment1);
 
-        service.addComment(offer,comment1);
+    public void addComment(Order order) {
+        System.out.println("insert comment");
+        String comment = scanner.nextLine();
+        Comment comment1 = new Comment(null, null, comment, this.customer);
+        Offer offer = order.getOffer();
+        service.addComment(offer, comment1);
     }
-    public void sortOfferByPrice(List<Offer> offers){
-      var offerss=  offers.stream().sorted(new Comparator<Offer>() {
+
+    public void sortOfferByPrice(List<Offer> offers) {
+        var offerss = offers.stream().sorted(new Comparator<Offer>() {
             @Override
             public int compare(Offer offer, Offer t1) {
-               return offer.getOfferPrice().compareTo(t1.getOfferPrice());
+                return offer.getOfferPrice().compareTo(t1.getOfferPrice());
             }
         }).collect(Collectors.toList());
-      for (Offer offer:offerss){
-          System.out.println(offer.getId());
-          System.out.println(offer.getOfferPrice());
+        for (Offer offer : offerss) {
+            System.out.println(offer.getId());
+            System.out.println(offer.getOfferPrice());
 
-      }
+        }
     }
 
   /*

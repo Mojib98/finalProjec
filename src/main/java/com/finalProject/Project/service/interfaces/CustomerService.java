@@ -1,30 +1,20 @@
-/*
 package com.finalProject.Project.service.interfaces;
 
-import com.finalProject.Project.entity.Customer;
-import com.finalProject.Project.entity.Offer;
+import com.finalProject.Project.entity.*;
 
 
 import java.util.List;
 
 public interface CustomerService {
+    public void insertOrder(Order order);
+    List<SubService> shoeSubService();
+    List<Order> findMyOrder(Integer id);
+    void choiceOffer(Order order, Offer offer, List<Offer> offers);
+    List<Order> myDownOrder(Integer id);
+    void paying(Order order,Integer rate);
+    List<com.finalProject.Project.entity.SubService> allSubService();
+    List<Offer> findOfferByOrderId(Integer id);
+    void addComment(Offer offer, Comment comment);
+    List<Offer> findByRateAndPrice();
 
-    List<Offer> AllOffer(Integer id);
-
-    Offer findOfferById(Integer id);
-
-    void choice(Offer offer, Order order);
-
-    Orders findOrderById(Integer id);
-
-    List<Orders> findDownOrder(Integer id);
-
-    Offer myAcceptOffer(Integer id);
-
-    void paying(Offer offer, Integer price);
-
-//    void addComment(AcceptOffer acceptOffer, Integer id, Comment comment);
-
-    void changePassword(Customer customer, String newPassword);
 }
-*/

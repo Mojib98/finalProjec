@@ -8,29 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
-/*@SqlResultSetMapping(
-        name = "orders",
-        classes = @ConstructorResult(
-                targetClass = Order.class,
-                columns = {
-                        @ColumnResult(name = "id",type = Budget.class),
-                        @ColumnResult(name = "time",type = LocalDateTime.class),
-                        @ColumnResult(name = "offerprice",type = Double.class),
-                        @ColumnResult(name = "timeforwork",type = LocalDateTime.class),
-                        @ColumnResult(name = "describe",type = String.class),
-                        @ColumnResult(name = "customers_id",type = Customer.class)
-
-                })
-
-)*/
 @NamedNativeQueries({
-       /* @NamedNativeQuery(
-                name = "Person.findAllPersons",
-                query =
-                        "SELECT * " +
-                                "FROM Person ", resultClass = Person.class
-        ),*/
         @NamedNativeQuery(
                 name = "Order.findOrderForExpert",
                 query =
@@ -68,8 +46,6 @@ public class Order extends BaseClass {
     private WorkStatus workStatus;
     @ManyToOne
     private Customer customers;
-   /* @OneToMany(mappedBy = "order")
-    private List<Offer> offers;*/
     @ManyToOne
     private SubService subService;
     @OneToOne(fetch = FetchType.LAZY)

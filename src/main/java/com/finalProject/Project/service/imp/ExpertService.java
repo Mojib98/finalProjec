@@ -6,26 +6,23 @@ import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.repository.interfaces.OfferRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
 import com.finalProject.Project.repository.interfaces.SpecialtyRepository;
-import lombok.AllArgsConstructor;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
 public class ExpertService implements com.finalProject.Project.service.interfaces.ExpertService {
-    OrderRepository orderRepository;
-    SpecialtyRepository specialistRepository;
-    OfferRepository offerRepository;
-    @Autowired
-    OfferServiceImpl offerService;
+    private OrderRepository orderRepository;
+   private SpecialtyRepository specialistRepository;
+   private OfferRepository offerRepository;
+   private OfferServiceImpl offerService;
 
-
-    public ExpertService(OrderRepository orderRepository, SpecialtyRepository specialistRepository, OfferRepository offerRepository) {
+    public ExpertService(OrderRepository orderRepository, SpecialtyRepository specialistRepository,
+                         OfferRepository offerRepository, OfferServiceImpl offerService) {
         this.orderRepository = orderRepository;
         this.specialistRepository = specialistRepository;
         this.offerRepository = offerRepository;
+        this.offerService = offerService;
     }
 
     @Override
@@ -36,31 +33,10 @@ public class ExpertService implements com.finalProject.Project.service.interface
     }
 
     @Override
-    public Expert findByEmail(String email) {
-        return null;
-    }
-
-    @Override
-    public Customer findByIdCustomer(Integer id) {
-        return null;
-    }
-
-    @Override
-    public void changeWorkFlow(Order order) {
-
-    }
-
-    @Override
-    public List<Offer> findMyAcceptOffer(Expert expert) {
-        return null;
-    }
-
-    @Override
     @Transactional
     public void changeWorkByExpert(Integer id, WorkStatus workStatus) {
         orderRepository.updateStatusByOfferId(workStatus,id);
     }
-
     @Override
     public void changePassword(Expert specialist, String newPassword) {
 

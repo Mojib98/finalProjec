@@ -10,8 +10,7 @@ public interface ManageServiceForService {
     List<Service> showAllService();
     void insertService(Service service);
     void insertSubService(SubService service);
-    Boolean isServiceExists(Service service);
-    Boolean isSubServiceExists(SubService service);
-    List<Expert> search(Expert specialist);
-    public Service findServiceByName(String name);
+   Service findServiceByName(String name);
+    List<SubService> showAllSubService();
+
 }

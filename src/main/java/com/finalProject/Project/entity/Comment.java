@@ -2,6 +2,7 @@ package com.finalProject.Project.entity;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Data
+@NoArgsConstructor
 public class Comment extends BaseClass{
     private String Comment;
     @OneToOne

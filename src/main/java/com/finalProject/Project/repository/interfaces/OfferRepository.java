@@ -4,6 +4,7 @@ import com.finalProject.Project.entity.Offer;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -14,7 +15,10 @@ public interface OfferRepository extends CrudRepository<Offer,Integer> {
     List<Offer> findAllByOrdersId(Integer id);
     @Query("from Offer where orders.workStatus=:work and expert.id=:id")
     List<Offer> findListOffer( @Param("id") Integer id, @Param("work") WorkStatus workStatus);
-//    Offer findById(Integer id);
-//    @Param("work") WorkStatus workStatus,
-
+    @Query("select f from Offer  f where f.orders.customers.id=:id and f.workStatus=:work order by f.offerPrice, f.expert.rate desc ")
+    List<Offer> sortByPriceAndRate( @Param("id") Integer id, @Param("work") WorkStatus workStatus);
+    @Query("select f from Offer  f where f.orders.customers.id=:id and f.workStatus=:work order by f.offerPrice")
+    List<Offer> sortByPrice( @Param("id") Integer id, @Param("work") WorkStatus workStatus);
+    @Query("select f from Offer  f where f.orders.customers.id=:id and f.workStatus=:work order by  f.expert.rate desc ")
+    List<Offer> sortByRate( @Param("id") Integer id, @Param("work") WorkStatus workStatus);
 }

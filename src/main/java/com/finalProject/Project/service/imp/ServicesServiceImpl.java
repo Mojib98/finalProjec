@@ -43,22 +43,6 @@ public class ServicesServiceImpl implements ManageServiceForService {
         subServiceRepository.save(service);
     }
 
-    @Override
-    public Boolean isServiceExists(com.finalProject.Project.entity.Service service) {
-        return null;
-    }
-
-    @Override
-    public Boolean isSubServiceExists(SubService service) {
-        return null;
-    }
-
-    @Override
-    public List<Expert> search(Expert specialist) {
-        return null;
-    }
-
-    @Override
     @Transactional
     public com.finalProject.Project.entity.Service findServiceByName(String name) {
         return serviceRepository.findByName(name);
