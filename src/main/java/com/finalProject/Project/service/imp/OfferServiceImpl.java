@@ -32,4 +32,5 @@ public class OfferServiceImpl {
     public void removeOffer(List<Offer> offers){
             offerRepository.deleteAll(offers);
     }
+
 }

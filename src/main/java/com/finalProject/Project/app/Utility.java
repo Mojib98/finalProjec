@@ -128,8 +128,9 @@ public class Utility {
     }
     public LocalDateTime dateTime() {
         while (true) {
-            System.out.println("Year:");
-            int year = input.nextInt();
+//            System.out.println("Year:");
+
+            int year =  2022;
 
             System.out.println("Date-time in format: dd.MM. HH:mm");
             input.nextLine();

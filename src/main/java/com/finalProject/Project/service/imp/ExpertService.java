@@ -25,7 +25,7 @@ public class ExpertService implements com.finalProject.Project.service.interface
     @Override
     @Transactional
     public List<Order> findOrders(Expert expert) {
-        List<Order> list = orderRepository.findOrderForExpert(17);
+        List<Order> list = orderRepository.findOrderForExpert(expert.getId());
         return list;
     }
 

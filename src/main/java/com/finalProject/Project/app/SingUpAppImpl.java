@@ -1,7 +1,5 @@
-package com.finalProject.Project.app.impl;
+package com.finalProject.Project.app;
 
-import com.finalProject.Project.app.Utility;
-import com.finalProject.Project.app.interfaces.SingApp;
 import com.finalProject.Project.entity.Avatar;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.util.Scanner;
 @Component
-public class SingUpAppImpl implements SingApp {
+public class SingUpAppImpl {
     Scanner scanner = new Scanner(System.in);
     SingUpService sing;
 

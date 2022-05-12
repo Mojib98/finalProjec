@@ -66,8 +66,8 @@ public class ManagerForExpert {
      manager.handelRequestForSpecialty(accept,unAccept);
     }
     public void search(){
-        Expert specialist = optionForSearch();
-        System.out.println(specialist);
+        Expert expert = optionForSearch();
+        List<Expert> experts = manager.search(expert);
 
     }
     private Expert optionForSearch(){

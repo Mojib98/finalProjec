@@ -62,10 +62,11 @@ public class ExpertApp {
         Order order = null;
         List<Order> list = expertService.findOrders(expert);
         for (Order orders:list){
-            System.out.print(orders.getDescribe()+" ");
-            System.out.print(orders.getOfferPrice()+" ");
-            System.out.print(orders.getTimeForWork()+" ");
-            System.out.print(orders.getId()+" ");
+            System.out.print(orders.getDescribe()+"\t");
+            System.out.print(orders.getOfferPrice()+"\t ");
+            System.out.print(orders.getTimeForWork()+"\t ");
+            System.out.print(orders.getId()+"\t ");
+            System.out.println();
         };
         System.out.println("insert id");
         Integer id=utility.giveIntegerInput();
@@ -76,12 +77,14 @@ public class ExpertApp {
         String des=scanner.next();
         System.out.println("isnert price");
         Integer offerPrice = scanner.nextInt();
+        if (checkPrice(order.getSubService(),offerPrice))
+            return;
         System.out.println("insert time");
         LocalDateTime dateTime = utility.dateTime();
-        if (dateTime.isBefore(order.getTime())){
+      /*  if (dateTime.isBefore(order.getTime())){
             System.out.println("bad time ");
             return;
-        }
+        }*/
        Offer offer = new Offer(null,null,offerPrice,dateTime, WorkStatus.WAIT_FOR_CHOICE,expert,order);
 
         expertService.insertOffer(offer,order);
@@ -108,7 +111,7 @@ public class ExpertApp {
     public void changePassword(){}
     private boolean checkPrice(SubService subService,Integer price){
 
-        return price <= subService.getBasePrice() ;
+        return price < subService.getBasePrice() ;
 
     }
     private boolean isTimeBefore(LocalDateTime orderTime,LocalDateTime offerTime){

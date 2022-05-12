@@ -52,5 +52,10 @@ public class CustomerServiceImpl {
 //        Customer customer
 
     }
-
+    public List<com.finalProject.Project.entity.SubService> allSubService(){
+        return servicesService.showAllSubService();
+    }
+    public List<Offer> findOfferByOrderId(Integer id){
+        return offerService.findMyOffers(id);
+    }
 }

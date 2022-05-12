@@ -1,7 +1,7 @@
 package com.finalProject.Project;
 
 import com.finalProject.Project.app.*;
-import com.finalProject.Project.app.impl.SingUpAppImpl;
+import com.finalProject.Project.app.SingUpAppImpl;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.enumeration.UserStatus;
@@ -41,24 +41,16 @@ public class ProjectApplication {
 
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
-		/*	expert.setId(17);
+			expert.setId(17);
 			expertApp.setExpert(expert);
-			customer.setId(12);
+			customer.setId(13);
 			customerApp.setCustomer(customer);
-//			expertApp.writeOffer();
-			customerApp.choiceOffer();*/
-//			while (true)
+//			customerApp.choiceOffer();
+			while (true)
+				expertApp.writeOffer();
+//				customerApp.createOrder();
 //			menu.MangeSpecialist();
-			Expert expert = new Expert();
-//
-			expert.setStatus(UserStatus.UNCONFIRMED);
-		var s=	expertService.searchs(expert);
-//			s.stream().forEach(System.out::println);
-			for (Expert expert1:s){
-				System.out.println(expert1.getFirstName());
-			}
-//			while (true)
-//				expertApp.writeOffer();
+
 		}
 	}
 

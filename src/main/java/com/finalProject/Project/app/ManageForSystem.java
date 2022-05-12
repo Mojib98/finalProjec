@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Scanner;
+
 @Component
 public class ManageForSystem {
     Scanner scanner = new Scanner(System.in);
@@ -19,19 +20,21 @@ public class ManageForSystem {
     }
 
     List<Service> serviceList;
-    public void addService(){
+
+    public void addService() {
         System.out.println("enter name");
         String name = scanner.next();
-        Service service = new Service(null,null,name);
+        Service service = new Service(null, null, name);
         serviceForService.insertService(service);
 
 
     }
-    public void addSubService(){
+
+    public void addSubService() {
 
         List<Service> serviceList;
         serviceList = serviceForService.showAllService();
-        for (Service service:serviceList){
+        for (Service service : serviceList) {
             System.out.println(service.getId());
             System.out.println(service.getName());
         }
@@ -46,16 +49,17 @@ public class ManageForSystem {
         System.out.println("Enter Base price ");
         Integer price = scanner.nextInt();
         System.out.println("please insert describer");
-        String des =scanner.nextLine();
-        SubService subService = new SubService(null,null,name,price,des,service);
+        String des = scanner.nextLine();
+        SubService subService = new SubService(null, null, name, price, des, service);
         System.out.println(subService);
         serviceForService.insertSubService(subService);
 
     }
-    public void showListOfService(){
+
+    public void showListOfService() {
         List<Service> serviceList;
         serviceList = serviceForService.showAllService();
-        for (Service service:serviceList){
+        for (Service service : serviceList) {
             System.out.println(service.getName());
         }
     }

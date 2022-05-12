@@ -29,6 +29,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(
+//        name="offer",
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"expert_id", "orders_id"})
+)
 public class Offer extends BaseClass {
     private Integer offerPrice;
     private Integer timeForWork;

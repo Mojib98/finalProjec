@@ -16,13 +16,9 @@ import java.util.Scanner;
 public class CustomerAppImpl {
     @Autowired
     CustomerServiceImpl service;
-    @Autowired
-    ServicesServiceImpl servicesService;
-    @Autowired
-    OfferServiceImpl offerService;
-    Customer customer;
-    Scanner scanner = new Scanner(System.in);
-    Utility utility = new Utility();
+   private Customer customer;
+   private Scanner scanner = new Scanner(System.in);
+   private Utility utility = new Utility();
 /*    public void seeCategory(){
        for (Service service : list )
            System.out.println(list);
@@ -49,7 +45,7 @@ public class CustomerAppImpl {
         System.out.println("adress");
         String address = scanner.next();
 
-        List<SubService> services = servicesService.showAllSubService();
+        List<SubService> services = service.allSubService();
         for (SubService service : services) {
             System.out.print(service.getName() + "  ");
             System.out.print(service.getBasePrice());
@@ -92,7 +88,7 @@ public class CustomerAppImpl {
         for (com.finalProject.Project.entity.Order orders1 : order) {
             System.out.println(orders1);
             Integer id = scanner.nextInt();
-            List<Offer> offers = offerService.findByOrderId(id);
+            List<Offer> offers = service.findOfferByOrderId(id);
             offers.stream().forEach(System.out::println);
             Integer idOffer = scanner.nextInt();
             Offer offer = offers.stream()
