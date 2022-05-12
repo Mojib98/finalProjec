@@ -14,4 +14,7 @@ public interface OfferService {
     void removeOffer(List<Offer> offers);
     List<Offer> findExpertOfferForAction(Integer id, WorkStatus workStatus);
     Offer findOfferById(Integer id);
+    List<Offer> sortByRateAndPrice(Integer id);
+    List<Offer> sortByRate(Integer id);
+    List<Offer> sortByPrice(Integer id);
 }

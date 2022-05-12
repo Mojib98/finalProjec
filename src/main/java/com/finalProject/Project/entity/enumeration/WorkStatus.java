@@ -6,5 +6,7 @@ public enum WorkStatus {
     WAIT_FOR_ARRIVE,
     START,
     DONE,
-    PAYED;
+    WAIT,
+    PAYED,
+    EXPIRED;
 }

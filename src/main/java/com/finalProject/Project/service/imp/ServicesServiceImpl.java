@@ -1,4 +1,5 @@
 package com.finalProject.Project.service.imp;
+
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.SubService;
 import com.finalProject.Project.repository.interfaces.ServiceRepository;
@@ -12,8 +13,8 @@ import java.util.List;
 
 @Service
 public class ServicesServiceImpl implements ManageServiceForService {
-    ServiceRepository serviceRepository;
-    SubServiceRepository subServiceRepository;
+    private final ServiceRepository serviceRepository;
+    private final SubServiceRepository subServiceRepository;
 
     public ServicesServiceImpl(ServiceRepository serviceRepository, SubServiceRepository subServiceRepository) {
         this.serviceRepository = serviceRepository;
@@ -25,7 +26,7 @@ public class ServicesServiceImpl implements ManageServiceForService {
     @Transactional
     public List<com.finalProject.Project.entity.Service> showAllService() {
         List<com.finalProject.Project.entity.Service> services;
-        services= (List<com.finalProject.Project.entity.Service>) serviceRepository.findAll();
+        services = (List<com.finalProject.Project.entity.Service>) serviceRepository.findAll();
         return services;
     }
 
@@ -47,21 +48,23 @@ public class ServicesServiceImpl implements ManageServiceForService {
     public com.finalProject.Project.entity.Service findServiceByName(String name) {
         return serviceRepository.findByName(name);
     }
+
     @Transactional
-    void checkUniqService(com.finalProject.Project.entity.Service service){
+    void checkUniqService(com.finalProject.Project.entity.Service service) {
         com.finalProject.Project.entity.Service service1 = serviceRepository.findByName(service.getName());
-        if (service1 !=null)
+        if (service1 != null)
             throw new RuntimeException("this class exists");
     }
 
     @Transactional
-    void checkUniqSubService(SubService service){
-       SubService service1 = subServiceRepository.findByName(service.getName());
-        if (service1 !=null) {
+    void checkUniqSubService(SubService service) {
+        SubService service1 = subServiceRepository.findByName(service.getName());
+        if (service1 != null) {
             throw new RuntimeException("this class exists");
         }
     }
-    public List<SubService> showAllSubService(){
+
+    public List<SubService> showAllSubService() {
         return (List<SubService>) subServiceRepository.findAll();
     }
 }

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Component
 public class CustomerAppImpl {
     @Autowired
-    CustomerServiceImpl service;
+   private CustomerServiceImpl service;
     private Customer customer;
     private Scanner scanner = new Scanner(System.in);
     private Utility utility = new Utility();
@@ -147,37 +147,6 @@ public class CustomerAppImpl {
 
         }
     }
-
-  /*
-   public void seeAllSpecialty(){
-        List<Service> list=
-        for (Service service : list ) {
-            System.out.println(service.getName());
-
-        }
-    }
-
- public void seeOffer(){}
-    public void choseOffer(){
-        Integer id = scanner.nextInt();
-        Offer offer = customerServiceImpl.findOfferById(id);
-        System.out.println(offer);
-        Integer idSpecialist=offer.getSpecialists().getId();
-        Integer idOrder = offer.getOrder().getId();
-        System.out.println(idSpecialist+" "+idOrder);
-   Order order = customerServiceImpl.findOrderById(idOrder);
-        System.out.println(order);
-
-        AcceptOffer acceptOffer = new AcceptOffer(null,null);
-        acceptOffer.setOfferPrice(offer.getOfferPrice());
-        acceptOffer.setWorkTime(offer.getWorkTime());
-        customerServiceImpl.choice(offer,acceptOffer);
-
-
-
-    }
-
-*/
 
 
 }

@@ -22,24 +22,10 @@ public interface OrderRepository extends CrudRepository<Order,Integer> {
     @Query("update Order set workStatus=:work where offer.id=:id")
     void updateStatusByOfferId(@Param("work") WorkStatus workStatus,@Param("id") Integer id);
     List<Order> findAllByCustomersIdAndWorkStatusEquals(Integer id,WorkStatus workStatus);
+    @Modifying
+    @Query("update Expert set password=:password where email=:email and password=:pass")
+    void updatePassword(@Param(value = "password") String password,
+                          @Param(value = "email") String email,
+                          @Param(value = "pass") String pass);
 
-
- /*   @Query("select new com.finalProject.Project.entity.Order(o.id,o.time,o.offerPrice,o.timeForWork,o.address," +
-            "o.describe,o.customers,o.subService)" +
-            " from Order o inner join Specialty p on o.subService.category.id=p.service.id " +
-            "where p.expert.id=:id ")
-    List<Order> findMyOrder(@Param(value = "id") Integer id);*/
-/*    @@Native("select * from orders o inner join sub_service ss on ss.id = o.sub_service_id\n" +
-            "    inner join service s on s.id = ss.category_id\n" +
-            "    inner join specialty s2 on s.id = s2.service_id where s2.id=19;")
-    List<Order> findMyOrder(@Param(value = "id") Integer id);*/
- /*   select * from orders o inner join sub_service ss on ss.id = o.sub_service_id
-    inner join service s on s.id = ss.category_id
-    inner join specialty s2 on s.id = s2.service_id where s2.id=19;*/
-
-/*
-    @Query("from Order o inner join Offer f where " +
-            "f.expert.id=:id and o.workStatus='WAIT_FOR_ARRIVE'")
-    List<Order> myAcceptOffer(@Param(value = "id") Integer id);
-*/
 }

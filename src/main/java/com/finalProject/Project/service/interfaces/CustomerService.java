@@ -16,5 +16,8 @@ public interface CustomerService {
     List<Offer> findOfferByOrderId(Integer id);
     void addComment(Offer offer, Comment comment);
     List<Offer> findByRateAndPrice();
+    List<Customer> search(Customer customer);
+    void changePassword(Customer customer, String newPassword);
+
 
 }

@@ -11,45 +11,66 @@ import java.util.List;
 
 @Service
 public class OfferServiceImpl implements OfferService {
-   private OfferRepository offerRepository;
+    private OfferRepository offerRepository;
 
     public OfferServiceImpl(OfferRepository offerRepository) {
         this.offerRepository = offerRepository;
     }
+
     @Transactional
-    public void insertOffer(Offer offer){
+    public void insertOffer(Offer offer) {
 //        if (offer.getExpert() !=null)
-            offerRepository.save(offer);
-            System.err.println(offerRepository);
+        offer.setWorkStatus(WorkStatus.WAIT);
+        offerRepository.save(offer);
+        System.err.println(offerRepository);
     }
+
     @Transactional
-    public List<Offer> findMyOffers(Integer id){
+    public List<Offer> findMyOffers(Integer id) {
         return offerRepository.findAllByOrdersId(id);
     }
+
     @Transactional
-    public List<Offer> findByOrderId(Integer id){
+    public List<Offer> findByOrderId(Integer id) {
         return offerRepository.findAllByOrdersId(id);
     }
+
     @Transactional
-    public List<Offer> findById(Integer id){
-        return  offerRepository.find(id);
+    public List<Offer> findById(Integer id) {
+        return offerRepository.find(id);
     }
+
     @Transactional
-    public void removeOffer(List<Offer> offers){
-            offerRepository.deleteAll(offers);
+    public void removeOffer(List<Offer> offers) {
+        offerRepository.deleteAll(offers);
     }
+
     @Transactional
-    public List<Offer> findExpertOfferForAction(Integer id,WorkStatus workStatus){
+    public List<Offer> findExpertOfferForAction(Integer id, WorkStatus workStatus) {
         return offerRepository.findListOffer(id, workStatus);
     }
+
     @Transactional
-    public Offer findOfferById(Integer id){
+    public Offer findOfferById(Integer id) {
         return offerRepository.findById(id).get();
     }
+
     @Transactional
-    public List<Offer> sortByRateAndPrice(Integer id){
-//        return offerRepository.sortByPriceAndRate(id);
-        return null;
+    public List<Offer> sortByRateAndPrice(Integer id) {
+        return offerRepository.sortByPriceAndRate(id, WorkStatus.WAIT);
+
+    }
+
+    @Transactional
+    public List<Offer> sortByRate(Integer id) {
+        return offerRepository.sortByRate(id, WorkStatus.WAIT);
+
+    }
+
+    @Transactional
+    public List<Offer> sortByPrice(Integer id) {
+        return offerRepository.sortByPrice(id, WorkStatus.WAIT);
+
     }
 
 }

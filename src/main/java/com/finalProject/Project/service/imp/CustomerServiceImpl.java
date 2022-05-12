@@ -6,7 +6,6 @@ import com.finalProject.Project.repository.interfaces.CommentRepository;
 import com.finalProject.Project.repository.interfaces.CustomerRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
 import com.finalProject.Project.service.interfaces.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -21,12 +20,12 @@ import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    private OfferServiceImpl offerService;
-    private OrderRepository orderRepository;
-    private ServicesServiceImpl servicesService;
-    private CustomerRepository customerRepository;
-    private ManageExpertService expertService;
-    private CommentRepository commentRepository;
+    private final OfferServiceImpl offerService;
+    private final OrderRepository orderRepository;
+    private final ServicesServiceImpl servicesService;
+    private final CustomerRepository customerRepository;
+    private final ManageExpertService expertService;
+    private final CommentRepository commentRepository;
 
     public CustomerServiceImpl(OfferServiceImpl offerService, OrderRepository orderRepository,
                                ServicesServiceImpl servicesService, CustomerRepository customerRepository,
@@ -140,9 +139,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
-
+    @Transactional
     public List<Customer> search(Customer customer) {
         Specification<Customer> specification = option(customer);
         return null;
+    }
+
+
+
+    @Transactional
+    public void changePassword(Customer customer, String newPassword) {
+        customerRepository.updatePassword(newPassword,customer.getEmail(),customer.getPassword());
     }
 }

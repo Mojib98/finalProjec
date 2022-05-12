@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Service
 public class ExpertService implements com.finalProject.Project.service.interfaces.ExpertService {
-    private OrderRepository orderRepository;
-   private SpecialtyRepository specialistRepository;
-   private OfferRepository offerRepository;
-   private OfferServiceImpl offerService;
+    private final OrderRepository orderRepository;
+    private final SpecialtyRepository specialistRepository;
+    private final OfferRepository offerRepository;
+    private final OfferServiceImpl offerService;
 
     public ExpertService(OrderRepository orderRepository, SpecialtyRepository specialistRepository,
                          OfferRepository offerRepository, OfferServiceImpl offerService) {
@@ -35,29 +36,30 @@ public class ExpertService implements com.finalProject.Project.service.interface
     @Override
     @Transactional
     public void changeWorkByExpert(Integer id, WorkStatus workStatus) {
-        orderRepository.updateStatusByOfferId(workStatus,id);
+        orderRepository.updateStatusByOfferId(workStatus, id);
     }
+
     @Override
     public void changePassword(Expert specialist, String newPassword) {
 
     }
+
     @Transactional
-    public void requestForSpecialty(Specialty specialty){
+    public void requestForSpecialty(Specialty specialty) {
         specialty.setStatus(UserStatus.AWAITING_CONFIRMATION);
         specialistRepository.save(specialty);
     }
+
     @Transactional
-    public void insertOffer(Offer offer,Order order){
+    public void insertOffer(Offer offer, Order order) {
         order.setWorkStatus(WorkStatus.WAIT_FOR_CHOICE);
         offerRepository.save(offer);
-        orderRepository.updateStatus(WorkStatus.WAIT_FOR_CHOICE,order.getId());
+        orderRepository.updateStatus(WorkStatus.WAIT_FOR_CHOICE, order.getId());
 
     }
 
-    public List<Offer> findOfferForAction(Integer id,WorkStatus workStatus){
-        return offerService.findExpertOfferForAction(id,workStatus);
+    public List<Offer> findOfferForAction(Integer id, WorkStatus workStatus) {
+        return offerService.findExpertOfferForAction(id, workStatus);
     }
- /*   public List<Order> findOrderForStart(Expert expert){
 
-    }*/
 }

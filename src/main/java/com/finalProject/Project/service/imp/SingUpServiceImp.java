@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SingUpServiceImp  implements SingUpService {
-   private SingUpRepository sing;
+   private final SingUpRepository sing;
 
     public SingUpServiceImp(SingUpRepository sing) {
         this.sing = sing;

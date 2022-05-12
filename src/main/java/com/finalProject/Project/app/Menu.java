@@ -1,13 +1,15 @@
 package com.finalProject.Project.app;
 
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
+@Setter
 @Component
 public class Menu {
-    Scanner scanner = new Scanner(System.in);
+   private final Scanner scanner = new Scanner(System.in);
 
     public Menu(SingUpAppImpl sing, ManageForSystem manageForSystem, ManagerForExpert managerForExpert) {
         this.sing = sing;
@@ -15,17 +17,18 @@ public class Menu {
         this.managerForExpert = managerForExpert;
     }
 
-    SingUpAppImpl sing;
-    ManageForSystem manageForSystem;
-    ManagerForExpert managerForExpert;
-    ExpertApp expertApp;
-    CustomerAppImpl customerApp;
+    private SingUpAppImpl sing;
+    private ManageForSystem manageForSystem;
+    private ManagerForExpert managerForExpert;
+    private ExpertApp expertApp;
+    private CustomerAppImpl customerApp;
+
     public void singUp() throws IOException {
         System.out.println("\t\tWelcome\n\t\t" +
                 "for request for specialist insert 'new specialist \n" +
                 "\t\tif Customer insert 'customer'");
         String choice = scanner.next();
-        switch (choice){
+        switch (choice) {
             case "new":
                 sing.requestForSingUp();
                 break;
@@ -36,12 +39,13 @@ public class Menu {
         }
 
     }
-    public void MangeSpecialist(){
+
+    public void MangeSpecialist() {
         System.out.println("\t\tWelcome" +
                 "\n\t\tfor see new request for singUp insert 'newsing'" +
                 "\n\t\tfor see new request for specialty insert 'check'");
         String choice = scanner.next().toLowerCase(Locale.ROOT);
-        switch (choice){
+        switch (choice) {
             case "newsing":
                 managerForExpert.determineSingUp();
                 break;
@@ -51,7 +55,8 @@ public class Menu {
             case "search":
         }
     }
-    public void specialistMenu(){
+
+    public void specialistMenu() {
         System.out.println("\t\twelcome" +
                 "\n\t\tfor see new order insert 'order'" +
                 "\n\t\tfor see your offer insert 'offer'" +
@@ -59,7 +64,7 @@ public class Menu {
                 "\n\t\tfor see your budget insert " +
                 "\n\t\tfor see your comment insert ");
         String choice = scanner.next().toLowerCase(Locale.ROOT);
-        switch (choice){
+        switch (choice) {
             case "order":
                 expertApp.seeOrders();
                 break;
@@ -77,7 +82,8 @@ public class Menu {
 
         }
     }
-    public void mangeManagerSystem(){
+
+    public void mangeManagerSystem() {
         System.out.println("\t\twelcome\n" +
                 "\t\tfor insert service 'service'" +
                 "\nt\t\tfor insert subService 'sub'" +
@@ -85,7 +91,7 @@ public class Menu {
                 "\n\t\tfor see all categury insert 'c'" +
                 "\b\t\tfor search insert 'search'");
         String choice = scanner.next().toLowerCase(Locale.ROOT);
-        switch (choice){
+        switch (choice) {
             case "service":
                 manageForSystem.addService();
                 break;
@@ -99,12 +105,13 @@ public class Menu {
                 manageForSystem.showListOfService();
         }
     }
-    public void customerMenu(){
+
+    public void customerMenu() {
         System.out.println("\t\tWelcome" +
                 "\n\t\tfor see new request for singUp insert 'newsing'" +
                 "\n\t\tfor see new request for specialty insert 'check'");
         String choice = scanner.next().toLowerCase(Locale.ROOT);
-        switch (choice){
+        switch (choice) {
             case "order":
                 customerApp.createOrder();
                 break;
@@ -116,6 +123,7 @@ public class Menu {
             case "change":
         }
     }
+
     public void expertMenu() {
         System.out.println("\t\twelcome for see order for you insert 'order'" +
                 "\n\t\tfor write offer insert 'offer" +
@@ -139,6 +147,21 @@ public class Menu {
             case "new":
             case "down":
 
+        }
+    }
+    public void menu(){
+        System.out.println("\t\tWelcome" +
+                "\n\t\tfor customer menu insert 'customer'" +
+                "\n\t\tfor expert menu insert 'expert'");
+        String choice = scanner.next().toLowerCase(Locale.ROOT);
+        switch (choice) {
+            case "customer":
+                managerForExpert.determineSingUp();
+                break;
+            case "expert":
+                managerForExpert.determineForRequestSpecialty();
+                break;
+            case "search":
         }
     }
 

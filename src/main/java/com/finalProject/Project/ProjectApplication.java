@@ -57,8 +57,8 @@ public class ProjectApplication {
 //			expertApp.downWork();
 
 //
-		var s=	offerService.sortByRateAndPrice(13);
-			System.out.println(s);
+//		var s=	offerService.sortByRateAndPrice(13);
+//			System.out.println(s);
 //			menu.MangeSpecialist();
 
 		}
