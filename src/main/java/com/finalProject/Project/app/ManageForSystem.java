@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 @Component
 public class ManageForSystem {
-   private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     public ServicesServiceImpl serviceForService;
 
     public ManageForSystem(ServicesServiceImpl serviceForService) {
@@ -23,58 +23,77 @@ public class ManageForSystem {
     List<Service> serviceList;
 
     public void addService() {
-        System.out.println("enter name");
-        String name = scanner.next();
-        Service service = new Service(null, null, name);
-        serviceForService.insertService(service);
+        try {
+            System.out.println("enter name");
+            String name = scanner.next();
+            Service service = new Service(null, null, name);
+            serviceForService.insertService(service);
 
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void addSubService() {
+        try {
+            List<Service> serviceList;
+            serviceList = serviceForService.showAllService();
+            for (Service service : serviceList) {
+                System.out.println(service.getId());
+                System.out.println(service.getName());
+            }
+            System.out.println("enter name of category");
+            String serviceName = scanner.next();
+            Service service = serviceList.stream()
+                    .filter(p -> p.getName().equals(serviceName))
+                    .findFirst().get();
+            System.out.println(service);
+            System.out.println("Enter name ");
+            String name = scanner.next();
+            System.out.println("Enter Base price ");
+            Integer price = scanner.nextInt();
+            System.out.println("please insert describer");
+            String des = scanner.nextLine();
+            SubService subService = new SubService(null, null, name, price, des, service);
+            System.out.println(subService);
+            serviceForService.insertSubService(subService);
 
-        List<Service> serviceList;
-        serviceList = serviceForService.showAllService();
-        for (Service service : serviceList) {
-            System.out.println(service.getId());
-            System.out.println(service.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("enter name of category");
-        String serviceName = scanner.next();
-        Service service = serviceList.stream()
-                .filter(p -> p.getName().equals(serviceName))
-                .findFirst().get();
-        System.out.println(service);
-        System.out.println("Enter name ");
-        String name = scanner.next();
-        System.out.println("Enter Base price ");
-        Integer price = scanner.nextInt();
-        System.out.println("please insert describer");
-        String des = scanner.nextLine();
-        SubService subService = new SubService(null, null, name, price, des, service);
-        System.out.println(subService);
-        serviceForService.insertSubService(subService);
-
     }
 
     public void showListOfService() {
-        List<Service> serviceList;
-        serviceList = serviceForService.showAllService();
-        for (Service service : serviceList) {
-            System.out.println(service.getName());
+        try {
+
+            List<Service> serviceList;
+            serviceList = serviceForService.showAllService();
+            for (Service service : serviceList) {
+                System.out.println(service.getName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-    public void showListOfSubService(){
-         List<SubService> subService = serviceForService.showAllSubService();
-        for (SubService service:subService){
-            System.out.println(service.getName());
+
+    public void showListOfSubService() {
+        try {
+            List<SubService> subService = serviceForService.showAllSubService();
+            for (SubService service : subService) {
+                System.out.println(service.getName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-    public void search(){
+
+    public void search() {
+
         Customer customer = optionForSearch();
         System.out.println(customer);
     }
-    private Customer optionForSearch(){
+
+    private Customer optionForSearch() {
         System.out.println("\t\t!!!if want add option insert request else insert  'no'");
         System.out.println("\tfirst name");
         String fName = checker();
@@ -83,14 +102,15 @@ public class ManageForSystem {
         System.out.println("\temail");
         String email = checker();
         System.out.println("\tstatus");
-        String status =checker();
+        String status = checker();
         UserStatus status1 = UserStatus.valueOf(status);
 //        UserStatus status1 = UserStatus.CONFIRMED;
 
-        return new Customer(null,null,fName,lName,email,null,status1);
+        return new Customer(null, null, fName, lName, email, null, status1);
 
     }
-    private String checker(){
+
+    private String checker() {
         String string = scanner.next();
         if (string.equals("no"))
             return null;

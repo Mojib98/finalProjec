@@ -58,39 +58,37 @@ public class ExpertApp {
         }
 
     }
-    public void writeOffer(){
-        Order order = null;
-        List<Order> list = expertService.findOrders(expert);
-        for (Order orders:list){
-            System.out.print(orders.getDescribe()+"\t");
-            System.out.print(orders.getOfferPrice()+"\t ");
-            System.out.print(orders.getTimeForWork()+"\t ");
-            System.out.print(orders.getId()+"\t ");
-            System.out.println();
-        };
-        System.out.println("insert id");
-        Integer id=utility.giveIntegerInput();
-        order= list.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst().get();
-        System.out.println("insert des");
-        String des=scanner.next();
-        System.out.println("isnert price");
-        Integer offerPrice = scanner.nextInt();
-        if (checkPrice(order.getSubService(),offerPrice))
-            return;
-        System.out.println("insert time");
-        LocalDateTime dateTime = utility.dateTime();
-      /*  if (dateTime.isBefore(order.getTime())){
-            System.out.println("bad time ");
-            return;
-        }*/
-       Offer offer = new Offer(null,null,offerPrice,dateTime, WorkStatus.WAIT_FOR_CHOICE,expert,order);
-
-        expertService.insertOffer(offer,order);
+    public void writeOffer() {
+        try {
+            Order order = null;
+            List<Order> list = expertService.findOrders(expert);
+            for (Order orders : list) {
+                System.out.print(orders.getDescribe() + "\t");
+                System.out.print(orders.getOfferPrice() + "\t ");
+                System.out.print(orders.getTimeForWork() + "\t ");
+                System.out.print(orders.getId() + "\t ");
+                System.out.println();
+            }
+            System.out.println("insert id");
+            Integer id = utility.giveIntegerInput();
+            order = list.stream()
+                    .filter(p -> p.getId().equals(id))
+                    .findFirst().get();
+            System.out.println("insert des");
+            String des = scanner.next();
+            System.out.println("isnert price");
+            Integer offerPrice = scanner.nextInt();
+            if (checkPrice(order.getSubService(), offerPrice))
+                return;
+            System.out.println("insert time");
+            LocalDateTime dateTime = utility.dateTime();
+            Offer offer = new Offer(null, null, offerPrice, dateTime, WorkStatus.WAIT_FOR_CHOICE, expert, order);
+            expertService.insertOffer(offer, order);
 
 
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void seeOrderForStart(){
         Order order = null;
@@ -126,25 +124,33 @@ public class ExpertApp {
         }
         return false;
     }
-    public void startWork(){
-        List<Offer> acceptOffers =expertService.findOfferForAction(expert.getId(),WorkStatus.WAIT_FOR_ARRIVE);
-        for (Offer a:acceptOffers){
-            System.out.println(a.getId());
-            System.out.println(a.getWorkTime());
+    public void startWork() {
+        try {
+            List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.WAIT_FOR_ARRIVE);
+            for (Offer a : acceptOffers) {
+                System.out.println(a.getId());
+                System.out.println(a.getWorkTime());
+            }
+            System.out.println("please select one of for start ");
+            Integer id = scanner.nextInt();
+            expertService.changeWorkByExpert(id, WorkStatus.START);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("please select one of for start ");
-        Integer id = scanner.nextInt();
-        expertService.changeWorkByExpert(id,WorkStatus.START);
     }
-    public void downWork(){
-        List<Offer> acceptOffers =expertService.findOfferForAction(expert.getId(),WorkStatus.START);
-        for (Offer a:acceptOffers){
-            System.out.println(a.getId());
-            System.out.println(a.getWorkTime());
+    public void downWork() {
+        try {
+            List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.START);
+            for (Offer a : acceptOffers) {
+                System.out.println(a.getId());
+                System.out.println(a.getWorkTime());
+            }
+            System.out.println("please select one of for start ");
+            Integer id = scanner.nextInt();
+            expertService.changeWorkByExpert(id, WorkStatus.DONE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("please select one of for start ");
-        Integer id = scanner.nextInt();
-        expertService.changeWorkByExpert(id,WorkStatus.DONE);
     }
 
 

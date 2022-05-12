@@ -4,10 +4,8 @@ import com.finalProject.Project.app.*;
 import com.finalProject.Project.app.SingUpAppImpl;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
-import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ManageExpertService;
 import com.finalProject.Project.service.imp.OfferServiceImpl;
-import com.finalProject.Project.service.interfaces.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -31,7 +29,7 @@ public class ProjectApplication {
 		@Autowired
 		ExpertApp expertApp;
 		@Autowired
-        CustomerAppImpl customerApp;
+        CustomerApp customerApp;
 		@Autowired
 		Menu menu;
 		@Autowired

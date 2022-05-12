@@ -21,7 +21,7 @@ public class Menu {
     private ManageForSystem manageForSystem;
     private ManagerForExpert managerForExpert;
     private ExpertApp expertApp;
-    private CustomerAppImpl customerApp;
+    private CustomerApp customerApp;
 
     public void singUp() throws IOException {
         System.out.println("\t\tWelcome\n\t\t" +

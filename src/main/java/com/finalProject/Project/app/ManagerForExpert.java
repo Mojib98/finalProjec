@@ -22,61 +22,73 @@ public class ManagerForExpert {
     }
 
     public void determineSingUp() {
-        List<Expert> list = manager.requestListSingUp();
-        List<Expert> accept = new ArrayList<>();
-        List<Expert> unAccept = new ArrayList<>();
-        for (Expert request : list) {
-            System.out.print(request.getId() + "  ");
-            System.out.print(request.getFirstName() + "  ");
-            System.out.print(request.getLastName() + "  ");
-            System.out.print(request.getTime() + "  ");
-            System.out.println("if confirmation insert 'y' or insert 'n'");
-            char check = scanner.next().charAt(0);
-            switch (check) {
-                case 'y':
-                    accept.add(request);
-                    break;
-                case 'n':
-                    unAccept.add(request);
-                    break;
-                default:
+        try {
+            List<Expert> list = manager.requestListSingUp();
+            List<Expert> accept = new ArrayList<>();
+            List<Expert> unAccept = new ArrayList<>();
+            for (Expert request : list) {
+                System.out.print(request.getId() + "  ");
+                System.out.print(request.getFirstName() + "  ");
+                System.out.print(request.getLastName() + "  ");
+                System.out.print(request.getTime() + "  ");
+                System.out.println("if confirmation insert 'y' or insert 'n'");
+                char check = scanner.next().charAt(0);
+                switch (check) {
+                    case 'y':
+                        accept.add(request);
+                        break;
+                    case 'n':
+                        unAccept.add(request);
+                        break;
+                    default:
+                }
             }
+            manager.handleRequestForExpert(accept, unAccept);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        manager.handleRequestForExpert(accept, unAccept);
     }
 
     public void determineForRequestSpecialty() {
-        List<Specialty> list = manager.requestListSpecialty();
-        List<Specialty> accept = new ArrayList<>();
-        List<Specialty> unAccept = new ArrayList<>();
-        for (Specialty request : list) {
+        try {
+            List<Specialty> list = manager.requestListSpecialty();
+            List<Specialty> accept = new ArrayList<>();
+            List<Specialty> unAccept = new ArrayList<>();
+            for (Specialty request : list) {
 //            System.out.println(request.getSpecialist());
-            System.out.println(request.getService().getName());
-            System.out.println(request.getExpert().getFirstName());
-            System.out.println("if confirmation insert 'y' or insert 'n'");
-            char check = scanner.next().charAt(0);
-            switch (check) {
-                case 'y':
-                    accept.add(request);
-                    break;
-                case 'n':
-                    unAccept.add(request);
-                    continue;
-                default:
+                System.out.println(request.getService().getName());
+                System.out.println(request.getExpert().getFirstName());
+                System.out.println("if confirmation insert 'y' or insert 'n'");
+                char check = scanner.next().charAt(0);
+                switch (check) {
+                    case 'y':
+                        accept.add(request);
+                        break;
+                    case 'n':
+                        unAccept.add(request);
+                        continue;
+                    default:
+                }
             }
+            manager.handelRequestForSpecialty(accept, unAccept);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        manager.handelRequestForSpecialty(accept, unAccept);
     }
 
     public void search() {
-        Expert expert = optionForSearch();
-        List<Expert> experts = manager.search(expert);
-        for (Expert expert1 : experts) {
-            System.out.println(expert1.getFirstName() + " " +
-                    expert1.getLastName() + " " +
-                    expert1.getEmail());
-        }
+        try {
+            Expert expert = optionForSearch();
+            List<Expert> experts = manager.search(expert);
+            for (Expert expert1 : experts) {
+                System.out.println(expert1.getFirstName() + " " +
+                        expert1.getLastName() + " " +
+                        expert1.getEmail());
+            }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private Expert optionForSearch() {
