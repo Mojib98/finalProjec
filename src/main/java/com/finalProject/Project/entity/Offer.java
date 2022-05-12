@@ -56,4 +56,5 @@ public class Offer extends BaseClass {
         this.expert = expert;
         this.orders = orders;
     }
+
 }

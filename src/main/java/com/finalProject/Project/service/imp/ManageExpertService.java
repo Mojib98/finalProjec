@@ -49,10 +49,6 @@ public class ManageExpertService implements ManageServiceForExpert {
         }
     }
 
-    @Override
-    public List<Expert> search(Expert expert) {
-        return null;
-    }
 
     @Override
     @Transactional
@@ -91,7 +87,9 @@ public class ManageExpertService implements ManageServiceForExpert {
     }
 
     @Transactional
-    public void remove(Expert expert) {
+    public void remove(Integer id) {
+        Expert expert = new Expert();
+        expert.setId(id);
         manageRepositoryForExpert.delete(expert);
     }
 
@@ -107,15 +105,12 @@ public class ManageExpertService implements ManageServiceForExpert {
         return manageRepositoryForExpert.findById(id).get();
 
     }
-    public Specification<Expert> searching(Expert expert){
+    public Specification<Expert> option(Expert expert){
         Predicate predicate;
         Specification<Expert> specification = new Specification<Expert>() {
             @Override
             public Predicate toPredicate(Root<Expert> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-//                var session = sessionFactory.getCurrentSession();
-//                var criteriaBuilder = entityManager.getCriteriaBuilder();
                 var criteriaQuery = criteriaBuilder.createQuery(Expert.class);
-//                var root = criteriaQuery.from(Expert.class); // select query
                 List<Predicate> predicates = new ArrayList<>();
                 if (expert.getFirstName() != null && !expert.getFirstName().isEmpty())
                     predicates.add(criteriaBuilder.equal(root.get("firstName"), expert.getFirstName()));
@@ -127,13 +122,8 @@ public class ManageExpertService implements ManageServiceForExpert {
                     predicates.add(criteriaBuilder.equal(root.get("status"), expert.getStatus()));
                 criteriaQuery
                         .where(predicates.toArray(new Predicate[0]));
-//                return criteriaBuilder.conjunction();
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
-//                return predicates;
-//                return criteriaQuery;//                return criteriaQuery;
 
-//                return null;
-//                return null;
             }
 
         };
@@ -142,10 +132,9 @@ public class ManageExpertService implements ManageServiceForExpert {
 
         return specification;
     }
-    public List<Expert> searchs(Expert expert){
-        Specification<Expert> specification = searching(expert);
-        var s= manageRepositoryForExpert.findAll(specification);
-        return s;
+    public List<Expert> search(Expert expert){
+        Specification<Expert> specification = option(expert);
+        return manageRepositoryForExpert.findAll(specification);
     }
 
 }

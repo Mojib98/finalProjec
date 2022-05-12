@@ -22,17 +22,14 @@ public class SingUpAppImpl {
 
 
     public void requestForSingUp() throws IOException {
-        //همه این ورودی و خروجی رو تبدیل به تابع بکن با چک کردن ورودی
-        String fname = utility.setName();
-        String lname = utility.setName();
+        String firstName = utility.setName();
+        String lastName = utility.setName();
         String email = utility.email();
         String password = utility.setPassword();
-        System.out.print("please insert about u");
-        String about = scanner.next();
         System.out.println();
         InputStream image = utility.pathOfPicture();
         Avatar avatar = new Avatar(image.readAllBytes());
-        Expert expert = new Expert(null,null,fname,lname,email,password,null,avatar);
+        Expert expert = new Expert(null,null,firstName,lastName,email,password,null,avatar);
         sing.requestForSingUp(expert);
     }
 

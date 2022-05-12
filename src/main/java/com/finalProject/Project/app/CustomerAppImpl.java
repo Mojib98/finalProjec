@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 @Setter
 @Component
 public class CustomerAppImpl {
@@ -90,6 +93,7 @@ public class CustomerAppImpl {
             Integer id = scanner.nextInt();
             List<Offer> offers = service.findOfferByOrderId(id);
             offers.stream().forEach(System.out::println);
+            sortOfferByPrice(offers);
             Integer idOffer = scanner.nextInt();
             Offer offer = offers.stream()
                     .filter(p -> p.getId().equals(idOffer))
@@ -128,8 +132,18 @@ public class CustomerAppImpl {
 
         service.addComment(offer,comment1);
     }
-    public void sortOfferByPrice(){
+    public void sortOfferByPrice(List<Offer> offers){
+      var offerss=  offers.stream().sorted(new Comparator<Offer>() {
+            @Override
+            public int compare(Offer offer, Offer t1) {
+               return offer.getOfferPrice().compareTo(t1.getOfferPrice());
+            }
+        }).collect(Collectors.toList());
+      for (Offer offer:offerss){
+          System.out.println(offer.getId());
+          System.out.println(offer.getOfferPrice());
 
+      }
     }
 
   /*

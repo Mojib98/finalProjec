@@ -50,13 +50,8 @@ public class ProjectApplication {
 //				expertApp.writeOffer();
 //				customerApp.choiceOffer();
 //			expertApp.downWork();
-			Expert expert = new Expert();
-			expert.setStatus(UserStatus.CONFIRMED);
-		var s=	expertService.searchs(expert);
-		for (Expert expert1:s){
-			System.out.println(expert1.getFirstName());
-		}
-				customerApp.payForOrder();
+
+				customerApp.choiceOffer();
 //			menu.MangeSpecialist();
 
 		}

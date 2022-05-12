@@ -15,8 +15,10 @@ import java.time.LocalDateTime;
 public class Expert extends Users {
     @Embedded
     private Avatar avatar;
+    @Column(columnDefinition = "integer default 0")
     private Integer budget;
-
+    @Column(columnDefinition = "integer default 5")
+    private Integer rate;
     public Expert(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status, Avatar avatar) {
         super(id, time, firstName, lastName, email, password, status);
         this.avatar = avatar;

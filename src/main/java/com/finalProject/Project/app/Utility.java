@@ -48,24 +48,6 @@ public class Utility {
             throw new InvalidName("name should be more than 2 character!");
 
     }
-    public String setUserName() {
-        String userName;
-        while (true) {
-            while (true) {
-                System.out.print("Enter UserName:");
-                userName = input.nextLine();
-                if (userName.length() > 2)
-                    break;
-                else
-                    System.out.println("UserName must bigger than 2!");
-            }
-
-
-            return userName;
-        }
-    }
-
-
     public String setPassword(){
         String password;
         while(true) {
@@ -79,7 +61,6 @@ public class Utility {
             }
         }
     }
-
     public void passwordCheck(String password){
         if(password.length() < 3 )
             throw new InvalidPassword("password should be more than 8 ");

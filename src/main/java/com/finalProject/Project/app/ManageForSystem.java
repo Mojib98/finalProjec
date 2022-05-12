@@ -3,6 +3,7 @@ package com.finalProject.Project.app;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.SubService;
+import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
 
 import org.springframework.stereotype.Component;
@@ -12,8 +13,8 @@ import java.util.Scanner;
 
 @Component
 public class ManageForSystem {
-    Scanner scanner = new Scanner(System.in);
-    ServicesServiceImpl serviceForService;
+   private Scanner scanner = new Scanner(System.in);
+    public ServicesServiceImpl serviceForService;
 
     public ManageForSystem(ServicesServiceImpl serviceForService) {
         this.serviceForService = serviceForService;
@@ -63,13 +64,13 @@ public class ManageForSystem {
             System.out.println(service.getName());
         }
     }
-    /*public void showListOfSubService(){
-         List<SubService> subService = serviceForService();
+    public void showListOfSubService(){
+         List<SubService> subService = serviceForService.showAllSubService();
         for (SubService service:subService){
             System.out.println(service.getName());
         }
-    }*/
-    /*public void search(){
+    }
+    public void search(){
         Customer customer = optionForSearch();
         System.out.println(customer);
     }
@@ -96,5 +97,5 @@ public class ManageForSystem {
         else
             return string;
 
-    }*/
+    }
 }

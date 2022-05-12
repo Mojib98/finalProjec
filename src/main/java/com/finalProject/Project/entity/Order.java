@@ -42,7 +42,7 @@ import java.time.LocalDateTime;
 @SqlResultSetMapping(
         name = "orders",
         classes = @ConstructorResult(
-                targetClass = DtoOrder.class,
+                targetClass = Order.class,
                 columns = {
                         @ColumnResult(name = "id",type = Integer.class),
                         @ColumnResult(name = "time",type = LocalDateTime.class),

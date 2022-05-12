@@ -11,9 +11,13 @@ public interface ManageServiceForExpert{
     void handleRequestForExpert(List<Expert> accepted, List<Expert> unAccepted);
     List<Expert> search(Expert expert);
     List<Expert> requestListSingUp();
-    public void handelRequestForSpecialty(List<Specialty> accepted, List<Specialty> unAccepted);
-    public void removeSpecialty(Specialty specialty);
+     void handelRequestForSpecialty(List<Specialty> accepted, List<Specialty> unAccepted);
+     void removeSpecialty(Specialty specialty);
     List<Specialty> requestListSpecialty();
+    void remove(Integer id);
+    void update(Expert expert);
+    void insert(Expert expert);
+    Expert findById(Integer id);
 
 
 
