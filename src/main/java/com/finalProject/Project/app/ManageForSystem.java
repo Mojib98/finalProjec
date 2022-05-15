@@ -52,8 +52,9 @@ public class ManageForSystem {
             String name = scanner.next();
             System.out.println("Enter Base price ");
             Integer price = scanner.nextInt();
-            System.out.println("please insert describer");
-            String des = scanner.nextLine();
+            System.out.println();
+            System.out.print("please insert describer: ");
+            String des = scanner.next();
             SubService subService = new SubService(null, null, name, price, des, service);
             System.out.println(subService);
             serviceForService.insertSubService(subService);

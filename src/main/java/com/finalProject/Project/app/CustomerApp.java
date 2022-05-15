@@ -53,7 +53,7 @@ public class CustomerApp {
     }
 
     private void checkPrice(SubService service, Integer price) {
-        if (service.getBasePrice() >= price)
+        if (service.getBasePrice() > price)
             throw new RuntimeException("bad price");
     }
 
@@ -110,7 +110,6 @@ public class CustomerApp {
             Integer rate = scanner.nextInt();
             service.paying(order, rate);
             addComment(order);
-
         } catch (Exception e) {
             e.printStackTrace();
 

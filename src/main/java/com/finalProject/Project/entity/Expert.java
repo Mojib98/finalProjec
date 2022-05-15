@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class Expert extends Users {
+public class Expert extends User {
     @Embedded
     private Avatar avatar;
     @Column(columnDefinition = "integer default 0")
@@ -24,6 +24,4 @@ public class Expert extends Users {
         this.avatar = avatar;
     }
 
-  /*   @OneToMany(mappedBy = "service")
-    private List<Specialty> specialties;*/
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Data
 @NoArgsConstructor
-public class Customer extends  Users{
+public class Customer extends  User{
     @OneToMany(mappedBy = "customers")
     private List<Order> orders;
     private Integer budget;

@@ -14,7 +14,7 @@ import java.util.Objects;
 @Getter
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@MappedSuperclass
-public class Users extends BaseClass{
+public abstract class User extends BaseClass{
     @NotNull
     private String firstName;
     @NotNull
@@ -25,7 +25,7 @@ public class Users extends BaseClass{
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    public Users() {
+    public User() {
 
     }
 
@@ -34,11 +34,11 @@ public class Users extends BaseClass{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Users person = (Users) o;
+        User person = (User) o;
         return Objects.equals(email, person.email);
     }
 
-    public Users(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status) {
+    public User(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status) {
         super(id, time);
         this.firstName = firstName;
         this.lastName = lastName;

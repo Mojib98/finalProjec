@@ -41,7 +41,6 @@ public class SingUpAppImpl {
     public void singUpForCustomer() {
         try {
             String fName = utility.setName();
-
             String lName = utility.setName();
             String email = utility.email();
             String password = utility.setPassword();

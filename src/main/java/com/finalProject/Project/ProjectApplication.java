@@ -43,9 +43,9 @@ public class ProjectApplication {
 
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
-			expert.setId(17);
+			expert.setId(80);
 			expertApp.setExpert(expert);
-			customer.setId(13);
+			customer.setId(78);
 			customerApp.setCustomer(customer);
 	/*		customerApp.choiceOffer();
 			expertApp.writeOffer();*/
@@ -53,11 +53,20 @@ public class ProjectApplication {
 //				expertApp.writeOffer();
 //				customerApp.choiceOffer();
 //			expertApp.downWork();
-
 //
 //		var s=	offerService.sortByRateAndPrice(13);
 //			System.out.println(s);
+//					manageForSystem.addSubService();
 //			menu.MangeSpecialist();
+			while (true){
+				try {
+					expertApp.writeOffer();
+//					sing.requestForSingUp();
+//					customerApp.createOrder();
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+			}
 
 		}
 	}
