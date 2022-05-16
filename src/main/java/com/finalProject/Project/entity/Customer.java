@@ -24,4 +24,11 @@ public class Customer extends  User{
         super(id, time, firstName, lastName, email, password, status);
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "orders=" + orders +
+                ", budget=" + budget +
+                "} " + super.toString();
+    }
 }

@@ -51,4 +51,15 @@ public abstract class User extends BaseClass{
     public int hashCode() {
         return Objects.hash(super.hashCode(), email);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                "} " + super.toString();
+    }
 }

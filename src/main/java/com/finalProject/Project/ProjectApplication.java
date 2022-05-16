@@ -18,7 +18,7 @@ public class ProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectApplication.class, args);
 	}
-	@Component
+	/*@Component
 	class Start implements ApplicationRunner {
 		@Autowired
 		ManageForSystem manageForSystem;
@@ -47,8 +47,8 @@ public class ProjectApplication {
 			expertApp.setExpert(expert);
 			customer.setId(78);
 			customerApp.setCustomer(customer);
-	/*		customerApp.choiceOffer();
-			expertApp.writeOffer();*/
+	*//*		customerApp.choiceOffer();
+			expertApp.writeOffer();*//*
 //			while (true)
 //				expertApp.writeOffer();
 //				customerApp.choiceOffer();
@@ -68,7 +68,7 @@ public class ProjectApplication {
 				}
 			}
 
-		}
-	}
+		}*/
+//	}
 
 }
