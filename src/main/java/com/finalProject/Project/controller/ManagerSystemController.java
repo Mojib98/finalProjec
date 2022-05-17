@@ -28,7 +28,16 @@ public class ManagerSystemController {
 
 
     }
-    public void addSubService(){}
+    @PostMapping
+    public void addSubService(@RequestBody ServiceDto serviceDto){
+        SubService subService = modelMapper.map(serviceDto,SubService.class);
+        Service service = findServiceByName(serviceDto.getServiceName());
+        System.out.println(service);
+        subService.setCategory(service);
+        servicesService.insertSubService(subService);
+
+
+    }
     public List<Service> showAllService(){
         return null;
     }
@@ -36,4 +45,10 @@ public class ManagerSystemController {
         return null;
     }
     //search do here
+    public Service findServiceByName(String name){
+        Service service = servicesService.findServiceByName(name);
+        if (service == null)
+            throw new RuntimeException("class not find");
+        return service;
+    }
 }
