@@ -32,7 +32,7 @@ public class SingUpAppImpl {
             InputStream image = utility.pathOfPicture();
             Avatar avatar = new Avatar(image.readAllBytes());
             Expert expert = new Expert(null, null, firstName, lastName, email, password, null, avatar);
-            sing.requestForSingUp(expert);
+//            sing.requestForSingUp(expert);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class SingUpAppImpl {
             String password = utility.setPassword();
             Customer customer = new Customer(null, null,
                     fName, lName, email, password, UserStatus.ACTIVE);
-            sing.insertCustomer(customer);
+//            sing.insertCustomer(customer);
         } catch (Exception e) {
             e.printStackTrace();
         }
