@@ -20,7 +20,9 @@ public class Checker {
                     throw new RuntimeException("invalid email");
         }
     public void checkSizeOfAvatar(MultipartFile avatar){
-               if (avatar.getSize()>299000)
+        if (avatar.isEmpty())
+            throw new RuntimeException("please insert photo");
+        if (avatar.getSize()>299000)
                    throw new RuntimeException("size image too big");
 
         }
@@ -30,13 +32,11 @@ public class Checker {
                     .matcher(password)
                     .matches()) {
             } else
-                throw new RuntimeException("invalid email");
+                throw new RuntimeException("invalid password");
         }
         public void checkerForSingUp(UserDto userDto){
             checkPassword(userDto.getPassword());
             checkEmail(userDto.getEmail());
-            if (userDto.getImage() !=null)
-                checkSizeOfAvatar(userDto.getImage());
         }
 
 
