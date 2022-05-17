@@ -1,6 +1,7 @@
 package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.Avatar;
+import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
@@ -34,9 +35,10 @@ public class SingUpServiceImp  implements SingUpService {
 
     @Override
     @Transactional
-    public void insertCustomer(UserDto customer) {
+    public void insertCustomer(UserDto userDto) {
+        Customer customer = modelMapper.map(userDto, Customer.class);
         customer.setStatus(UserStatus.ACTIVE);
         customer.setBudget(50000);
-//        singUpRepository.save(customer);
+        singUpRepository.save(customer);
     }
 }
