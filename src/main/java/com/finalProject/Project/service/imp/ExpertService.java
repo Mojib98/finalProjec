@@ -57,8 +57,11 @@ public class ExpertService implements com.finalProject.Project.service.interface
     }
 
     @Transactional
-    public void insertOffer(Offer offer, Order order) {
+    public void insertOffer(Offer offer, Order order,Expert expert) {
         order.setWorkStatus(WorkStatus.WAIT_FOR_CHOICE);
+        offer.setExpert(expert);
+        offer.setWorkStatus(WorkStatus.WAIT);
+        offer.setOrders(order);
         offerRepository.save(offer);
         orderRepository.updateStatus(WorkStatus.WAIT_FOR_CHOICE, order.getId());
 
@@ -66,6 +69,13 @@ public class ExpertService implements com.finalProject.Project.service.interface
 
     public List<Offer> findOfferForAction(Integer id, WorkStatus workStatus) {
         return offerService.findExpertOfferForAction(id, workStatus);
+    }
+    public Order findOrderById(Integer id){
+        Order order = orderRepository.findById(id).get();
+        if (order == null){
+            throw new RuntimeException("order not find");
+        }
+        return order;
     }
 
 }

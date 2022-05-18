@@ -2,6 +2,7 @@ package com.finalProject.Project.controller;
 
 import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.dto.OfferDto;
 import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
@@ -57,33 +58,22 @@ import java.util.Scanner;
         List<com.finalProject.Project.entity.Order> list = expertService.findOrders(expert);
         return Arrays.asList(modelMapper.map(list, OrderDto[].class));
     }
-    public void writeOffer() {
-            Order order = null;
-            List<Order> list = expertService.findOrders(expert);
-            for (Order orders : list) {
-                System.out.print(orders.getDescribe() + "\t");
-                System.out.print(orders.getOfferPrice() + "\t ");
-                System.out.print(orders.getTimeForWork() + "\t ");
-                System.out.print(orders.getId() + "\t ");
-                System.out.println();
+    @PostMapping("/offer")
+    public void writeOffer(@RequestBody OfferDto offerDto) {
+        modelMapper.addMappings(new PropertyMap<OfferDto, Offer>() {
+            @Override
+            protected void configure() {
+//                skip(destination.getCommentId());
+//                skip(destination.getOrderId());
+//                skip(destination.getExpert());
+                skip(destination.getId());
             }
-            System.out.println("insert iinid");
-            Integer id = utility.giveIntegerInput();
-            order = list.stream()
-                    .filter(p -> p.getId().equals(id))
-                    .findFirst().get();
-            System.out.println("insert des");
-            String des = scanner.next();
-            System.out.println("isnert price");
-            Integer offerPrice = scanner.nextInt();
-            if (checkPrice(order.getSubService(), offerPrice))
-                return;
-            System.out.println("insert time");
-            LocalDateTime dateTime = utility.dateTime();
-            Offer offer = new Offer(null, null, offerPrice, dateTime, WorkStatus.WAIT_FOR_CHOICE, expert, order);
-            expertService.insertOffer(offer, order);
-
-
+        });
+        Order order = expertService.findOrderById(offerDto.getOrderId());
+        checkingOffer(offerDto,order,order.getSubService());
+        Offer offer = modelMapper.map(offerDto,Offer.class);
+        expertService.insertOffer(offer, order,expert);
+        System.out.println(offerDto);
     }
     public void seeOrderForStart(){
         Order order = null;
@@ -101,17 +91,6 @@ import java.util.Scanner;
                 .findFirst().get();
     }
     public void changePassword(){}
-    private boolean checkPrice(SubService subService,Integer price){
-
-        return price < subService.getBasePrice() ;
-
-    }
-    private boolean isTimeBefore(LocalDateTime orderTime,LocalDateTime offerTime){
-        if (offerTime.isBefore(orderTime)){
-            return true;
-        }
-        return false;
-    }
     private boolean isCurrentTime(LocalDateTime orderTime,LocalDateTime offerTime){
         if (offerTime.equals(orderTime)){
             return true;
@@ -145,5 +124,12 @@ import java.util.Scanner;
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void checkingOffer(OfferDto offerDto,Order order,SubService service){
+        if (offerDto.getWorkTime().isBefore(order.getTimeForWork()) )
+            throw new RuntimeException("time not current try");
+        if (offerDto.getOfferPrice()<service.getBasePrice())
+            throw new RuntimeException("your price lower range");
+
     }
 }

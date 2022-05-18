@@ -83,7 +83,7 @@ public class ExpertApp {
             System.out.println("insert time");
             LocalDateTime dateTime = utility.dateTime();
             Offer offer = new Offer(null, null, offerPrice, dateTime, WorkStatus.WAIT_FOR_CHOICE, expert, order);
-            expertService.insertOffer(offer, order);
+//            expertService.insertOffer(offer, order);
 
 
         } catch (Exception e) {

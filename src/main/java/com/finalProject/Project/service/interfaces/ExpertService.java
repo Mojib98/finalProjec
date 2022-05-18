@@ -10,6 +10,6 @@ public interface ExpertService{
     void changeWorkByExpert(Integer id, WorkStatus workStatus);
     void changePassword(Expert specialist, String newPassword);
     void requestForSpecialty(Expert expert,String serviceName);
-    void insertOffer(Offer offer,Order order);
+    void insertOffer(Offer offer,Order order,Expert expert);
     List<Offer> findOfferForAction(Integer id,WorkStatus workStatus);
 }
