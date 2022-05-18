@@ -5,6 +5,7 @@ import com.finalProject.Project.entity.SubService;
 import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,11 +44,18 @@ public class ManagerSystemController {
     @GetMapping
     public List<ServiceDto> showAllService(){
         var listService= servicesService.showAllService();
-        var listDtoService =  Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
-        return listDtoService;
+        return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
-    public List<SubService> showAllSubService(){
-        return null;
+    @GetMapping("/sub")
+    public List<ServiceDto> showAllSubService(){
+        modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
+            @Override
+            protected void configure() {
+                skip(destination.getServiceName());
+            }
+        });
+        var listService= servicesService.showAllSubService();
+        return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
     //search do here
     public Service findServiceByName(String name){
