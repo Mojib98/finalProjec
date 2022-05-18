@@ -1,6 +1,7 @@
 package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.repository.interfaces.OfferRepository;
@@ -17,13 +18,15 @@ public class ExpertService implements com.finalProject.Project.service.interface
     private final SpecialtyRepository specialistRepository;
     private final OfferRepository offerRepository;
     private final OfferServiceImpl offerService;
+    private final ServicesServiceImpl servicesService;
 
     public ExpertService(OrderRepository orderRepository, SpecialtyRepository specialistRepository,
-                         OfferRepository offerRepository, OfferServiceImpl offerService) {
+                         OfferRepository offerRepository, OfferServiceImpl offerService, ServicesServiceImpl service) {
         this.orderRepository = orderRepository;
         this.specialistRepository = specialistRepository;
         this.offerRepository = offerRepository;
         this.offerService = offerService;
+        this.servicesService = service;
     }
 
     @Override
@@ -45,7 +48,10 @@ public class ExpertService implements com.finalProject.Project.service.interface
     }
 
     @Transactional
-    public void requestForSpecialty(Specialty specialty) {
+    public void requestForSpecialty(Expert expert, String serviceDto) {
+        com.finalProject.Project.entity.Service service = servicesService.findServiceByName(serviceDto);
+        Specialty specialty = new Specialty(null,null,expert,service);
+        specialty.setService(service);
         specialty.setStatus(UserStatus.AWAITING_CONFIRMATION);
         specialistRepository.save(specialty);
     }

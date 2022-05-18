@@ -9,7 +9,7 @@ public interface ExpertService{
     List<Order> findOrders(Expert expert);
     void changeWorkByExpert(Integer id, WorkStatus workStatus);
     void changePassword(Expert specialist, String newPassword);
-    void requestForSpecialty(Specialty specialty);
+    void requestForSpecialty(Expert expert,String serviceName);
     void insertOffer(Offer offer,Order order);
     List<Offer> findOfferForAction(Integer id,WorkStatus workStatus);
 }

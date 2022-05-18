@@ -44,7 +44,7 @@ public class ExpertApp {
                 .findFirst().get();
         System.out.println(service);
         Specialty specialty = new Specialty(null,null,this.expert,service);
-        expertService.requestForSpecialty(specialty);
+//        expertService.requestForSpecialty(specialty);
 
 
     }

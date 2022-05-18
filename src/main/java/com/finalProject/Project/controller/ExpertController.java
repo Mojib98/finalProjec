@@ -2,21 +2,24 @@ package com.finalProject.Project.controller;
 
 import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.service.imp.ExpertService;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
-@RestController("/expert")
-public class ExpertController {
+@RestController
+@RequestMapping("/exp")public class ExpertController {
     Integer id;
-    Expert expert;
+    Expert expert = new Expert();
+    {
+        expert.setId(94);
+    }
     List<Service> serviceList;
     Scanner scanner = new Scanner(System.in);
 
@@ -32,18 +35,9 @@ public class ExpertController {
             System.out.println(service.getName());
         }
     }
-    public void requestForSpecialty(){
-        showListOfSpecialty();
-        System.out.println("select on by name");
-        String serviceName=scanner.next();
-        Service service = serviceList.stream()
-                .filter(p -> p.getName().equals(serviceName))
-                .findFirst().get();
-        System.out.println(service);
-        Specialty specialty = new Specialty(null,null,this.expert,service);
-        expertService.requestForSpecialty(specialty);
-
-
+    @PostMapping("/request")
+    public void requestForSpecialty(@RequestBody ServiceDto service){
+        expertService.requestForSpecialty(expert,service.getServiceName());
     }
     public void seeOrders(){
         List<com.finalProject.Project.entity.Order> list = expertService.findOrders(expert);
