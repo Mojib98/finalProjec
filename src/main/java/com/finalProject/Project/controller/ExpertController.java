@@ -58,7 +58,6 @@ import java.util.Scanner;
         return Arrays.asList(modelMapper.map(list, OrderDto[].class));
     }
     public void writeOffer() {
-        try {
             Order order = null;
             List<Order> list = expertService.findOrders(expert);
             for (Order orders : list) {
@@ -68,7 +67,7 @@ import java.util.Scanner;
                 System.out.print(orders.getId() + "\t ");
                 System.out.println();
             }
-            System.out.println("insert id");
+            System.out.println("insert iinid");
             Integer id = utility.giveIntegerInput();
             order = list.stream()
                     .filter(p -> p.getId().equals(id))
@@ -85,9 +84,6 @@ import java.util.Scanner;
             expertService.insertOffer(offer, order);
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     public void seeOrderForStart(){
         Order order = null;
