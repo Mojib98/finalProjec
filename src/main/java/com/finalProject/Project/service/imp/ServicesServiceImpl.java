@@ -40,14 +40,17 @@ public class ServicesServiceImpl implements ManageServiceForService {
     @Override
     @Transactional
     public void insertSubService(SubService service) {
+        com.finalProject.Project.entity.Service service1 = findServiceByName(service.getName());
         checkUniqSubService(service);
         subServiceRepository.save(service);
     }
 
     @Transactional
     public com.finalProject.Project.entity.Service findServiceByName(String name) {
-        return serviceRepository.findByName(name);
-    }
+        com.finalProject.Project.entity.Service service = serviceRepository.findByName(name);
+        if (service == null)
+            throw new RuntimeException("class not find");
+        return service;    }
 
     @Transactional
     void checkUniqService(com.finalProject.Project.entity.Service service) {

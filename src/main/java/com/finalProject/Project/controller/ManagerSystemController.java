@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -38,8 +40,11 @@ public class ManagerSystemController {
 
 
     }
-    public List<Service> showAllService(){
-        return null;
+    @GetMapping
+    public List<ServiceDto> showAllService(){
+        var listService= servicesService.showAllService();
+        var listDtoService =  Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
+        return listDtoService;
     }
     public List<SubService> showAllSubService(){
         return null;
