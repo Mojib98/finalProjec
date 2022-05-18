@@ -1,34 +1,31 @@
-package com.finalProject.Project.app;
+package com.finalProject.Project.controller;
 
+import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.service.imp.ExpertService;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
-@Setter
-@Component
-public class ExpertApp {
 
-
+@RestController("/expert")
+public class ExpertController {
     Integer id;
     Expert expert;
     List<Service> serviceList;
     Scanner scanner = new Scanner(System.in);
 
-    public ExpertApp(ExpertService expertService, ServicesServiceImpl servicesService) {
-        this.expertService = expertService;
-        this.servicesService = servicesService;
-    }
-
+    @Autowired
     ExpertService expertService;
+    @Autowired
     ServicesServiceImpl servicesService;
     Utility utility = new Utility();
+    @GetMapping("/showspec")
     public void showListOfSpecialty(){
         this.serviceList = servicesService.showAllService();
         for (Service service:serviceList){
@@ -151,6 +148,4 @@ public class ExpertApp {
             e.printStackTrace();
         }
     }
-
-
 }
