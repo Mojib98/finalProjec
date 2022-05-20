@@ -1,5 +1,4 @@
 package com.finalProject.Project.controller;
-
 import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.SubService;
 import com.finalProject.Project.entity.dto.ServiceDto;
@@ -8,13 +7,12 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ser")
+@CrossOrigin
+@RequestMapping("/service")
 public class ManagerSystemController {
     private final ModelMapper modelMapper = new ModelMapper();
     @Autowired
@@ -22,8 +20,8 @@ public class ManagerSystemController {
 
     @Autowired
     ServicesServiceImpl service;
-    @PostMapping("/service")
-    public void addService(@RequestBody ServiceDto serviceDto){
+    @PostMapping("/addservice")
+    public void addService(@ModelAttribute ServiceDto serviceDto){
         System.out.println(serviceDto.getServiceName());
         Service service = modelMapper.map(serviceDto,Service.class);
         System.out.println(service);
