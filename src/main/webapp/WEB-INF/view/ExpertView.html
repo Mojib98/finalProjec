@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<div id="div3">
+</div>
+<div>
+    <p>
+        <label for="describe" class="floatLabel">describe</label>
+        <input id="describe" name="describe" type="text">
+    </p>
+    <p>
+        <label for="time" class="floatLabel">time</label>
+        <input id="time" name="time" type="datetime-local">
+    </p>
+    <!--    <p>
+            <label for="date" class="floatLabel">time</label>
+            <input id="date" name="date" type="date">
+        </p>-->
+    <p>
+        <label for="address" class="floatLabel">address</label>
+        <input id="address" name="address" type="text">
+    </p>
+    <p>
+        <label for="price" class="floatLabel">price</label>
+        <input id="price" name="price" type="number" accept="application/vnd.apple.numbers">
+    </p>
+    <p>
+        <button type="button" value="Create My Account" id="button">Add</button>
+
+    </p>
+</div>
+<script>
+    let checkbox;
+    $(document).ready(function () {
+        $("button").click(function (event) {
+            var formData = {
+                describe: $("#describe").val(),
+                localDateTime: $("#time").val(),
+                address: $("#address").val(),
+                offerPrice: $("#price").val(),
+                orderId:checkbox.id
+                // superheroAlias: $("#superheroAlias").val(),
+            };
+
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/exp/writeOffer",
+                data: formData,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                console.log(data);
+            });
+
+            event.preventDefault();
+        });
+    });
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/exp/seeorder/",
+            type: "GET",
+            // data: {depart:deptid},
+            dataType: "json",
+            success: function (response) {
+
+                var len = response.length;
+
+                $("#div3").empty();
+                for (var i = 0; i < len; i++) {
+                    var id = response[i]['id'];
+                    var name = response[i]['subServiceId'];
+
+                    // $("#service").append("<option value='"+id+"'>"+name+"</option>");
+                    $("#div3").append("<input type='checkbox' name='check' class='radio' value='" + id + "' id='" + id + "' />" + name + "</label>");
+
+                }
+            }
+        });
+    });
+    $(document).on('click', 'input[type="checkbox"]', function () {
+        $('input[type="checkbox"]').not(this).prop('checked', false);
+        checkbox = document.querySelector('input[type="checkbox"]');
+    });
+
+</script>
+</body>
+</html>
