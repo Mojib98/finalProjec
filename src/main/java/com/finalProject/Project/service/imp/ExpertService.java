@@ -58,7 +58,7 @@ public class ExpertService implements com.finalProject.Project.service.interface
 
     @Transactional
     public void insertOffer(Offer offer, Order order,Expert expert) {
-        order.setWorkStatus(WorkStatus.WAIT_FOR_CHOICE);
+//        order.setWorkStatus(WorkStatus.WAIT_FOR_CHOICE);
         offer.setExpert(expert);
         offer.setWorkStatus(WorkStatus.WAIT);
         offer.setOrders(order);

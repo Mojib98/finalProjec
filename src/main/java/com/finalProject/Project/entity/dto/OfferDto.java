@@ -22,11 +22,13 @@ import java.time.format.DateTimeFormatter;
 
 @Data
 public class OfferDto {
+    private Integer id;
     private Integer offerPrice;
     private Integer timeForWork;
     //    private LocalTime time;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime workTime;
+    private String localDateTime;
     @JsonIgnore
     private WorkStatus workStatus;
     private Integer commentId;

@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/exp")
 public class ExpertController {
     private final ModelMapper modelMapper = new ModelMapper();
@@ -47,7 +48,7 @@ public class ExpertController {
     public void requestForSpecialty(@RequestBody ServiceDto service){
         expertService.requestForSpecialty(expert,service.getServiceName());
     }
-    @GetMapping
+    @GetMapping("/seeorder")
     public List<OrderDto> seeOrders(){
         modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
             @Override
@@ -59,8 +60,8 @@ public class ExpertController {
         List<com.finalProject.Project.entity.Order> list = expertService.findOrders(expert);
         return Arrays.asList(modelMapper.map(list, OrderDto[].class));
     }
-    @PostMapping("/offer")
-    public void writeOffer(@RequestBody OfferDto offerDto) {
+    @PostMapping("/writeOffer")
+    public void writeOffer(@ModelAttribute OfferDto offerDto) {
         modelMapper.addMappings(new PropertyMap<OfferDto, Offer>() {
             @Override
             protected void configure() {
@@ -70,10 +71,14 @@ public class ExpertController {
                 skip(destination.getId());
             }
         });
+        LocalDateTime localDateTime = LocalDateTime.parse(offerDto.getLocalDateTime());
         Order order = expertService.findOrderById(offerDto.getOrderId());
-        checkingOffer(offerDto,order,order.getSubService());
         Offer offer = modelMapper.map(offerDto,Offer.class);
+        offer.setWorkTime(localDateTime);
+//        checkingOffer(offer,order,order.getSubService());
         expertService.insertOffer(offer, order,expert);
+        System.out.println(offerDto);
+       expertService.insertOffer(offer,order,expert);
         System.out.println(offerDto);
     }
     public void seeOrderForStart(){
@@ -126,10 +131,10 @@ public class ExpertController {
             e.printStackTrace();
         }
     }
-    private void checkingOffer(OfferDto offerDto,Order order,SubService service){
-        if (offerDto.getWorkTime().isBefore(order.getTimeForWork()) )
+    private void checkingOffer(Offer offer,Order order,SubService service){
+        if (offer.getWorkTime().isBefore(order.getTimeForWork()) )
             throw new RuntimeException("time not current try");
-        if (offerDto.getOfferPrice()<service.getBasePrice())
+        if (offer.getOfferPrice()<service.getBasePrice())
             throw new RuntimeException("your price lower range");
 
     }
