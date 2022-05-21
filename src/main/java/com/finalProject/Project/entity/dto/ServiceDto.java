@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ServiceDto {
+    private Integer id;
     private String serviceName;
     private String subServiceName;
     private Integer basePrice;

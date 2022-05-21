@@ -1,6 +1,8 @@
 package com.finalProject.Project.controller;
+import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.SubService;
+import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -29,12 +31,23 @@ public class ManagerSystemController {
 
 
     }
-    @PostMapping
-    public void addSubService(@RequestBody ServiceDto serviceDto){
+    @PostMapping("/addsub")
+    public void addSubService(@ModelAttribute ServiceDto serviceDto){
+        modelMapper.addMappings(new PropertyMap<ServiceDto, SubService>() {
+            @Override
+            protected void configure() {
+//                skip(destination.getService());
+                map().setName(source.getSubServiceName());
+//                skip(source.getServiceName());
+            }
+        });
         SubService subService = modelMapper.map(serviceDto,SubService.class);
+        System.out.println(serviceDto);
+        System.out.println(subService);
+        System.out.println(serviceDto.getServiceName());
         Service service = findServiceByName(serviceDto.getServiceName());
-        System.out.println(service);
-        subService.setCategory(service);
+        System.out.println(service+"check111");
+        subService.setService(service);
         servicesService.insertSubService(subService);
 
 
@@ -49,10 +62,12 @@ public class ManagerSystemController {
         modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
             @Override
             protected void configure() {
-                skip(destination.getServiceName());
+//                map().setServiceName(source.getService().getName());
+                map().setSubServiceName(source.getName());
             }
         });
         var listService= servicesService.showAllSubService();
+//        System.out.println(listService.get(0).getService().getName());
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
     //search do here

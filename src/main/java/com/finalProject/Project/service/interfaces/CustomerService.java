@@ -1,12 +1,13 @@
 package com.finalProject.Project.service.interfaces;
 
 import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.dto.OrderDto;
 
 
 import java.util.List;
 
 public interface CustomerService {
-    public void insertOrder(Order order);
+    public void insertOrder(OrderDto order,Customer customer);
     List<SubService> shoeSubService();
     List<Order> findMyOrder(Integer id);
     void choiceOffer(Order order, Offer offer, List<Offer> offers);

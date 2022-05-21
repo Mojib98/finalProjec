@@ -1,11 +1,13 @@
 package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.repository.interfaces.CommentRepository;
 import com.finalProject.Project.repository.interfaces.CustomerRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
 import com.finalProject.Project.service.interfaces.CustomerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +29,8 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final ManageExpertService expertService;
     private final CommentRepository commentRepository;
+    private final ModelMapper modelMapper = new ModelMapper();
+
 
     public CustomerServiceImpl(OfferServiceImpl offerService, OrderRepository orderRepository,
                                ServicesServiceImpl servicesService, CustomerRepository customerRepository,
@@ -39,8 +44,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void insertOrder(Order order) {
+    public void insertOrder(OrderDto orderDto,Customer customer) {
+        LocalDateTime localDateTime = LocalDateTime.parse(orderDto.getLocalDateTime());
+        Order order = modelMapper.map(orderDto,Order.class);
+        order.setTimeForWork(localDateTime);
+        order.setCustomers(customer);
         order.setWorkStatus(WorkStatus.WAIT_FOR_OFFER);
+        SubService subService = new SubService();
+        subService.setId(orderDto.getSubServiceId());
+        order.setSubService(subService);
+        order.setOffer(null);
         orderRepository.save(order);
     }
 

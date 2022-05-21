@@ -21,13 +21,13 @@ public class SubService extends BaseClass {
     private Integer basePrice;
     private String describe;
     @ManyToOne
-    private Service category;
+    private Service service;
 
     public SubService(Integer id, LocalDateTime time, String name, Integer basePrice, String describe, Service service) {
         super(id, time);
         this.name = name;
         this.basePrice = basePrice;
         this.describe = describe;
-        this.category = service;
+        this.service = service;
     }
 }

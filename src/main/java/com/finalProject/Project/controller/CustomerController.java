@@ -1,55 +1,47 @@
-package com.finalProject.Project.app;
+package com.finalProject.Project.controller;
 
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.service.imp.CustomerServiceImpl;
-import lombok.Setter;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-@Setter
-@Component
-public class CustomerApp {
+@RestController
+@CrossOrigin
+@RequestMapping("/customer")
+public class CustomerController {
     @Autowired
-   private CustomerServiceImpl service;
-    private Customer customer;
+    private CustomerServiceImpl service;
+    private Customer customer=new Customer();
+    {
+        customer.setId(113);
+    }
     private Scanner scanner = new Scanner(System.in);
     private Utility utility = new Utility();
+    private final ModelMapper modelMapper = new ModelMapper();
 
 
-    public void createOrder() {
-        try {
-            System.out.println("insert des");
-            String describe = scanner.next();
-            System.out.println("adress");
-            String address = scanner.next();
-
-            List<SubService> services = service.allSubService();
-            for (SubService service : services) {
-                System.out.print(service.getName() + "  ");
-                System.out.print(service.getBasePrice());
-            }
-            System.out.println("insert name service for order");
-            String nameService = scanner.next();
-            SubService subService = services.stream()
-                    .filter(p -> p.getName().equals(nameService))
-                    .findFirst().get();
-            System.out.println("please insert offer price");
-            Integer price = scanner.nextInt();
-            checkPrice(subService, price);
-            LocalDateTime time = utility.dateTime();
-            com.finalProject.Project.entity.Order order = new com.finalProject.Project.entity.Order(null, null, price, time, address, describe, customer, subService);
-//            service.insertOrder(order);
+    @PostMapping("/createorder")
+    public void createOrder(@ModelAttribute OrderDto orderDto) {
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+           service.insertOrder(orderDto,customer);
+
+
+
     }
 
     private void checkPrice(SubService service, Integer price) {
@@ -142,7 +134,4 @@ public class CustomerApp {
         }
     }
 
-
 }
-
-
