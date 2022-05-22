@@ -1,25 +1,24 @@
-package com.finalProject.Project.app;
+package com.finalProject.Project.controller;
 
 import com.finalProject.Project.entity.Expert;
-import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.Specialty;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ManageExpertService;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-@Component
-public class ManagerForExpert {
-   /* Scanner scanner = new Scanner(System.in);
+@RestController
+@RequestMapping("/exp")
+public class ManageForServiceController {
+
+    Scanner scanner = new Scanner(System.in);
     ManageExpertService manager;
 
-    public ManagerForExpert(ManageExpertService manager) {
-        this.manager = manager;
-    }
+
 
     public void determineSingUp() {
         try {
@@ -127,5 +126,5 @@ public class ManagerForExpert {
 
     }
 
-*/
+
 }

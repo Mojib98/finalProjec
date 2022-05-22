@@ -5,6 +5,7 @@ import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.dto.OfferDto;
 import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.entity.dto.ServiceDto;
+import com.finalProject.Project.entity.dto.SpecialistDto;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.service.imp.ExpertService;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
@@ -45,8 +46,9 @@ public class ExpertController {
         }
     }
     @PostMapping("/request")
-    public void requestForSpecialty(@RequestBody ServiceDto service){
-        expertService.requestForSpecialty(expert,service.getServiceName());
+    public void requestForSpecialty(@ModelAttribute SpecialistDto specialistDto){
+        System.out.println(specialistDto);
+        expertService.requestForSpecialty(expert,specialistDto.getServiceName());
     }
     @GetMapping("/seeorder")
     public List<OrderDto> seeOrders(){
@@ -137,5 +139,10 @@ public class ExpertController {
         if (offer.getOfferPrice()<service.getBasePrice())
             throw new RuntimeException("your price lower range");
 
+    }
+    @GetMapping("/serviceList")
+    public List<ServiceDto> showAllService(){
+        var listService= servicesService.showAllService();
+        return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
 }

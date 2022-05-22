@@ -8,52 +8,90 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
-    
+
 </head>
 <body>
     <div>
-        <p>
-            <label for="service" >service</label>
-            <input id="service" name="service" type="text">
-            <button type = "button" value="service" id="butservice">Add</button>
-        </p>
-        <br>
-        <br>
-        <br>
-        <p>
-            <label for="category" >category</label>
-            <input id="category" name="category" type="text">
 
-            <label for="subService" >subService</label>
-            <input id="subService" name="subService" type="text">
-
-            <label for="describe" >describe</label>
-            <input id="describe" name="describe" type="text">
-
-            <label for="price" >price</label>
-            <input id="price" name="service" type="text" accept="application/vnd.apple.numbers">
-            <button type = "button" value="service" id="butsub">Add</button>
-        </p>
-        <p>
-            <button type = "button" value="show all" id="show">show</button>
-
-        </p>
 
     </div>
     <div class="container">
-        <h1>How to get data from database using jquery ajax in asp net MVC </h1>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">fsadfsa</span>
+              </button>
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adservice" aria-expanded="false"
+               aria-controls="adservice">
+                اضافه کردن سرویس
+              </button>
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adsubservice" aria-expanded="false"
+              aria-controls="adsubservice">
+               اضافه کردن زیرخدمت
+             </button>
+             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAll" aria-expanded="false"
+              aria-controls="showAll"  id="show">
+               اضافه کردن زیرخدمت
+             </button>
+             <!-- <button type = "button" value="show all" id="show">show</button> -->
+
+              <div class="collapse navbar-collapse" id="navbarNav">
+              </div>
+            </div>
+          </nav>
+          <div class="collapse" id="adservice">
+            <div class="mb-3 card card-body">
+                <label for="service" class="form-label">service</label>
+                <input type="text" class="form-control" id="service" placeholder="سرویس را وارد کنید">
+                <button type = "button" value="service" id="butservice">Add</button>
+              </div>
+              </div>
+              <div class="collapse" id="adsubservice">
+                <div class="mb-3 card card-body">
+                    <p>
+                        <label for="category" class="form-label">category</label>
+                        <input id="category" name="category" type="text">
+                    </p>
+
+                        <p>
+                        <label for="subService" class="form-label">subService</label>
+                        <input id="subService" name="subService" type="text">
+                    </p>
+
+                        <p>
+                        <label for="describe" class="form-label" >describe</label>
+                        <input id="describe" name="describe" type="text">
+                    </p>
+
+                        <p>
+                        <label for="price" class="form-label">price</label>
+                        <input id="price" name="service" type="text" accept="application/vnd.apple.numbers">
+                    </p>
+
+                        <p>
+                        <button type = "button" class="btn btn-outline-success" value="service" id="butsub">Add</button>
+                    </p>
+                  </div>
+                  </div>
+
+              <div class="collapse" id="showAll">
+
+        <h1>لیست تمامی خدمات موجود در سامانه</h1>
         <br />
         <fieldset>
             <legend>
-                Customer List
+                service list
             </legend>
             <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>category</th>
+                        <th>sunservice</th>
                         <!-- <th>price</th>
                         <th>Address</th>
                         <th>City</th> -->
@@ -64,15 +102,12 @@
             </table>
         </fieldset>
     </div>
-    <div>
-
-     </div>
      <script>
            $(document).ready(function () {
               $("#butservice").click(function (event) {
                   var formData = {
                     serviceName: $("#service").val(),
-                    
+
                       // superheroAlias: $("#superheroAlias").val(),
                   };
 
@@ -134,6 +169,7 @@
                     var html = '';
                     $.each(result, function (key, item) {
                         var tablerow = '<tr>'
+                            + '<td>' + item.id + '</td>'
                             + '<td>' + item.serviceName + '</td>'
                             + '<td>' + item.subServiceName + '</td>'
                             +'</tr>';

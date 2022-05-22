@@ -9,48 +9,93 @@
     <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
 </head>
 <body>
+<div class="container">
 
 
-<div id="div3">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">fsadfsa</span>
+            </button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#showAllService" aria-expanded="true"
+                    aria-controls="#showAllService">
+                درخواست تخصص
+            </button>
+            <!--     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adsubservice" aria-expanded="false"
+                         aria-controls="adsubservice">
+                     اضافه کردن زیرخدمت
+                 </button>
+                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAll" aria-expanded="false"
+                         aria-controls="showAll"  id="show">
+                     اضافه کردن زیرخدمت
+                 </button>-->
+            <!-- <button type = "button" value="show all" id="show">show</button> -->
+
+            <!--            <div class="collapse navbar-collapse" id="navbarNav">-->
+            <!--            </div>-->
+        </div>
+    </nav>
+
+    <div class="collapse navbar-collapse" id="showAllService">
+        <div class="card card-body">
+            <div id="listof">
+            </div>
+            <button type="button" class="btn btn-outline-primary" id="request">ثبت درخواست</button>
+        </div>
+    </div>
+
+
+
+    <div id="div3">
+    </div>
+    <div>
+        <p>
+            <label for="describe" class="floatLabel">describe</label>
+            <input id="describe" name="describe" type="text">
+        </p>
+        <p>
+            <label for="time" class="floatLabel">time</label>
+            <input id="time" name="time" type="datetime-local">
+        </p>
+        <!--    <p>
+                <label for="date" class="floatLabel">time</label>
+                <input id="date" name="date" type="date">
+            </p>-->
+        <p>
+            <label for="address" class="floatLabel">address</label>
+            <input id="address" name="address" type="text">
+        </p>
+        <p>
+            <label for="price" class="floatLabel">price</label>
+            <input id="price" name="price" type="number" accept="application/vnd.apple.numbers">
+        </p>
+        <p>
+            <button type="button" value="Create My Account" id="button">Add</button>
+
+        </p>
+    </div>
 </div>
-<div>
-    <p>
-        <label for="describe" class="floatLabel">describe</label>
-        <input id="describe" name="describe" type="text">
-    </p>
-    <p>
-        <label for="time" class="floatLabel">time</label>
-        <input id="time" name="time" type="datetime-local">
-    </p>
-    <!--    <p>
-            <label for="date" class="floatLabel">time</label>
-            <input id="date" name="date" type="date">
-        </p>-->
-    <p>
-        <label for="address" class="floatLabel">address</label>
-        <input id="address" name="address" type="text">
-    </p>
-    <p>
-        <label for="price" class="floatLabel">price</label>
-        <input id="price" name="price" type="number" accept="application/vnd.apple.numbers">
-    </p>
-    <p>
-        <button type="button" value="Create My Account" id="button">Add</button>
 
-    </p>
-</div>
 <script>
-    let checkbox;
+    var checkbox;
     $(document).ready(function () {
-        $("button").click(function (event) {
+        $("#button").click(function (event) {
             var formData = {
                 describe: $("#describe").val(),
                 localDateTime: $("#time").val(),
                 address: $("#address").val(),
                 offerPrice: $("#price").val(),
-                orderId:checkbox.id
+                orderId: $('input[name="check"]:checked').attr('id')
                 // superheroAlias: $("#superheroAlias").val(),
             };
 
@@ -81,7 +126,7 @@
                 $("#div3").empty();
                 for (var i = 0; i < len; i++) {
                     var id = response[i]['id'];
-                    var name = response[i]['subServiceId'];
+                    var name = response[i]['subServiceName'];
 
                     // $("#service").append("<option value='"+id+"'>"+name+"</option>");
                     $("#div3").append("<input type='checkbox' name='check' class='radio' value='" + id + "' id='" + id + "' />" + name + "</label>");
@@ -91,8 +136,57 @@
         });
     });
     $(document).on('click', 'input[type="checkbox"]', function () {
+        checkbox=null;
         $('input[type="checkbox"]').not(this).prop('checked', false);
         checkbox = document.querySelector('input[type="checkbox"]');
+        alert($('input[name="check"]:checked').attr('value'))
+    });
+/*    $(document).ready(function(){
+        $('input[name="check1"]').on('change', function() {
+            $('input[name="check1"]').not(this).prop('checked', false);
+            alert("The best cricketer is: " + $('input[name="check1"]:checked').attr("id"));
+        });
+    });*/
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:8080/exp/serviceList/",
+            type: "GET",
+            // data: {depart:deptid},
+            dataType: "json",
+            success: function (response) {
+
+                var len = response.length;
+
+                $("#listof").empty();
+                for (var i = 0; i < len; i++) {
+                    var id = response[i]['id'];
+                    var name = response[i]['serviceName'];
+
+                    // $("#service").append("<option value='"+id+"'>"+name+"</option>");
+                    $("#listof").append("<input type='checkbox' name='check' class='radio' value='"+name+"' id='"+id+"' />" + name + "</label>");
+
+                }
+            }
+        });
+        $("#request").click(function (event) {
+            var formData = {
+                serviceName: $('input[name="check"]:checked').attr('value')
+                // superheroAlias: $("#superheroAlias").val(),
+            };
+
+            $.ajax({
+                type: "POST",
+                method: "POST",
+                url: "http://localhost:8080/exp/request",
+                data: formData,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                console.log(data);
+            });
+
+            event.preventDefault();
+        });
     });
 
 </script>
