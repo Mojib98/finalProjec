@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+
 @JsonAutoDetect
 @Setter
 @Getter
@@ -23,6 +26,18 @@ public class UserDto extends User {
 //    private Avatar avatar;
    private MultipartFile image;
     private Integer budget;
+    private List<Integer> ids;
+    private List<UserDto> userDto;
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "image=" + image +
+                ", budget=" + budget +
+                ", ids=" + ids +
+                ", userDto=" + userDto +
+                "} " + super.toString();
+    }
 
 /*
     public UserDto(@NotNull String firstName, @NotNull String lastName, String email, String password, UserStatus status, Avatar avatar, MultipartFile image, Integer budget) {
@@ -30,15 +45,9 @@ public class UserDto extends User {
 //        this.avatar = avatar;
         this.image = image;
         this.budget = budget;
-    }
-*/
 
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "avatar=" + image +
-                ", image=" + image +
-                ", budget=" + budget +
-                "} " + super.toString();
     }
+
+*/
 }
+

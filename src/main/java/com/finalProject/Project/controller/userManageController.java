@@ -2,27 +2,46 @@ package com.finalProject.Project.controller;
 
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.Specialty;
+import com.finalProject.Project.entity.SubService;
+import com.finalProject.Project.entity.dto.ServiceDto;
+import com.finalProject.Project.entity.dto.SpecialistDto;
+import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ManageExpertService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 @RestController
-@RequestMapping("/exp")
-public class ManageForServiceController {
+@CrossOrigin
+@RequestMapping("/user")
+public class userManageController {
 
     Scanner scanner = new Scanner(System.in);
+    @Autowired
     ManageExpertService manager;
+    private final ModelMapper modelMapper = new ModelMapper();
 
 
 
-    public void determineSingUp() {
-        try {
-            List<Expert> list = manager.requestListSingUp();
+    @PostMapping("/expertdetermine")
+    public void determineSingUp(@ModelAttribute UserDto selectedExpert) {
+        List<Expert> list = manager.requestListSingUp();
+        System.out.println(selectedExpert.getIds());
+        System.out.println(selectedExpert.getUserDto());
+        manager.handleRequestForExpert(selectedExpert.getIds(), null);
+
+
+
+      /*  try {
             List<Expert> accept = new ArrayList<>();
             List<Expert> unAccept = new ArrayList<>();
             for (Expert request : list) {
@@ -42,11 +61,11 @@ public class ManageForServiceController {
                     default:
                 }
             }
-            manager.handleRequestForExpert(accept, unAccept);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
+
 
     public void determineForRequestSpecialty() {
         try {
@@ -73,6 +92,27 @@ public class ManageForServiceController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @GetMapping("/listExpert")
+    public List<UserDto> requestListSingUp(){
+        List<Expert> list = manager.requestListSingUp();
+        return Arrays.asList(modelMapper.map(list, UserDto[].class));
+    }
+    @GetMapping("/specialty")
+    public List<SpecialistDto> specialistDtoList(){
+        List<Specialty> list = manager.requestListSpecialty();
+        modelMapper.addMappings(new PropertyMap<Specialty, SpecialistDto>() {
+            @Override
+            protected void configure() {
+//                skip(destination.getService());
+                map().setExpertFirstName(source.getExpert().getFirstName());
+                map().setExpertLastName(source.getExpert().getLastName());
+                map().setServiceName(source.getService().getName());
+//                skip(source.getServiceName());
+            }
+        });
+        var s=Arrays.asList(modelMapper.map(list, SpecialistDto[].class));
+        return s;
     }
 
     public void search() {

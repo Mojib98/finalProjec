@@ -36,16 +36,19 @@ public class ManageExpertService implements ManageServiceForExpert {
 
     @Override
     @Transactional
-    public void handleRequestForExpert(List<Expert> accepted, List<Expert> unAccepted) {
-        for (Expert expert : accepted) {
+    public void handleRequestForExpert(List<Integer> accepted, List<Integer> unAccepted) {
+
+        for (Integer id : accepted) {
+            Expert expert = new Expert();
+            expert.setId(id);
             expert.setStatus(UserStatus.CONFIRMED);
             System.out.println(expert);
             changeStatusExpert(expert);
         }
-        for (Expert expert : unAccepted) {
+     /*   for (Expert expert : unAccepted) {
             expert.setStatus(UserStatus.UNCONFIRMED);
             changeStatusExpert(expert);
-        }
+        }*/
     }
 
 
@@ -81,7 +84,11 @@ public class ManageExpertService implements ManageServiceForExpert {
 
     public List<Specialty> requestListSpecialty() {
         List<Specialty> list = null;
-        list = specialtyRepository.findAllByStatus(UserStatus.AWAITING_CONFIRMATION);
+        list = specialtyRepository.find(UserStatus.AWAITING_CONFIRMATION);
+        for (Specialty specialty:list){
+            System.out.println(specialty.getService().getName());
+            System.out.println(specialty.getExpert().getFirstName());
+        }
         return list;
     }
 

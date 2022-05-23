@@ -5,7 +5,9 @@ import lombok.Data;
 
 @Data
 public class SpecialistDto {
-    private String ServiceName,ExpertFirstName,ExpertLastName;
-    private Integer ServiceId,ExpertId;
+    private String serviceName;
+    private String expertFirstName;
+   private String expertLastName;
+    private Integer serviceId,expertId,id;
     private UserStatus userStatus;
 }

@@ -28,5 +28,14 @@ public class Specialty extends BaseClass{
     public Specialty() {
 
     }
+
+    public Specialty(Integer id,String firstName,String lastName,String serviceName) {
+        super(id, null);
+        this.expert = new Expert();
+        expert.setLastName(firstName);
+        expert.setFirstName(lastName);
+        this.service = new Service();
+        service.setName(serviceName);
+    }
 }
 
