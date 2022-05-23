@@ -66,32 +66,11 @@ public class userManageController {
         }*/
     }
 
+    @PostMapping("/specialtydetermine")
+    public void determineForRequestSpecialty(@ModelAttribute SpecialistDto specialistDto) {
 
-    public void determineForRequestSpecialty() {
-        try {
-            List<Specialty> list = manager.requestListSpecialty();
-            List<Specialty> accept = new ArrayList<>();
-            List<Specialty> unAccept = new ArrayList<>();
-            for (Specialty request : list) {
-//            System.out.println(request.getSpecialist());
-                System.out.println(request.getService().getName());
-                System.out.println(request.getExpert().getFirstName());
-                System.out.println("if confirmation insert 'y' or insert 'n'");
-                char check = scanner.next().charAt(0);
-                switch (check) {
-                    case 'y':
-                        accept.add(request);
-                        break;
-                    case 'n':
-                        unAccept.add(request);
-                        continue;
-                    default:
-                }
-            }
-            manager.handelRequestForSpecialty(accept, unAccept);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            manager.handelRequestForSpecialty(specialistDto.getIds(), null);
+
     }
     @GetMapping("/listExpert")
     public List<UserDto> requestListSingUp(){

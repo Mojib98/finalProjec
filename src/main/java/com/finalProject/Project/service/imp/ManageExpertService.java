@@ -61,19 +61,21 @@ public class ManageExpertService implements ManageServiceForExpert {
 
     @Override
     @Transactional
-    public void handelRequestForSpecialty(List<Specialty> accepted, List<Specialty> unAccepted) {
-        for (Specialty accept : accepted) {
-            accept.setStatus(UserStatus.CONFIRMED);
-            specialtyRepository.save(accept);
+    public void handelRequestForSpecialty(List<Integer> accepted, List<Specialty> unAccepted) {
+        for (Integer id : accepted) {
+            Specialty specialty = specialtyRepository.findById(id).get();
+            specialty.setId(id);
+            specialty.setStatus(UserStatus.CONFIRMED);
+            specialtyRepository.save(specialty);
         }
-        for (Specialty unAccept : unAccepted) {
+ /*       for (Specialty unAccept : unAccepted) {
             unAccept.setStatus(UserStatus.UNCONFIRMED);
             specialtyRepository.save(unAccept);
             specialtyRepository.delete(unAccept);
             removeSpecialty(unAccept);
 
 
-        }
+        }*/
     }
 
     @Override
