@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">fsadfsa</span>
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adservice"
+                    aria-expanded="false" aria-controls="adservice">
+                    اضافه کردن سرویس
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showSpecialty"
+                    aria-expanded="false" aria-controls="showSpecialty" id="speccialtyExpert">
+                    بررسی درخواست تخصص
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAll"
+                    aria-expanded="false" aria-controls="showAll" id="show">
+                    چک کردن ثبت نام
+                </button>
+                <!-- <button type = "button" value="show all" id="show">show</button> -->
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                </div>
+            </div>
+        </nav>
+        <div id="showAll" class="collapse">
+
+            <h1>لیست تمامی خدمات موجود در سامانه</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>status</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="tblbody">
+                    </tbody>
+                </table>
+            </fieldset>
+            <button type="button" class="btn btn-outline-success" value="service" id="butdet">Add</button>
+
+
+        </div>
+        <div id="showSpecialty" class="collapse">
+
+            <h1>لیست تمامی خدمات موجود در سامانه</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>status</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="tblbodyspecialty">
+                    </tbody>
+                </table>
+            </fieldset>
+            <button type="button" class="btn btn-outline-success" value="service" id="butdetspecialty">Add</button>
+
+
+        </div>
+
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#show").click(function (event) {
+            BindpatientData();
+        })
+    });
+
+    function BindpatientData() {
+        $.ajax({
+            url: "http://localhost:8080/user/listExpert/",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                if (result) {
+                    //itetrate thorugh each record and bind it to td
+                    var html = '';
+                    $.each(result, function (key, item) {
+                        var tablerow = '<tr>'
+                            + '<td id="ide">' + item.id + '</td>'
+                            + '<td>' + item.firstName + " " + item.lastName + '</td>'
+                            + '<td id="email">' + item.email + '</td>'
+                            + '<td>' + item.status + '</td>'
+                            + '<td>' + "<input type='checkbox' name='check' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+                            + '</tr>';
+                        $("#tblbody").append(tablerow);
+                    });
+                }
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+    $(document).ready(function () {
+        $("#speccialtyExpert").click(function (event) {
+            specialtyList();
+        })
+    });
+
+    function specialtyList() {
+        $.ajax({
+            url: "http://localhost:8080/user/specialty/",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                if (result) {
+                    //itetrate thorugh each record and bind it to td
+                    var html = '';
+                    $.each(result, function (key, item) {
+                        var tablerow = '<tr>'
+                            + '<td id="ide">' + item.id + '</td>'
+                            + '<td>' + item.expertFirstName + " " + item.expertLastName + '</td>'
+                            + '<td id="email">' + item.serviceName + '</td>'
+                            + '<td>' + "<input type='checkbox' name='checkspecialty' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+                            + '</tr>';
+                        $("#tblbodyspecialty").append(tablerow);
+                    });
+                }
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    // var userList = $('input[type=checkbox]:checked').serializeArray();
+    // alert(userList)
+    $(document).ready(function () {
+        $("#butdet").click(function (event) {
+        //     var checkboxValues = [];
+        //     $('input.removeLater:checked').map(function () {
+        //         checkboxValues.push($(this).val());
+        //     });
+        //     console.log(checkboxValues);
+        // }
+            var selectedExpert = new Array() ;
+            var s = {};
+            var categoryVals = [];
+            // categoryVals.push('');
+        $('input[name="check"]:checked').map(function () {
+            var se = "'id':'"+$(this).val()+"'";
+            categoryVals.push($(this).val());
+            // alert(categoryVals)
+            selectedExpert.push(this.value);
+        });
+        var formData = {
+                    ids: categoryVals
+                      // superheroAlias: $("#superheroAlias").val(),
+                  };
+        // var formData = {
+        //     ids: selectedExpert
+        //
+        //     // superheroAlias: $("#superheroAlias").val(),
+        // };
+        // var postData = {"arr": selectedExpert };
+        // JSON.stringify(adresses.toArray())
+        // var myJsonString = JSON.parse(selectedExpert);
+        // alert(myJsonString)
+        // alert(selectedExpert)
+
+        // alert("Number of selected Languages: " + selectedExpert.length + "\n" + "And, they are: " + selectedExpert.values);
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/user/expertdetermine/",
+            data:formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            console.log(data);
+        });
+
+        event.preventDefault();
+    });
+    });
+    $(document).ready(function () {
+        $("#butdetspecialty").click(function (event) {
+        //     var checkboxValues = [];
+        //     $('input.removeLater:checked').map(function () {
+        //         checkboxValues.push($(this).val());
+        //     });
+        //     console.log(checkboxValues);
+        // }
+            var selectedExpert = new Array() ;
+            var s = {};
+            var categoryVals = [];
+            // categoryVals.push('');
+        $('input[name="checkspecialty"]:checked').map(function () {
+            var se = "'id':'"+$(this).val()+"'";
+            categoryVals.push($(this).val());
+            // alert(categoryVals)
+            selectedExpert.push(this.value);
+        });
+        var formData = {
+                    ids: categoryVals
+                      // superheroAlias: $("#superheroAlias").val(),
+                  };
+        // var formData = {
+        //     ids: selectedExpert
+        //
+        //     // superheroAlias: $("#superheroAlias").val(),
+        // };
+        // var postData = {"arr": selectedExpert };
+        // JSON.stringify(adresses.toArray())
+        // var myJsonString = JSON.parse(selectedExpert);
+        // alert(myJsonString)
+        // alert(selectedExpert)
+
+        // alert("Number of selected Languages: " + selectedExpert.length + "\n" + "And, they are: " + selectedExpert.values);
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/user/specialtydetermine/",
+            data:formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            console.log(data);
+        });
+
+        event.preventDefault();
+    });
+    });
+
+
+</script>
+
+</html>
