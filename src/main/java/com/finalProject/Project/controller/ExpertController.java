@@ -83,20 +83,19 @@ public class ExpertController {
        expertService.insertOffer(offer,order,expert);
         System.out.println(offerDto);
     }
-    public void seeOrderForStart(){
-        Order order = null;
-        List<Order> list = expertService.findOrders(expert);
-        for (Order orders:list){
-            System.out.print(orders.getDescribe()+" ");
-            System.out.print(orders.getOfferPrice()+" ");
-            System.out.print(orders.getTimeForWork()+" ");
-            System.out.print(orders.getId()+" ");
-        };
-        System.out.println("insert id");
-        Integer id=utility.giveIntegerInput();
-        order= list.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst().get();
+    @GetMapping("/startOrder")
+    public List<OrderDto> seeOrderForStart(){
+        List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.START);
+//        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+//            @Override
+//            protected void configure() {
+//                map().setCustomersName(source.getCustomers().getFirstName());
+//                map().setSubServiceName(source.getSubService().getName());
+//            }
+//        });
+        List<Order> list = expertService.findOrdersForStart(expert);
+        System.out.println(list);
+        return Arrays.asList(modelMapper.map(list, OrderDto[].class));
     }
     public void changePassword(){}
     private boolean isCurrentTime(LocalDateTime orderTime,LocalDateTime offerTime){
@@ -105,19 +104,11 @@ public class ExpertController {
         }
         return false;
     }
-    public void startWork() {
-        try {
-            List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.WAIT_FOR_ARRIVE);
-            for (Offer a : acceptOffers) {
-                System.out.println(a.getId());
-                System.out.println(a.getWorkTime());
-            }
-            System.out.println("please select one of for start ");
-            Integer id = scanner.nextInt();
-            expertService.changeWorkByExpert(id, WorkStatus.START);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @PostMapping("/startwork")
+    public void startWork(@ModelAttribute OrderDto orderDto) {
+
+        System.out.println(id);
+        expertService.startWork(orderDto.getId());
     }
     public void downWork() {
         try {

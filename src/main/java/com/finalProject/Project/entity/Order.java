@@ -8,15 +8,16 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-@NamedNativeQueries({
-        @NamedNativeQuery(
-                name = "Order.findOrderForExpert",
-                query =
-                        "select * from orders o inner join sub_service ss on ss.id = o.sub_service_id " +
-                                "    inner join service s on s.id = ss.category_id" +
-                                "    inner join specialty s2 on s.id = s2.service_id where s2.expert_id=?", resultClass = Order.class)
-
-})
+@NamedNativeQueries({@NamedNativeQuery(
+        name = "Order.findOrderForExpert",
+        query =
+                "select * from orders o inner join sub_service ss on ss.id = o.sub_service_id " +
+                        "    inner join service s on s.id = ss.category_id" +
+                        "    inner join specialty s2 on s.id = s2.service_id where s2.expert_id=?", resultClass = Order.class), @NamedNativeQuery(
+        name = "Order.findOrderForExpertStart",
+        query =
+                "select * from orders o inner join offer ss on ss.orders_id = o.id " +
+                        "   where ss.expert_id=? and o.work_status='WAIT_FOR_ARRIVE'", resultClass = Order.class)})
 @SqlResultSetMapping(
         name = "orders",
         classes = @ConstructorResult(

@@ -41,6 +41,12 @@ public class ExpertService implements com.finalProject.Project.service.interface
     public void changeWorkByExpert(Integer id, WorkStatus workStatus) {
         orderRepository.updateStatusByOfferId(workStatus, id);
     }
+    @Transactional
+    public void startWork(Integer id) {
+//        Integer ids=Integer.parseInt(id);
+//        System.out.println(ids);
+        orderRepository.updateStatus(WorkStatus.START, id);
+    }
 
     @Override
     public void changePassword(Expert specialist, String newPassword) {
@@ -76,6 +82,12 @@ public class ExpertService implements com.finalProject.Project.service.interface
             throw new RuntimeException("order not find");
         }
         return order;
+    }
+    @Transactional
+    public List<Order> findOrdersForStart(Expert expert) {
+        List<Order> list = orderRepository.findOrderForExpertStart(expert.getId());
+        System.out.println(list);
+        return list;
     }
 
 }
