@@ -67,12 +67,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void choiceOffer(Order order, Offer offer, List<Offer> offers) {
+    public void choiceOffer(Integer id) {
+        Offer offer = offerService.findOfferById(id);
+        Order order=orderRepository.findById(offer.getOrders().getId()).get();
         order.setWorkStatus(WorkStatus.WAIT_FOR_ARRIVE);
         order.setOffer(offer);
         offer.setWorkStatus(WorkStatus.START);
         orderRepository.save(order);
-        offerService.removeOffer(offers);
+//        offerService.removeOffer(offers);
 
 
     }

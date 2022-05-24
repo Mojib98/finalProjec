@@ -92,7 +92,7 @@ public class CustomerApp {
                     .filter(p -> p.getId().equals(id))
                     .findFirst().get();
             offers.remove(offer);
-            service.choiceOffer(order1, offer, offers);
+//            service.choiceOffer(order1, offer, offers);
         } catch (Exception e) {
             e.printStackTrace();
         }

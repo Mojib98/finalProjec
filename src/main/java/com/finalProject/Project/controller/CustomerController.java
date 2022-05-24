@@ -56,24 +56,10 @@ public class CustomerController {
                 skip(destination.getExpertName());
             }
         });
-//          ّ
         Integer ids=Integer.parseInt(id);
-        System.out.println(id);
-        System.out.println(id);
-        System.out.println("ds");
-
-
-//        List<Order> order = service.findMyOrder(customer.getId());
-
-
-
         var list = service.findOfferByOrderId(ids);
-        System.out.println(list.size());
         return Arrays.asList(modelMapper.map(list, OfferDto[].class));
-
-//        return null;
     }
-
     @GetMapping("/myOrder")
     public List<OrderDto> seeMyOrder() {
         modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
@@ -100,28 +86,11 @@ public class CustomerController {
         service.changePassword(this.customer, newPassword);
 
     }
+    @PostMapping("/choiceOffer")
+    public void choiceOffer(@ModelAttribute OfferDto offerDto) {
+        System.out.println(offerDto);
 
-    public void choiceOffer() {
-        try {
-            List<Order> order = service.findMyOrder(customer.getId());
-            for (com.finalProject.Project.entity.Order orders1 : order)
-                System.out.println(orders1);
-            Integer id = scanner.nextInt();
-            List<Offer> offers = service.findOfferByOrderId(id);
-            offers.stream().forEach(System.out::println);
-            sortOfferByPrice(offers);
-            Integer idOffer = scanner.nextInt();
-            Offer offer = offers.stream()
-                    .filter(p -> p.getId().equals(idOffer))
-                    .findFirst().get();
-            Order order1 = order.stream()
-                    .filter(p -> p.getId().equals(id))
-                    .findFirst().get();
-            offers.remove(offer);
-            service.choiceOffer(order1, offer, offers);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            service.choiceOffer(offerDto.getId());
     }
 
     public void payForOrder() {

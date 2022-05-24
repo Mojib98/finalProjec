@@ -121,8 +121,8 @@
                 </div>
                 <div>
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                        data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" id="visitOffer">
-                        showOffer;;;
+                        data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" id="choiceOffer">
+                        choiceOffer
                     </button>
                 </div>
             </div>
@@ -166,6 +166,7 @@
         <script>
             let SubServiceName;
             let idSubService;
+            let order;
 
             $(document).ready(function () {
                 $("#button").click(function (event) {
@@ -194,8 +195,6 @@
                 });
             });
             $(document).ready(function () {
-
-
                 $.ajax({
                     url: "http://localhost:8080/service/sub/",
                     type: "GET",
@@ -258,6 +257,7 @@
                 alert($('input[name="myOrder"]:checked').attr('value'))
             });
             $(document).ready(function () {
+                order=$('input[name="myOrder"]:checked').attr('value');
                 $("#order").click(function (event) {
                     $.ajax({
                         url: "http://localhost:8080/customer/myOffer/",
@@ -278,7 +278,7 @@
                                         + '<td>' + item.describe + '</td>'
                                         + '<td>' + item.offerPrice + '</td>'
                                         + '<td id="email">' + item.address + '</td>'
-                                        + '<td>' + "<input type='checkbox' name='myOffer' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+                                        + '<td>' + "<input type='checkbox' name='myOffers' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                         + '</tr>';
                                     $("#tableOffer").append(tablerow);
                                 });
@@ -290,7 +290,31 @@
                     });
                 });
             });
-        </script>
+            $(document).ready(function () {
+                alert(order)
+                $("#choiceOffer").click(function (event) {
+                    var formData = {
+                        id:$('input[name="myOffers"]:checked').attr('value') ,
+                        orderId: order,
+                        // superheroAlias: $("#superheroAlias").val(),
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        method: "POST",
+                        url: "http://localhost:8080/customer/choiceOffer/",
+                        data: formData,
+                        dataType: "json",
+                        encode: true,
+                    }).done(function (data) {
+                        console.log(data);
+                    });
+
+                    event.preventDefault();
+                });
+            });
+       
+       </script>
 </body>
 
 

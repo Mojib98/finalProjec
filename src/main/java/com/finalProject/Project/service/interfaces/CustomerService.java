@@ -10,7 +10,7 @@ public interface CustomerService {
     public void insertOrder(OrderDto order,Customer customer);
     List<SubService> shoeSubService();
     List<Order> findMyOrder(Integer id);
-    void choiceOffer(Order order, Offer offer, List<Offer> offers);
+    void choiceOffer(Integer id);
     List<Order> myDownOrder(Integer id);
     void paying(Order order,Integer rate);
     List<com.finalProject.Project.entity.SubService> allSubService();

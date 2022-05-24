@@ -39,8 +39,6 @@ public class userManageController {
         System.out.println(selectedExpert.getUserDto());
         manager.handleRequestForExpert(selectedExpert.getIds(), null);
 
-
-
       /*  try {
             List<Expert> accept = new ArrayList<>();
             List<Expert> unAccept = new ArrayList<>();
