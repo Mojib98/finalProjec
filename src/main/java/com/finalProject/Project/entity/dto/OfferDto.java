@@ -26,7 +26,7 @@ public class OfferDto {
     private Integer offerPrice;
     private Integer timeForWork;
     //    private LocalTime time;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime workTime;
     private String localDateTime;
     @JsonIgnore

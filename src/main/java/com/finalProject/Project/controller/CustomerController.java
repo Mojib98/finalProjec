@@ -3,9 +3,11 @@ package com.finalProject.Project.controller;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.dto.OfferDto;
 import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.service.imp.CustomerServiceImpl;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -25,10 +28,12 @@ import java.util.stream.Collectors;
 public class CustomerController {
     @Autowired
     private CustomerServiceImpl service;
-    private Customer customer=new Customer();
+    private Customer customer = new Customer();
+
     {
         customer.setId(113);
     }
+
     private Scanner scanner = new Scanner(System.in);
     private Utility utility = new Utility();
     private final ModelMapper modelMapper = new ModelMapper();
@@ -38,8 +43,49 @@ public class CustomerController {
     public void createOrder(@ModelAttribute OrderDto orderDto) {
 
 
-           service.insertOrder(orderDto,customer);
+        service.insertOrder(orderDto, customer);
 
+
+    }
+    @GetMapping("/myOffer{id}")
+    public List<OfferDto> findOfferForOrder(@RequestParam String id) {
+        modelMapper.addMappings(new PropertyMap<Offer, OfferDto>() {
+            @Override
+            protected void configure() {
+                skip(destination.getSubServiceId());
+                skip(destination.getExpertName());
+            }
+        });
+//          ّ
+        Integer ids=Integer.parseInt(id);
+        System.out.println(id);
+        System.out.println(id);
+        System.out.println("ds");
+
+
+//        List<Order> order = service.findMyOrder(customer.getId());
+
+
+
+        var list = service.findOfferByOrderId(ids);
+        System.out.println(list.size());
+        return Arrays.asList(modelMapper.map(list, OfferDto[].class));
+
+//        return null;
+    }
+
+    @GetMapping("/myOrder")
+    public List<OrderDto> seeMyOrder() {
+        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+            @Override
+            protected void configure() {
+                map().setCustomersName(source.getCustomers().getFirstName());
+                map().setSubServiceName(source.getSubService().getName());
+            }
+        });
+
+        List<Order> order = service.findMyOrder(customer.getId());
+        return Arrays.asList(modelMapper.map(order, OrderDto[].class));
 
 
     }
@@ -51,20 +97,8 @@ public class CustomerController {
 
     public void changePassword() {
         String newPassword = utility.setPassword();
-        service.changePassword(this.customer,newPassword);
+        service.changePassword(this.customer, newPassword);
 
-    }
-
-    public void seeMyOrder() {
-        try {
-            List<Order> order = service.findMyOrder(customer.getId());
-            for (com.finalProject.Project.entity.Order orders1 : order) {
-                System.out.println(orders1);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void choiceOffer() {
