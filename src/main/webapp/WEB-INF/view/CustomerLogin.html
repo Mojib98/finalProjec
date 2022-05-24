@@ -156,7 +156,7 @@
 
     @include transition(color .3s, top .3s, background-color .8s);
 
-    &.floatLabel {
+    .floatLabel {
       top: -11px;
       background-color: rgba(255, 255, 255, 0.8);
       font-size: 14px;
@@ -185,21 +185,16 @@
       <input id="password" name="password" type="password">
       <span>Enter a password longer than 8 characters</span>
     </p>
-    <!--     <p>
-              <label for="confirm_password" class="floatLabel">Confirm Password</label>
-              <input id="confirm_password" name="confirm_password" type="password">
-              <span>Your passwords do not match</span>
-          </p>-->
     <p>
       <input class="form-check-input" type="radio" name="flexRadioDefault" id="customer">
-      <label class="form-check-label" for="customer">
+      <label class="form-check-label" for="customer" value="http://localhost:8080/singup/customer/">
         customer
       </label>
     </p>
     <p>
-      <input class="form-check-input" type="radio" name="expert" id="expert" data-bs-toggle="collapse"
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="expert" data-bs-toggle="collapse"
         data-bs-target="#expertphoto" aria-expanded="false" aria-controls="#ex">
-      <label class="form-check-label" for="expert">
+      <label class="form-check-label" for="expert" value="http://localhost:8080/singup/expert/">
         expert
       </label>
     </p>
@@ -254,35 +249,59 @@
     /*     });
      });
  });*/
+    let urlsend;
     $(document).ready(function () {
-      let urlsend;
-      $("radio").select(function () {
-        if ($("#expert").is(':checked')) {
-          alert("it's checked");
-          urlsend = "http://localhost:8080/singup/customer/";
-        } else {
-          urlsend = "http://localhost:8080/singup/expert/";
-        }
-      });
       $("#button").click(function (event) {
-        var formData = {
-          firstName: $("#firstName").val(),
-          email: $("#email").val(),
-          lastName: $("#nameL").val(),
-          password: $("#password").val(),
-          // superheroAlias: $("#superheroAlias").val(),
-        };
+        alert($('input:radio[name=flexRadioDefault]:checked').attr('id'));
+        var checker = $('input:radio[name=flexRadioDefault]:checked').attr('id');
+        // alert( $('input[name=flexRadioDefault]:checked').attr('id'))
+        if (checker == 'expert') {
+          // alert("it's checked");
+          urlsend = "http://localhost:8080/singup/expert/";
+        } else {
+          urlsend = "http://localhost:8080/singup/customer/";
+        }
+        alert(urlsend)
+        // var formData = {
+        //   firstName: $("#firstName").val(),
+        //   email: $("#email").val(),
+        //   lastName: $("#nameL").val(),
+        //   password: $("#password").val(),
+        //   // superheroAlias: $("#superheroAlias").val(),
+        // };
+        event.preventDefault();
+
+        // Get form
+        var form = $('#myform')[0];
+
+        // Create an FormData object
+        var data = new FormData(form);
 
         $.ajax({
+          enctype: 'multipart/form-data',
           type: "POST",
           method: "POST",
+          processData: false,
+          contentType: false,
           url: urlsend,
-          data: formData,
+          data: data,
           dataType: "json",
           encode: true,
-        }).done(function (data) {
-          console.log(data);
-        });
+          success: function (data) {
+
+            $("#result").text(data);
+            console.log("SUCCESS : ", data);
+            $("#btnSubmit").prop("disabled", false);
+
+          },
+          error: function (e) {
+
+            $("#result").text(e.responseText);
+            console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+
+          }
+        })
 
         event.preventDefault();
       });
