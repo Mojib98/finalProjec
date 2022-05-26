@@ -2,10 +2,7 @@ package com.finalProject.Project.controller;
 
 import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
-import com.finalProject.Project.entity.dto.OfferDto;
-import com.finalProject.Project.entity.dto.OrderDto;
-import com.finalProject.Project.entity.dto.ServiceDto;
-import com.finalProject.Project.entity.dto.SpecialistDto;
+import com.finalProject.Project.entity.dto.*;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.service.imp.ExpertService;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
@@ -156,4 +153,12 @@ public class ExpertController {
         System.out.println(list);
         return Arrays.asList(modelMapper.map(list, OrderDto[].class));
     }
+    @GetMapping("/showMyInfo")
+    public UserDto showMyInfo(){
+        Expert expert1 = expertService.showMyInfo(this.expert.getId());
+        UserDto userDto = modelMapper.map(expert1,UserDto.class);
+        System.out.println(userDto);
+        return userDto;
+    }
+
 }

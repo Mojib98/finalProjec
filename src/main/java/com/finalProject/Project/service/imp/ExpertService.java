@@ -1,9 +1,9 @@
 package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.*;
-import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
+import com.finalProject.Project.repository.interfaces.ManageRepositoryForExpert;
 import com.finalProject.Project.repository.interfaces.OfferRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
 import com.finalProject.Project.repository.interfaces.SpecialtyRepository;
@@ -19,14 +19,16 @@ public class ExpertService implements com.finalProject.Project.service.interface
     private final OfferRepository offerRepository;
     private final OfferServiceImpl offerService;
     private final ServicesServiceImpl servicesService;
+    private final ManageRepositoryForExpert manageRepositoryForExpert;
 
     public ExpertService(OrderRepository orderRepository, SpecialtyRepository specialistRepository,
-                         OfferRepository offerRepository, OfferServiceImpl offerService, ServicesServiceImpl service) {
+                         OfferRepository offerRepository, OfferServiceImpl offerService, ServicesServiceImpl service, ManageRepositoryForExpert manageRepositoryForExpert) {
         this.orderRepository = orderRepository;
         this.specialistRepository = specialistRepository;
         this.offerRepository = offerRepository;
         this.offerService = offerService;
         this.servicesService = service;
+        this.manageRepositoryForExpert = manageRepositoryForExpert;
     }
 
     @Override
@@ -99,6 +101,10 @@ public class ExpertService implements com.finalProject.Project.service.interface
         List<Order> list = orderRepository.findOrderForExpertDown(expert.getId());
         System.out.println(list);
         return list;
+    }
+    @Transactional
+    public Expert showMyInfo(Integer id){
+        return manageRepositoryForExpert.findById(id).get();
     }
 
 }

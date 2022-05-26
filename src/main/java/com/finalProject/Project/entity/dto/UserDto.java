@@ -28,7 +28,7 @@ public class UserDto extends User {
     private Integer budget;
     private List<Integer> ids;
     private List<UserDto> userDto;
-
+    private Integer rate;
     @Override
     public String toString() {
         return "UserDto{" +

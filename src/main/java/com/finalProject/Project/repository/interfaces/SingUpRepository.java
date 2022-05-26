@@ -1,5 +1,6 @@
 package com.finalProject.Project.repository.interfaces;
 
+import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.User;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;

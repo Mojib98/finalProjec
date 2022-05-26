@@ -47,14 +47,17 @@
                 id="createOffer">
                 create Offer
             </button>
-                <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAll" aria-expanded="false"
-                         aria-controls="showAll"  id="show">
-                     اضافه کردن زیرخدمت
-                 </button> -->
-                <!-- <button type = "button" value="show all" id="show">show</button> -->
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#showAllOrder" aria-expanded="true" aria-controls="showAllOrder"
+                        id="showAllOrderBut">
+                    مشاهده تمام پیشنهادات
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#myInfo" aria-expanded="true" aria-controls="myInfo"
+                        id="info">
+                    دیدن رتبه و کیف پول
+                </button>
 
-                <!--            <div class="collapse navbar-collapse" id="navbarNav">-->
-                <!--            </div>-->
             </div>
         </nav>
 
@@ -143,7 +146,7 @@
     </div>
 
 
-    <div id="showOrderAll" class="collapse">
+    <div id="showAllOrder" class="collapse">
 
         <h1>لیست سفارشات برای شما</h1>
         <br />
@@ -166,7 +169,7 @@
             <th>City</th> -->
                 </tr>
                 </thead>
-                <tbody id="tblbody">
+                <tbody id="AllOrders">
                 </tbody>
             </table>
         </fieldset>
@@ -179,14 +182,7 @@
                 <label for="time" class="floatLabel">time</label>
                 <input id="time" name="time" type="datetime-local">
             </p>
-            <!--    <p>
-                    <label for="date" class="floatLabel">time</label>
-                    <input id="date" name="date" type="date">
-                </p>-->
-<!--            <p>-->
-<!--                <label for="address" class="floatLabel">address</label>-->
-<!--                <input id="address" name="address" type="text">-->
-<!--            </p>-->
+
             <p>
                 <label for="price" class="floatLabel">price</label>
                 <input id="price" name="price" type="number" accept="application/vnd.apple.numbers">
@@ -200,6 +196,37 @@
 
     <div id="div3">
     </div>
+        <div id="myInfo" class="collapse navbar-collapse">
+            <p>Thnaks</p>
+                    </div>
+        <div id="showOrderAll" class="collapse">
+
+            <h1>لیست سفارشات برای شما</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    Order list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>subService</th>
+                        <th>describe</th>
+                        <th>time</th>
+                        <th>price</th>
+                        <th>address</th>
+                        <th>checkbox</th>
+                        <!-- <th>price</th>
+                <th>Address</th>
+                <th>City</th> -->
+                    </tr>
+                    </thead>
+                    <tbody id="tblbody">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
     </div>
 
     <script>
@@ -429,6 +456,70 @@
                 event.preventDefault();
             });
         });
+        $(document).ready(function () {
+
+            $("#showAllOrderBut").click(function (event) {
+            $.ajax({
+                url: "http://localhost:8080/exp/seeorder/",
+                type: "GET",
+                // data: {depart:deptid},
+                dataType: "json",
+                success: function (result) {
+                    debugger;
+                    if (result) {
+                        //itetrate thorugh each record and bind it to td
+                        var html = '';
+                        $.each(result, function (key, item) {
+                            var tablerow = '<tr>'
+                                + '<td id="ide">' + item.id + '</td>'
+                                + '<td>' + item.subServiceName+'</td>'
+                                + '<td >' + item.describe + '</td>'
+                                + '<td >' + item.timeForWork + '</td>'
+                                + '<td >' + item.orderPrice + '</td>'
+                                + '<td >' + item.address + '</td>'
+                                + '</tr>';
+                            $("#AllOrders").append(tablerow);
+                        });
+                    }
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        });
+        });
+        $(document).ready(function () {
+            // order=$('input[name="myOrder"]:checked').attr('value');
+            $("#info").click(function (event) {
+                $.ajax({
+                    url: "http://localhost:8080/exp/showMyInfo/",
+                    type: "GET",
+                    // data: {
+                    //     id:$('input[name="myOrder"]:checked').attr('value')
+                    // },
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        debugger;
+                        if (result) {
+                            $("#myInfo").empty();
+
+                            //itetrate thorugh each record and bind it to td
+                            var html = '';
+                            var id =result["rate"];
+                            var name = result["budget"] ;
+
+                            alert("my rate:"+id+"  "+"my budget: "+name)
+                                $("#myInfo").append("<p>"+id+" "+name+"</p>");
+
+                        }
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            });
+            });
 
     </script>
 </body>
