@@ -179,5 +179,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void changePassword(Customer customer, String newPassword) {
         customerRepository.updatePassword(newPassword,customer.getEmail(),customer.getPassword());
     }
+    @Transactional
+    public Customer findMe(Integer id ){
+        return customerRepository.findById(id).get();
+    }
 
 }

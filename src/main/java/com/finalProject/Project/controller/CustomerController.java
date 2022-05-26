@@ -5,6 +5,7 @@ import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.dto.OfferDto;
 import com.finalProject.Project.entity.dto.OrderDto;
+import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.service.imp.CustomerServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -136,5 +137,12 @@ public class CustomerController {
 
         List<Order> order = service.findMyOrder(customer.getId());
         return Arrays.asList(modelMapper.map(order, OrderDto[].class));    }
+    @GetMapping("myInfo")
+    public UserDto myInfo(){
+        Customer customer = service.findMe(this.customer.getId());
+        UserDto userDto = modelMapper.map(customer,UserDto.class);
+        System.out.println(userDto);
+        return userDto;
+    }
 
 }

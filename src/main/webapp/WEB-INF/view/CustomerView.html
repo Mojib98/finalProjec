@@ -47,10 +47,9 @@
                     aria-expanded="false" aria-controls="showAllOrderForMe" id="ALlOrder">
                     مشاهده تمام سفارشات
                 </button>
-                <!-- <button type = "button" value="show all" id="show">show</button> -->
-
-                <!--            <div class="collapse navbar-collapse" id="navbarNav">-->
-                <!--            </div>-->
+                <button class="btn btn-primary" type="button" id="MyInfo">
+                    مشاهده مشخصات
+                </button>
             </div>
         </nav>
 
@@ -585,45 +584,7 @@
                 });
             });
         });
-        //____paying table____
-        // $(document).ready(function () {
-        //     order = $('input[name="myOrder"]:checked').attr('value');
-        //     $("#").click(function (event) {
-        //         $.ajax({
-        //             url: "http://localhost:8080/customer/downOrder/",
-        //             type: "GET",
-        //             data: {
-        //                 id: $('input[name="myOrder"]:checked').attr('value')
-        //             },
-        //             // contentType: "application/json;charset=utf-8",
-        //             dataType: "json",
-        //             success: function (result) {
-        //                 debugger;
-        //                 if (result) {
-        //                     $("#tableOffer").empty();
 
-        //                     //itetrate thorugh each record and bind it to td
-        //                     var html = '';
-        //                     $.each(result, function (key, item) {
-        //                         var tablerow = '<tr>'
-        //                             + '<td id="ide">' + item.id + '</td>'
-        //                             + '<td>' + item.offerPrice + '</td>'
-        //                             + '<td>' + item.workTime + '</td>'
-        //                             + '<td id="email">' + item.timeForWork + '</td>'
-        //                             + '<td id="email">' + item.expertName + '</td>'
-        //                             // + '<td id="email">' + item.subServiceId + '</td>'
-        //                             + '<td>' + "<input type='checkbox' name='downOrder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
-        //                             + '</tr>';
-        //                         $("#tableOffer").append(tablerow);
-        //                     });
-        //                 }
-        //             },
-        //             error: function (errormessage) {
-        //                 alert(errormessage.responseText);
-        //             }
-        //         });
-        //     });
-        // });
         //downWork
         $(document).ready(function () {
             order = $('input[name="myOrder"]:checked').attr('value');
@@ -775,6 +736,35 @@ $(document).ready(function () {
                                     + '</tr>';
                                 $("#listOfOrder").append(tablerow);
                             });
+                        }
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            });
+        });
+        $(document).ready(function () {
+            // order=$('input[name="myOrder"]:checked').attr('value');
+            $("#myInfo").click(function (event) {
+                $.ajax({
+                    url: "http://localhost:8080/customer/myInfo/",
+                    type: "GET",
+                    // data: {
+                    //     id:$('input[name="myOrder"]:checked').attr('value')
+                    // },
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        debugger;
+                        if (result) {
+                            // $("#myInfo").empty();
+
+                            // var id =result["rate"];
+                            var name = result["budget"] ;
+
+                            alert("my budget: "+name);
+
                         }
                     },
                     error: function (errormessage) {
