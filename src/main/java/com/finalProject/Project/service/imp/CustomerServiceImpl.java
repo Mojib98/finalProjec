@@ -78,14 +78,15 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     }
-
+    @Transactional
     public List<Order> myDownOrder(Integer id) {
         return orderRepository.findAllDownOrderByCustomerId(WorkStatus.DONE,id);
     }
 
     @Transactional
-    public void paying(Order order, Integer rate) {
-        Order order1 = orderRepository.findById(order.getId()).get();
+    public void paying(OrderDto orderDto) {
+        Integer rate = orderDto.getRate();
+        Order order1 = orderRepository.findById(orderDto.getId()).get();
         Offer offer = offerService.findOfferById(order1.getOffer().getId());
         System.out.println(offer);
         Customer customer = customerRepository.findById(order1.getCustomers().getId()).get();
@@ -94,11 +95,13 @@ public class CustomerServiceImpl implements CustomerService {
         Integer offerPrice = offer.getOfferPrice();
         Integer walletExpert = expert.getBudget();
         customer.setBudget(walletCustomer - offerPrice);
-        expert.setBudget(walletCustomer + walletExpert);
+        expert.setBudget(offerPrice + walletExpert);
         rate += expert.getRate();
         expert.setRate(rate / 2);
         offer.setWorkStatus(WorkStatus.PAYED);
         order1.setWorkStatus(WorkStatus.PAYED);
+        addComment(orderDto.getCommentText(),offer);
+
 
     }
 
@@ -111,11 +114,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void addComment(Offer offer, Comment comment) {
-        commentRepository.save(comment);
-        Offer offer1 = offerService.findOfferById(offer.getId());
-        offer1.setComment(comment);
+    public void addComment(String comment,Offer offer) {
+        System.out.println(comment);
+        if (comment != null) {
+            Comment comment1 = new Comment();
+            comment1.setComment(comment);
+            commentRepository.save(comment1);
+            Offer offer1 = offerService.findOfferById(offer.getId());
+            offer1.setComment(comment1);
 //        offerService.insertOffer(offer);
+        } else return;
     }
 
     @Override

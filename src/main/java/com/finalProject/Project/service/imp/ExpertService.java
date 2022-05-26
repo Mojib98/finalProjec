@@ -47,6 +47,12 @@ public class ExpertService implements com.finalProject.Project.service.interface
 //        System.out.println(ids);
         orderRepository.updateStatus(WorkStatus.START, id);
     }
+    @Transactional
+    public void doneWork(Integer id) {
+//        Integer ids=Integer.parseInt(id);
+//        System.out.println(ids);
+        orderRepository.updateStatus(WorkStatus.DONE, id);
+    }
 
     @Override
     public void changePassword(Expert specialist, String newPassword) {
@@ -86,6 +92,11 @@ public class ExpertService implements com.finalProject.Project.service.interface
     @Transactional
     public List<Order> findOrdersForStart(Expert expert) {
         List<Order> list = orderRepository.findOrderForExpertStart(expert.getId());
+        System.out.println(list);
+        return list;
+    }
+    public List<Order> findOrderForFinish(Expert expert) {
+        List<Order> list = orderRepository.findOrderForExpertDown(expert.getId());
         System.out.println(list);
         return list;
     }

@@ -17,7 +17,14 @@ import java.time.LocalDateTime;
         name = "Order.findOrderForExpertStart",
         query =
                 "select * from orders o inner join offer ss on ss.orders_id = o.id " +
-                        "   where ss.expert_id=? and o.work_status='WAIT_FOR_ARRIVE'", resultClass = Order.class)})
+                        "   where ss.expert_id=? and o.work_status='WAIT_FOR_ARRIVE'", resultClass = Order.class),
+        @NamedNativeQuery(
+                name = "Order.findOrderForExpertDown",
+                query =
+                        "select * from orders o inner join offer ss on ss.orders_id = o.id " +
+                                "   where ss.expert_id=? and o.work_status='START'", resultClass = Order.class)
+})
+
 @SqlResultSetMapping(
         name = "orders",
         classes = @ConstructorResult(

@@ -108,7 +108,7 @@ public class CustomerApp {
                     .findFirst().get();
             System.out.println("insert rate");
             Integer rate = scanner.nextInt();
-            service.paying(order, rate);
+//            service.paying(order, rate);
             addComment(order);
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +122,7 @@ public class CustomerApp {
             String comment = scanner.nextLine();
             Comment comment1 = new Comment(null, null, comment, this.customer);
             Offer offer = order.getOffer();
-            service.addComment(offer, comment1);
+//            service.addComment(offer, comment1);
         } catch (Exception e) {
             e.printStackTrace();
         }

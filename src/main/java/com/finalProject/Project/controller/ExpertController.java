@@ -85,7 +85,7 @@ public class ExpertController {
     }
     @GetMapping("/startOrder")
     public List<OrderDto> seeOrderForStart(){
-        List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.START);
+        List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.WAIT_FOR_ARRIVE);
 //        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
 //            @Override
 //            protected void configure() {
@@ -107,7 +107,7 @@ public class ExpertController {
     @PostMapping("/startwork")
     public void startWork(@ModelAttribute OrderDto orderDto) {
 
-        System.out.println(id);
+        System.out.println(orderDto.getId());
         expertService.startWork(orderDto.getId());
     }
     public void downWork() {
@@ -135,5 +135,25 @@ public class ExpertController {
     public List<ServiceDto> showAllService(){
         var listService= servicesService.showAllService();
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
+    }
+    @PostMapping("/finish")
+    public void doneWork(@ModelAttribute OrderDto orderDto) {
+
+        System.out.println(orderDto.getId());
+        expertService.doneWork(orderDto.getId());
+    }
+    @GetMapping("/donelist")
+    public List<OrderDto> seeStartedOrder(){
+        List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.START);
+//        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+//            @Override
+//            protected void configure() {
+//                map().setCustomersName(source.getCustomers().getFirstName());
+//                map().setSubServiceName(source.getSubService().getName());
+//            }
+//        });
+        List<Order> list = expertService.findOrderForFinish(expert);
+        System.out.println(list);
+        return Arrays.asList(modelMapper.map(list, OrderDto[].class));
     }
 }

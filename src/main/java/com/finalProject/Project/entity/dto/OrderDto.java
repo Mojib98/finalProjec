@@ -24,5 +24,7 @@ public class OrderDto {
     private String expertName;
     private Integer offerId;
     private Integer subServiceId;
+    private Integer rate;
+    private String commentText;
 
 }

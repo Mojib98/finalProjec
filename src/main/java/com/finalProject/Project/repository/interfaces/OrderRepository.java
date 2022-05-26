@@ -15,6 +15,7 @@ import java.util.List;
 public interface OrderRepository extends CrudRepository<Order,Integer> {
     List<Order> findOrderForExpert(Integer id);
     List<Order> findOrderForExpertStart(Integer id);
+    List<Order> findOrderForExpertDown(Integer id);
     @Modifying
     @Query("update Order set workStatus=:work where id=:id")
     void updateStatus( @Param("work") WorkStatus workStatus,@Param("id") Integer id);

@@ -95,11 +95,10 @@ public class CustomerController {
     @GetMapping("/downOrder")
     public List<OrderDto> ListDownOffer() {
             List<Order> downOrder = service.myDownOrder(customer.getId());
-            System.out.println(downOrder.get(0).getExpert());
         modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
             @Override
             protected void configure() {
-                map().setExpertName(source.getExpert());
+//                map().setExpertName(source.getExpert());
                 map().setOfferPrice(source.getOfferPrice());
                 skip(destination.getCustomersName());
             }
@@ -107,17 +106,9 @@ public class CustomerController {
         return Arrays.asList(modelMapper.map(downOrder, OrderDto[].class));
 
     }
-
-    public void addComment(Order order) {
-        try {
-            System.out.println("insert comment");
-            String comment = scanner.nextLine();
-            Comment comment1 = new Comment(null, null, comment, this.customer);
-            Offer offer = order.getOffer();
-            service.addComment(offer, comment1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @PostMapping("/paying")
+    public void paying(@ModelAttribute OrderDto orderDto) {
+            service.paying(orderDto);
     }
 
     public void sortOfferByPrice(List<Offer> offers) {

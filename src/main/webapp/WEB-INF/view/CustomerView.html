@@ -121,8 +121,8 @@
 
             <div>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                    data-bs-target="" aria-expanded="true" aria-controls="" id="paying">
-                    Paying
+                    data-bs-target="#paypage" aria-expanded="true" aria-controls="paypage" id="#">
+                    Paying1
                 </button>
             </div>
         </div>
@@ -232,6 +232,66 @@
         <!-- Submit button -->
         <button type="submit" id="buttons" class="btn btn-primary btn-block mb-4">Place order</button>
     </form>
+    <form id="paypage" class="collapse navbar-collapse ">
+        <select class="form-select" aria-label="Default select example">
+            <option selected value="5" id="rating">پنج</option>
+            <option value="1" >یک</option>
+            <option value="2">دو</option>
+            <option value="3">سه</option>
+            <option value="4">چهار</option>
+            <option value="5">پنج</option>
+          </select>
+        <div class="form-outline mb-4">
+            <textarea class="form-control" id="commenrText" rows="4"></textarea>
+            <label class="form-label" for="commenrText"><i class="fa fa-comment" aria-hidden="true"></i></label>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#" aria-expanded="true" aria-controls="" id="paying">
+                    Paying
+                </button>
+        </div>
+
+    </form>
+   <div class="collapse navbar-collapse" id="showDown">
+            <div class="card card-body">
+                <div>
+                </div>
+                <div>
+
+                    <h1></h1>
+                    <br />
+                    <fieldset>
+                        <legend>
+                            service list
+                        </legend>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>name</th>
+                                    <th>price</th>
+                                    <th>time</th>
+                                    <th>status</th>
+                                    <th>checkbox</th>
+                                    <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="listDownWork">
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                        data-bs-target="#paypage" aria-expanded="true" aria-controls="paypage">
+                        paying
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let SubServiceName;
         let idSubService;
@@ -325,11 +385,7 @@
             });
 
         });
-
-
-
-
-
+//____________________________---------
         $("service").on("change", function () {
             SubServiceName = $("subServiceId").find(":selected").text();
             idSubService = $("input[name='subServiceId']:checked").val();
@@ -375,19 +431,19 @@
         });
         $(document).ready(function () {
             order = $('input[name="myOrder"]:checked').attr('value');
-            $("#order").click(function (event) {
+            $("#").click(function (event) {
                 $.ajax({
                     url: "http://localhost:8080/customer/myOffer/",
                     type: "GET",
-                    data: {
-                        id: $('input[name="myOrder"]:checked').attr('value')
-                    },
+                    // data: {
+                    //     id: $('input[name="myOrder"]:checked').attr('value')
+                    // },
                     // contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     success: function (result) {
                         debugger;
                         if (result) {
-                            $("#tableOffer").empty();
+                            $("#paypage").empty();
 
                             //itetrate thorugh each record and bind it to td
                             var html = '';
@@ -401,7 +457,7 @@
                                     // + '<td id="email">' + item.subServiceId + '</td>'
                                     + '<td>' + "<input type='checkbox' name='myOffers' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                     + '</tr>';
-                                $("#tableOffer").append(tablerow);
+                                $("#paypage").append(tablerow);
                             });
                         }
                     },
@@ -411,6 +467,45 @@
                 });
             });
         });
+        //____paying table____
+        // $(document).ready(function () {
+        //     order = $('input[name="myOrder"]:checked').attr('value');
+        //     $("#").click(function (event) {
+        //         $.ajax({
+        //             url: "http://localhost:8080/customer/downOrder/",
+        //             type: "GET",
+        //             data: {
+        //                 id: $('input[name="myOrder"]:checked').attr('value')
+        //             },
+        //             // contentType: "application/json;charset=utf-8",
+        //             dataType: "json",
+        //             success: function (result) {
+        //                 debugger;
+        //                 if (result) {
+        //                     $("#tableOffer").empty();
+
+        //                     //itetrate thorugh each record and bind it to td
+        //                     var html = '';
+        //                     $.each(result, function (key, item) {
+        //                         var tablerow = '<tr>'
+        //                             + '<td id="ide">' + item.id + '</td>'
+        //                             + '<td>' + item.offerPrice + '</td>'
+        //                             + '<td>' + item.workTime + '</td>'
+        //                             + '<td id="email">' + item.timeForWork + '</td>'
+        //                             + '<td id="email">' + item.expertName + '</td>'
+        //                             // + '<td id="email">' + item.subServiceId + '</td>'
+        //                             + '<td>' + "<input type='checkbox' name='downOrder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+        //                             + '</tr>';
+        //                         $("#tableOffer").append(tablerow);
+        //                     });
+        //                 }
+        //             },
+        //             error: function (errormessage) {
+        //                 alert(errormessage.responseText);
+        //             }
+        //         });
+        //     });
+        // });
         $(document).ready(function () {
             order = $('input[name="myOrder"]:checked').attr('value');
             $("#showDownWork").click(function (event) {
@@ -437,7 +532,7 @@
                                     + '<td id="email">' + item.describe + '</td>'
                                     + '<td id="email">' + item.expertName + '</td>'
                                     // + '<td id="email">' + item.subServiceId + '</td>'
-                                    + '<td>' + "<input type='checkbox' name='paying' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+                                    + '<td>' + "<input type='checkbox' name='downOrder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                     + '</tr>';
                                 $("#listDownWork").append(tablerow);
                             });
@@ -447,6 +542,34 @@
                         alert(errormessage.responseText);
                     }
                 });
+            });
+        });
+
+        $(document).ready(function () {
+            $("#paying").click(function (event) {
+
+                alert($('input[name="downOrder"]:checked').attr('value'));
+                alert($('#rating').val());
+                var formData = {
+                    id: $('input[name="downOrder"]:checked').attr('value'),
+                    commentText :$("#commenrText").val(),
+                    rate: $('#rating').val(),
+                    // subServiceId: idSubService
+                    // superheroAlias: $("#superheroAlias").val(),
+                };
+
+                $.ajax({
+                    type: "POST",
+                    method: "POST",
+                    url: "http://localhost:8080/customer/paying/",
+                    data: formData,
+                    dataType: "json",
+                    encode: true,
+                }).done(function (data) {
+                    console.log(data);
+                });
+
+                event.preventDefault();
             });
         });
         $(document).ready(function () {
