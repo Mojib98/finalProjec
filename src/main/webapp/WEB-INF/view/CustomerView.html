@@ -41,7 +41,7 @@
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#downWork"
                     aria-expanded="false" aria-controls="downWork" id="showDownWork">
-                    پرداخت سفارشات showAllOrderForMe
+                     showAllOrderForMe
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAllOrderForMe"
                     aria-expanded="false" aria-controls="showAllOrderForMe" id="ALlOrder">
@@ -167,44 +167,6 @@
                 </button>
             </div>
         </div>
-     <!--   <div class="collapse navbar-collapse" id="showOrder">
-            &lt;!&ndash;        <div class="card card-body">&ndash;&gt;
-            &lt;!&ndash;            <div id="listOrder">&ndash;&gt;
-            &lt;!&ndash;            </div>&ndash;&gt;
-            &lt;!&ndash;        <div>&ndash;&gt;
-
-            <h1></h1>
-            <br />
-            <fieldset>
-                <legend>
-                    service list
-                </legend>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>price</th>
-                            <th>workTime</th>expertName
-                            <th>timeForWork</th>
-                            <th>expertName</th>
-                            <th>checkbox</th>
-                            &lt;!&ndash; <th>price</th>
-                    <th>Address</th>
-                    <th>City</th> &ndash;&gt;
-                        </tr>
-                    </thead>
-                    <tbody id="tblbodyspecialty">
-                    </tbody>
-                </table>
-            </fieldset>
-
-            <div>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                    data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" id="order">
-                    showOffer
-                </button>
-            </div>
-        </div>-->
         <div class="collapse navbar-collapse" id="showAllOfferForMe">
             <!--        <div class="card card-body">-->
             <!--            <div id="listOrder">-->
@@ -758,7 +720,7 @@
 //-------------------------۰۰۰۰۰/
         //show Order
 $(document).ready(function () {
-            $("#StartshowOrder").click(function (event) {
+            $("#ALlOrder").click(function (event) {
                 $.ajax({
                     url: "http://localhost:8080/customer/myOrder/",
                     type: "GET",
@@ -780,6 +742,38 @@ $(document).ready(function () {
                                     + '<td>' + "<input type='checkbox' name='myOrdder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                     + '</tr>';
                                 $("#tableOrder").append(tablerow);
+                            });
+                        }
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            });
+        });
+        $(document).ready(function () {
+            $("#StartshowOrder").click(function (event) {
+                $.ajax({
+                    url: "http://localhost:8080/customer/allmyorder/",
+                    type: "GET",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        debugger;
+                        if (result) {
+                            //itetrate thorugh each record and bind it to td
+                            $("#listOfOrder").empty();
+                            var html = '';
+                            $.each(result, function (key, item) {
+                                var tablerow = '<tr>'
+                                    + '<td id="ide">' + item.id + '</td>'
+                                    + '<td>' + item.describe + '</td>'
+                                    + '<td>' + item.offerPrice + '</td>'
+                                    + '<td id="email">' + item.timeForWork + '</td>'
+                                    + '<td id="email">' + item.workStatus + '</td>'
+                                    + '<td>' + "<input type='checkbox' name='myOrdder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+                                    + '</tr>';
+                                $("#listOfOrder").append(tablerow);
                             });
                         }
                     },

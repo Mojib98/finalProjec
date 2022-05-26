@@ -71,7 +71,7 @@ public class CustomerController {
             }
         });
 
-        List<Order> order = service.findMyOrder(customer.getId());
+        List<Order> order = service.findMyOrderstatus(customer.getId());
         return Arrays.asList(modelMapper.map(order, OrderDto[].class));
     }
 
@@ -126,7 +126,15 @@ public class CustomerController {
     }
     @GetMapping("/allmyorder")
     public List<OrderDto> AllMyOffer(){
-        return null;
-    }
+        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+            @Override
+            protected void configure() {
+                map().setCustomersName(source.getCustomers().getFirstName());
+                map().setSubServiceName(source.getSubService().getName());
+            }
+        });
+
+        List<Order> order = service.findMyOrder(customer.getId());
+        return Arrays.asList(modelMapper.map(order, OrderDto[].class));    }
 
 }

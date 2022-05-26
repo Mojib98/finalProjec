@@ -65,6 +65,10 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Order> findMyOrder(Integer id) {
         return orderRepository.findAllByCustomersId(id);
     }
+    @Transactional
+    public List<Order> findMyOrderstatus(Integer id) {
+        return orderRepository.findAllByCustomersIdAndWorkStatusEquals(id,WorkStatus.WAIT_FOR_CHOICE);
+    }
 
     @Transactional
     public void choiceOffer(Integer id) {
