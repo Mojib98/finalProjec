@@ -80,7 +80,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public List<Order> myDownOrder(Integer id) {
-        return orderRepository.findAllByCustomersIdAndWorkStatusEquals(id, WorkStatus.DONE);
+        return orderRepository.findAllDownOrderByCustomerId(WorkStatus.DONE,id);
     }
 
     @Transactional

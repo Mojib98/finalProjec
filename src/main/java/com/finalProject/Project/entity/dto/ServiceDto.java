@@ -10,6 +10,7 @@ import lombok.Setter;
 public class ServiceDto {
     private Integer id;
     private String serviceName;
+    private String name;
     private String subServiceName;
     private Integer basePrice;
     private String describe;

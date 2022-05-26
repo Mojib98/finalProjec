@@ -2,6 +2,7 @@ package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.Specialty;
+import com.finalProject.Project.entity.dto.SpecialistDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.repository.interfaces.ManageRepositoryForExpert;
 import com.finalProject.Project.repository.interfaces.SpecialtyRepository;
@@ -129,6 +130,8 @@ public class ManageExpertService implements ManageServiceForExpert {
                     predicates.add(criteriaBuilder.equal(root.get("email"), expert.getEmail()));
                 if (expert.getStatus() != null)
                     predicates.add(criteriaBuilder.equal(root.get("status"), expert.getStatus()));
+                if (expert.getRate() != null)
+                    predicates.add(criteriaBuilder.equal(root.get("rate"), expert.getRate()));
                 criteriaQuery
                         .where(predicates.toArray(new Predicate[0]));
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
@@ -144,6 +147,19 @@ public class ManageExpertService implements ManageServiceForExpert {
     public List<Expert> search(Expert expert) {
         Specification<Expert> specification = option(expert);
         return manageRepositoryForExpert.findAll(specification);
+    }
+    @Transactional
+    public void insertSpecialty(SpecialistDto specialistDto){
+        Specialty specialty = new Specialty();
+        com.finalProject.Project.entity.Service service = new com.finalProject.Project.entity.Service();
+        service.setId(specialistDto.getServiceId());
+        Expert expert = new Expert();
+        expert.setId(specialistDto.getExpertId());
+        specialty.setService(service);
+        specialty.setExpert(expert);
+        specialty.setStatus(UserStatus.CONFIRMED);
+        specialtyRepository.save(specialty);
+
     }
 
 }

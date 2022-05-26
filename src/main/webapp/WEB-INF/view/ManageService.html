@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +9,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 
 </head>
+
 <body>
     <div>
 
@@ -21,167 +26,171 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon">fsadfsa</span>
-              </button>
-              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adservice" aria-expanded="false"
-               aria-controls="adservice">
-                اضافه کردن سرویس
-              </button>
-              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adsubservice" aria-expanded="false"
-              aria-controls="adsubservice">
-               اضافه کردن زیرخدمت
-             </button>
-             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAll" aria-expanded="false"
-              aria-controls="showAll"  id="show">
-               اضافه کردن زیرخدمت
-             </button>
-             <!-- <button type = "button" value="show all" id="show">show</button> -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">fsadfsa</span>
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adservice"
+                    aria-expanded="false" aria-controls="adservice">
+                    اضافه کردن سرویس
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adsubservice"
+                    aria-expanded="false" aria-controls="adsubservice">
+                    اضافه کردن زیرخدمت
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAll"
+                    aria-expanded="false" aria-controls="showAll" id="show">
+                    اضافه کردن زیرخدمت
+                </button>
+                <!-- <button type = "button" value="show all" id="show">show</button> -->
 
-              <div class="collapse navbar-collapse" id="navbarNav">
-              </div>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                </div>
             </div>
-          </nav>
-          <div class="collapse" id="adservice">
+        </nav>
+        <div class="collapse" id="adservice">
             <div class="mb-3 card card-body">
                 <label for="service" class="form-label">service</label>
                 <input type="text" class="form-control" id="service" placeholder="سرویس را وارد کنید">
-                <button type = "button" value="service" id="butservice">Add</button>
-              </div>
-              </div>
-              <div class="collapse" id="adsubservice">
-                <div class="mb-3 card card-body">
-                    <p>
-                        <label for="category" class="form-label">category</label>
-                        <input id="category" name="category" type="text">
-                    </p>
+                <button type="button" value="service" id="butservice">Add</button>
+            </div>
+        </div>
+        <div class="collapse" id="adsubservice">
+            <div class=" mb-3 card card-body">
+                <p>
+                    <label for="category" class="form-label">category</label>
+                    <input id="category" name="category" type="text">
+                </p>
 
-                        <p>
-                        <label for="subService" class="form-label">subService</label>
-                        <input id="subService" name="subService" type="text">
-                    </p>
+                <p>
+                    <label for="subService" class="form-label">subService</label>
+                    <input id="subService" name="subService" type="text">
+                </p>
 
-                        <p>
-                        <label for="describe" class="form-label" >describe</label>
-                        <input id="describe" name="describe" type="text">
-                    </p>
+                <p>
+                    <label for="describe" class="form-label">describe</label>
+                    <input id="describe" name="describe" type="text">
+                </p>
 
-                        <p>
-                        <label for="price" class="form-label">price</label>
-                        <input id="price" name="service" type="text" accept="application/vnd.apple.numbers">
-                    </p>
+                <p>
+                    <label for="price" class="form-label">price</label>
+                    <input id="price" name="price" type="text" accept="application/vnd.apple.numbers">
+                </p>
 
-                        <p>
-                        <button type = "button" class="btn btn-outline-success" value="service" id="butsub">Add</button>
-                    </p>
-                  </div>
-                  </div>
+                <p>
+                    <button type="button" class="btn btn-outline-success" value="service" id="butsub">Add</button>
+                </p>
+            </div>
+        </div>
 
-              <div class="collapse" id="showAll">
+        <div class="collapse" id="showAll">
 
-        <h1>لیست تمامی خدمات موجود در سامانه</h1>
-        <br />
-        <fieldset>
-            <legend>
-                service list
-            </legend>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>category</th>
-                        <th>sunservice</th>
-                        <!-- <th>price</th>
-                        <th>Address</th>
-                        <th>City</th> -->
-                    </tr>
-                </thead>
-                <tbody id="tblbody">
-                </tbody>
-            </table>
-        </fieldset>
-    </div>
-     <script>
-           $(document).ready(function () {
-              $("#butservice").click(function (event) {
-                  var formData = {
-                    serviceName: $("#service").val(),
-
-                      // superheroAlias: $("#superheroAlias").val(),
-                  };
-
-                  $.ajax({
-                      type: "POST",
-                      method: "POST",
-                      url: "http://localhost:8080/service/addservice/",
-                      data: formData,
-                      dataType: "json",
-                      encode: true,
-                  }).done(function (data) {
-                      console.log(data);
-                  });
-
-                  event.preventDefault();
-              });
-          });
-           $(document).ready(function () {
-               $("#butsub").click(function (event) {
-                   var formData = {
-                       serviceName: $("#category").val(),
-                       subServiceName:$("#subService").val(),
-                       basePrice:$("#price").val(),
-                       describe:$("#describe").val()
-
-                       // superheroAlias: $("#superheroAlias").val(),
-                   };
-
-                   $.ajax({
-                       type: "POST",
-                       method: "POST",
-                       url: "http://localhost:8080/service/addsub/",
-                       data: formData,
-                       dataType: "json",
-                       encode: true,
-                   }).done(function (data) {
-                       console.log(data);
-                   });
-
-                   event.preventDefault();
-               });
-           });
-           $(document).ready(function () {
-            $("#show").click(function (event) {
-        BindpatientData();
-           })
-        });
-    function BindpatientData() {
-        $.ajax({
-            url: "http://localhost:8080/service/sub/",
-            type: "GET",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (result)
-            {
-                debugger;
-                if (result) {
-                    //itetrate thorugh each record and bind it to td
-                    var html = '';
-                    $.each(result, function (key, item) {
-                        var tablerow = '<tr>'
-                            + '<td>' + item.id + '</td>'
-                            + '<td>' + item.serviceName + '</td>'
-                            + '<td>' + item.subServiceName + '</td>'
-                            +'</tr>';
-                        $("#tblbody").append(tablerow);
-                    });
+            <h1>لیست تمامی خدمات موجود در سامانه</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>subservice</th>
+                            <th>price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblbody">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+        <script>
+            $("input[name='price']").on("change", function () {
+                if ($(this).val() > 0) {
+                } else {
+                    alert("negative mony")
+                    $(this).val('');
                 }
-            },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
+            });
+            $(document).ready(function () {
+                $("#butservice").click(function (event) {
+                    var formData = {
+                        serviceName: $("#service").val(),
+
+                        // superheroAlias: $("#superheroAlias").val(),
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        method: "POST",
+                        url: "http://localhost:8080/service/addservice/",
+                        data: formData,
+                        dataType: "json",
+                        encode: true,
+                    }).done(function (data) {
+                        console.log(data);
+                    });
+
+                    event.preventDefault();
+                });
+            });
+            $(document).ready(function () {
+                $("#butsub").click(function (event) {
+                    var formData = {
+                        serviceName: $("#category").val(),
+                        subServiceName: $("#subService").val(),
+                        basePrice: $("#price").val(),
+                        describe: $("#describe").val()
+
+                        // superheroAlias: $("#superheroAlias").val(),
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        method: "POST",
+                        url: "http://localhost:8080/service/addsub/",
+                        data: formData,
+                        dataType: "json",
+                        encode: true,
+                    }).done(function (data) {
+                        console.log(data);
+                    });
+
+                    event.preventDefault();
+                });
+            });
+            $(document).ready(function () {
+                $("#show").click(function (event) {
+                    BindpatientData();
+                })
+            });
+            function BindpatientData() {
+                $.ajax({
+                    url: "http://localhost:8080/service/sub/",
+                    type: "GET",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        debugger;
+                        if (result) {
+                            //itetrate thorugh each record and bind it to td
+                            var html = '';
+                            $.each(result, function (key, item) {
+                                var tablerow = '<tr>'
+                                    + '<td>' + item.id + '</td>'
+                                    + '<td>' + item.subServiceName + '</td>'
+                                    + '<td>' + item.basePrice + '</td>'
+                                    + '</tr>';
+                                $("#tblbody").append(tablerow);
+                            });
+                        }
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
             }
-        });
-    }
-     </script>
+        </script>
 </body>
+
 </html>

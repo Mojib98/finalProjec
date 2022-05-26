@@ -42,7 +42,7 @@ public class CustomerController {
     @PostMapping("/createorder")
     public void createOrder(@ModelAttribute OrderDto orderDto) {
 
-
+        System.out.println(orderDto.getSubServiceId());
         service.insertOrder(orderDto, customer);
 
 
@@ -92,23 +92,20 @@ public class CustomerController {
 
             service.choiceOffer(offerDto.getId());
     }
+    @GetMapping("/downOrder")
+    public List<OrderDto> ListDownOffer() {
+            List<Order> downOrder = service.myDownOrder(customer.getId());
+            System.out.println(downOrder.get(0).getExpert());
+        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+            @Override
+            protected void configure() {
+                map().setExpertName(source.getExpert());
+                map().setOfferPrice(source.getOfferPrice());
+                skip(destination.getCustomersName());
+            }
+        });
+        return Arrays.asList(modelMapper.map(downOrder, OrderDto[].class));
 
-    public void payForOrder() {
-        try {
-            List<Order> acceptOffer = service.myDownOrder(customer.getId());
-            acceptOffer.stream().forEach(System.out::println);
-            Integer orderId = scanner.nextInt();
-            Order order = acceptOffer.stream()
-                    .filter(p -> p.getId().equals(orderId))
-                    .findFirst().get();
-            System.out.println("insert rate");
-            Integer rate = scanner.nextInt();
-            service.paying(order, rate);
-            addComment(order);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
     }
 
     public void addComment(Order order) {

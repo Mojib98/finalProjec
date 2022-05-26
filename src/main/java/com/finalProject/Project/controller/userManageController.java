@@ -1,6 +1,7 @@
 package com.finalProject.Project.controller;
 
 import com.finalProject.Project.entity.Expert;
+import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.Specialty;
 import com.finalProject.Project.entity.SubService;
 import com.finalProject.Project.entity.dto.ServiceDto;
@@ -8,6 +9,7 @@ import com.finalProject.Project.entity.dto.SpecialistDto;
 import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ManageExpertService;
+import org.apache.catalina.Server;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,21 +93,20 @@ public class userManageController {
         var s=Arrays.asList(modelMapper.map(list, SpecialistDto[].class));
         return s;
     }
-
-    public void search() {
-        try {
-            Expert expert = optionForSearch();
+    @PostMapping("/searchexpert")
+    public List<UserDto> search(@ModelAttribute UserDto userDto) {
+        System.out.println(userDto);
+      Expert expert=  modelMapper.map(userDto,Expert.class);
             List<Expert> experts = manager.search(expert);
-            for (Expert expert1 : experts) {
-                System.out.println(expert1.getFirstName() + " " +
-                        expert1.getLastName() + " " +
-                        expert1.getEmail());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        var s=Arrays.asList(modelMapper.map(experts, UserDto[].class));
+        return s;
     }
+    @PostMapping("/addSpecialty")
+    public void addSpecialty(@ModelAttribute SpecialistDto specialistDto){
+
+        manager.insertSpecialty(specialistDto);
+    }
+
 
     private Expert optionForSearch() {
         Expert expert = new Expert();

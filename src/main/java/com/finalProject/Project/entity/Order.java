@@ -51,6 +51,8 @@ public class Order extends BaseClass {
     private SubService subService;
     @OneToOne(fetch = FetchType.LAZY)
     private Offer offer;
+    @Transient
+    private String expert;
 
     public Order(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime timeForWork, String address, String describe, Customer customers, SubService subService) {
         super(id, time);
@@ -79,5 +81,13 @@ public class Order extends BaseClass {
         this.offerPrice = offerPrice;
         this.timeForWork = timeForWork;
         this.describe = describe;
+    }
+
+    public Order(Integer id, Integer offerPrice, LocalDateTime timeForWork, String describe, String  expert) {
+        super(id, null);
+        this.offerPrice = offerPrice;
+        this.timeForWork = timeForWork;
+        this.describe = describe;
+        this.expert = expert;
     }
 }

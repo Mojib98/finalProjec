@@ -74,4 +74,7 @@ public class ServicesServiceImpl implements ManageServiceForService {
     public List<SubService> showAllSubService() {
         return (List<SubService>) subServiceRepository.findAll();
     }
+    public List<SubService> showAllSubServiceById(Integer id) {
+        return (List<SubService>) subServiceRepository.findAllByServiceId(id);
+    }
 }

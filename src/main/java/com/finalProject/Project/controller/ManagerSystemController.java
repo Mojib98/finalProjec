@@ -52,13 +52,30 @@ public class ManagerSystemController {
 
 
     }
-    @GetMapping
+    @GetMapping("/allService")
     public List<ServiceDto> showAllService(){
         var listService= servicesService.showAllService();
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
-    @GetMapping("/sub")
-    public List<ServiceDto> showAllSubService(){
+    @PostMapping("/sub")
+    public List<ServiceDto> showAllSubService(@ModelAttribute ServiceDto serviceDto){
+//        modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
+//            @Override
+//            protected void configure() {
+////                map().setServiceName(source..getName());
+//                map().setSubServiceName(source.getName());
+//                skip(destination.getServiceName());
+//            }
+//        });
+        System.out.println(serviceDto.getId());
+
+
+        var listService= servicesService.showAllSubServiceById(serviceDto.getId());
+       var s= Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
+       return s;
+    }
+/*    @GetMapping("/sub")
+    public List<ServiceDto> showAllService(){
         modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
             @Override
             protected void configure() {
@@ -69,7 +86,7 @@ public class ManagerSystemController {
         var listService= servicesService.showAllSubService();
 //        System.out.println(listService.get(0).getService().getName());
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
-    }
+    }*/
     //search do here
     public Service findServiceByName(String name){
         Service service = servicesService.findServiceByName(name);

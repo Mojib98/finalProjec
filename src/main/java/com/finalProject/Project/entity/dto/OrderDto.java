@@ -13,6 +13,7 @@ import java.util.Date;
 public class OrderDto {
     private Integer id;
     private Integer offerPrice;
+    private Integer orderPrice;
     private LocalDateTime timeForWork;
     private String localDateTime;
     private String address;
@@ -20,6 +21,7 @@ public class OrderDto {
     private WorkStatus workStatus;
     private String customersName;
     private String subServiceName;
+    private String expertName;
     private Integer offerId;
     private Integer subServiceId;
 

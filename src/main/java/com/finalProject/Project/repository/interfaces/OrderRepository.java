@@ -29,4 +29,9 @@ public interface OrderRepository extends CrudRepository<Order,Integer> {
                           @Param(value = "email") String email,
                           @Param(value = "pass") String pass);
 
+    @Query(" select new com.finalProject.Project.entity.Order(s.id,s.offer.offerPrice,s.timeForWork,s.describe,s.offer.expert.lastName) from Order s " +
+            " where s.customers.id=:id and s.workStatus=:work")
+    List<Order> findAllDownOrderByCustomerId(@Param("work") WorkStatus workStatus, @Param("id") Integer id);
+    //
+
 }
