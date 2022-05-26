@@ -49,10 +49,11 @@ public class CustomerController {
     }
     @GetMapping("/myOffer{id}")
     public List<OfferDto> findOfferForOrder(@RequestParam String id) {
+        System.out.println(id);
         modelMapper.addMappings(new PropertyMap<Offer, OfferDto>() {
             @Override
             protected void configure() {
-                skip(destination.getSubServiceId());
+//                skip(destination.getSubServiceId());
                 skip(destination.getExpertName());
             }
         });

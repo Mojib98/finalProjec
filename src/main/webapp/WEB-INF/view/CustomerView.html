@@ -28,7 +28,7 @@
                     <span class="navbar-toggler-icon">fsadfsa</span>
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                    data-bs-target="#showOrder" aria-expanded="true" aria-controls="#showOrder" id="visable">
+                    data-bs-target="#showOrder" aria-expanded="true" aria-controls="#showOrder" id="StartshowOrder">
                     مشاهده سفارشات
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
@@ -64,14 +64,14 @@
             <br />
             <fieldset>
                 <legend>
-                    service list
+                    show Order list
                 </legend>
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>price</th>
-                            <th>workTime</th>expertName
+                            <th>workTime</th>
                             <th>timeForWork</th>
                             <th>expertName</th>
                             <th>checkbox</th>
@@ -80,17 +80,53 @@
                     <th>City</th> -->
                         </tr>
                     </thead>
-                    <tbody id="tblbodyspecialty">
+                    <tbody id="tableOrder">
                     </tbody>
                 </table>
             </fieldset>
 
             <div>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                    data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" id="order">
+                    data-bs-target="#OffferForOrdershow" aria-expanded="true" aria-controls="#OffferForOrdershow" id="StartshowOffer">
                     showOffer
                 </button>
             </div>
+            <div class="collapse navbar-collapse" id="OffferForOrdershow">
+                <!--        <div class="card card-body">-->
+                <!--            <div id="listOrder">-->
+                <!--            </div>-->
+                <!--        <div>-->
+
+                <h1></h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        show Offer list
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>price</th>
+                            <th>workTime</th>
+                            <th>timeForWork</th>
+                            <th>expertName</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                        </thead>
+                        <tbody id="OffferForOrder">
+                        </tbody>
+                    </table>
+                </fieldset>
+                <div>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                            data-bs-target="#" aria-expanded="true" aria-controls="#" id="chioceOffer">
+                        choice
+                    </button>
+                </div>
         </div>
         <div class="collapse navbar-collapse" id="downWork">
             <!--        <div class="card card-body">-->
@@ -130,11 +166,11 @@
                 </button>
             </div>
         </div>
-        <div class="collapse navbar-collapse" id="showOrder">
-            <!--        <div class="card card-body">-->
-            <!--            <div id="listOrder">-->
-            <!--            </div>-->
-            <!--        <div>-->
+     <!--   <div class="collapse navbar-collapse" id="showOrder">
+            &lt;!&ndash;        <div class="card card-body">&ndash;&gt;
+            &lt;!&ndash;            <div id="listOrder">&ndash;&gt;
+            &lt;!&ndash;            </div>&ndash;&gt;
+            &lt;!&ndash;        <div>&ndash;&gt;
 
             <h1></h1>
             <br />
@@ -151,9 +187,9 @@
                             <th>timeForWork</th>
                             <th>expertName</th>
                             <th>checkbox</th>
-                            <!-- <th>price</th>
+                            &lt;!&ndash; <th>price</th>
                     <th>Address</th>
-                    <th>City</th> -->
+                    <th>City</th> &ndash;&gt;
                         </tr>
                     </thead>
                     <tbody id="tblbodyspecialty">
@@ -167,7 +203,7 @@
                     showOffer
                 </button>
             </div>
-        </div>
+        </div>-->
         <div class="collapse navbar-collapse" id="showAllOfferForMe">
             <!--        <div class="card card-body">-->
             <!--            <div id="listOrder">-->
@@ -419,6 +455,7 @@
 
             }
         });
+        //createOrder
         $(document).ready(function () {
             $("#buttons").click(function (event) {
                 // alert($('input[name="subServiceId"]:checked').attr('value')+"button");
@@ -548,19 +585,20 @@
         });
         $(document).ready(function () {
             order = $('input[name="myOrder"]:checked').attr('value');
-            $("#").click(function (event) {
+            $("#StartshowOffer").click(function (event) {
+                alert($('input[name="myOrdder"]:checked').attr('value'))
                 $.ajax({
                     url: "http://localhost:8080/customer/myOffer/",
                     type: "GET",
-                    // data: {
-                    //     id: $('input[name="myOrder"]:checked').attr('value')
-                    // },
+                    data: {
+                        id: $('input[name="myOrdder"]:checked').attr('value')
+                    },
                     // contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     success: function (result) {
                         debugger;
                         if (result) {
-                            $("#paypage").empty();
+                            $("#OffferForOrder").empty();
 
                             //itetrate thorugh each record and bind it to td
                             var html = '';
@@ -574,7 +612,7 @@
                                     // + '<td id="email">' + item.subServiceId + '</td>'
                                     + '<td>' + "<input type='checkbox' name='myOffers' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                     + '</tr>';
-                                $("#paypage").append(tablerow);
+                                $("#OffferForOrder").append(tablerow);
                             });
                         }
                     },
@@ -623,6 +661,7 @@
         //         });
         //     });
         // });
+        //downWork
         $(document).ready(function () {
             order = $('input[name="myOrder"]:checked').attr('value');
             $("#showDownWork").click(function (event) {
@@ -661,7 +700,7 @@
                 });
             });
         });
-
+        //paying
         $(document).ready(function () {
             $("#paying").click(function (event) {
 
@@ -689,12 +728,15 @@
                 event.preventDefault();
             });
         });
+        //choice
         $(document).ready(function () {
-            alert(order)
-            $("#choiceOffer").click(function (event) {
+
+            $("#chioceOffer").click(function (event) {
+                alert($('input[name="myOffers"]:checked').attr('value'))
+                alert(order)
                 var formData = {
                     id: $('input[name="myOffers"]:checked').attr('value'),
-                    orderId: order,
+                    orderId:  $('input[name="myOrder"]:checked').attr('value'),
                     // superheroAlias: $("#superheroAlias").val(),
                 };
 
@@ -712,9 +754,10 @@
                 event.preventDefault();
             });
         });
-//-------------------------۰۰۰۰۰
+//-------------------------۰۰۰۰۰/
+        //show Order
 $(document).ready(function () {
-            $("#ALlOrder").click(function (event) {
+            $("#StartshowOrder").click(function (event) {
                 $.ajax({
                     url: "http://localhost:8080/customer/myOrder/",
                     type: "GET",
@@ -724,6 +767,7 @@ $(document).ready(function () {
                         debugger;
                         if (result) {
                             //itetrate thorugh each record and bind it to td
+                            $("#tableOrder").empty();
                             var html = '';
                             $.each(result, function (key, item) {
                                 var tablerow = '<tr>'
@@ -732,9 +776,9 @@ $(document).ready(function () {
                                     + '<td>' + item.offerPrice + '</td>'
                                     + '<td id="email">' + item.timeForWork + '</td>'
                                     + '<td id="email">' + item.workStatus + '</td>'
-                                    + '<td>' + "<input type='checkbox' name='myOrder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+                                    + '<td>' + "<input type='checkbox' name='myOrdder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                     + '</tr>';
-                                $("#listOfOrder").append(tablerow);
+                                $("#tableOrder").append(tablerow);
                             });
                         }
                     },
