@@ -41,7 +41,11 @@
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#downWork"
                     aria-expanded="false" aria-controls="downWork" id="showDownWork">
-                    پرداخت سفارشات
+                    پرداخت سفارشات showAllOrderForMe
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAllOrderForMe"
+                    aria-expanded="false" aria-controls="showAllOrderForMe" id="ALlOrder">
+                    مشاهده تمام سفارشات
                 </button>
                 <!-- <button type = "button" value="show all" id="show">show</button> -->
 
@@ -126,8 +130,84 @@
                 </button>
             </div>
         </div>
+        <div class="collapse navbar-collapse" id="showOrder">
+            <!--        <div class="card card-body">-->
+            <!--            <div id="listOrder">-->
+            <!--            </div>-->
+            <!--        <div>-->
 
-        <div class="collapse navbar-collapse" id="showOffer">
+            <h1></h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>price</th>
+                            <th>workTime</th>expertName
+                            <th>timeForWork</th>
+                            <th>expertName</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="tblbodyspecialty">
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" id="order">
+                    showOffer
+                </button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="showAllOfferForMe">
+            <!--        <div class="card card-body">-->
+            <!--            <div id="listOrder">-->
+            <!--            </div>-->
+            <!--        <div>-->
+
+            <h1></h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>price</th>
+                            <th>workTime</th>
+                            <th>timeForWork</th>
+                            <th>expertName</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="listShowAllOfferForMe">
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#paypage" aria-expanded="true" aria-controls="paypage" id="#">
+                    Paying1
+                </button>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="visable">
             <div class="card card-body">
                 <div>
                 </div>
@@ -166,6 +246,41 @@
                 </div>
             </div>
         </div>
+        //--
+        <div class="collapse navbar-collapse" id="showAllOrderForMe">
+            <div class="card card-body">
+                <div>
+
+                    <h1></h1>
+                    <br />
+                    <fieldset>
+                        <legend>
+                            service list
+                        </legend>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>name</th>
+                                    <th>price</th>
+                                    <th>time</th>
+                                    <th>status</th>
+                                    <th>checkbox</th>
+                                    <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="listOfOrder">
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+              
+            </div>
+        </div>
+        
+
     </div>
 
     <form id="wirteorder" class="collapse navbar-collapse ">
@@ -176,7 +291,7 @@
                 <option selected>Sub service</option>
             </select>
         </div>
-        <div class="form-outline mb-4" id="Subservice">
+        <div class="form-outline mb-4" id="">
             <!-- <label for="Subservice"></label>
                 <select id="Subservice" class="form-select" aria-label="Default select example">
                     <option selected>Sub service</option>
@@ -193,12 +308,12 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>sunservice</th>
+                            <th>subService</th>
                             <th>price</th>
                             <th>select</th>
                         </tr>
                     </thead>
-                    <tbody id="tblbody">
+                    <tbody id="SubServiceList">
                     </tbody>
                 </table>
             </fieldset>
@@ -306,7 +421,7 @@
         });
         $(document).ready(function () {
             $("#buttons").click(function (event) {
-                alert($('input[name="subServiceId"]:checked').attr('value'));
+                // alert($('input[name="subServiceId"]:checked').attr('value')+"button");
                 var formData = {
                     describe: $("#describe").val(),
                     localDateTime: $("#time").val(),
@@ -353,21 +468,23 @@
             });
         });
         $(document).ready(function () {
-
             $("#service").change(function () {
                 var service = $(this).val();
                 alert(service)
+                var formData = {
+                    id: $(this).val(),// superheroAlias: $("#superheroAlias").val(),
+                };
                 $.ajax({
                     url: 'http://localhost:8080/service/sub/',
                     type: 'post',
-                    data: { id: service },
+                    data: formData,
                     dataType: 'json',
-                    contentType: false,
+                    // contentType: false,
                     success: function (response) {
 
-                        debugger;
+                        // debugger;
                         if (response) {
-                            $("#tblbody").empty();
+                            $("#SubServiceList").empty();
                             //itetrate thorugh each record and bind it to td
                             var html = '';
                             $.each(response, function (key, item) {
@@ -377,7 +494,7 @@
                                     + '<td>' + item.basePrice + '</td>'
                                     + '<td>' + "<input type='checkbox' name='subServiceId' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                     + '</tr>';
-                                $("#tblbody").append(tablerow);
+                                $("#SubServiceList").append(tablerow);
                             });
                         }
                     }
@@ -593,6 +710,38 @@
                 });
 
                 event.preventDefault();
+            });
+        });
+//-------------------------۰۰۰۰۰
+$(document).ready(function () {
+            $("#ALlOrder").click(function (event) {
+                $.ajax({
+                    url: "http://localhost:8080/customer/myOrder/",
+                    type: "GET",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        debugger;
+                        if (result) {
+                            //itetrate thorugh each record and bind it to td
+                            var html = '';
+                            $.each(result, function (key, item) {
+                                var tablerow = '<tr>'
+                                    + '<td id="ide">' + item.id + '</td>'
+                                    + '<td>' + item.describe + '</td>'
+                                    + '<td>' + item.offerPrice + '</td>'
+                                    + '<td id="email">' + item.timeForWork + '</td>'
+                                    + '<td id="email">' + item.workStatus + '</td>'
+                                    + '<td>' + "<input type='checkbox' name='myOrder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+                                    + '</tr>';
+                                $("#listOfOrder").append(tablerow);
+                            });
+                        }
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
             });
         });
 

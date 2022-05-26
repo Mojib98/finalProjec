@@ -42,7 +42,7 @@ public class CustomerController {
     @PostMapping("/createorder")
     public void createOrder(@ModelAttribute OrderDto orderDto) {
 
-        System.out.println(orderDto.getSubServiceId());
+//        System.out.println(orderDto.getSubServiceId());
         service.insertOrder(orderDto, customer);
 
 
@@ -72,8 +72,6 @@ public class CustomerController {
 
         List<Order> order = service.findMyOrder(customer.getId());
         return Arrays.asList(modelMapper.map(order, OrderDto[].class));
-
-
     }
 
     private void checkPrice(SubService service, Integer price) {
@@ -110,7 +108,6 @@ public class CustomerController {
     public void paying(@ModelAttribute OrderDto orderDto) {
             service.paying(orderDto);
     }
-
     public void sortOfferByPrice(List<Offer> offers) {
         var offerss = offers.stream().sorted(new Comparator<Offer>() {
             @Override
@@ -123,6 +120,10 @@ public class CustomerController {
             System.out.println(offer.getOfferPrice());
 
         }
+    }
+    @GetMapping("/allmyorder")
+    public List<OrderDto> AllMyOffer(){
+        return null;
     }
 
 }

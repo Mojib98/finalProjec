@@ -211,7 +211,7 @@
   </form>
   <script>
     $("input[type='file']").on("change", function () {
-      if (this.files[0].size > 20000000) {
+      if (this.files[0].size > 300000) {
         alert("Please upload file less than 2MB. Thanks!!");
         $(this).val('');
       }
@@ -301,51 +301,7 @@
         });
     });
 
-          // function isPasswordValid() {
-//   return $password.val().length > 8;
-// }
 
-// function arePasswordsMatching() {
-//   return $password.val() === $confirmPassword.val();
-// }
-
-// function canSubmit() {
-//   return isPasswordValid() && arePasswordsMatching();
-// }
-//
-// function passwordEvent(){
-//     //Find out if password is valid
-//     if(isPasswordValid()) {
-//       //Hide hint if valid
-//       $password.next().hide();
-//     } else {
-//       //else show hint
-//       $password.next().show();
-//     }
-// }
-
-// function confirmPasswordEvent() {
-//   //Find out if password and confirmation match
-//   if(arePasswordsMatching()) {
-//     //Hide hint if match
-//     $confirmPassword.next().hide();
-//   } else {
-//     //else show hint
-//     $confirmPassword.next().show();
-//   }
-// }
-
-// function enableSubmitEvent() {
-//   $("#submit").prop("disabled", !canSubmit());
-// }
-//
-// //When event happens on password input
-// $password.focus(passwordEvent).keyup(passwordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
-//
-// //When event happens on confirmation input
-// $confirmPassword.focus(confirmPasswordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
-//
-// enableSubmitEvent();
   </script>
 </body>
 

@@ -1,9 +1,6 @@
 package com.finalProject.Project.controller;
 
-import com.finalProject.Project.entity.Expert;
-import com.finalProject.Project.entity.Service;
-import com.finalProject.Project.entity.Specialty;
-import com.finalProject.Project.entity.SubService;
+import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.entity.dto.SpecialistDto;
 import com.finalProject.Project.entity.dto.UserDto;
@@ -94,11 +91,19 @@ public class userManageController {
         return s;
     }
     @PostMapping("/searchexpert")
-    public List<UserDto> search(@ModelAttribute UserDto userDto) {
+    public List<UserDto> searchExpert(@ModelAttribute UserDto userDto) {
         System.out.println(userDto);
       Expert expert=  modelMapper.map(userDto,Expert.class);
             List<Expert> experts = manager.search(expert);
         var s=Arrays.asList(modelMapper.map(experts, UserDto[].class));
+        return s;
+    }
+    @PostMapping("/searchcustomer")
+    public List<UserDto> searchCustomer(@ModelAttribute UserDto userDto) {
+        System.out.println(userDto);
+        Customer customer=  modelMapper.map(userDto, Customer.class);
+        List<Customer> customers = manager.searchCustomer(customer);
+        var s=Arrays.asList(modelMapper.map(customers, UserDto[].class));
         return s;
     }
     @PostMapping("/addSpecialty")

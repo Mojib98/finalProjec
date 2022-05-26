@@ -67,6 +67,7 @@ public class ManagerSystemController {
 //                skip(destination.getServiceName());
 //            }
 //        });
+        System.out.println(serviceDto);
         System.out.println(serviceDto.getId());
 
 

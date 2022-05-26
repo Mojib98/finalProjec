@@ -174,4 +174,5 @@ public class CustomerServiceImpl implements CustomerService {
     public void changePassword(Customer customer, String newPassword) {
         customerRepository.updatePassword(newPassword,customer.getEmail(),customer.getPassword());
     }
+
 }

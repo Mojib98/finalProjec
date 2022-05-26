@@ -37,6 +37,14 @@
                     aria-expanded="false" aria-controls="showAll" id="show">
                     چک کردن ثبت نام
                 </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showFormForSearchExpert"
+                aria-expanded="false" aria-controls="showFormForSearchExpert" id="#">
+                جستجوی متخصصان
+            </button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showFormForSearchCustomer"
+            aria-expanded="false" aria-controls="showFormForSearchCustomer" id="searchForSearchCustomer">
+           جستچوی مشتری
+        </button>
                 <!-- <button type = "button" value="show all" id="show">show</button> -->
 
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -99,7 +107,7 @@
             </fieldset>
             <button type="button" class="btn btn-outline-success" value="service" id="butdetspecialty">Add</button>
         </div>
-        <div id="searchexpert" ">
+        <div id="searchexpert" class="collapse navbar-collapse" >
 
             <h1>search result</h1>
             <br />
@@ -125,6 +133,7 @@
                 </table>
             </fieldset>
         </div>
+        <div id="showFormForSearchExpert" class="collapse navbar-collapse">
         <form id="myform">
             <h2>searching expert</h2>
             <p>
@@ -145,12 +154,95 @@
             </p>
             <p>
                 <button type="button" class="btn btn-outline-success" value="service" id="search">Add</button>
-                <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#searchexpert"
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#searchexpert"
                     aria-expanded="false" aria-controls="searchexpert" id="search">
-                    چک کردن ثبت نام
-                </button> -->
+                    نمایش جستجو
+                </button>
 
             </p>
+            </form>
+        </div>
+        <div id="showFormForSearchCustomer" class="collapse navbar-collapse">
+            <form id="myformCustomer">
+                <h2>searching expert</h2>
+                <p>
+                    <label for="Email" class="floatLabel">Email</label>
+                    <input id="email" name="email" type="text">
+                </p>
+                <p>
+                    <label for="firstName" class="floatLabel">FirstName</label>
+                    <input id="firstName" name="firstName" type="text">
+                </p>
+                <p>
+                    <label for="nameL" class="floatLabel">LastName</label>
+                    <input id="nameL" name="lastName" type="text">
+                </p>
+                <p>
+                    <label for="status" class="floatLabel">staus</label>
+                    <input id="status" name="status" type="text">
+                </p>
+                <p>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showResultSearchCustomer"
+                        aria-expanded="false" aria-controls="showResultSearchCustomer" id="searchcustomer">
+                        نمایش جستجو
+                    </button>
+    
+                </p>
+                </form>
+
+            </div>
+            <div id="showResultSearchCustomer" class="collapse navbar-collapse" >
+
+                <h1>search result</h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        service list
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>name</th>
+                                <th>email</th>
+                                <th>status</th>
+                                <th>checkbox</th>
+                                <!-- <th>price</th>
+                        <th>Address</th>
+                        <th>City</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="CustomerResult">
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+            <div id="showResultSearch" class="collapse navbar-collapse" >
+
+                <h1>search result</h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        service list
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>name</th>
+                                <th>email</th>
+                                <th>status</th>
+                                <th>checkbox</th>
+                                <!-- <th>price</th>
+                        <th>Address</th>
+                        <th>City</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="expertResult">
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
             <div>
                 <div class="card card-body">
                     <div id="listof">
@@ -367,6 +459,50 @@
                                 + '<td>' + "<input type='checkbox' name='subServiceId' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                 + '</tr>';
                             $("#expertResult").append(tablerow);
+                        });
+                    }
+                },error: function (errormessage) {
+                        alert(errormessage.responseText);
+                }
+            });
+        });
+
+    });
+    //_____________________________________
+    $(document).ready(function () {
+        $("#searchcustomer").click( function (event) {
+            var form = $('#myform')[0];
+            // Create an FormData object
+            var data = new FormData(form);
+            var formData = {
+                        // serviceName: $("#service").val(),
+                        firstName: $("#firstName").val(),
+                        lastName: $("#lastName").val(),
+                        email: $("#email").val(),
+                        // superheroAlias: $("#superheroAlias").val(),
+                    };
+
+            $.ajax({
+                url: 'http://localhost:8080/user/searchcustomer/',
+                type: 'POST',
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                
+                success: function (response) {
+                    if (response) {
+                        $("#CustomerResult").empty();
+                        //itetrate thorugh each record and bind it to td
+                        var html = '';
+                        $.each(response, function (key, item) {
+                            var tablerow = '<tr>'
+    
+                       + '<td>' + item.id + '</td>'
+                                + '<td>' + item.firstName + '</td>'
+                                + '<td>' + item.lastName + '</td>'
+                                + '<td>' + "<input type='checkbox' name='subServiceId' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
+                                + '</tr>';
+                            $("#CustomerResult").append(tablerow);
                         });
                     }
                 },error: function (errormessage) {

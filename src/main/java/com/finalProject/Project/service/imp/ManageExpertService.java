@@ -1,16 +1,17 @@
 package com.finalProject.Project.service.imp;
 
+import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.Specialty;
 import com.finalProject.Project.entity.dto.SpecialistDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
+import com.finalProject.Project.repository.interfaces.CustomerRepository;
 import com.finalProject.Project.repository.interfaces.ManageRepositoryForExpert;
 import com.finalProject.Project.repository.interfaces.SpecialtyRepository;
 import com.finalProject.Project.service.interfaces.ManageServiceForExpert;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -23,10 +24,12 @@ import java.util.List;
 public class ManageExpertService implements ManageServiceForExpert {
     private final ManageRepositoryForExpert manageRepositoryForExpert;
     private final SpecialtyRepository specialtyRepository;
+    private final CustomerRepository customerRepository;
 
-    public ManageExpertService(ManageRepositoryForExpert manageRepositoryForExpert, SpecialtyRepository specialtyRepository) {
+    public ManageExpertService(ManageRepositoryForExpert manageRepositoryForExpert, SpecialtyRepository specialtyRepository, CustomerRepository customerRepository) {
         this.manageRepositoryForExpert = manageRepositoryForExpert;
         this.specialtyRepository = specialtyRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -161,6 +164,43 @@ public class ManageExpertService implements ManageServiceForExpert {
         specialtyRepository.save(specialty);
 
     }
+    public List<Customer> searchCustomer(Customer customer) {
+        Specification<Customer> specification = optionCustomer(customer);
+        return customerRepository.findAll(specification);
+    }
+    public Specification<Customer> optionCustomer(Customer customer) {
+        Predicate predicate;
+        Specification<Customer> specification = new Specification<Customer>() {
+            @Override
+            public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                var criteriaQuery = criteriaBuilder.createQuery(Customer.class);
+                List<Predicate> predicates = new ArrayList<>();
+                if (customer.getFirstName() != null && !customer.getFirstName().isEmpty())
+                    predicates.add(criteriaBuilder.equal(root.get("firstName"), customer.getFirstName()));
+                if (customer.getLastName() != null && !customer.getLastName().isEmpty())
+                    predicates.add(criteriaBuilder.equal(root.get("lastName"), customer.getLastName()));
+                if (customer.getEmail() != null && !customer.getEmail().isEmpty())
+                    predicates.add(criteriaBuilder.equal(root.get("email"), customer.getEmail()));
+                if (customer.getStatus() != null)
+                    predicates.add(criteriaBuilder.equal(root.get("status"), customer.getStatus()));
+//                if (customer.() != null)
+//                    predicates.add(criteriaBuilder.equal(root.get("rate"), customer.getRate()));
+                criteriaQuery
+                        .where(predicates.toArray(new Predicate[0]));
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+
+            }
+
+        };
+
+
+        return specification;
+    }
+
+
+
+
+
 
 }
 
