@@ -100,7 +100,7 @@ public class CustomerServiceImpl implements CustomerService {
         expert.setRate(rate / 2);
         offer.setWorkStatus(WorkStatus.PAYED);
         order1.setWorkStatus(WorkStatus.PAYED);
-        addComment(orderDto.getCommentText(),offer);
+        addComment(orderDto.getCommentText(),offer,customer);
 
 
     }
@@ -114,11 +114,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void addComment(String comment,Offer offer) {
+    public void addComment(String comment,Offer offer,Customer customer) {
         System.out.println(comment);
         if (comment != null) {
             Comment comment1 = new Comment();
             comment1.setComment(comment);
+            comment1.setCustomer(customer);
             commentRepository.save(comment1);
             Offer offer1 = offerService.findOfferById(offer.getId());
             offer1.setComment(comment1);

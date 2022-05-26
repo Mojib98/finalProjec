@@ -94,12 +94,14 @@ public class CustomerController {
     @GetMapping("/downOrder")
     public List<OrderDto> ListDownOffer() {
             List<Order> downOrder = service.myDownOrder(customer.getId());
+        System.out.println(downOrder);
         modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
             @Override
             protected void configure() {
 //                map().setExpertName(source.getExpert());
-                map().setOfferPrice(source.getOfferPrice());
+//                map().setOfferPrice(source.getOfferPrice());
                 skip(destination.getCustomersName());
+//                skip(destination.getLocalDateTime());
             }
         });
         return Arrays.asList(modelMapper.map(downOrder, OrderDto[].class));

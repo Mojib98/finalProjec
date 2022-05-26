@@ -91,6 +91,7 @@
                     showOffer
                 </button>
             </div>
+            </div>
             <div class="collapse navbar-collapse" id="OffferForOrdershow">
                 <!--        <div class="card card-body">-->
                 <!--            <div id="listOrder">-->
@@ -237,7 +238,7 @@
 
             <div>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                    data-bs-target="#paypage" aria-expanded="true" aria-controls="paypage" id="#">
+                    data-bs-target="#paypage" aria-expanded="true" aria-controls="paypage" id="">
                     Paying1
                 </button>
             </div>
@@ -384,8 +385,8 @@
         <button type="submit" id="buttons" class="btn btn-primary btn-block mb-4">Place order</button>
     </form>
     <form id="paypage" class="collapse navbar-collapse ">
-        <select class="form-select" aria-label="Default select example">
-            <option selected value="5" id="rating">پنج</option>
+        <select class="form-select" aria-label="Default select example" id="rating">
+            <option selected value="5" >پنج</option>
             <option value="1" >یک</option>
             <option value="2">دو</option>
             <option value="3">سه</option>
@@ -428,7 +429,7 @@
                     <th>City</th> -->
                                 </tr>
                             </thead>
-                            <tbody id="listDownWork">
+                            <tbody id="">
                             </tbody>
                         </table>
                     </fieldset>
@@ -682,11 +683,11 @@
                             var html = '';
                             $.each(result, function (key, item) {
                                 var tablerow = '<tr>'
-                                    + '<td id="ide">' + item.id + '</td>'
+                                    + '<td >' + item.id + '</td>'
                                     + '<td>' + item.offerPrice + '</td>'
-                                    + '<td>' + item.timeForWork + '</td>'
-                                    + '<td id="email">' + item.describe + '</td>'
-                                    + '<td id="email">' + item.expertName + '</td>'
+                                    // + '<td>' + item + '</td>'
+                                    + '<td >' + item.describe + '</td>'
+                                    // + '<td >' + item + '</td>'
                                     // + '<td id="email">' + item.subServiceId + '</td>'
                                     + '<td>' + "<input type='checkbox' name='downOrder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                                     + '</tr>';
