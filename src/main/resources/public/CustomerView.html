@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="js/CustomerViewScript.js" ></script>
+<!--    <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>-->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+
+
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">fsadfsa</span>
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#showOrder" aria-expanded="true" aria-controls="#showOrder" id="StartshowOrder">
+                    مشاهده سفارشات
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" >
+                    showOffer
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#wirteorder"
+                    aria-expanded="false" aria-controls="wirteorder">
+                    درخواست خدمت
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#downWork"
+                    aria-expanded="false" aria-controls="downWork" id="showDownWork">
+                     showAllOrderForMe
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAllOrderForMe"
+                    aria-expanded="false" aria-controls="showAllOrderForMe" id="ALlOrder">
+                    مشاهده تمام سفارشات
+                </button>
+                <button class="btn btn-primary" type="button" id="MyInfo">
+                    مشاهده مشخصات
+                </button>
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse" id="showOrder">
+            <!--        <div class="card card-body">-->
+            <!--            <div id="listOrder">-->
+            <!--            </div>-->
+            <!--        <div>-->
+
+            <h1></h1>
+            <br />
+            <fieldset>
+                <legend>
+                    show Order list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>price</th>
+                            <th>workTime</th>
+                            <th>timeForWork</th>
+                            <th>expertName</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="tableOrder">
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#OffferForOrdershow" aria-expanded="true" aria-controls="#OffferForOrdershow" id="StartshowOffer">
+                    showOffer
+                </button>
+            </div>
+            </div>
+            <div class="collapse navbar-collapse" id="OffferForOrdershow">
+                <!--        <div class="card card-body">-->
+                <!--            <div id="listOrder">-->
+                <!--            </div>-->
+                <!--        <div>-->
+
+                <h1></h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        show Offer list
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>price</th>
+                            <th>workTime</th>
+                            <th>timeForWork</th>
+                            <th>expertName</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                        </thead>
+                        <tbody id="OffferForOrder">
+                        </tbody>
+                    </table>
+                </fieldset>
+                <div>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                            data-bs-target="#" aria-expanded="true" aria-controls="#" id="chioceOffer">
+                        choice
+                    </button>
+                </div>
+        </div>
+        <div class="collapse navbar-collapse" id="downWork">
+            <!--        <div class="card card-body">-->
+            <!--            <div id="listOrder">-->
+            <!--            </div>-->
+            <!--        <div>-->
+
+            <h1></h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>price</th>
+                            <th>workTime</th>
+                            <th>timeForWork</th>
+                            <th>expertName</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="listDownWork">
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#paypage" aria-expanded="true" aria-controls="paypage" id="#">
+                    Paying1
+                </button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="showAllOfferForMe">
+            <!--        <div class="card card-body">-->
+            <!--            <div id="listOrder">-->
+            <!--            </div>-->
+            <!--        <div>-->
+
+            <h1></h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>price</th>
+                            <th>workTime</th>
+                            <th>timeForWork</th>
+                            <th>expertName</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="listShowAllOfferForMe">
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#paypage" aria-expanded="true" aria-controls="paypage" id="">
+                    Paying1
+                </button>
+            </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="visable">
+            <div class="card card-body">
+                <div>
+                </div>
+                <div>
+
+                    <h1></h1>
+                    <br />
+                    <fieldset>
+                        <legend>
+                            service list
+                        </legend>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>name</th>
+                                    <th>price</th>
+                                    <th>time</th>
+                                    <th>status</th>
+                                    <th>checkbox</th>
+                                    <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="tableOffer">
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                        data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" id="choiceOffer">
+                        choiceOffer
+                    </button>
+                </div>
+            </div>
+        </div>
+        //--
+        <div class="collapse navbar-collapse" id="showAllOrderForMe">
+            <div class="card card-body">
+                <div>
+
+                    <h1></h1>
+                    <br />
+                    <fieldset>
+                        <legend>
+                            service list
+                        </legend>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>name</th>
+                                    <th>price</th>
+                                    <th>time</th>
+                                    <th>status</th>
+                                    <th>checkbox</th>
+                                    <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="listOfOrder">
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+              
+            </div>
+        </div>
+        
+
+    </div>
+
+    <form id="wirteorder" class="collapse navbar-collapse ">
+        <div class="form-outline mb-4">
+            <label for="service"></label>
+            <!-- <option selected>Open this select menu</option> -->
+            <select id="service" class="form-select" aria-label="Default select example">
+                <option selected>Sub service</option>
+            </select>
+        </div>
+        <div class="form-outline mb-4" id="">
+            <!-- <label for="Subservice"></label>
+                <select id="Subservice" class="form-select" aria-label="Default select example">
+                    <option selected>Sub service</option>
+                </select>
+                <option selected>Open this select menu</option> -->
+
+            <h1>لیست تمامی خدمات موجود در سامانه</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>subService</th>
+                            <th>price</th>
+                            <th>select</th>
+                        </tr>
+                    </thead>
+                    <tbody id="SubServiceList">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+
+        <!-- Text input -->
+        <div class="form-outline mb-4">
+            <input type="text" id="address" class="form-control" />
+            <label class="form-label" for="address">Address</label>
+        </div>
+
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <input type="datetime-local" id="time" class="form-control" />
+            <label class="form-label" for="time">date</label>
+        </div>
+
+        <!-- Number input -->
+        <div class="form-outline mb-4">
+            <input type="number" id="price" class="form-control" />
+            <label class="form-label" for="price">Price</label>
+        </div>
+
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+            <textarea class="form-control" id="describe" rows="4"></textarea>
+            <label class="form-label" for="describe">describe</label>
+        </div>
+
+
+        <!-- Submit button -->
+        <button type="submit" id="buttons" class="btn btn-primary btn-block mb-4">Place order</button>
+    </form>
+    <form id="paypage" class="collapse navbar-collapse ">
+        <select class="form-select" aria-label="Default select example" id="rating">
+            <option selected value="5" >پنج</option>
+            <option value="1" >یک</option>
+            <option value="2">دو</option>
+            <option value="3">سه</option>
+            <option value="4">چهار</option>
+            <option value="5">پنج</option>
+          </select>
+        <div class="form-outline mb-4">
+            <textarea class="form-control" id="commenrText" rows="4"></textarea>
+            <label class="form-label" for="commenrText"><i class="fa fa-comment" aria-hidden="true"></i></label>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#" aria-expanded="true" aria-controls="" id="paying">
+                    Paying
+                </button>
+        </div>
+
+    </form>
+   <div class="collapse navbar-collapse" id="showDown">
+            <div class="card card-body">
+                <div>
+                </div>
+                <div>
+
+                    <h1></h1>
+                    <br />
+                    <fieldset>
+                        <legend>
+                            service list
+                        </legend>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>name</th>
+                                    <th>price</th>
+                                    <th>time</th>
+                                    <th>status</th>
+                                    <th>checkbox</th>
+                                    <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="">
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                        data-bs-target="#paypage" aria-expanded="true" aria-controls="paypage">
+                        paying
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+
+
+</html>

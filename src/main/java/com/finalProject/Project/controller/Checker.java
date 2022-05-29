@@ -1,6 +1,7 @@
 package com.finalProject.Project.controller;
 
 import com.finalProject.Project.entity.dto.UserDto;
+import com.finalProject.Project.exception.InvalinInput;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -17,13 +18,13 @@ public class Checker {
                         .matcher(email)
                         .matches()) {
                 } else
-                    throw new RuntimeException("invalid email");
+                    throw new InvalinInput("invalid email");
         }
     public void checkSizeOfAvatar(MultipartFile avatar){
         if (avatar.isEmpty())
-            throw new RuntimeException("please insert photo");
+            throw new InvalinInput("please insert photo");
         if (avatar.getSize()>299000)
-                   throw new RuntimeException("size image too big");
+                   throw new InvalinInput("size image too big");
 
         }
         public void checkPassword(String password){
@@ -32,7 +33,7 @@ public class Checker {
                     .matcher(password)
                     .matches()) {
             } else
-                throw new RuntimeException("invalid password");
+                throw new InvalinInput("invalid password");
         }
         public void checkerForSingUp(UserDto userDto){
             checkPassword(userDto.getPassword());

@@ -1,7 +1,4 @@
 package com.finalProject.Project.controller;
-
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.dto.OfferDto;
 import com.finalProject.Project.entity.dto.OrderDto;
@@ -35,8 +32,6 @@ public class CustomerController {
         customer.setId(113);
     }
 
-    private Scanner scanner = new Scanner(System.in);
-    private Utility utility = new Utility();
     private final ModelMapper modelMapper = new ModelMapper();
 
 
@@ -81,11 +76,6 @@ public class CustomerController {
             throw new RuntimeException("bad price");
     }
 
-    public void changePassword() {
-        String newPassword = utility.setPassword();
-        service.changePassword(this.customer, newPassword);
-
-    }
     @PostMapping("/choiceOffer")
     public void choiceOffer(@ModelAttribute OfferDto offerDto) {
         System.out.println(offerDto);

@@ -1,6 +1,5 @@
 package com.finalProject.Project.controller;
 
-import com.finalProject.Project.app.Utility;
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.dto.*;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
@@ -34,7 +33,6 @@ public class ExpertController {
     ExpertService expertService;
     @Autowired
     ServicesServiceImpl servicesService;
-    Utility utility = new Utility();
     @GetMapping("/showspec")
     public void showListOfSpecialty(){
         this.serviceList = servicesService.showAllService();
