@@ -46,7 +46,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "orders")
 public class Order extends BaseClass {
-    private Integer offerPrice;
+    private Integer orderPrice;
     private LocalDateTime timeForWork;
     private String address;
     private String describe;
@@ -63,7 +63,7 @@ public class Order extends BaseClass {
 
     public Order(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime timeForWork, String address, String describe, Customer customers, SubService subService) {
         super(id, time);
-        this.offerPrice = offerPrice;
+        this.orderPrice = offerPrice;
         this.timeForWork = timeForWork;
         this.address = address;
         this.describe = describe;
@@ -73,7 +73,7 @@ public class Order extends BaseClass {
 
     public Order(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime timeForWork, String address, String describe, WorkStatus workStatus, Customer customers, SubService subService, Offer acceptOffer) {
         super(id, time);
-        this.offerPrice = offerPrice;
+        this.orderPrice = offerPrice;
         this.timeForWork = timeForWork;
         this.address = address;
         this.describe = describe;
@@ -85,14 +85,14 @@ public class Order extends BaseClass {
 
     public Order(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime timeForWork, String describe) {
         super(id, time);
-        this.offerPrice = offerPrice;
+        this.orderPrice = offerPrice;
         this.timeForWork = timeForWork;
         this.describe = describe;
     }
 
     public Order(Integer id, Integer offerPrice, LocalDateTime timeForWork, String describe, String  expert) {
         super(id, null);
-        this.offerPrice = offerPrice;
+        this.orderPrice = offerPrice;
         this.timeForWork = timeForWork;
         this.describe = describe;
         this.expert = expert;

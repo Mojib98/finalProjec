@@ -37,7 +37,6 @@ import java.time.LocalDateTime;
 public class Offer extends BaseClass {
     private Integer offerPrice;
     private Integer timeForWork;
-//    private LocalTime time;
     private LocalDateTime workTime;
     @Enumerated(EnumType.STRING)
     private WorkStatus workStatus;

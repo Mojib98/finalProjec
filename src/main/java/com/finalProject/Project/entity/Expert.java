@@ -16,9 +16,9 @@ public class Expert extends User {
     @Embedded
     private Avatar avatar;
     @Column(columnDefinition = "integer default 0")
-    private Integer budget;
+    private Integer wallet;
     @Column(columnDefinition = "integer default 5")
-    private Integer rate;
+    private Float rate;
     public Expert(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status, Avatar avatar) {
         super(id, time, firstName, lastName, email, password, status);
         this.avatar = avatar;

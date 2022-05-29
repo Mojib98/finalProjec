@@ -22,10 +22,8 @@ public class SingUpController {
     SingUpService singUpService;
     private Checker checker = new Checker();
     @PostMapping("/customer")
-    public void singUpCustomer(@ModelAttribute UserDto userDto){
-        System.out.println(userDto);
+    public void singUpCustomer(@RequestBody UserDto userDto){
         singUpService.insertCustomer(userDto);
-        System.out.println(userDto);
     }
     @PostMapping("/expert")
     public void singUpExpert(@ModelAttribute UserDto  userDto) throws IOException {

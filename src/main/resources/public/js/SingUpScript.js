@@ -64,7 +64,7 @@ $(document).ready(function () {
 
 
         $.ajax({
-            enctype: 'multipart/form-data',
+            // enctype: 'multipart/form-data',
             type: "POST",
             method: "POST",
             // processData: false,

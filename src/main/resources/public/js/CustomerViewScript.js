@@ -14,7 +14,7 @@ $("input[id='price']").on("change", function () {
 });
 //createOrder
 $(document).ready(function () {
-    $("#buttons").click(function (event) {
+    $("#createOffer").click(function (event) {
         // alert($('input[name="subServiceId"]:checked').attr('value')+"button");
         var formData = {
             describe: $("#describe").val(),
@@ -74,23 +74,19 @@ $(document).ready(function () {
             data: formData,
             dataType: 'json',
             // contentType: false,
-            success: function (response) {
 
-                // debugger;
-                if (response) {
-                    $("#SubServiceList").empty();
-                    //itetrate thorugh each record and bind it to td
-                    var html = '';
-                    $.each(response, function (key, item) {
-                        var tablerow = '<tr>'
-                            + '<td>' + item.id + '</td>'
-                            + '<td>' + item.name + '</td>'
-                            + '<td>' + item.basePrice + '</td>'
-                            + '<td>' + "<input type='checkbox' name='subServiceId' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
-                            + '</tr>';
-                        $("#SubServiceList").append(tablerow);
-                    });
-                }
+                success: function (response) {
+
+                    var len = response.length;
+        
+                    $("#Subservices").empty();
+                    for (var i = 0; i < len; i++) {
+                        var id = response[i]['id'];
+                        var name = response[i]['serviceName'];
+        
+                        $("#Subservices").append("<option value='" + id + "'>" + name + "</option>");
+                        // service
+                    }
             }
         });
     });
@@ -104,7 +100,7 @@ $("service").on("change", function () {
     alert(SubServiceName + " " + id + $("#time").val());
 });
 $(document).ready(function () {
-    $("#visable").click(function (event) {
+    $("#showOrders").click(function (event) {
         $.ajax({
             url: "http://localhost:8080/customer/myOrder/",
             type: "GET",
@@ -124,7 +120,7 @@ $(document).ready(function () {
                             + '<td id="email">' + item.workStatus + '</td>'
                             + '<td>' + "<input type='checkbox' name='myOrder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                             + '</tr>';
-                        $("#tblbodyspecialty").append(tablerow);
+                        $("#listOfOrderForChoice").append(tablerow);
                     });
                 }
             },
@@ -143,12 +139,12 @@ $(document).on('click', 'input[type="checkbox"]', function () {
 $(document).ready(function () {
     order = $('input[name="myOrder"]:checked').attr('value');
     $("#StartshowOffer").click(function (event) {
-        alert($('input[name="myOrdder"]:checked').attr('value'))
+        alert($('input[name="myOrder"]:checked').attr('value'))
         $.ajax({
             url: "http://localhost:8080/customer/myOffer/",
             type: "GET",
             data: {
-                id: $('input[name="myOrdder"]:checked').attr('value')
+                id: $('input[name="myOrder"]:checked').attr('value')
             },
             // contentType: "application/json;charset=utf-8",
             dataType: "json",
@@ -278,7 +274,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#ALlOrder").click(function (event) {
         $.ajax({
-            url: "http://localhost:8080/customer/myOrder/",
+            url: "http://localhost:8080/customer/allmyorder/",
             type: "GET",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
@@ -295,7 +291,6 @@ $(document).ready(function () {
                             + '<td>' + item.offerPrice + '</td>'
                             + '<td id="email">' + item.timeForWork + '</td>'
                             + '<td id="email">' + item.workStatus + '</td>'
-                            + '<td>' + "<input type='checkbox' name='myOrdder' class='radio' value='" + item.id + "' id='" + item.id + "' />" + "</label>" + '</td>'
                             + '</tr>';
                         $("#tableOrder").append(tablerow);
                     });

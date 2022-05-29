@@ -3,14 +3,11 @@ package com.finalProject.Project.service.imp;
 import com.finalProject.Project.entity.Avatar;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
-import com.finalProject.Project.entity.SubService;
-import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.repository.interfaces.SingUpRepository;
 import com.finalProject.Project.service.interfaces.SingUpService;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,8 +34,8 @@ public class SingUpServiceImp  implements SingUpService {
         });*/
         Expert expert = modelMapper.map(userDto, Expert.class);
         expert.setStatus(UserStatus.AWAITING_CONFIRMATION);
-        expert.setBudget(0);
-        expert.setRate(5);
+        expert.setWallet(0);
+        expert.setRate(5F);
         expert.setAvatar(new Avatar(userDto.getImage().getBytes()));
         singUpRepository.save(expert);
     }
@@ -48,7 +45,7 @@ public class SingUpServiceImp  implements SingUpService {
     public void insertCustomer(UserDto userDto) {
         Customer customer = modelMapper.map(userDto, Customer.class);
         customer.setStatus(UserStatus.ACTIVE);
-        customer.setBudget(50000);
+        customer.setWallet(50000);
         singUpRepository.save(customer);
     }
 }

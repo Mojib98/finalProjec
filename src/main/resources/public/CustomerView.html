@@ -23,16 +23,16 @@
 
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">fsadfsa</span>
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
                     data-bs-target="#showOrder" aria-expanded="true" aria-controls="#showOrder" id="StartshowOrder">
                     مشاهده سفارشات
-                </button>
+                </button> -->
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                    data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" >
+                    data-bs-target="#showAllOrderForchoive" aria-expanded="true" aria-controls="#showAllOrderForchoive" id="showOrders">
                     showOffer
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#wirteorder"
@@ -41,7 +41,7 @@
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#downWork"
                     aria-expanded="false" aria-controls="downWork" id="showDownWork">
-                     showAllOrderForMe
+                     show offer for pay
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAllOrderForMe"
                     aria-expanded="false" aria-controls="showAllOrderForMe" id="ALlOrder">
@@ -73,7 +73,6 @@
                             <th>workTime</th>
                             <th>timeForWork</th>
                             <th>expertName</th>
-                            <th>checkbox</th>
                             <!-- <th>price</th>
                     <th>Address</th>
                     <th>City</th> -->
@@ -123,7 +122,7 @@
                 </fieldset>
                 <div>
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                            data-bs-target="#" aria-expanded="true" aria-controls="#" id="chioceOffer">
+                            data-bs-target="#OffferForOrdershow" aria-expanded="true" aria-controls="#OffferForOrdershow" id="chioceOffer">
                         choice
                     </button>
                 </div>
@@ -205,7 +204,7 @@
             </div>
         </div>
 
-        <div class="collapse navbar-collapse" id="visable">
+        <!-- <div class="collapse navbar-collapse" id="visable">
             <div class="card card-body">
                 <div>
                 </div>
@@ -226,9 +225,9 @@
                                     <th>time</th>
                                     <th>status</th>
                                     <th>checkbox</th>
-                                    <!-- <th>price</th>
+                                     <th>price</th>
                     <th>Address</th>
-                    <th>City</th> -->
+                    <th>City</th> 
                                 </tr>
                             </thead>
                             <tbody id="tableOffer">
@@ -236,14 +235,9 @@
                         </table>
                     </fieldset>
                 </div>
-                <div>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
-                        data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" id="choiceOffer">
-                        choiceOffer
-                    </button>
-                </div>
+               
             </div>
-        </div>
+        </div> -->
         //--
         <div class="collapse navbar-collapse" id="showAllOrderForMe">
             <div class="card card-body">
@@ -277,6 +271,44 @@
               
             </div>
         </div>
+        <div class="collapse navbar-collapse" id="showAllOrderForchoive">
+            <div class="card card-body">
+                <div>
+
+                    <h1></h1>
+                    <br />
+                    <fieldset>
+                        <legend>
+                            service list
+                        </legend>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>name</th>
+                                    <th>price</th>
+                                    <th>time</th>
+                                    <th>status</th>
+                                    <th>checkbox</th>
+                                    <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="listOfOrderForChoice">
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                        data-bs-target="#OffferForOrdershow" aria-expanded="true" aria-controls="#OffferForOrdershow" id="choiceOrder">
+                        choice ordder for find Offer
+                    </button>
+                </div>
+              
+            </div>
+        </div>
         
 
     </div>
@@ -290,11 +322,11 @@
             </select>
         </div>
         <div class="form-outline mb-4" id="">
-            <!-- <label for="Subservice"></label>
-                <select id="Subservice" class="form-select" aria-label="Default select example">
+            <label for="Subservices"></label>
+                <select id="Subservices" class="form-select" aria-label="Default select example">
                     <option selected>Sub service</option>
                 </select>
-                <option selected>Open this select menu</option> -->
+                <option selected>Open this select menu</option>
 
             <h1>لیست تمامی خدمات موجود در سامانه</h1>
             <br />
@@ -343,8 +375,11 @@
 
 
         <!-- Submit button -->
-        <button type="submit" id="buttons" class="btn btn-primary btn-block mb-4">Place order</button>
+        <button type="submit" id="createOffer" class="btn btn-primary btn-block mb-4">Place order</button>
     </form>
+
+
+
     <form id="paypage" class="collapse navbar-collapse ">
         <select class="form-select" aria-label="Default select example" id="rating">
             <option selected value="5" >پنج</option>

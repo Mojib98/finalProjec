@@ -17,7 +17,7 @@ import java.util.List;
 public class Customer extends  User{
     @OneToMany(mappedBy = "customers")
     private List<Order> orders;
-    private Integer budget;
+    private Integer wallet;
 
 
     public Customer(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status) {
@@ -28,7 +28,7 @@ public class Customer extends  User{
     public String toString() {
         return "Customer{" +
                 "orders=" + orders +
-                ", budget=" + budget +
+                ", budget=" + wallet +
                 "} " + super.toString();
     }
 }
