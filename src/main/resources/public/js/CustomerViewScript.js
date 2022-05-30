@@ -15,11 +15,11 @@ $("input[id='price']").on("change", function () {
 //createOrder
 $(document).ready(function () {
     $("#createOffer").click(function (event) {
-        // alert($('input[name="subServiceId"]:checked').attr('value')+"button");
+        alert($("#Subservices").val());
         var formData = {
             describe: $("#describe").val(),
             localDateTime: $("#time").val(),
-            subServiceId: $("input[type=checkbox][name=subServiceId]:checked").val(),
+            subServiceId: $("#Subservices").val(),
             address: $("#address").val(),
             offerPrice: $("#price").val(),
             // subServiceId: idSubService
@@ -63,8 +63,6 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     $("#service").change(function () {
-        var service = $(this).val();
-        alert(service)
         var formData = {
             id: $(this).val(),// superheroAlias: $("#superheroAlias").val(),
         };
@@ -82,7 +80,7 @@ $(document).ready(function () {
                     $("#Subservices").empty();
                     for (var i = 0; i < len; i++) {
                         var id = response[i]['id'];
-                        var name = response[i]['serviceName'];
+                        var name = response[i]['subServiceName'];
         
                         $("#Subservices").append("<option value='" + id + "'>" + name + "</option>");
                         // service

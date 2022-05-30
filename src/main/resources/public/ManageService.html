@@ -33,12 +33,12 @@
                     اضافه کردن سرویس
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adsubservice"
-                    aria-expanded="false" aria-controls="adsubservice">
+                    aria-expanded="false" aria-controls="adsubservice" id="addSubServicePanel">
                     اضافه کردن زیرخدمت
                 </button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAll"
                     aria-expanded="false" aria-controls="showAll" id="show">
-                    اضافه کردن زیرخدمت
+                    ndn کردن زیرخدمت
                 </button>
                 <!-- <button type = "button" value="show all" id="show">show</button> -->
 
@@ -49,7 +49,7 @@
         <div class="collapse" id="adservice">
             <div class="mb-3 card card-body">
                 <label for="service" class="form-label">service</label>
-                <input type="text" class="form-control" id="service" placeholder="سرویس را وارد کنید">
+                <input type="text" class="form-control" id="newServiceName" placeholder="سرویس را وارد کنید">
                 <button type="button" value="service" id="butservice">Add</button>
             </div>
         </div>
@@ -75,6 +75,12 @@
                     <input id="price" name="price" type="text" accept="application/vnd.apple.numbers">
                 </p>
 
+                
+                <p>
+                    <select class="form-select" aria-label="Default select example" id="services">
+                        <option selected value="5"  >انتخاب کنید</option>
+                      </select>
+                </p>
                 <p>
                     <button type="button" class="btn btn-outline-success" value="service" id="butsub">Add</button>
                 </p>
@@ -102,9 +108,7 @@
                 </table>
             </fieldset>
         </div>
-        <script>
-
-        </script>
+  
 </body>
 
 </html>

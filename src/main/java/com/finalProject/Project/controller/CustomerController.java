@@ -29,7 +29,7 @@ public class CustomerController {
     private Customer customer = new Customer();
 
     {
-        customer.setId(113);
+        customer.setId(189);
     }
 
     private final ModelMapper modelMapper = new ModelMapper();
@@ -39,6 +39,7 @@ public class CustomerController {
     public void createOrder(@ModelAttribute OrderDto orderDto) {
 
 //        System.out.println(orderDto.getSubServiceId());
+        System.out.println(orderDto);
         service.insertOrder(orderDto, customer);
 
 

@@ -1,5 +1,5 @@
-import "https://code.jquery.com/jquery-3.6.0.js";
-import "https://code.jquery.com/jquery-migrate-3.4.0.js";
+// import "https://code.jquery.com/jquery-3.6.0.js";
+// import "https://code.jquery.com/jquery-migrate-3.4.0.js";
 import "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
 $("input[name='price']").on("change", function () {
     if ($(this).val() > 0) {
@@ -11,7 +11,7 @@ $("input[name='price']").on("change", function () {
 $(document).ready(function () {
     $("#butservice").click(function (event) {
         var formData = {
-            serviceName: $("#service").val(),
+            serviceName: $("#newServiceName").val(),
 
             // superheroAlias: $("#superheroAlias").val(),
         };
@@ -22,7 +22,7 @@ $(document).ready(function () {
             url: "http://localhost:8080/service/addservice/",
             data: formData,
             dataType: "json",
-            encode: true,
+            // encode: true,
         }).done(function (data) {
             console.log(data);
         });
@@ -32,8 +32,9 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     $("#butsub").click(function (event) {
+        alert($("#services").val())
         var formData = {
-            serviceName: $("#category").val(),
+            serviceName: $("#services").val(),
             subServiceName: $("#subService").val(),
             basePrice: $("#price").val(),
             describe: $("#describe").val()
@@ -85,4 +86,25 @@ function BindpatientData() {
             alert(errormessage.responseText);
         }
     });
-}
+};
+    $(document).ready(function () {
+        $("#addSubServicePanel").click(function (event) {
+            $.ajax({
+                url: "http://localhost:8080/service/allService/",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $("#services").empty();
+                    $("#services").attr('disabled', false);
+                    $.each(result,function(key, value)
+                    {
+                        $("#services").append('<option value="' + value.serviceName +'">' + value.serviceName + '</option>');
+                    });
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+        })
+    });
+});

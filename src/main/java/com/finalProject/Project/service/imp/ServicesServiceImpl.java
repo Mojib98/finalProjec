@@ -1,6 +1,5 @@
 package com.finalProject.Project.service.imp;
 
-import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.SubService;
 import com.finalProject.Project.repository.interfaces.ServiceRepository;
 import com.finalProject.Project.repository.interfaces.SubServiceRepository;
@@ -32,7 +31,9 @@ public class ServicesServiceImpl implements ManageServiceForService {
 
     @Override
     @Transactional
-    public void insertService(com.finalProject.Project.entity.Service service) {
+    public void insertService(String name) {
+        com.finalProject.Project.entity.Service service = new com.finalProject.Project.entity.Service();
+        service.setName(name);
         checkUniqService(service);
         serviceRepository.save(service);
     }

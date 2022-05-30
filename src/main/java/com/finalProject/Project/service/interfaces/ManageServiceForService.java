@@ -8,7 +8,7 @@ import java.util.List;
 public interface ManageServiceForService {
 
     List<Service> showAllService();
-    void insertService(Service service);
+    void insertService(String service);
     void insertSubService(SubService service);
    Service findServiceByName(String name);
     List<SubService> showAllSubService();

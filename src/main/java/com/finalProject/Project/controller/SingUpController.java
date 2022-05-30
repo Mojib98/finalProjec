@@ -22,7 +22,7 @@ public class SingUpController {
     SingUpService singUpService;
     private Checker checker = new Checker();
     @PostMapping("/customer")
-    public void singUpCustomer(@RequestBody UserDto userDto){
+    public void singUpCustomer(@ModelAttribute UserDto userDto){
         singUpService.insertCustomer(userDto);
     }
     @PostMapping("/expert")
