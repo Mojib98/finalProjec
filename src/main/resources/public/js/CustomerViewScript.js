@@ -129,15 +129,16 @@ $(document).ready(function () {
     });
 });
 $(document).on('click', 'input[type="checkbox"]', function () {
-    checkbox = null;
+    // checkbox = null;
     $('input[type="checkbox"]').not(this).prop('checked', false);
     checkbox = document.querySelector('input[type="checkbox"]');
-    alert($('input[name="subServiceId"]:checked').attr('value'))
+    // alert($('input[name="subServiceId"]:checked').attr('value'))
 });
+//showOffer
 $(document).ready(function () {
-    order = $('input[name="myOrder"]:checked').attr('value');
     $("#StartshowOffer").click(function (event) {
-        alert($('input[name="myOrder"]:checked').attr('value'))
+        order = $('input[name="myOrder"]:checked').attr('value');
+        alert($('input[name="myOrder"]:checked').attr('value'));
         $.ajax({
             url: "http://localhost:8080/customer/myOffer/",
             type: "GET",
@@ -268,7 +269,7 @@ $(document).ready(function () {
     });
 });
 //-------------------------۰۰۰۰۰/
-//show Order
+//show all Order
 $(document).ready(function () {
     $("#ALlOrder").click(function (event) {
         $.ajax({
@@ -300,6 +301,7 @@ $(document).ready(function () {
         });
     });
 });
+//all order
 $(document).ready(function () {
     $("#").click(function (event) {
         $.ajax({
@@ -332,6 +334,7 @@ $(document).ready(function () {
         });
     });
 });
+//info
 $(document).ready(function () {
     // order=$('input[name="myOrder"]:checked').attr('value');
     $("#myInfo").click(function (event) {

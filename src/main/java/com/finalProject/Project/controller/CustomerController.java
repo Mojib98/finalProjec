@@ -44,9 +44,9 @@ public class CustomerController {
 
 
     }
-    @GetMapping("/myOffer{id}")
+    @GetMapping("/myOffer")
     public List<OfferDto> findOfferForOrder(@RequestParam String id) {
-        System.out.println(id);
+        System.out.println("id s:"+id);
         modelMapper.addMappings(new PropertyMap<Offer, OfferDto>() {
             @Override
             protected void configure() {

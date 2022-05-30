@@ -5,6 +5,7 @@ let orid;
 var checkbox;
 $(document).ready(function () {
     $("#button").click(function (event) {
+        alert($('input[name="check"]:checked').attr('value'));
         var formData = {
             describe: $("#describe").val(),
             localDateTime: $("#time").val(),
@@ -28,7 +29,9 @@ $(document).ready(function () {
         event.preventDefault();
     });
 });
+//serOrderforOffer
 $(document).ready(function () {
+    $("#createOffer").click(function (event) {
     $.ajax({
         url: "http://localhost:8080/exp/seeorder/",
         type: "GET",
@@ -58,6 +61,7 @@ $(document).ready(function () {
         }
     });
 });
+});
 $(document).on('click', 'input[type="checkbox"]', function () {
     checkbox = null;
     $('input[type="checkbox"]').not(this).prop('checked', false);
@@ -69,7 +73,8 @@ $(document).on('click', 'input[type="checkbox"]', function () {
             alert("The best cricketer is: " + $('input[name="check1"]:checked').attr("id"));
         });
     });*/
-$(document).ready(function () {
+//serviceList
+    $(document).ready(function () {
     $.ajax({
         url: "http://localhost:8080/exp/serviceList/",
         type: "GET",
@@ -110,6 +115,7 @@ $(document).ready(function () {
         event.preventDefault();
     });
 });
+//orderForStart
 $(document).ready(function () {
     // order=$('input[name="myOrder"]:checked').attr('value');
     $("#showOrderForStart").click(function (event) {
@@ -169,6 +175,7 @@ $(document).ready(function () {
         event.preventDefault();
     });
 });
+//DownWork
 $(document).ready(function () {
     // order=$('input[name="myOrder"]:checked').attr('value');
     $("#showDownWork").click(function (event) {
@@ -204,6 +211,7 @@ $(document).ready(function () {
         });
     });
 });
+//finishWork
 $(document).ready(function () {
     $("#finish").click(function (event) {
         alert($('input[name="finishing"]:checked').attr('value'))
@@ -227,6 +235,7 @@ $(document).ready(function () {
         event.preventDefault();
     });
 });
+//order
 $(document).ready(function () {
 
     $("#showAllOrderBut").click(function (event) {
@@ -259,6 +268,7 @@ $(document).ready(function () {
         });
     });
 });
+//show info
 $(document).ready(function () {
     // order=$('input[name="myOrder"]:checked').attr('value');
     $("#info").click(function (event) {

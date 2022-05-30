@@ -7,6 +7,7 @@ import com.finalProject.Project.service.imp.ExpertService;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,14 +48,18 @@ public class ExpertController {
     }
     @GetMapping("/seeorder")
     public List<OrderDto> seeOrders(){
-        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
-            @Override
-            protected void configure() {
-                map().setCustomersName(source.getCustomers().getFirstName());
-                map().setSubServiceName(source.getSubService().getName());
-            }
-        });
+        TypeMap<Order,OrderDto> typeMap = modelMapper.getTypeMap(Order.class, OrderDto.class);
+        if (typeMap == null) {
+            modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+                @Override
+                protected void configure() {
+                    map().setCustomersName(source.getCustomers().getFirstName());
+                    map().setSubServiceName(source.getSubService().getName());
+                }
+            });
+        }
         List<com.finalProject.Project.entity.Order> list = expertService.findOrders(expert);
+        System.out.println(list);
         return Arrays.asList(modelMapper.map(list, OrderDto[].class));
     }
     @PostMapping("/writeOffer")

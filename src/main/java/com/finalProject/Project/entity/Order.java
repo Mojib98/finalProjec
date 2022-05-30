@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
         name = "Order.findOrderForExpert",
         query =
                 "select * from orders o inner join sub_service ss on ss.id = o.sub_service_id " +
-                        "    inner join service s on s.id = ss.category_id" +
+                        "    inner join service s on s.id = ss.service_id" +
                         "    inner join specialty s2 on s.id = s2.service_id where s2.expert_id=?", resultClass = Order.class), @NamedNativeQuery(
         name = "Order.findOrderForExpertStart",
         query =
