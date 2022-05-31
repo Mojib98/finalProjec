@@ -189,5 +189,10 @@ public class CustomerServiceImpl implements CustomerService {
         Integer oldAmount =customer.getWallet();
         customer.setWallet(oldAmount+amount);
     }
+    public Integer OfferPrice(Integer id){
+        Order order1 = orderRepository.findById(id).get();
+        Offer offer = offerService.findOfferById(order1.getOffer().getId());
+        return offer.getOfferPrice();
+    }
 
 }

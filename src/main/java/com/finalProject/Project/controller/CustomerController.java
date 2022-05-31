@@ -7,11 +7,13 @@ import com.finalProject.Project.service.imp.CustomerServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.net.URI;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -141,5 +143,41 @@ public class CustomerController {
         depositWallet(orderDto);
         paying(orderDto);
     }
+    @GetMapping(value = "/redirect")
+    public ResponseEntity<Void> redirect(@RequestParam String input){
 
+        System.out.println(input);
+        Map<String,String>  map = new HashMap<>();
+        map.put("id","2");
+        return ResponseEntity.
+
+                status(HttpStatus.FOUND).
+
+                location(URI.create("https://fullstackdeveloper.guru"))
+        .build();
+    }
+    @GetMapping(value = "/redirect1")
+    public RedirectView redirect2(){
+
+//        System.out.println(input);
+
+
+        RedirectView redirectView = new RedirectView();
+//        redirectView.setContextRelative();
+        redirectView.setUrl("/home/arkad/IdeaProjects/Project/src/main/resources/public/payment.html");
+
+        return redirectView;
+
+    }
+    @GetMapping("/howMuch")
+    public OfferDto findPrice(@RequestParam String id){
+        Integer ids=Integer.parseInt(id);
+        Integer price = service.OfferPrice(ids);
+        OfferDto offerDto = new OfferDto();
+        offerDto.setOfferPrice(price);
+        return offerDto;
+
+
+    }
 }
+

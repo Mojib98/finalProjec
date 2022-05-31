@@ -1,6 +1,7 @@
 import "https://code.jquery.com/jquery-3.6.0.js";
 import "https://code.jquery.com/jquery-migrate-3.4.0.js";
 // import "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
+import "./Redirect.js";
 let SubServiceName;
 let idSubService;
 let order;
@@ -363,5 +364,12 @@ $(document).ready(function () {
             }
         });
     });
+});
+$(document).ready(function () {
+$("#test").click(function (event) {
+    $.redirect('/payment.html', {'orderId': '211', 'customerId': '113'},'GET');
+    // $().redirect('google.com', {'arg1': 'value1', 'arg2': 'value2'});
+});
+
 });
 
