@@ -26,5 +26,7 @@ public class OrderDto {
     private Integer subServiceId;
     private Integer rate;
     private String commentText;
+    private Integer  customerId;
+    private Integer amount;
 
 }

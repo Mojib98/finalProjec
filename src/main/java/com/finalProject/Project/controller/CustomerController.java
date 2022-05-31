@@ -9,15 +9,9 @@ import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @RestController
@@ -134,6 +128,18 @@ public class CustomerController {
         UserDto userDto = modelMapper.map(customer,UserDto.class);
         System.out.println(userDto);
         return userDto;
+    }
+    @PostMapping("/despositOnline")
+    public void depositWallet(@ModelAttribute OrderDto orderDto){
+        Integer customerId=orderDto.getCustomerId();
+        Integer amount = orderDto.getAmount();
+        //checking
+        service.depositWallet(customerId,amount);
+    }
+    @PostMapping("/onlinePaying")
+    public void OnlinePaying(@ModelAttribute OrderDto orderDto){
+        depositWallet(orderDto);
+        paying(orderDto);
     }
 
 }

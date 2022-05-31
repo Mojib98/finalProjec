@@ -104,7 +104,7 @@ public class CustomerServiceImpl implements CustomerService {
 //        expert.setRate(rate / 2);
         offer.setWorkStatus(WorkStatus.PAYED);
         order1.setWorkStatus(WorkStatus.PAYED);
-        addComment(orderDto.getCommentText(),offer,customer);
+//        addComment(orderDto.getCommentText(),offer,customer);
 
 
     }
@@ -182,6 +182,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public Customer findMe(Integer id ){
         return customerRepository.findById(id).get();
+    }
+    @Transactional
+    public void depositWallet(Integer id,Integer amount){
+        Customer customer =customerRepository.findById(id).get();
+        Integer oldAmount =customer.getWallet();
+        customer.setWallet(oldAmount+amount);
     }
 
 }

@@ -1,6 +1,6 @@
 import "https://code.jquery.com/jquery-3.6.0.js";
 import "https://code.jquery.com/jquery-migrate-3.4.0.js";
-import "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
+// import "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
 let SubServiceName;
 let idSubService;
 let order;
