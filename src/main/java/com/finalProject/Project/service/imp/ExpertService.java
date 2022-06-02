@@ -106,5 +106,8 @@ public class ExpertService implements com.finalProject.Project.service.interface
     public Expert showMyInfo(Integer id){
         return manageRepositoryForExpert.findById(id).get();
     }
+    public List<Order> historyOfOrrder(Integer id){
+        return orderRepository.findOrderForExpertHistory(id);
+    }
 
 }

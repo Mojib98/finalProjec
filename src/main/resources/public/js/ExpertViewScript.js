@@ -138,7 +138,7 @@ $(document).ready(function () {
                         var tablerow = '<tr>'
                             + '<td id="ide">' + item.id + '</td>'
                             + '<td>' + item.describe + '</td>'
-                            + '<td>' + item.offerPrice + '</td>'
+                            + '<td>' + item.orderPrice + '</td>'
                             + '<td id="email">' + item.address + '</td>'
                             + '<td>' + "<input type='checkbox' name='forStart' class='forStart' value='" + item.id + "' id='" + item.id + "' />" + "<lable></label>" + '</td>'
                             + '</tr>';
@@ -240,7 +240,7 @@ $(document).ready(function () {
 
     $("#showAllOrderBut").click(function (event) {
         $.ajax({
-            url: "http://localhost:8080/exp/seeorder/",
+            url: "http://localhost:8080/exp/seeAllorder/",
             type: "GET",
             // data: {depart:deptid},
             dataType: "json",
@@ -248,6 +248,7 @@ $(document).ready(function () {
                 debugger;
                 if (result) {
                     //itetrate thorugh each record and bind it to td
+                    $("#AllOrders").empty();
                     var html = '';
                     $.each(result, function (key, item) {
                         var tablerow = '<tr>'
@@ -281,14 +282,13 @@ $(document).ready(function () {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-                debugger;
                 if (result) {
                     // $("#myInfo").empty();
 
                     //itetrate thorugh each record and bind it to td
                     var html = '';
                     var id =result["rate"];
-                    var name = result["budget"] ;
+                    var name = result["wallet"] ;
 
                     alert("my rate:"+id+"  "+"my budget: "+name)
                     $("#myInfo").append("<p>"+id+" "+name+"</p>");

@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
         query =
                 "select * from orders o inner join sub_service ss on ss.id = o.sub_service_id " +
                         "    inner join service s on s.id = ss.service_id" +
-                        "    inner join specialty s2 on s.id = s2.service_id where s2.expert_id=?", resultClass = Order.class), @NamedNativeQuery(
+                        "    inner join specialty s2 on s.id = s2.service_id where s2.expert_id=?  and( o.work_status='WAIT_FOR_ARRIVE' or  o.work_status='WAIT_FOR_CHOICE')", resultClass = Order.class),
+        @NamedNativeQuery(
         name = "Order.findOrderForExpertStart",
         query =
                 "select * from orders o inner join offer ss on ss.orders_id = o.id " +
@@ -23,6 +24,12 @@ import java.time.LocalDateTime;
                 query =
                         "select * from orders o inner join offer ss on ss.orders_id = o.id " +
                                 "   where ss.expert_id=? and o.work_status='START'", resultClass = Order.class)
+        ,
+        @NamedNativeQuery(
+                name = "Order.findOrderForExpertHistory",
+                query =
+                        "select * from orders o inner join offer ss on ss.id = o.offer_id " +
+                                "   where ss.expert_id=? ", resultClass = Order.class)
 })
 
 @SqlResultSetMapping(

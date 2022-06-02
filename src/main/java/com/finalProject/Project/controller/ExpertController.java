@@ -73,6 +73,7 @@ public class ExpertController {
                 skip(destination.getId());
             }
         });
+        System.out.println(offerDto.getLocalDateTime());
         LocalDateTime localDateTime = LocalDateTime.parse(offerDto.getLocalDateTime());
         Order order = expertService.findOrderById(offerDto.getOrderId());
         Offer offer = modelMapper.map(offerDto,Offer.class);
@@ -159,9 +160,26 @@ public class ExpertController {
     @GetMapping("/showMyInfo")
     public UserDto showMyInfo(){
         Expert expert1 = expertService.showMyInfo(this.expert.getId());
+        System.out.println(expert1.getWallet());
         UserDto userDto = modelMapper.map(expert1,UserDto.class);
-        System.out.println(userDto);
+        System.out.println(userDto.getWallet());
         return userDto;
+    }
+    @GetMapping("/seeAllorder")
+    public List<OrderDto> AllOrder(){
+        TypeMap<Order,OrderDto> typeMap = modelMapper.getTypeMap(Order.class, OrderDto.class);
+        if (typeMap == null) {
+            modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+                @Override
+                protected void configure() {
+                    map().setCustomersName(source.getCustomers().getFirstName());
+                    map().setSubServiceName(source.getSubService().getName());
+                }
+            });
+        }
+        List<com.finalProject.Project.entity.Order> list = expertService.historyOfOrrder(expert.getId());
+        System.out.println(list);
+        return Arrays.asList(modelMapper.map(list, OrderDto[].class));
     }
 
 }

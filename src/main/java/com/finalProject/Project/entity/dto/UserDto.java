@@ -25,7 +25,7 @@ import java.util.List;
 public class UserDto extends User {
 //    private Avatar avatar;
    private MultipartFile image;
-    private Integer budget;
+    private Integer wallet;
     private List<Integer> ids;
     private List<UserDto> userDto;
     private Integer rate;
@@ -33,7 +33,7 @@ public class UserDto extends User {
     public String toString() {
         return "UserDto{" +
                 "image=" + image +
-                ", budget=" + budget +
+                ", budget=" + wallet +
                 ", ids=" + ids +
                 ", userDto=" + userDto +
                 "} " + super.toString();
