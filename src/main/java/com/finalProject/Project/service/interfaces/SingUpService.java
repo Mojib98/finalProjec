@@ -9,4 +9,5 @@ import java.io.IOException;
 public interface SingUpService {
      void requestForSingUp(UserDto expert) throws IOException;
      void insertCustomer(UserDto customer);
+     String confirmToken(String token);
 }

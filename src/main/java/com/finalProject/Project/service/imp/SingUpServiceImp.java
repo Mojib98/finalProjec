@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -41,33 +42,33 @@ public class SingUpServiceImp  implements SingUpService {
                 skip(source.getImage());
             }
         });*/
-        String tokenCode = UUID.randomUUID().toString();
+        String tokenCode = "EXPERT"+UUID.randomUUID().toString();
         Expert expert = modelMapper.map(userDto, Expert.class);
         ConfirmationToken token = new ConfirmationToken(tokenCode,expert);
-        expert.setStatus(UserStatus.AWAITING_CONFIRMATION);
+        expert.setStatus(UserStatus.AWAITING_CONFIRMATION_EMAIL);
         expert.setWallet(0);
         expert.setRate(5F);
         expert.setAvatar(new Avatar(userDto.getImage().getBytes()));
         singUpRepository.save(expert);
         confirmationTokenRepository.save(token);
-        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        String link = "http://localhost:8080/singup/confirm?token=" + tokenCode;
         emailService.send(
-                expert.getEmail(),
-                buildEmail(expert.getFirstName(), link));
+                userDto.getEmail(),
+                buildEmail(userDto.getFirstName(), link));
     }
 
     @Override
     @Transactional
     public void insertCustomer(UserDto userDto) {
         Customer customer = modelMapper.map(userDto, Customer.class);
-        customer.setStatus(UserStatus.ACTIVE);
+        customer.setStatus(UserStatus.AWAITING_CONFIRMATION_EMAIL);
         customer.setWallet(50000);
         String tokenCode = UUID.randomUUID().toString();
         ConfirmationToken token = new ConfirmationToken(tokenCode,customer);
-        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        String link = "http://localhost:8080/singup/confirm?token=" + tokenCode;
         emailService.send(
-                customer.getEmail(),
-                buildEmail(customer.getFirstName(), link));
+                userDto.getEmail(),
+                buildEmail(userDto.getFirstName(), link));
         singUpRepository.save(customer);
         confirmationTokenRepository.save(token);
     }
@@ -139,5 +140,24 @@ public class SingUpServiceImp  implements SingUpService {
                 "\n" +
                 "</div></div>";
     }
+
+    @Transactional
+    public String confirmToken(String token) {
+        ConfirmationToken confirmationToken = confirmationTokenRepository.findByTokenCode(token).
+                orElseThrow(() ->
+                        new IllegalStateException("token not found"));
+     /*   if (!confirmationToken.getIsActive())
+            throw new IllegalStateException("token unActive");*/
+
+        confirmationTokenRepository.updateConfirmedAt(token);
+        if (token.substring(0,6).equals("EXPERT"))
+            singUpRepository.updateConfirmedAt(UserStatus.AWAITING_CONFIRMATION,
+                    confirmationToken.getUser().getEmail());
+         else
+        singUpRepository.updateConfirmedAt(UserStatus.ACTIVE,
+                        confirmationToken.getUser().getEmail());
+        return "confirmed";
+    }
+
 
 }

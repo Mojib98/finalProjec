@@ -32,5 +32,13 @@ public class SingUpController {
         singUpService.requestForSingUp(userDto);
     }
 
+    @GetMapping(path = "confirm")
+    public String confirm(@RequestParam("token") String token) {
+        System.out.println(token.substring(0,5));
+        return singUpService.confirmToken(token);
+    }
+
+
+
 
 }

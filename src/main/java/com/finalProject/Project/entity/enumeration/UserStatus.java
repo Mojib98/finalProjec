@@ -5,6 +5,7 @@ public enum UserStatus {
     INACTIVE("Inactive"),
     CONFIRMED("Confirmed"),
     UNCONFIRMED("Unconfirmed"),
+    AWAITING_CONFIRMATION_EMAIL("awaiting confirmation email"),
     AWAITING_CONFIRMATION("awaiting confirmation");
     private final String toString;
 
