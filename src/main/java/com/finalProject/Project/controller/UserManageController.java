@@ -1,20 +1,15 @@
 package com.finalProject.Project.controller;
 
 import com.finalProject.Project.entity.*;
-import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.entity.dto.SpecialistDto;
 import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ManageExpertService;
-import org.apache.catalina.Server;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +17,7 @@ import java.util.Scanner;
 @RestController
 @CrossOrigin
 @RequestMapping("/user")
-public class userManageController {
+public class UserManageController {
 
     Scanner scanner = new Scanner(System.in);
     @Autowired
