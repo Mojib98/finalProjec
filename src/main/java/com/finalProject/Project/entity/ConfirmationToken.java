@@ -19,7 +19,7 @@ public class ConfirmationToken extends BaseClass {
 //    @Column(columnDefinition = "boolean default ture")
     @Column(columnDefinition = "boolean default true")
 //    @Column(columnDefinition = "boolean default true")
-    private Boolean isActive;
+    private Boolean isActive=true;
 
     @ManyToOne
 //    @Transient

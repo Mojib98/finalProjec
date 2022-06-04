@@ -19,7 +19,7 @@ public interface SingUpRepository<T extends User> extends JpaRepository<T,Intege
     @Query("UPDATE User c " +
             "SET c.status =:status  " +
             "WHERE c.email = :email")
-    int updateConfirmedAt(@Param(value = "status")UserStatus userStatus,
+    int updadeStatusUser(@Param(value = "status")UserStatus userStatus,
                           @Param(value = "email") String email);
 
 }

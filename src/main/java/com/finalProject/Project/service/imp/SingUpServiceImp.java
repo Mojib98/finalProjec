@@ -146,15 +146,15 @@ public class SingUpServiceImp  implements SingUpService {
         ConfirmationToken confirmationToken = confirmationTokenRepository.findByTokenCode(token).
                 orElseThrow(() ->
                         new IllegalStateException("token not found"));
-     /*   if (!confirmationToken.getIsActive())
-            throw new IllegalStateException("token unActive");*/
+        if (!confirmationToken.getIsActive())
+            throw new IllegalStateException("token unActive");
 
         confirmationTokenRepository.updateConfirmedAt(token);
         if (token.substring(0,6).equals("EXPERT"))
-            singUpRepository.updateConfirmedAt(UserStatus.AWAITING_CONFIRMATION,
+            singUpRepository.updadeStatusUser(UserStatus.AWAITING_CONFIRMATION,
                     confirmationToken.getUser().getEmail());
          else
-        singUpRepository.updateConfirmedAt(UserStatus.ACTIVE,
+        singUpRepository.updadeStatusUser(UserStatus.ACTIVE,
                         confirmationToken.getUser().getEmail());
         return "confirmed";
     }
