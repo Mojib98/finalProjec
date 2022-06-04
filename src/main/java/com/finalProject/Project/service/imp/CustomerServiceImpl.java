@@ -89,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     public void paying(OrderDto orderDto) {
-        Float rate = orderDto.getRate();
+        Float rate = 5F;
         Order order1 = orderRepository.findById(orderDto.getId()).get();
         Offer offer = offerService.findOfferById(order1.getOffer().getId());
         System.out.println(offer);
@@ -100,7 +100,7 @@ public class CustomerServiceImpl implements CustomerService {
         Integer walletExpert = expert.getWallet();
         customer.setWallet(walletCustomer - offerPrice);
         expert.setWallet(offerPrice + walletExpert);
-        rate += expert.getRate();
+        rate = Float.sum(expert.getRate(),rate);
         expert.setRate(rate / 2F);
         offer.setWorkStatus(WorkStatus.PAYED);
         order1.setWorkStatus(WorkStatus.PAYED);
@@ -188,6 +188,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer =customerRepository.findById(id).get();
         Integer oldAmount =customer.getWallet();
         customer.setWallet(oldAmount+amount);
+        System.out.println(customer.getWallet());
     }
     public Integer OfferPrice(Integer id){
         Order order1 = orderRepository.findById(id).get();

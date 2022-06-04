@@ -144,10 +144,12 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="btn btn-primary mb-3">
-                        <span class="ps-3" id="paying">Pay $243</span>
+                    <canvas id="canvas"></canvas>
+                    <input name="code" />
+                    <button class="btn btn-primary mb-3" id="payingbut">
+                        <span class="ps-3"  id="paying">Pay</span>
                         <span class="fas fa-arrow-right"></span>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -157,18 +159,27 @@
 
 
 
-    <canvas id="canvas"></canvas>
-    <input name="code" />
+  
     <button id="valid">Test</button>
 
     <script>
+          var OrderId;
+        var CustomerId;
+        var budget;
+        var rate;
+
+
         $(document).ready(function () {
-            const captcha = new Captcha($('#canvas'));
+            var captcha;
+            var captcha = new Captcha($('#canvas'));
             //  alert(captcha)
-            $('#valid').on('click', function () {
-
+            $('#payingbut').on('click', function () {
                 const ans = captcha.valid($('input[name="code"]').val());
-
+                if(ans){
+                        paying();
+                }else{
+                    captcha = new Captcha($('#canvas'));
+                }
                 console.log(ans);
 
             });
@@ -186,9 +197,6 @@
 
     var queryString = new Array();
     window.onload = function () {
-        var OrderId;
-        var CustomerId;
-        var budget;
         if (queryString.length == 0) {
             if (window.location.search.split('?').length > 1) {
                 var params = window.location.search.split('?')[1].split('&');
@@ -199,12 +207,13 @@
                 }
             }
         }
-        if (queryString["orderId"] != null && queryString["customerId"] != null) {
+        if (queryString["orderId"] != null && queryString["rate"] != null) {
             var data = "<u>Values from QueryString</u><br /><br />";
             data += "<b>Name:</b> " + queryString["orderId"] + " <b>Technology:</b> " + queryString["customeId"];
             document.getElementById("lblData").innerHTML = data;
             OrderId=queryString["orderId"];
-            CustomerId=queryString["customeId"];
+            // CustomerId=queryString["customerId"];
+            rate=queryString["rate"];
         }
         alert("id order"+OrderId);
         $.ajax({
@@ -213,7 +222,7 @@
             data: {
                 id:OrderId
             },
-            contentType: "application/json;charset=utf-8",
+            // contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
                 debugger;
@@ -221,9 +230,9 @@
                     // $("#myInfo").empty();
                     // var id =result["rate"];
                     
-                    alert(result.val)
+                    // alert(result.val)
                     budget = result["offerPrice"] ;
-                    alert("my budget: "+budget);
+                    // alert("my budget: "+budget);
                     document.getElementById("paying").innerHTML = budget;
                 }
             },
@@ -233,11 +242,37 @@
         });
 
     };
+    // $(document).ready(function () {
+    // $("#paying").click(function (event) {
+        function paying(){
+
+        var formData = {
+            id:OrderId,
+            amount:budget,
+            rate:rate
+        };
+        $.ajax({
+            type: "POST",
+            method: "POST",
+            url: "http://localhost:8080/customer/onlinePaying/",
+            data: formData,
+            dataType: "json",
+            // encode: true,
+        }).done(function (data) {
+           alert("paying is do")
+           alert(data)
+        }).fail(function(data){
+                
+        })
+
+        event.preventDefault();
+    }
+    // });
+// });
+    
+
+
 </script>
-
-        
-
-    </script>
 
 
 </body>

@@ -366,8 +366,10 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-$("#test").click(function (event) {
-    $.redirect('/payment.html', {'orderId': '211', 'customerId': '113'},'GET');
+$("#onlinePaying").click(function (event) {
+    // 'customerId': '189'
+
+    $.redirect('/payment.html', {'orderId':$('input[name="downOrder"]:checked').val(),'rate':$('#rating').val() },'GET');
     // $().redirect('google.com', {'arg1': 'value1', 'arg2': 'value2'});
 });
 

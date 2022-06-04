@@ -6,6 +6,7 @@ import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.service.imp.CustomerServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -81,17 +82,20 @@ public class CustomerController {
     }
     @GetMapping("/downOrder")
     public List<OrderDto> ListDownOffer() {
-            List<Order> downOrder = service.myDownOrder(customer.getId());
-        System.out.println(downOrder);
-        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
-            @Override
-            protected void configure() {
+        TypeMap<Order,OrderDto> typeMap = modelMapper.getTypeMap(Order.class, OrderDto.class);
+        List<Order> downOrder = service.myDownOrder(customer.getId());
+        if (typeMap == null) {
+            System.out.println(downOrder);
+            modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+                @Override
+                protected void configure() {
 //                map().setExpertName(source.getExpert());
 //                map().setOfferPrice(source.getOfferPrice());
-                skip(destination.getCustomersName());
+                    skip(destination.getCustomersName());
 //                skip(destination.getLocalDateTime());
-            }
-        });
+                }
+            });
+        }
         return Arrays.asList(modelMapper.map(downOrder, OrderDto[].class));
 
     }
@@ -133,15 +137,18 @@ public class CustomerController {
     }
     @PostMapping("/despositOnline")
     public void depositWallet(@ModelAttribute OrderDto orderDto){
-        Integer customerId=orderDto.getCustomerId();
+        Integer customerId=customer.getId();
         Integer amount = orderDto.getAmount();
         //checking
         service.depositWallet(customerId,amount);
     }
     @PostMapping("/onlinePaying")
-    public void OnlinePaying(@ModelAttribute OrderDto orderDto){
+    public ResponseEntity<Object> OnlinePaying(@ModelAttribute OrderDto orderDto){
+        System.out.println(orderDto);
         depositWallet(orderDto);
         paying(orderDto);
+        return ResponseEntity.accepted()
+                .body("a");
     }
     @GetMapping(value = "/redirect")
     public ResponseEntity<Void> redirect(@RequestParam String input){
