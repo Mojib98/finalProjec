@@ -18,15 +18,18 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class SingUpServiceImp  implements SingUpService {
    private final SingUpRepository singUpRepository;
    private final ModelMapper modelMapper = new ModelMapper();
    private final EmailService emailService;
    private final ConfirmationTokenRepository confirmationTokenRepository;
 
-
-
+    public SingUpServiceImp(SingUpRepository singUpRepository, EmailService emailService,
+                            ConfirmationTokenRepository confirmationTokenRepository) {
+        this.singUpRepository = singUpRepository;
+        this.emailService = emailService;
+        this.confirmationTokenRepository = confirmationTokenRepository;
+    }
 
     @Override
     @Transactional
@@ -61,12 +64,12 @@ public class SingUpServiceImp  implements SingUpService {
         customer.setWallet(50000);
         String tokenCode = UUID.randomUUID().toString();
         ConfirmationToken token = new ConfirmationToken(tokenCode,customer);
-        confirmationTokenRepository.save(token);
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         emailService.send(
                 customer.getEmail(),
                 buildEmail(customer.getFirstName(), link));
         singUpRepository.save(customer);
+        confirmationTokenRepository.save(token);
     }
     private String buildEmail(String name, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
@@ -136,4 +139,5 @@ public class SingUpServiceImp  implements SingUpService {
                 "\n" +
                 "</div></div>";
     }
+
 }

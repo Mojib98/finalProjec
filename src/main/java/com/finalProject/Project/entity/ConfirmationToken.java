@@ -2,6 +2,7 @@ package com.finalProject.Project.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,24 +14,23 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ConfirmationToken extends BaseClass {
     @Column(nullable = false)
-    private String token;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
+    private String tokenCode;
     private LocalDateTime confirmedAt;
-    @Column(columnDefinition = "boolean default ture")
+//    @Column(columnDefinition = "boolean default ture")
+    @Column(columnDefinition = "boolean default true")
+//    @Column(columnDefinition = "boolean default true")
     private Boolean isActive;
 
     @ManyToOne
+//    @Transient
     private User user;
 
     public ConfirmationToken( String token,  User user) {
-        super(null , null);
-        this.token = token;
+        super(null,null);
+        this.tokenCode = token;
         this.user = user;
     }
+
 
 
 }

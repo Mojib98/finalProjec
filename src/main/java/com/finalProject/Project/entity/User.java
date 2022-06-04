@@ -13,6 +13,7 @@ import java.util.Objects;
 @Setter
 @Getter
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "users")
 public abstract class User extends BaseClass{
     @NotNull
     private String firstName;
