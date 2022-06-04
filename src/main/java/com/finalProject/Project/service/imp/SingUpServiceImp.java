@@ -1,10 +1,12 @@
 package com.finalProject.Project.service.imp;
 
 import com.finalProject.Project.entity.Avatar;
+import com.finalProject.Project.entity.ConfirmationToken;
 import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
+import com.finalProject.Project.repository.interfaces.ConfirmationTokenRepository;
 import com.finalProject.Project.repository.interfaces.SingUpRepository;
 import com.finalProject.Project.service.interfaces.SingUpService;
 import lombok.AllArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -20,11 +23,13 @@ public class SingUpServiceImp  implements SingUpService {
    private final SingUpRepository singUpRepository;
    private final ModelMapper modelMapper = new ModelMapper();
    private final EmailService emailService;
+   private final ConfirmationTokenRepository confirmationTokenRepository;
 
 
 
 
     @Override
+    @Transactional
     public void requestForSingUp(UserDto userDto) throws IOException {
    /*     modelMapper.addMappings(new PropertyMap<UserDto, Expert>() {
             @Override
@@ -33,13 +38,19 @@ public class SingUpServiceImp  implements SingUpService {
                 skip(source.getImage());
             }
         });*/
+        String tokenCode = UUID.randomUUID().toString();
         Expert expert = modelMapper.map(userDto, Expert.class);
+        ConfirmationToken token = new ConfirmationToken(tokenCode,expert);
         expert.setStatus(UserStatus.AWAITING_CONFIRMATION);
         expert.setWallet(0);
         expert.setRate(5F);
         expert.setAvatar(new Avatar(userDto.getImage().getBytes()));
         singUpRepository.save(expert);
-
+        confirmationTokenRepository.save(token);
+        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        emailService.send(
+                expert.getEmail(),
+                buildEmail(expert.getFirstName(), link));
     }
 
     @Override
@@ -48,6 +59,13 @@ public class SingUpServiceImp  implements SingUpService {
         Customer customer = modelMapper.map(userDto, Customer.class);
         customer.setStatus(UserStatus.ACTIVE);
         customer.setWallet(50000);
+        String tokenCode = UUID.randomUUID().toString();
+        ConfirmationToken token = new ConfirmationToken(tokenCode,customer);
+        confirmationTokenRepository.save(token);
+        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        emailService.send(
+                customer.getEmail(),
+                buildEmail(customer.getFirstName(), link));
         singUpRepository.save(customer);
     }
     private String buildEmail(String name, String link) {

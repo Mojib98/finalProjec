@@ -26,12 +26,11 @@ public class ConfirmationToken extends BaseClass {
     @ManyToOne
     private User user;
 
-    public ConfirmationToken( String token, LocalDateTime createdAt, LocalDateTime confirmedAt, User user) {
+    public ConfirmationToken( String token,  User user) {
         super(null , null);
         this.token = token;
-        this.createdAt = createdAt;
-        this.confirmedAt = confirmedAt;
         this.user = user;
     }
+
 
 }
