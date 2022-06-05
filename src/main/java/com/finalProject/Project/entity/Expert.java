@@ -2,6 +2,7 @@ package com.finalProject.Project.entity;
 
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

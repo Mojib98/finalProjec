@@ -21,6 +21,7 @@ public class OrderDto {
     private WorkStatus workStatus;
     private String customersName;
     private String subServiceName;
+    private String serviceName;
     private String expertName;
     private Integer offerId;
     private Integer subServiceId;

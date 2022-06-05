@@ -35,7 +35,9 @@ import java.time.LocalDateTime;
         @UniqueConstraint(columnNames={"expert_id", "orders_id"})
 )
 public class Offer extends BaseClass {
+    @Column(name = "offer_price")
     private Integer offerPrice;
+    @Column(name = "time_for_work")
     private Integer timeForWork;
     private LocalDateTime workTime;
     @Enumerated(EnumType.STRING)

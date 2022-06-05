@@ -147,8 +147,7 @@ public class CustomerController {
         System.out.println(orderDto);
         depositWallet(orderDto);
         paying(orderDto);
-        return ResponseEntity.accepted()
-                .body("a");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
     @GetMapping(value = "/redirect")
     public ResponseEntity<Void> redirect(@RequestParam String input){
