@@ -1,10 +1,9 @@
 package com.finalProject.Project.service.imp;
 
-import com.finalProject.Project.entity.Customer;
-import com.finalProject.Project.entity.Offer;
+import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.Order;
-import com.finalProject.Project.entity.SubService;
 import com.finalProject.Project.entity.dto.OrderDto;
+import com.finalProject.Project.repository.interfaces.ManageRepositoryForExpert;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ManagerProfileServiceImpl {
     OrderRepository orderRepository;
+    ManageRepositoryForExpert manageRepositoryForExpert;
     public List<Offer> historyOfferForExpert(String email){
         return null;
     }
@@ -67,5 +68,17 @@ public class ManagerProfileServiceImpl {
 
 
         return specification;
+    }
+    public List<Expert> findBySingUpTime(LocalDateTime start,LocalDateTime end){
+        return manageRepositoryForExpert.findAllByTimeBetween(start,end);
+    }
+    public List<Expert> findExpertBySingupTime(){
+        LocalDateTime start =LocalDateTime.of(2022,5,29, 0,0,0);
+        LocalDateTime end =LocalDateTime.of(2022,5,29, 23,59,59);
+
+        return null;
+    }
+    public List<Customer> findCustomerBySingUpTime(){
+        return null;
     }
 }

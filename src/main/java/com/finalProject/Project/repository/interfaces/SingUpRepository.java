@@ -22,4 +22,5 @@ public interface SingUpRepository<T extends User> extends JpaRepository<T,Intege
     int updadeStatusUser(@Param(value = "status")UserStatus userStatus,
                           @Param(value = "email") String email);
 
+
 }

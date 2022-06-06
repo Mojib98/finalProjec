@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ManageRepositoryForExpert extends CrudRepository<Expert,Integer>, JpaSpecificationExecutor<Expert> {
@@ -18,5 +19,6 @@ public interface ManageRepositoryForExpert extends CrudRepository<Expert,Integer
 
     List<Expert> findAllByStatus(UserStatus status);
     List<Expert> findAll(Specification<Expert> spec);
+    List<Expert> findAllByTimeBetween(LocalDateTime start,LocalDateTime end);
 
 }
