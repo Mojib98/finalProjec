@@ -194,5 +194,16 @@ public class CustomerController {
     public void addComment(@ModelAttribute OrderDto orderDto){
         service.addComment(orderDto.getCommentText(),customer,orderDto.getId());
     }
+    public List<OrderDto> OrderForComment(){
+        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
+            @Override
+            protected void configure() {
+                map().setCustomersName(source.getCustomers().getFirstName());
+                map().setSubServiceName(source.getSubService().getName());
+            }
+        });
+
+        List<Order> order = service.findPaidOrder(customer.getId());
+        return Arrays.asList(modelMapper.map(order, OrderDto[].class));    }
 }
 

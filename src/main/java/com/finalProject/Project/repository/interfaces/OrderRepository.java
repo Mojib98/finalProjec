@@ -1,8 +1,5 @@
 package com.finalProject.Project.repository.interfaces;
 
-import com.finalProject.Project.entity.Comment;
-import com.finalProject.Project.entity.Customer;
-import com.finalProject.Project.entity.Offer;
 import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import org.springframework.data.jpa.domain.Specification;
@@ -12,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.lang.annotation.Native;
 import java.util.List;
 
 public interface OrderRepository extends CrudRepository<Order,Integer> , JpaSpecificationExecutor<Order> {
@@ -36,7 +32,7 @@ public interface OrderRepository extends CrudRepository<Order,Integer> , JpaSpec
 
     @Query(" select new com.finalProject.Project.entity.Order(s.id,s.offer.offerPrice,s.timeForWork,s.describe,s.offer.expert.lastName) from Order s " +
             " where s.customers.id=:id and s.workStatus=:work")
-    List<Order> findAllDownOrderByCustomerId(@Param("work") WorkStatus workStatus, @Param("id") Integer id);
+    List<Order> findAllOrderByCustomerIdandWorkStatus(@Param("work") WorkStatus workStatus, @Param("id") Integer id);
     List<Order> findAll(Specification<Order> spec);
 
 

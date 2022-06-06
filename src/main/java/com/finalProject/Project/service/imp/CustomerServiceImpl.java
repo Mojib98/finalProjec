@@ -84,7 +84,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
     @Transactional
     public List<Order> myDownOrder(Integer id) {
-        return orderRepository.findAllDownOrderByCustomerId(WorkStatus.DONE,id);
+        return orderRepository.findAllOrderByCustomerIdandWorkStatus(WorkStatus.DONE,id);
     }
 
     @Transactional
@@ -189,10 +189,15 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setWallet(oldAmount+amount);
         System.out.println(customer.getWallet());
     }
+    @Transactional
     public Integer OfferPrice(Integer id){
         Order order1 = orderRepository.findById(id).get();
         Offer offer = offerService.findOfferById(order1.getOffer().getId());
         return offer.getOfferPrice();
+    }
+    @Transactional
+    public List<Order> findPaidOrder(Integer id) {
+        return orderRepository.findAllOrderByCustomerIdandWorkStatus(WorkStatus.PAYED,id);
     }
 
 }
