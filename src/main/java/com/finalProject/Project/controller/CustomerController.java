@@ -190,5 +190,9 @@ public class CustomerController {
 
 
     }
+    @PostMapping("/addcomment")
+    public void addComment(@ModelAttribute OrderDto orderDto){
+        service.addComment(orderDto.getCommentText(),customer,orderDto.getId());
+    }
 }
 
