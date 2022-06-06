@@ -2,6 +2,7 @@ package com.finalProject.Project.controller;
 import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.SubService;
 import com.finalProject.Project.entity.dto.ServiceDto;
+import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -18,6 +19,8 @@ public class ManagerSystemController {
     private final ModelMapper modelMapper = new ModelMapper();
     @Autowired
     private ServicesServiceImpl servicesService;
+    @Autowired
+    private ManagerProfileServiceImpl managerProfileService;
 
     @Autowired
     ServicesServiceImpl service;
@@ -94,4 +97,5 @@ public class ManagerSystemController {
             throw new RuntimeException("class not find");
         return service;
     }
+
 }

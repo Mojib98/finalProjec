@@ -4,7 +4,9 @@ import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.repository.interfaces.ManageRepositoryForExpert;
+import com.finalProject.Project.repository.interfaces.OfferRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
+import com.finalProject.Project.service.interfaces.OfferService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,11 +23,12 @@ import java.util.List;
 public class ManagerProfileServiceImpl {
     OrderRepository orderRepository;
     ManageRepositoryForExpert manageRepositoryForExpert;
+    OfferRepository offerRepository;
     public List<Offer> historyOfferForExpert(String email){
-        return null;
+        return offerRepository.expertHistory(email);
     }
     public List<Offer> historyOfferForCustomer(String email){
-        return null;
+        return offerRepository.customerHistory(email);
     }
     public List<Order> searchOrder(OrderDto orderDto) {
         Specification<Order> specification = optionCustomer(orderDto);
