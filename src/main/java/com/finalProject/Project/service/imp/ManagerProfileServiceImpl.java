@@ -27,6 +27,7 @@ public class ManagerProfileServiceImpl {
     public List<Offer> historyOfferForExpert(String email){
         return offerRepository.expertHistory(email);
     }
+    @Transactional
     public List<Offer> historyOfferForCustomer(String email){
         return offerRepository.customerHistory(email);
     }

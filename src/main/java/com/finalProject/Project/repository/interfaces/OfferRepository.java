@@ -30,7 +30,7 @@ public interface OfferRepository extends CrudRepository<Offer,Integer> {
     List<Offer> expertHistory(@Param("email") String email);
     @Query(
             "select f from Offer f where " +
-                    "f.orders.customers=:email and f.workStatus='SELECTED' or f.workStatus='PAYED'"
+                    "f.orders.customers.email=:email and f.workStatus='SELECTED' or f.workStatus='PAYED'"
     )
     List<Offer> customerHistory(@Param("email") String email);
     List<Offer> findAll(Specification<Offer> spec);

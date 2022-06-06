@@ -1,6 +1,10 @@
 package com.finalProject.Project.controller;
+import com.finalProject.Project.entity.Offer;
+import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.SubService;
+import com.finalProject.Project.entity.dto.OfferDto;
+import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
@@ -24,16 +28,18 @@ public class ManagerSystemController {
 
     @Autowired
     ServicesServiceImpl service;
+
     @PostMapping("/addservice")
-    public void addService(@ModelAttribute ServiceDto service){
+    public void addService(@ModelAttribute ServiceDto service) {
 //        Service service = modelMapper.map(serviceDto,Service.class);
         System.out.println(service);
         servicesService.insertService(service.getServiceName());
 
 
     }
+
     @PostMapping("/addsub")
-    public void addSubService(@ModelAttribute ServiceDto serviceDto){
+    public void addSubService(@ModelAttribute ServiceDto serviceDto) {
         TypeMap<ServiceDto, SubService> typeMap = modelMapper.getTypeMap(ServiceDto.class, SubService.class);
         if (typeMap == null) {
             modelMapper.addMappings(new PropertyMap<ServiceDto, SubService>() {
@@ -46,24 +52,26 @@ public class ManagerSystemController {
                 // if not  already added
             });
         }
-        SubService subService = modelMapper.map(serviceDto,SubService.class);
+        SubService subService = modelMapper.map(serviceDto, SubService.class);
         System.out.println(serviceDto);
         System.out.println(subService);
         System.out.println(serviceDto.getServiceName());
         Service service = findServiceByName(serviceDto.getServiceName());
-        System.out.println(service+"check111");
+        System.out.println(service + "check111");
         subService.setService(service);
         servicesService.insertSubService(subService);
     }
+
     @GetMapping("/allService")
-    public List<ServiceDto> showAllService(){
-        var listService= servicesService.showAllService();
+    public List<ServiceDto> showAllService() {
+        var listService = servicesService.showAllService();
         System.out.println(listService);
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
+
     @PostMapping("/sub")
-    public List<ServiceDto> showAllSubService(@ModelAttribute ServiceDto serviceDto){
-        TypeMap<SubService,ServiceDto> typeMap = modelMapper.getTypeMap(SubService.class, ServiceDto.class);
+    public List<ServiceDto> showAllSubService(@ModelAttribute ServiceDto serviceDto) {
+        TypeMap<SubService, ServiceDto> typeMap = modelMapper.getTypeMap(SubService.class, ServiceDto.class);
         if (typeMap == null) {
             modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
                 @Override
@@ -74,28 +82,70 @@ public class ManagerSystemController {
                 }
             });
         }
-        var listService= servicesService.showAllSubServiceById(serviceDto.getId());
-       return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
-    }
-/*    @GetMapping("/sub")
-    public List<ServiceDto> showAllService(){
-        modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
-            @Override
-            protected void configure() {
-//                map().setServiceName(source.getService().getName());
-                map().setSubServiceName(source.getName());
-            }
-        });
-        var listService= servicesService.showAllSubService();
-//        System.out.println(listService.get(0).getService().getName());
+        var listService = servicesService.showAllSubServiceById(serviceDto.getId());
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
-    }*/
+    }
+
+    /*    @GetMapping("/sub")
+        public List<ServiceDto> showAllService(){
+            modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
+                @Override
+                protected void configure() {
+    //                map().setServiceName(source.getService().getName());
+                    map().setSubServiceName(source.getName());
+                }
+            });
+            var listService= servicesService.showAllSubService();
+    //        System.out.println(listService.get(0).getService().getName());
+            return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
+        }*/
     //search do here
-    public Service findServiceByName(String name){
+    public Service findServiceByName(String name) {
         Service service = servicesService.findServiceByName(name);
         if (service == null)
             throw new RuntimeException("class not find");
         return service;
     }
 
+    @GetMapping("expertHistory")
+    public List<OfferDto> expertHistoryOffer(@RequestParam String email) {
+        TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
+        if (typeMap == null) {
+            modelMapper.addMappings(new PropertyMap<ServiceDto, SubService>() {
+                @Override
+                protected void configure() {
+//                skip(destination.getService());
+//                    map().setName(source.getSubServiceName());
+//                skip(source.getServiceName());
+                }
+                // if not  already added
+            });
+        }
+        List<Offer> offerList=managerProfileService.historyOfferForExpert(email);
+        return Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
+
+    }
+    @GetMapping("customerHistory{email}")
+    public String customerHistoryOffer( String email) {
+        System.out.println(email);
+      /*  TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
+        if (typeMap == null) {
+            modelMapper.addMappings(new PropertyMap<ServiceDto, SubService>() {
+                @Override
+                protected void configure() {
+//                skip(destination.getService());
+//                    map().setName(source.getSubServiceName());
+//                skip(source.getServiceName());
+                }
+                // if not  already added
+            });
+        }
+        List<Offer> offerList=managerProfileService.historyOfferForCustomer(email);*/
+//        return Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
+        List<Offer> offerList=managerProfileService.historyOfferForCustomer(email);
+//        var s= Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
+        System.out.println(offerList);
+        return "ok";
+
+    }
 }
