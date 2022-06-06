@@ -103,6 +103,11 @@ public class CustomerController {
     public void paying(@ModelAttribute OrderDto orderDto) {
             service.paying(orderDto);
     }
+    @PostMapping("/addcomment")
+    public void commenting(OrderDto orderDto){
+        service.addComment(orderDto.getCommentText(),customer,orderDto.getId());
+
+    }
     public void sortOfferByPrice(List<Offer> offers) {
         var offerss = offers.stream().sorted(new Comparator<Offer>() {
             @Override

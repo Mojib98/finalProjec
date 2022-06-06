@@ -15,7 +15,7 @@ public interface CustomerService {
     void paying(OrderDto orderDto);
     List<com.finalProject.Project.entity.SubService> allSubService();
     List<Offer> findOfferByOrderId(Integer id);
-    void addComment(String Comment, Offer offer,Customer customer);
+    void addComment(String Comment,Customer customer,Integer orderId);
     List<Offer> findByRateAndPrice();
     List<Customer> search(Customer customer);
     void changePassword(Customer customer, String newPassword);

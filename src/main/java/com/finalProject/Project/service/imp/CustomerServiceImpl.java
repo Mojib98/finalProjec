@@ -106,7 +106,6 @@ public class CustomerServiceImpl implements CustomerService {
         offer.setWorkStatus(WorkStatus.PAYED);
         order1.setWorkStatus(WorkStatus.PAYED);
 
-
     }
 
     public List<com.finalProject.Project.entity.SubService> allSubService() {
@@ -118,14 +117,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void addComment(String comment,Offer offer,Customer customer) {
+    public void addComment(String comment,Customer customer,Integer orderId) {
         System.out.println(comment);
         if (comment != null) {
             Comment comment1 = new Comment();
             comment1.setComment(comment);
             comment1.setCustomer(customer);
             commentRepository.save(comment1);
-            Offer offer1 = offerService.findOfferById(offer.getId());
+            Offer offer1 = offerService.findOfferByOrderId(orderId);
             offer1.setComment(comment1);
 //        offerService.insertOffer(offer);
         } else return;

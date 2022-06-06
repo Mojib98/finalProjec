@@ -34,6 +34,7 @@ public interface OfferRepository extends CrudRepository<Offer,Integer> {
     )
     List<Offer> customerHistory(@Param("email") String email);
     List<Offer> findAll(Specification<Offer> spec);
+    Offer findByOrdersIdAndWorkStatus(Integer id,WorkStatus workStatus);
 
 
 
