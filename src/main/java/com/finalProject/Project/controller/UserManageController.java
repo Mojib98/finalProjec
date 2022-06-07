@@ -226,9 +226,12 @@ public class UserManageController {
     public List<UserDto> findUserBySingUpTime(String date){
         var list = managerProfileService.findByDate(date);
         return Arrays.asList(modelMapper.map(list, UserDto[].class));
-
-
-
+    }
+    @GetMapping("/findcustomerordernum{number}")
+    public List<UserDto> findCustomerByOrderNumb(Long number){
+        System.out.println(number.getClass());
+        var list = managerProfileService.findCustomerByOrderNumber(number);
+        return Arrays.asList(modelMapper.map(list, UserDto[].class));
     }
 
 

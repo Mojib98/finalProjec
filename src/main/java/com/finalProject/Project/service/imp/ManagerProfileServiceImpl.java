@@ -3,10 +3,7 @@ package com.finalProject.Project.service.imp;
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.dto.OrderDto;
-import com.finalProject.Project.repository.interfaces.ManageRepositoryForExpert;
-import com.finalProject.Project.repository.interfaces.OfferRepository;
-import com.finalProject.Project.repository.interfaces.OrderRepository;
-import com.finalProject.Project.repository.interfaces.UserRepository;
+import com.finalProject.Project.repository.interfaces.*;
 import com.finalProject.Project.service.interfaces.OfferService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,7 @@ public class ManagerProfileServiceImpl {
     ManageRepositoryForExpert manageRepositoryForExpert;
     OfferRepository offerRepository;
     private UserRepository userRepository;
+    CustomerRepository customerRepository;
     public List<Offer> historyOfferForExpert(String email){
         return offerRepository.expertHistory(email);
     }
@@ -114,6 +112,14 @@ public class ManagerProfileServiceImpl {
         LocalDateTime end = LocalDateTime.of(endDate,timeEnd);
         return userRepository.findAllByTimeBetween(start,end);
 
+    }
+    @Transactional
+    public List<Customer> findCustomerByOrderNumber(Long number){
+        return customerRepository.findAllByNumberOrder( number);
+    }
+    @Transactional
+    public List<Expert> findExpertByOrderNumber(long number){
+        return null;
     }
 
 }

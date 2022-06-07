@@ -21,5 +21,11 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer>, J
     void updatePassword(@Param(value = "password") String id,
                         @Param(value = "email") String email,
                         @Param(value = "pass") String pass);
+    @Query(
+            "select o from Order c inner join c.customers o  " +
+                    "group by o having count(c)=:number"
+    )
+    List<Customer> findAllByNumberOrder(@Param(value = "number") Long number);
+
 
 }

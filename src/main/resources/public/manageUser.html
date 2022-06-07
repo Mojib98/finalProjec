@@ -49,62 +49,112 @@
                     data-bs-target="#historyOfCustomer" aria-expanded="false" aria-controls="historyOfCustomer" id="">
                     جستچوی خدمات انجام شده مشتری
                 </button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                data-bs-target="#orderSearch" aria-expanded="false" aria-controls="orderSearch" id="">
-                جستجوی سفارش بر اساس پرامتر
-            </button>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-            data-bs-target="#showforDate" aria-expanded="false" aria-controls="showforDate" id="">
-            جستجو بر اساس تاریخ
-        </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#orderSearch"
+                    aria-expanded="false" aria-controls="orderSearch" id="">
+                    جستجوی سفارش بر اساس پرامتر
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showforDate"
+                    aria-expanded="false" aria-controls="showforDate" id="">
+                    جستجو بر اساس تاریخ
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showbyNumberOrder"
+                    aria-expanded="false" aria-controls="showbyNumberOrder" id="">
+                    جستجو بر اساس تعداد سفارشات
+                </button>
                 <!-- <button type = "button" value="show all" id="show">show</button> -->
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 </div>
             </div>
         </nav>
-        <div id="showforDate" class="collapse">
-        
-                <p>
-                    <label for="singupdate" class="floatLabel">finishDate</label>
-                    <input id="singupdate" name="singupdate" type="date">
-                </p> 
-                <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#showUserDate" aria-expanded="false"
-                    aria-controls="showUserDate" id="doUserSearch">
-                 انجام جستجو
+        <div id="showbyNumberOrder" class="collapse">
+
+            <p>
+                <label for="numberOrder" class="floatLabel">جستجوی مشتری</label>
+                <input id="numberOrder" name="numberOrder" type="number">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showUserNumberOrder"
+                    aria-expanded="false" aria-controls="showUserNumberOrder" id="doUserSearchByNumber">
+                    انجام جستجو
                 </button>
-                </p>
-            
-        <div id="showUserDate" class="collapse">
-            <h1>لیست تمامی خدمات موجود در سامانه</h1>
-            <br />
-            <fieldset>
-                <legend>
-                    service list
-                </legend>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>name</th>
-                            <th>email</th>
-                            <th>status</th>
-                            <th>wallet</th>
-                            <th>rate</th>
-                            <th>role</th>
-                            <!-- <th>price</th>
+            </p>
+            <p>
+                <label for="numberOrder" class="floatLabel">جستجوی متخصص</label>
+                <input id="numberOrder" name="numberOrder" type="number">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showUserNumberOrder"
+                    aria-expanded="false" aria-controls="showUserNumberOrder" id="">
+                    انجام جستجو
+                </button>
+            </p>
+
+            <div id="showUserNumberOrder" class="collapse">
+                <h1>لیست تمامی خدمات موجود در سامانه</h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        user list
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>name</th>
+                                <th>email</th>
+                                <th>status</th>
+                                <th>wallet</th>
+                                <th>rate</th>
+                                <th>role</th>
+                                <!-- <th>price</th>
                     <th>Address</th>
                     <th>City</th> -->
-                        </tr>
-                    </thead>
-                    <tbody id="userSearchResult">
-                    </tbody>
-                </table>
-            </fieldset>
+                            </tr>
+                        </thead>
+                        <tbody id="userSearchResultByNumber">
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
         </div>
-    </div>
+        <div id="showforDate" class="collapse">
+
+            <p>
+                <label for="singupdate" class="floatLabel">finishDate</label>
+                <input id="singupdate" name="singupdate" type="date">
+            </p>
+            <p>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showUserDate"
+                    aria-expanded="false" aria-controls="showUserDate" id="doUserSearch">
+                    انجام جستجو
+                </button>
+            </p>
+
+            <div id="showUserDate" class="collapse">
+                <h1>لیست تمامی خدمات موجود در سامانه</h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        service list
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>name</th>
+                                <th>email</th>
+                                <th>status</th>
+                                <th>wallet</th>
+                                <th>rate</th>
+                                <th>role</th>
+                                <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="userSearchResult">
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
         <div id="showAll" class="collapse">
 
             <h1>لیست تمامی خدمات موجود در سامانه</h1>
@@ -160,10 +210,9 @@
                 </form>
             </div>
             <div>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#resultSerach" aria-expanded="false"
-                    aria-controls="resultSerach" id="doOrderSearch">
-                 انجام جستجو
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#resultSerach"
+                    aria-expanded="false" aria-controls="resultSerach" id="doOrderSearch">
+                    انجام جستجو
                 </button>
             </div>
 
@@ -201,7 +250,7 @@
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
                     data-bs-target="#historyTableOfCustomer" aria-expanded="false"
                     aria-controls="historyTableOfCustomer" id="historyOfCustomerbut">
-                     جستجوی ایمیل مشتری
+                    جستجوی ایمیل مشتری
                 </button>
             </div>
             <div>
@@ -209,7 +258,7 @@
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
                     data-bs-target="#historyTableOfCustomer" aria-expanded="false"
                     aria-controls="historyTableOfCustomer" id="historyOfExpertbut">
-                متخصصان    جستجوی ایمیل
+                    متخصصان جستجوی ایمیل
                 </button>
             </div>
 
