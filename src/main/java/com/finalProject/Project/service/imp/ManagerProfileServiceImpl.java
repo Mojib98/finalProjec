@@ -119,7 +119,7 @@ public class ManagerProfileServiceImpl {
     }
     @Transactional
     public List<Expert> findExpertByOrderNumber(long number){
-        return null;
+        return manageRepositoryForExpert.findAllByNumberOfOrder(number);
     }
 
 }

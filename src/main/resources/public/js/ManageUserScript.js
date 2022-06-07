@@ -507,12 +507,12 @@ function searchByDate() {
     });
 }
 $(document).ready(function () {
-    $("#doUserSearchByNumber").click(function (event) {
-        searchByOrderNumber();
+    $("#doCustomerSearchByNumber").click(function (event) {
+        searchCustomerByOrderNumber();
     })
 });
 
-function searchByOrderNumber() {
+function searchCustomerByOrderNumber() {
     $.ajax({
         url: "http://localhost:8080/user/findcustomerordernum/",
         type: "GET",
@@ -543,6 +543,47 @@ function searchByOrderNumber() {
                         + '<td>' + item.wallet + '</td>' 
                         + '<td>' + item.rate + '</td>' 
                         + '<td>' + role + '</td>' 
+                        + '</tr>';
+                    $("#userSearchResultByNumber").append(tablerow);
+                });
+            }
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+}
+$(document).ready(function () {
+    $("#doExpertSearchByNumber").click(function (event) {
+        searchExpertByOrderNumber();
+    })
+});
+
+function searchExpertByOrderNumber() {
+    $.ajax({
+        url: "http://localhost:8080/user/findexpertordernum/",
+        type: "GET",
+        data: {
+            number:$("#numberExpertOrder").val(),
+        },
+        // contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            debugger;
+            if (result) {
+                //itetrate thorugh each record and bind it to td
+                var html = '';
+                $("#userSearchResultByNumber").empty();
+                $.each(result, function (key, item) {
+                   
+                    var tablerow = '<tr>'
+                        + '<td id="ide">' + item.id + '</td>'
+                        + '<td>' + item.firstName+" " +item.lastName + '</td>'
+                        + '<td>' + item.email + '</td>' 
+                        + '<td>' + item.status + '</td>' 
+                        + '<td>' + item.wallet + '</td>' 
+                        + '<td>' + item.rate + '</td>' 
+                        + '<td>' + 'expert' + '</td>' 
                         + '</tr>';
                     $("#userSearchResultByNumber").append(tablerow);
                 });

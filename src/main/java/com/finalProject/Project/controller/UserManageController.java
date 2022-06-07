@@ -233,6 +233,12 @@ public class UserManageController {
         var list = managerProfileService.findCustomerByOrderNumber(number);
         return Arrays.asList(modelMapper.map(list, UserDto[].class));
     }
+    @GetMapping("/findexpertordernum{number}")
+    public List<UserDto> findExpertByOrderNumb(Long number){
+        System.out.println(number.getClass());
+        var list = managerProfileService.findExpertByOrderNumber(number);
+        return Arrays.asList(modelMapper.map(list, UserDto[].class));
+    }
 
 
 }
