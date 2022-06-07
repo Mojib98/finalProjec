@@ -49,12 +49,78 @@
                     data-bs-target="#historyOfCustomer" aria-expanded="false" aria-controls="historyOfCustomer" id="">
                     جستچوی خدمات انجام شده مشتری
                 </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#orderSearch" aria-expanded="false" aria-controls="orderSearch" id="">
+                جستجوی سفارش بر اساس پرامتر
+            </button>
                 <!-- <button type = "button" value="show all" id="show">show</button> -->
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 </div>
             </div>
         </nav>
+        <div id="orderSearch" class="collapse">
+            <div>
+                <form id="searchForm">
+                    <h2>searching expert</h2>
+                    <p>
+                        <label for="workStatus" class="floatLabel">status</label>
+                        <input id="workStatus" name="workStatus" type="text">
+                    </p>
+                    <p>
+                        <label for="Service" class="floatLabel">Service</label>
+                        <input id="Service" name="Service" type="text">
+                    </p>
+                    <p>
+                        <label for="subService" class="floatLabel">subService</label>
+                        <input id="subService" name="subService" type="text">
+                    </p>
+                    <p>
+                        <label for="startDate" class="floatLabel">startDate</label>
+                        <input id="startDate" name="startDate" type="date">
+                    </p>
+                    <p>
+                        <label for="finishDate" class="floatLabel">finishDate</label>
+                        <input id="finishDate" name="finishDate" type="date">
+                    </p>
+                </form>
+            </div>
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#resultSerach" aria-expanded="false"
+                    aria-controls="resultSerach" id="doOrderSearch">
+                 انجام جستجو
+                </button>
+            </div>
+
+            <div id="resultSerach" class="collapse">
+                <h1> تاریخچه</h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        تاریخچه خدمات انجام شده مشتری
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>name</th>
+                                <th>price</th>
+                                <th>worktime</th>
+                                <th>service</th>
+                                <th>status</th>
+                                <th>offerId</th>
+                                <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="tblbodyresultSearch">
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
         <div id="historyOfCustomer" class="collapse">
             <div>
                 <input type="text" name="historyOfCustomer" id="inputemailcustomer">

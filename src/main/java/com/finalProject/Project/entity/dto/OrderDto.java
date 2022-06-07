@@ -20,6 +20,7 @@ public class OrderDto {
     private String describe;
     private WorkStatus workStatus;
     private String customersName;
+    private String email;
     private String subServiceName;
     private String serviceName;
     private String expertName;
@@ -29,5 +30,8 @@ public class OrderDto {
     private String commentText;
     private Integer  customerId;
     private Integer amount;
+    private String startDate;
+    private String finishDate;
+
 
 }

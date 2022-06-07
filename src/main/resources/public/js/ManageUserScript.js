@@ -408,3 +408,53 @@ function expertHistory() {
         }
     });
 }
+//______________________orderSearch___________________
+$(document).ready(function () {
+    $("#doOrderSearch").click( function (event) {
+        var form = $('#searchForm')[0];
+        // Create an FormData object
+        var data = new FormData(form);
+        var formData = {
+            serviceName: $("#Service").val(),
+            subServiceName: $("#subService").val(),
+            workStatus: $("#workStatus").val(),
+            startDate: $("#startDate").val(),
+            finishDate: $("#finishDate").val()
+
+            // superheroAlias: $("#superheroAlias").val(),
+        };
+
+        $.ajax({
+            url: 'http://localhost:8080/user/searchorder/',
+            type: 'POST',
+            method: 'POST',
+            data: formData,
+            dataType: 'json',
+
+            success: function (response) {
+                if (response) {
+                    $("#tblbodyresultSearch").empty();
+                    //itetrate thorugh each record and bind it to td
+                    var html = '';
+                    $.each(response, function (key, item) {
+                        var tablerow = '<tr>'
+
+                            + '<td>' + item.id + '</td>'
+                            + '<td>' + item.email + '</td>'
+                            + '<td>' + item.orderPrice + '</td>'
+                            + '<td>' + item.timeForWork + '</td>'
+                            + '<td>' + item.subServiceName + '</td>'
+                            + '<td>' + item.workStatus + '</td>'
+                            + '<td>' + item.offerId + '</td>'
+                            // + '<td>' + item + '</td>'
+                            + '</tr>';
+                        $("#tblbodyresultSearch").append(tablerow);
+                    });
+                }
+            },error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    });
+
+});

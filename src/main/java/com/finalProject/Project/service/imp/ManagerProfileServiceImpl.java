@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -43,8 +45,24 @@ public class ManagerProfileServiceImpl {
             public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 var criteriaQuery = criteriaBuilder.createQuery(Order.class);
                 List<Predicate> predicates = new ArrayList<>();
-             /*   if (orderDto.getFirstName() != null && !orderDto.getFirstName().isEmpty())
-                    predicates.add(criteriaBuilder.equal(root.get("firstName"), orderDto.getFirstName()));*/
+                if (orderDto.getStartDate() != null  && !orderDto.getStartDate().isEmpty())
+                    if (orderDto.getFinishDate() != null && !orderDto.getFinishDate().isEmpty()){
+                        LocalDate startDate =LocalDate.parse(orderDto.getStartDate());
+                        LocalTime timeStart = LocalTime.of(0,0,0);
+                        LocalDateTime start = LocalDateTime.of(startDate,timeStart);
+                        LocalDate endDate =LocalDate.parse(orderDto.getFinishDate());
+                        LocalTime timeEnd = LocalTime.of(23,59,59);
+                        LocalDateTime end = LocalDateTime.of(endDate,timeEnd);
+                        predicates.add(criteriaBuilder.between(root.get("timeForWork"), start,end));
+                    }else {
+                        LocalDate startDate =LocalDate.parse(orderDto.getStartDate());
+                        LocalTime timeStart = LocalTime.of(0,0,0);
+                        LocalDateTime start = LocalDateTime.of(startDate,timeStart);
+                        LocalDate endDate =LocalDate.parse(orderDto.getStartDate());
+                        LocalTime timeEnd = LocalTime.of(23,59,59);
+                        LocalDateTime end = LocalDateTime.of(endDate,timeEnd);
+                        predicates.add(criteriaBuilder.between(root.get("timeForWork"), start,end));
+                    }
               /*  if (orderDto.getServiceName() != null && !orderDto.getServiceName().isEmpty())
                     predicates.add(criteriaBuilder.equal(root.get("lastName"), orderDto.getServiceName()));*/
                 if (orderDto.getSubServiceName() != null && !orderDto.getSubServiceName().isEmpty()){
@@ -57,7 +75,6 @@ public class ManagerProfileServiceImpl {
                     Join<SubService, Service> service = subService.join("service",JoinType.INNER);
                     predicates.add(criteriaBuilder.equal(service.get("name"), orderDto.getServiceName()));
                 }
-
                 if (orderDto.getWorkStatus() != null)
                     predicates.add(criteriaBuilder.equal(root.get("workStatus"), orderDto.getWorkStatus()));
 //                if (customer.() != null)
