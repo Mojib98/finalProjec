@@ -48,6 +48,8 @@ public class Offer extends BaseClass {
     private Expert expert;
     @ManyToOne
     private Order orders;
+    @Transient
+    private String subServiceName;
 
     public Offer(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime workTime, WorkStatus workStatus, Expert expert, Order orders) {
         super(id, time);
@@ -56,6 +58,17 @@ public class Offer extends BaseClass {
         this.workStatus = workStatus;
         this.expert = expert;
         this.orders = orders;
+    }
+    public Offer(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime workTime, WorkStatus workStatus, String name, Integer ordersId,String serviceName) {
+        super(id, time);
+        this.offerPrice = offerPrice;
+        this.workTime = workTime;
+        this.workStatus = workStatus;
+        this.expert = new Expert();
+        this.expert.setLastName(name);
+        this.orders = new Order();
+        this.orders.setId(ordersId);
+        this.subServiceName =serviceName;
     }
 
 }

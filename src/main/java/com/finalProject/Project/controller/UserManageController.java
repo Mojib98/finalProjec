@@ -1,12 +1,16 @@
 package com.finalProject.Project.controller;
 
 import com.finalProject.Project.entity.*;
+import com.finalProject.Project.entity.dto.OfferDto;
+import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.entity.dto.SpecialistDto;
 import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.service.imp.ManageExpertService;
+import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +26,8 @@ public class UserManageController {
     Scanner scanner = new Scanner(System.in);
     @Autowired
     ManageExpertService manager;
+    @Autowired
+    ManagerProfileServiceImpl managerProfileService;
     private final ModelMapper modelMapper = new ModelMapper();
 
 
@@ -108,6 +114,7 @@ public class UserManageController {
     }
 
 
+
     private Expert optionForSearch() {
         Expert expert = new Expert();
         System.out.println("\t\t!!!if want add option insert request else insert  'no'");
@@ -141,6 +148,50 @@ public class UserManageController {
         System.out.println("please insert number id");
         Integer id = scanner.nextInt();
         manager.remove(id);
+
+    }
+//    @GetMapping("/historyofcustomer")
+//    public List<OfferDto> historyOfCustomer( String email){
+//        var listOf = managerProfileService.historyOfferForCustomer(email);
+//        return Arrays.asList(modelMapper.map(listOf, OfferDto[].class));
+//    }
+//    @GetMapping("/historyofexpert")
+//    public List<OfferDto> historyOfExpert(@ModelAttribute String email){
+//        var listOf = managerProfileService.historyOfferForExpert(email);
+//        return Arrays.asList(modelMapper.map(listOf, OfferDto[].class));
+//    }
+@GetMapping("expertHistory{email}")
+public List<OfferDto> expertHistoryOffer( String email) {
+    System.out.println(email);
+    TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
+    if (typeMap == null) {
+        modelMapper.addMappings(new PropertyMap<Offer, OfferDto>() {
+            @Override
+            protected void configure() {
+                map().setExpertName(source.getExpert().getLastName());
+                map().setOrderId(source.getOrders().getId());
+            }
+        });
+    }
+    List<Offer> offerList=managerProfileService.historyOfferForExpert(email);
+    return Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
+
+}
+    @GetMapping("customerHistory{email}")
+    public List<OfferDto> customerHistoryOffer( String email) {
+        System.out.println(email);
+        TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
+        if (typeMap == null) {
+            modelMapper.addMappings(new PropertyMap<Offer, OfferDto>() {
+                @Override
+                protected void configure() {
+                    map().setExpertName(source.getExpert().getLastName());
+                    map().setOrderId(source.getOrders().getId());
+                }
+            });
+        }
+        List<Offer> offerList=managerProfileService.historyOfferForCustomer(email);
+        return Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
 
     }
 

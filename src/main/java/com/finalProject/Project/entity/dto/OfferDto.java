@@ -17,12 +17,12 @@ public class OfferDto {
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime workTime;
     private String localDateTime;
-    @JsonIgnore
     private WorkStatus workStatus;
     private Integer commentId;
     private String expertName;
     private Integer orderId;
     private Integer subServiceId;
+    private String subServiceName;
 
 }
 

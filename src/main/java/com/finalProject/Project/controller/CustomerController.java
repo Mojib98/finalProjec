@@ -89,8 +89,9 @@ public class CustomerController {
             modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
                 @Override
                 protected void configure() {
-//                map().setExpertName(source.getExpert());
-//                map().setOfferPrice(source.getOfferPrice());
+                map().setExpertName(source.getExpert());
+                map().setOfferPrice(source.getOrderPrice());
+                map().setServiceName(source.getSubService().getName());
                     skip(destination.getCustomersName());
 //                skip(destination.getLocalDateTime());
                 }

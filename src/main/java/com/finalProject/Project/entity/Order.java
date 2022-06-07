@@ -97,11 +97,14 @@ public class Order extends BaseClass {
         this.describe = describe;
     }
 
-    public Order(Integer id, Integer offerPrice, LocalDateTime timeForWork, String describe, String  expert) {
+    public Order(Integer id, Integer offerPrice, LocalDateTime timeForWork, String describe, String  expert,WorkStatus workStatus,String subServiceName) {
         super(id, null);
+        this.subService=new SubService();
         this.orderPrice = offerPrice;
         this.timeForWork = timeForWork;
         this.describe = describe;
         this.expert = expert;
+        this.workStatus=workStatus;
+        this.subService.setName(subServiceName);
     }
 }

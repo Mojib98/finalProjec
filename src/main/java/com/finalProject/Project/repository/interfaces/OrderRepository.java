@@ -30,7 +30,7 @@ public interface OrderRepository extends CrudRepository<Order,Integer> , JpaSpec
                           @Param(value = "email") String email,
                           @Param(value = "pass") String pass);
 
-    @Query(" select new com.finalProject.Project.entity.Order(s.id,s.offer.offerPrice,s.timeForWork,s.describe,s.offer.expert.lastName) from Order s " +
+    @Query(" select new com.finalProject.Project.entity.Order(s.id,s.offer.offerPrice,s.timeForWork,s.describe,s.offer.expert.lastName,s.workStatus,s.subService.name) from Order s " +
             " where s.customers.id=:id and s.workStatus=:work")
     List<Order> findAllOrderByCustomerIdandWorkStatus(@Param("work") WorkStatus workStatus, @Param("id") Integer id);
     List<Order> findAll(Specification<Order> spec);

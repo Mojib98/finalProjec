@@ -107,45 +107,5 @@ public class ManagerSystemController {
         return service;
     }
 
-    @GetMapping("expertHistory")
-    public List<OfferDto> expertHistoryOffer(@RequestParam String email) {
-        TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
-        if (typeMap == null) {
-            modelMapper.addMappings(new PropertyMap<ServiceDto, SubService>() {
-                @Override
-                protected void configure() {
-//                skip(destination.getService());
-//                    map().setName(source.getSubServiceName());
-//                skip(source.getServiceName());
-                }
-                // if not  already added
-            });
-        }
-        List<Offer> offerList=managerProfileService.historyOfferForExpert(email);
-        return Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
 
-    }
-    @GetMapping("customerHistory{email}")
-    public String customerHistoryOffer( String email) {
-        System.out.println(email);
-      /*  TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
-        if (typeMap == null) {
-            modelMapper.addMappings(new PropertyMap<ServiceDto, SubService>() {
-                @Override
-                protected void configure() {
-//                skip(destination.getService());
-//                    map().setName(source.getSubServiceName());
-//                skip(source.getServiceName());
-                }
-                // if not  already added
-            });
-        }
-        List<Offer> offerList=managerProfileService.historyOfferForCustomer(email);*/
-//        return Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
-        List<Offer> offerList=managerProfileService.historyOfferForCustomer(email);
-//        var s= Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
-        System.out.println(offerList);
-        return "ok";
-
-    }
 }

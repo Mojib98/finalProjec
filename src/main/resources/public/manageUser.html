@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="module" src="js/ManageUserScript.js" ></script>
+    <script type="module" src="js/ManageUserScript.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
@@ -35,20 +35,72 @@
                     aria-expanded="false" aria-controls="showAll" id="show">
                     چک کردن ثبت نام
                 </button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showFormForSearchExpert"
-                aria-expanded="false" aria-controls="showFormForSearchExpert" id="#">
-                جستجوی متخصصان
-            </button>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showFormForSearchCustomer"
-            aria-expanded="false" aria-controls="showFormForSearchCustomer" id="searchForSearchCustomer">
-           جستچوی مشتری
-        </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#showFormForSearchExpert" aria-expanded="false"
+                    aria-controls="showFormForSearchExpert" id="#">
+                    جستجوی متخصصان
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#showFormForSearchCustomer" aria-expanded="false"
+                    aria-controls="showFormForSearchCustomer" id="searchForSearchCustomer">
+                    جستچوی مشتری
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#historyOfCustomer" aria-expanded="false" aria-controls="historyOfCustomer" id="">
+                    جستچوی خدمات انجام شده مشتری
+                </button>
                 <!-- <button type = "button" value="show all" id="show">show</button> -->
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 </div>
             </div>
         </nav>
+        <div id="historyOfCustomer" class="collapse">
+            <div>
+                <input type="text" name="historyOfCustomer" id="inputemailcustomer">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#historyTableOfCustomer" aria-expanded="false"
+                    aria-controls="historyTableOfCustomer" id="historyOfCustomerbut">
+                     جستجوی ایمیل مشتری
+                </button>
+            </div>
+            <div>
+                <input type="text" name="historyOfExpert" id="inputemailexpert">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#historyTableOfCustomer" aria-expanded="false"
+                    aria-controls="historyTableOfCustomer" id="historyOfExpertbut">
+                متخصصان    جستجوی ایمیل
+                </button>
+            </div>
+
+            <div id="historyTableOfCustomer" class="collapse">
+                <h1> تاریخچه</h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        تاریخچه خدمات انجام شده مشتری
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>name</th>
+                                <th>price</th>
+                                <th>worktime</th>
+                                <th>service</th>
+                                <th>status</th>
+                                <th>orderId</th>
+                                <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="tblbodyhistoryOffer">
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
         <div id="showAll" class="collapse">
 
             <h1>لیست تمامی خدمات موجود در سامانه</h1>
@@ -105,7 +157,7 @@
             </fieldset>
             <button type="button" class="btn btn-outline-success" value="service" id="butdetspecialty">Add</button>
         </div>
-        <div id="searchexpert" class="collapse navbar-collapse" >
+        <div id="searchexpert" class="collapse navbar-collapse">
 
             <h1>search result</h1>
             <br />
@@ -132,32 +184,32 @@
             </fieldset>
         </div>
         <div id="showFormForSearchExpert" class="collapse navbar-collapse">
-        <form id="myform">
-            <h2>searching expert</h2>
-            <p>
-                <label for="Email" class="floatLabel">Email</label>
-                <input id="email" name="email" type="text">
-            </p>
-            <p>
-                <label for="firstName" class="floatLabel">FirstName</label>
-                <input id="firstName" name="firstName" type="text">
-            </p>
-            <p>
-                <label for="nameL" class="floatLabel">LastName</label>
-                <input id="nameL" name="lastName" type="text">
-            </p>
-            <p>
-                <label for="status" class="floatLabel">Password</label>
-                <input id="status" name="password" type="password">
-            </p>
-            <p>
-                <button type="button" class="btn btn-outline-success" value="service" id="search">Add</button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#searchexpert"
-                    aria-expanded="false" aria-controls="searchexpert" id="search">
-                    نمایش جستجو
-                </button>
+            <form id="myform">
+                <h2>searching expert</h2>
+                <p>
+                    <label for="Email" class="floatLabel">Email</label>
+                    <input id="email" name="email" type="text">
+                </p>
+                <p>
+                    <label for="firstName" class="floatLabel">FirstName</label>
+                    <input id="firstName" name="firstName" type="text">
+                </p>
+                <p>
+                    <label for="nameL" class="floatLabel">LastName</label>
+                    <input id="nameL" name="lastName" type="text">
+                </p>
+                <p>
+                    <label for="status" class="floatLabel">Password</label>
+                    <input id="status" name="password" type="password">
+                </p>
+                <p>
+                    <button type="button" class="btn btn-outline-success" value="service" id="search">Add</button>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#searchexpert" aria-expanded="false" aria-controls="searchexpert" id="search">
+                        نمایش جستجو
+                    </button>
 
-            </p>
+                </p>
             </form>
         </div>
         <div id="showFormForSearchCustomer" class="collapse navbar-collapse">
@@ -180,78 +232,79 @@
                     <input id="status" name="status" type="text">
                 </p>
                 <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showResultSearchCustomer"
-                        aria-expanded="false" aria-controls="showResultSearchCustomer" id="searchcustomer">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#showResultSearchCustomer" aria-expanded="false"
+                        aria-controls="showResultSearchCustomer" id="searchcustomer">
                         نمایش جستجو
                     </button>
-    
+
                 </p>
-                </form>
+            </form>
 
-            </div>
-            <div id="showResultSearchCustomer" class="collapse navbar-collapse" >
+        </div>
+        <div id="showResultSearchCustomer" class="collapse navbar-collapse">
 
-                <h1>search result</h1>
-                <br />
-                <fieldset>
-                    <legend>
-                        service list
-                    </legend>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>name</th>
-                                <th>email</th>
-                                <th>status</th>
-                                <th>checkbox</th>
-                                <!-- <th>price</th>
+            <h1>search result</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>status</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
                         <th>Address</th>
                         <th>City</th> -->
-                            </tr>
-                        </thead>
-                        <tbody id="CustomerResult">
-                        </tbody>
-                    </table>
-                </fieldset>
-            </div>
-            <div id="showResultSearch" class="collapse navbar-collapse" >
+                        </tr>
+                    </thead>
+                    <tbody id="CustomerResult">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+        <div id="showResultSearch" class="collapse navbar-collapse">
 
-                <h1>search result</h1>
-                <br />
-                <fieldset>
-                    <legend>
-                        service list
-                    </legend>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>name</th>
-                                <th>email</th>
-                                <th>status</th>
-                                <th>checkbox</th>
-                                <!-- <th>price</th>
+            <h1>search result</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>status</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
                         <th>Address</th>
                         <th>City</th> -->
-                            </tr>
-                        </thead>
-                        <tbody id="expertResult">
-                        </tbody>
-                    </table>
-                </fieldset>
-            </div>
-            <div>
-                <div class="card card-body">
-                    <div id="listof">
-                    </div>
-                    <div class="form-outline mb-4">
-                        <input type="number" id="insertspecialty" class="form-control" />
-                        <label class="form-label" for="insertspecialty">Price</label>
-                    </div>
-                    <button type="button" class="btn btn-outline-primary" id="request">ثبت درخواست</button>
+                        </tr>
+                    </thead>
+                    <tbody id="expertResult">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+        <div>
+            <div class="card card-body">
+                <div id="listof">
                 </div>
+                <div class="form-outline mb-4">
+                    <input type="number" id="insertspecialty" class="form-control" />
+                    <label class="form-label" for="insertspecialty">Price</label>
+                </div>
+                <button type="button" class="btn btn-outline-primary" id="request">ثبت درخواست</button>
             </div>
+        </div>
 
 
     </div>

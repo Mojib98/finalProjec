@@ -327,3 +327,44 @@ $("#request").click(function (event) {
 
     event.preventDefault();
 });
+//-------------------------------------history of customer---------------
+$(document).ready(function () {
+    $("#historyOfCustomerbut").click(function (event) {
+        customerHistory();
+    })
+});
+
+function customerHistory() {
+    $.ajax({
+        url: "http://localhost:8080/user/customerHistory/",
+        type: "GET",
+        data: {
+            email:$("#inputemailcustomer").val(),
+        },
+        // contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            debugger;
+            if (result) {
+                //itetrate thorugh each record and bind it to td
+                var html = '';
+                $("#tblbodyhistoryOffer").empty();
+                $.each(result, function (key, item) {
+                    var tablerow = '<tr>'
+                        + '<td id="ide">' + item.id + '</td>'
+                        + '<td>' + item.expertName  + '</td>'
+                        + '<td>' + item.offerPrice + '</td>' //price
+                        + '<td>' + item.workTime + '</td>' //worktime
+                        + '<td>' + item.subServiceName + '</td>' // serviceName
+                        + '<td>' + item.workStatus + '</td>' //status
+                        + '<td>' + item.orderId + '</td>' //orderId
+                        + '</tr>';
+                    $("#tblbodyhistoryOffer").append(tablerow);
+                });
+            }
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+}
