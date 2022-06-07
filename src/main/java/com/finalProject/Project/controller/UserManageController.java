@@ -3,6 +3,7 @@ package com.finalProject.Project.controller;
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.dto.*;
 import com.finalProject.Project.entity.enumeration.UserStatus;
+import com.finalProject.Project.repository.interfaces.UserRepository;
 import com.finalProject.Project.service.imp.ManageExpertService;
 import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -25,6 +26,8 @@ public class UserManageController {
     ManageExpertService manager;
     @Autowired
     ManagerProfileServiceImpl managerProfileService;
+    @Autowired
+    UserRepository userRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
 
@@ -218,6 +221,14 @@ public class UserManageController {
         return Arrays.asList(modelMapper.map(listOrder, OrderDto[].class));
 
 //        return null;
+    }
+    @GetMapping("/finbuserbydate{date}")
+    public List<UserDto> findUserBySingUpTime(String date){
+        var list = managerProfileService.findByDate(date);
+        return Arrays.asList(modelMapper.map(list, UserDto[].class));
+
+
+
     }
 
 

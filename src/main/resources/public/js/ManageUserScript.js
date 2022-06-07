@@ -458,3 +458,51 @@ $(document).ready(function () {
     });
 
 });
+//__________________searchByDate_______________-
+$(document).ready(function () {
+    $("#doUserSearch").click(function (event) {
+        searchByDate();
+    })
+});
+
+function searchByDate() {
+    $.ajax({
+        url: "http://localhost:8080/user/finbuserbydate{/",
+        type: "GET",
+        data: {
+            date:$("#singupdate").val(),
+        },
+        // contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            debugger;
+            if (result) {
+                //itetrate thorugh each record and bind it to td
+                var html = '';
+                $("#userSearchResult").empty();
+                $.each(result, function (key, item) {
+                    var role;
+                    if(item.rate==null){
+                        item.rate='customer';
+                        role='customer';
+                    }else{
+                        role='expert';
+                    }
+                    var tablerow = '<tr>'
+                        + '<td id="ide">' + item.id + '</td>'
+                        + '<td>' + item.firstName+" " +item.lastName + '</td>'
+                        + '<td>' + item.email + '</td>' 
+                        + '<td>' + item.status + '</td>' 
+                        + '<td>' + item.wallet + '</td>' 
+                        + '<td>' + item.rate + '</td>' 
+                        + '<td>' + role + '</td>' 
+                        + '</tr>';
+                    $("#userSearchResult").append(tablerow);
+                });
+            }
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+}

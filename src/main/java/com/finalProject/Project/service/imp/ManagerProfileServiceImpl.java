@@ -6,6 +6,7 @@ import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.repository.interfaces.ManageRepositoryForExpert;
 import com.finalProject.Project.repository.interfaces.OfferRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
+import com.finalProject.Project.repository.interfaces.UserRepository;
 import com.finalProject.Project.service.interfaces.OfferService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class ManagerProfileServiceImpl {
     OrderRepository orderRepository;
     ManageRepositoryForExpert manageRepositoryForExpert;
     OfferRepository offerRepository;
+    private UserRepository userRepository;
     public List<Offer> historyOfferForExpert(String email){
         return offerRepository.expertHistory(email);
     }
@@ -102,4 +104,16 @@ public class ManagerProfileServiceImpl {
     public List<Customer> findCustomerBySingUpTime(){
         return null;
     }
+    @Transactional
+    public List<User> findByDate(String date){
+        LocalDate startDate =LocalDate.parse(date);
+        LocalTime timeStart = LocalTime.of(0,0,0);
+        LocalDateTime start = LocalDateTime.of(startDate,timeStart);
+        LocalDate endDate =LocalDate.parse(date);
+        LocalTime timeEnd = LocalTime.of(23,59,59);
+        LocalDateTime end = LocalDateTime.of(endDate,timeEnd);
+        return userRepository.findAllByTimeBetween(start,end);
+
+    }
+
 }

@@ -53,12 +53,86 @@
                 data-bs-target="#orderSearch" aria-expanded="false" aria-controls="orderSearch" id="">
                 جستجوی سفارش بر اساس پرامتر
             </button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+            data-bs-target="#showforDate" aria-expanded="false" aria-controls="showforDate" id="">
+            جستجو بر اساس تاریخ
+        </button>
                 <!-- <button type = "button" value="show all" id="show">show</button> -->
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                 </div>
             </div>
         </nav>
+        <div id="showforDate" class="collapse">
+        
+                <p>
+                    <label for="singupdate" class="floatLabel">finishDate</label>
+                    <input id="singupdate" name="singupdate" type="date">
+                </p> 
+                <p>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#showUserDate" aria-expanded="false"
+                    aria-controls="showUserDate" id="doUserSearch">
+                 انجام جستجو
+                </button>
+                </p>
+            
+        <div id="showUserDate" class="collapse">
+            <h1>لیست تمامی خدمات موجود در سامانه</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>status</th>
+                            <th>wallet</th>
+                            <th>rate</th>
+                            <th>role</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="userSearchResult">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+        <div id="showAll" class="collapse">
+
+            <h1>لیست تمامی خدمات موجود در سامانه</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>status</th>
+                            <th>checkbox</th>
+                            <!-- <th>price</th>
+                    <th>Address</th>
+                    <th>City</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="tblbody">
+                    </tbody>
+                </table>
+            </fieldset>
+
+
+        </div>
         <div id="orderSearch" class="collapse">
             <div>
                 <form id="searchForm">
