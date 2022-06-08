@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import java.util.Scanner;
 @CrossOrigin
 @RequestMapping("/user")
 public class UserManageController {
+//    var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     Scanner scanner = new Scanner(System.in);
     @Autowired
