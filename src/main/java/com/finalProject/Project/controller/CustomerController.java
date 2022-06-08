@@ -37,6 +37,7 @@ public class CustomerController {
 
 //        System.out.println(orderDto.getSubServiceId());
         System.out.println(orderDto);
+        System.out.println(orderDto);
         service.insertOrder(orderDto, customer);
 
 

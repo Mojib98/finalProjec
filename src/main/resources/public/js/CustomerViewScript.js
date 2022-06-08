@@ -1,6 +1,8 @@
-import "https://code.jquery.com/jquery-3.6.0.js";
-import "https://code.jquery.com/jquery-migrate-3.4.0.js";
+// import "https://code.jquery.com/jquery-3.6.0.js";
+// import "https://code.jquery.com/jquery-migrate-3.4.0.js";
 // import "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
+// import "https://cdn.map.ir/web-sdk/1.4.2/js/jquery-3.2.1.min.js";
+
 import "./Redirect.js";
 let SubServiceName;
 let idSubService;
@@ -14,14 +16,71 @@ $("input[id='price']").on("change", function () {
     }
 });
 //createOrder
-$(document).ready(function () {
+// $(document).ready(function () {
+//     alert("can do this")
+//     var myaddress ;
+//     var app = new map.Mapp({
+//       element: '#app',
+//       apiKey: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQzMGEwOTg5Y2JmYmY2NWM3YmU3OGY0MDRkM2FlN2RiYmU3NzllMDdjOWNjODk4YmJmMzk5OTBkYzViNWIxZDVkZDk5Y2Q1YjczMzE1NDIyIn0.eyJhdWQiOiIxODI1MiIsImp0aSI6ImQzMGEwOTg5Y2JmYmY2NWM3YmU3OGY0MDRkM2FlN2RiYmU3NzllMDdjOWNjODk4YmJmMzk5OTBkYzViNWIxZDVkZDk5Y2Q1YjczMzE1NDIyIiwiaWF0IjoxNjU0NjI1NDI5LCJuYmYiOjE2NTQ2MjU0MjksImV4cCI6MTY1NzIxNzQyOSwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.RGQSdY96zstW2_dK4S3WgLXkFa_8Byvu8A_0lsloixTokRm_vTRJZ-S_ZIyJVc96Latnem-kLne7RaGH22gkSuZSONQjYaaDaSXnAXRg7vVE3jwhIUjGIBcpP66fQ0xLwV9b0cyvBq5DK_wph8uA0THoE-tkz85nx_mhDhio0TDk3wMLSSeRHPsdit0cb9-iuIS4Rb_vmHHAivQafWuP_q9lKeg2XYt6Y0CMBbfdLUHbxaVz1vuNpCZ_HAvPxvdQOyFUI-jLHjkmTon2QTebnFlAsSTDZNWQiHQVax12kTvWkOmP2rP-xGZeHpFT6-iKYJgcOs-Jm5HoLDamBzO4PA',
+//       presets: {
+//         latlng: {
+//           lat: 35.73249,
+//           lng: 51.42268
+//         },
+//         zoom: 10
+//       }
+//     });
+//     app.addVectorLayers();
+//     let marker = app.addMarker({
+//       name: 'marker',
+//       latlng: {
+//         lat: 35.73249,
+//         lng: 51.42268
+//       },
+//       popup: {
+//         open: false
+//       }
+//     });
+//     app.map.on('click', function(e) {
+//       $.ajax({
+//         url: `https://map.ir/reverse/?lat=${e.latlng.lat}&lon=${e.latlng.lng}`,
+//         method: 'GET',
+//         beforeSend: function(request) {
+//           request.setRequestHeader('x-api-key', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQzMGEwOTg5Y2JmYmY2NWM3YmU3OGY0MDRkM2FlN2RiYmU3NzllMDdjOWNjODk4YmJmMzk5OTBkYzViNWIxZDVkZDk5Y2Q1YjczMzE1NDIyIn0.eyJhdWQiOiIxODI1MiIsImp0aSI6ImQzMGEwOTg5Y2JmYmY2NWM3YmU3OGY0MDRkM2FlN2RiYmU3NzllMDdjOWNjODk4YmJmMzk5OTBkYzViNWIxZDVkZDk5Y2Q1YjczMzE1NDIyIiwiaWF0IjoxNjU0NjI1NDI5LCJuYmYiOjE2NTQ2MjU0MjksImV4cCI6MTY1NzIxNzQyOSwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.RGQSdY96zstW2_dK4S3WgLXkFa_8Byvu8A_0lsloixTokRm_vTRJZ-S_ZIyJVc96Latnem-kLne7RaGH22gkSuZSONQjYaaDaSXnAXRg7vVE3jwhIUjGIBcpP66fQ0xLwV9b0cyvBq5DK_wph8uA0THoE-tkz85nx_mhDhio0TDk3wMLSSeRHPsdit0cb9-iuIS4Rb_vmHHAivQafWuP_q9lKeg2XYt6Y0CMBbfdLUHbxaVz1vuNpCZ_HAvPxvdQOyFUI-jLHjkmTon2QTebnFlAsSTDZNWQiHQVax12kTvWkOmP2rP-xGZeHpFT6-iKYJgcOs-Jm5HoLDamBzO4PA');
+//           request.setRequestHeader('content-type', 'application/json');
+//         },
+//         success: function(data, status) {
+//           var lat = e.latlng.lat;
+//           var lng = e.latlng.lng;
+//           var newLatLng = new L.LatLng(lat, lng);
+//           marker.setLatLng(newLatLng);
+//           myaddress=data.address
+//           alert(myaddress)
+//           var popup = app.generatePopupHtml({
+//             title: { i18n: 'آدرس' },
+//             description: { i18n: data.address },
+  
+//           });
+//           marker.bindPopup(popup).openPopup();
+//         },
+//         error: function(error) {
+//           console.log(error);
+//         }
+//       });
+//     });
+// });
+
+    $(document).ready(function () {
+
+  
     $("#createOffer").click(function (event) {
-        alert($("#Subservices").val());
+        
+        alert(addresstext);
         var formData = {
             describe: $("#describe").val(),
             localDateTime: $("#time").val(),
             subServiceId: $("#Subservices").val(),
-            address: $("#address").val(),
+            address:  $("#addresstext").val(),
             offerPrice: $("#price").val(),
             // subServiceId: idSubService
             // superheroAlias: $("#superheroAlias").val(),
@@ -41,7 +100,11 @@ $(document).ready(function () {
         event.preventDefault();
     });
 });
+
+
+
 $(document).ready(function () {
+    alert("hello")
     $.ajax({
         url: "http://localhost:8080/service/allService/",
         type: "GET",
@@ -132,7 +195,7 @@ $(document).ready(function () {
 $(document).on('click', 'input[type="checkbox"]', function () {
     // checkbox = null;
     $('input[type="checkbox"]').not(this).prop('checked', false);
-    checkbox = document.querySelector('input[type="checkbox"]');
+    // checkbox = document.querySelector('input[type="checkbox"]');
     // alert($('input[name="subServiceId"]:checked').attr('value'))
 });
 //showOffer
