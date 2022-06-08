@@ -1,11 +1,17 @@
 package com.finalProject.Project.entity;
 
+import com.finalProject.Project.entity.enumeration.Role;
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Setter
@@ -13,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class Expert extends User {
+public class Expert extends User  implements UserDetails {
     @Embedded
     private Avatar avatar;
     @Column(columnDefinition = "integer default 0")
@@ -25,4 +31,33 @@ public class Expert extends User {
         this.avatar = avatar;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(Role.EXPERT.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return getStatus().equals(UserStatus.ACTIVE);
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return getStatus().equals(UserStatus.ACTIVE);
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return getStatus().equals(UserStatus.ACTIVE);
+    }
 }
