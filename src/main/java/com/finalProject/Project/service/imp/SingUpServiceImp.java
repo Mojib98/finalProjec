@@ -6,6 +6,7 @@ import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.dto.UserDto;
 import com.finalProject.Project.entity.enumeration.UserStatus;
+import com.finalProject.Project.exception.UnActiveToken;
 import com.finalProject.Project.repository.interfaces.ConfirmationTokenRepository;
 import com.finalProject.Project.repository.interfaces.SingUpRepository;
 import com.finalProject.Project.service.interfaces.SingUpService;
@@ -146,9 +147,9 @@ public class SingUpServiceImp  implements SingUpService {
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenRepository.findByTokenCode(token).
                 orElseThrow(() ->
-                        new IllegalStateException("token not found"));
+                        new UnActiveToken("token not found"));
         if (!confirmationToken.getIsActive())
-            throw new IllegalStateException("token unActive");
+            throw new UnActiveToken("token unActive");
 
         confirmationTokenRepository.updateConfirmedAt(token);
         if (token.substring(0,6).equals("EXPERT"))
