@@ -38,7 +38,7 @@ public class Customer extends  User implements UserDetails {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("Role_"+ Role.EXPERT.name()));
+        return List.of(new SimpleGrantedAuthority("Role_"+ Role.CUSTOMER.name()));
     }
 
     @Override

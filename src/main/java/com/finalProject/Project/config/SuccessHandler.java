@@ -1,6 +1,5 @@
 package com.finalProject.Project.config;
 
-import com.finalProject.Project.entity.User;
 import com.finalProject.Project.entity.enumeration.Role;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 @Component
-public class Success implements AuthenticationSuccessHandler {
+public class SuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
             var user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -29,13 +28,13 @@ public class Success implements AuthenticationSuccessHandler {
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority grantedAuthority : authorities) {
                 System.out.println("role " + grantedAuthority.getAuthority());
-                if (grantedAuthority.getAuthority().equals("ROLE_"+Role.ADMIN.name())) {
-                    redirectUrl = "http://localhost:63342/Project/public/manageUser.html";
+                if (grantedAuthority.getAuthority().equals("ROLE_"+Role.EXPERT.name())) {
+                    redirectUrl = "http://localhost:63342/Project/public/ExpertView.html";
 //                    response.addCookie(userq.get);
                     i++;
                     break;
-                } else if (grantedAuthority.getAuthority().equals("ADMIN")) {
-                    redirectUrl = "/adminDashboard";
+                } else if (grantedAuthority.getAuthority().equals("ROLE_"+Role.CUSTOMER.name())) {
+                    redirectUrl = "http://localhost:63342/Project/public/CustomerView.html";
                     break;
                 }
             }
