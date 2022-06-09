@@ -149,7 +149,7 @@ public class SingUpServiceImp  implements SingUpService {
                 orElseThrow(() ->
                         new UnActiveToken("token not found"));
         if (!confirmationToken.getIsActive())
-            throw new UnActiveToken("token unActive");
+            throw new UnActiveToken("token is expired");
 
         confirmationTokenRepository.updateConfirmedAt(token);
         if (token.substring(0,6).equals("EXPERT"))
