@@ -52,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/user/**").authenticated() // means what ever that begins with /api
 //                .antMatchers(HttpMethod.GET, "/milad").authenticated() // means exactly /milad endpoint with HTTP method GET
                 .antMatchers("/user/**").hasAnyRole("ADMIN")
+                .antMatchers("/customer/**").hasAnyRole("CUSTOMER")
                 .and()
                 .formLogin()
                 .successHandler(success);
