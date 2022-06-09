@@ -38,7 +38,7 @@ public class Customer extends  User implements UserDetails {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("Role_"+ Role.CUSTOMER.name()));
+        return List.of(new SimpleGrantedAuthority(Role.CUSTOMER.name()));
     }
 
     @Override
@@ -48,17 +48,17 @@ public class Customer extends  User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return getStatus().equals(UserStatus.ACTIVE);
+        return (getStatus().equals(UserStatus.ACTIVE));
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return getStatus().equals(UserStatus.ACTIVE);
+        return (getStatus().equals(UserStatus.ACTIVE));
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

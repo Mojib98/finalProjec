@@ -28,12 +28,12 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority grantedAuthority : authorities) {
                 System.out.println("role " + grantedAuthority.getAuthority());
-                if (grantedAuthority.getAuthority().equals("ROLE_"+Role.EXPERT.name())) {
+                if (grantedAuthority.getAuthority().equals(Role.EXPERT.name())) {
                     redirectUrl = "http://localhost:63342/Project/public/ExpertView.html";
 //                    response.addCookie(userq.get);
                     i++;
                     break;
-                } else if (grantedAuthority.getAuthority().equals("ROLE_"+Role.CUSTOMER.name())) {
+                } else if (grantedAuthority.getAuthority().equals("CUSTOMER")) {
                     redirectUrl = "http://localhost:63342/Project/public/CustomerView.html";
                     break;
                 }

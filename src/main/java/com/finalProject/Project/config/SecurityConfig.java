@@ -52,28 +52,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("ADMIN")
-                .password("$2a$10$4cdCfnV3DryySlu70U0cZ.WQTaeJOymtO8ogAwyS22aIai.8AQEDC")
-                .authorities("ROLE_ADMIN").
-                and()
+//        auth.inMemoryAuthentication()
+//                .withUser("ADMIN")
+//                .password("$2a$10$4cdCfnV3DryySlu70U0cZ.WQTaeJOymtO8ogAwyS22aIai.8AQEDC")
+//                .authorities("ROLE_ADMIN").
+//                and()
+//                .passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailService)
                 .passwordEncoder(bCryptPasswordEncoder());
     }
 
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:63342/"));
-//        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-//        configuration.setAllowCredentials(true);
-//        //the below three lines will add the relevant CORS response headers
-////        configuration.addAllowedOrigin("*");
-////        configuration.addAllowedHeader("*");
-////        configuration.addAllowedMethod("*");
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
 
 
 }
