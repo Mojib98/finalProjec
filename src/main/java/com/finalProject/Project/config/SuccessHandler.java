@@ -30,7 +30,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
                 System.out.println("role " + grantedAuthority.getAuthority());
                 if (grantedAuthority.getAuthority().equals(Role.EXPERT.name())) {
                     redirectUrl = "http://localhost:63342/Project/public/ExpertView.html";
-//                    response.addCookie(userq.get);
+//                    response.addCookie(userq.getCredentials());
                     i++;
                     break;
                 } else if (grantedAuthority.getAuthority().equals("CUSTOMER")) {

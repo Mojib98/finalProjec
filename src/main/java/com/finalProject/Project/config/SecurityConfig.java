@@ -27,16 +27,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .cors().configurationSource(corsConfigurationSource()).and()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
 
 //                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //                .antMatchers("/user/**").authenticated() // means what ever that begins with /api
 //                .antMatchers(HttpMethod.GET, "/milad").authenticated() // means exactly /milad endpoint with HTTP method GET
-                .antMatchers("/user/**").hasAnyRole("ADMIN")
-                .antMatchers("/customer/**").hasAnyRole("CUSTOMER")
-                .antMatchers("/exp/**").hasAnyRole("EXPERT","ADMIN")
-                .antMatchers("/service/**").hasAnyRole("CUSTOMER","ADMIN")
-                .antMatchers("/singup/**").permitAll()
-                .anyRequest().permitAll()
+                .antMatchers("user/**").hasAnyRole("ADMIN")
+                .antMatchers("customer/**").hasAnyRole("CUSTOMER")
+                .antMatchers("exp/**").hasAnyRole("EXPERT","ADMIN")
+                .antMatchers("service/**").hasAnyRole("CUSTOMER","ADMIN")
+                .antMatchers("singup/**").permitAll()
+//                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .successHandler(success);
