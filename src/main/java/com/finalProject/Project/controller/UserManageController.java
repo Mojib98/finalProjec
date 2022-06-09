@@ -10,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +25,6 @@ import java.util.Scanner;
 public class UserManageController {
 //    var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    Scanner scanner = new Scanner(System.in);
     @Autowired
     ManageExpertService manager;
     @Autowired
@@ -73,6 +74,7 @@ public class UserManageController {
     }
 
     @GetMapping("/listExpert")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public List<UserDto> requestListSingUp() {
         List<Expert> list = manager.requestListSingUp();
         return Arrays.asList(modelMapper.map(list, UserDto[].class));
@@ -105,6 +107,7 @@ public class UserManageController {
     }
 
     @PostMapping("/searchcustomer")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public List<UserDto> searchCustomer(@ModelAttribute UserDto userDto) {
         System.out.println(userDto);
         Customer customer = modelMapper.map(userDto, Customer.class);
@@ -118,9 +121,7 @@ public class UserManageController {
 
         manager.insertSpecialty(specialistDto);
     }
-
-
-    private Expert optionForSearch() {
+  /*  private Expert optionForSearch() {
         Expert expert = new Expert();
         System.out.println("\t\t!!!if want add option insert request else insert  'no'");
         System.out.println("\tfirst name");
@@ -136,23 +137,19 @@ public class UserManageController {
         String status = checker();
         UserStatus status1 = UserStatus.valueOf(status);
         expert.setStatus(status1);
-        return expert;
+        return expert;*/
 //        UserStatus status1 = UserStatus.CONFIRMED;
-    }
-
-    private String checker() {
-        String string = scanner.next();
+  //  }
+/*    private String checker() {
         if (string.equals("no"))
             return null;
         else
             return string;
 
-    }
-
+    }*/
     public void removeExpert() {
         System.out.println("please insert number id");
-        Integer id = scanner.nextInt();
-        manager.remove(id);
+//        manager.remove(id);
 
     }
 
@@ -240,6 +237,11 @@ public class UserManageController {
         System.out.println(number.getClass());
         var list = managerProfileService.findExpertByOrderNumber(number);
         return Arrays.asList(modelMapper.map(list, UserDto[].class));
+    }
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/majid")
+    public String test(){
+        return "ok";
     }
 
 

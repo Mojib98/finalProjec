@@ -33,7 +33,7 @@ public class Expert extends User  implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(Role.EXPERT.name()));
+        return List.of(new SimpleGrantedAuthority("Role_"+Role.EXPERT.name()));
     }
 
     @Override

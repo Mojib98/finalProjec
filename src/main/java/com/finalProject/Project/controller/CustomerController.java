@@ -10,6 +10,7 @@ import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -30,8 +31,7 @@ public class CustomerController {
     }
 
     private final ModelMapper modelMapper = new ModelMapper();
-
-
+    //'ROLE_ADMIN',
     @PostMapping("/createorder")
     public void createOrder(@ModelAttribute OrderDto orderDto) {
 
@@ -74,7 +74,6 @@ public class CustomerController {
         if (service.getBasePrice() > price)
             throw new RuntimeException("bad price");
     }
-
     @PostMapping("/choiceOffer")
     public void choiceOffer(@ModelAttribute OfferDto offerDto) {
         System.out.println(offerDto);
@@ -105,6 +104,7 @@ public class CustomerController {
     public void paying(@ModelAttribute OrderDto orderDto) {
             service.paying(orderDto);
     }
+    @PreAuthorize("hasAnyRole('CUSTOMER')")
     @PostMapping("/addcomment")
     public void commenting(OrderDto orderDto){
         service.addComment(orderDto.getCommentText(),customer,orderDto.getId());
@@ -192,10 +192,7 @@ public class CustomerController {
 
 
     }
-    @PostMapping("/")
-    public void addComment(@ModelAttribute OrderDto orderDto){
-        service.addComment(orderDto.getCommentText(),customer,orderDto.getId());
-    }
+    @GetMapping("/")
     public List<OrderDto> OrderForComment(){
         modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
             @Override

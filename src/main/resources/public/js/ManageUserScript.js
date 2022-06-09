@@ -181,9 +181,9 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: 'http://localhost:8080/user/searchexpert/',
+            url: 'http://localhost:8080/user/searchexpert',
             type: 'POST',
-            method: 'POST',
+            // method: 'POST',
             data: formData,
             dataType: 'json',
 
@@ -227,7 +227,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'http://localhost:8080/user/searchcustomer/',
             type: 'POST',
-            method: 'POST',
+            // method: 'POST',
             data: formData,
             dataType: 'json',
 
@@ -310,7 +310,7 @@ $(document).ready(function () {
 $("#request").click(function (event) {
     var formData = {
         serviceId: $('input[name="check"]:checked').attr('value'),
-        expertId:$('input[#insertspecialty]').attr('value')
+        expertId:$('input[#insertspecialty ]').attr('value')
         // superheroAlias: $("#superheroAlias").val(),
     };
 
@@ -336,7 +336,7 @@ $(document).ready(function () {
 
 function customerHistory() {
     $.ajax({
-        url: "http://localhost:8080/user/customerHistory/",
+        url: "http://localhost:8080/user/customerHistory",
         type: "GET",
         data: {
             email:$("#inputemailcustomer").val(),
@@ -376,7 +376,7 @@ $(document).ready(function () {
 
 function expertHistory() {
     $.ajax({
-        url: "http://localhost:8080/user/expertHistory/",
+        url: "http://localhost:8080/user/expertHistory",
         type: "GET",
         data: {
             email:$("#inputemailcustomer").val(),
@@ -425,7 +425,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: 'http://localhost:8080/user/searchorder/',
+            url: 'http://localhost:8080/user/searchorder',
             type: 'POST',
             method: 'POST',
             data: formData,
@@ -467,7 +467,7 @@ $(document).ready(function () {
 
 function searchByDate() {
     $.ajax({
-        url: "http://localhost:8080/user/finbuserbydate{/",
+        url: "http://localhost:8080/user/finbuserbydate",
         type: "GET",
         data: {
             date:$("#singupdate").val(),
@@ -514,7 +514,7 @@ $(document).ready(function () {
 
 function searchCustomerByOrderNumber() {
     $.ajax({
-        url: "http://localhost:8080/user/findcustomerordernum/",
+        url: "http://localhost:8080/user/findcustomerordernum",
         type: "GET",
         data: {
             number:$("#numberOrder").val(),
@@ -561,7 +561,7 @@ $(document).ready(function () {
 
 function searchExpertByOrderNumber() {
     $.ajax({
-        url: "http://localhost:8080/user/findexpertordernum/",
+        url: "http://localhost:8080/user/findexpertordernum",
         type: "GET",
         data: {
             number:$("#numberExpertOrder").val(),

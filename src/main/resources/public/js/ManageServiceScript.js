@@ -1,5 +1,5 @@
-// import "https://code.jquery.com/jquery-3.6.0.js";
-// import "https://code.jquery.com/jquery-migrate-3.4.0.js";
+import "https://code.jquery.com/jquery-3.6.0.js";
+import "https://code.jquery.com/jquery-migrate-3.4.0.js";
 import "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
 $("input[name='price']").on("change", function () {
     if ($(this).val() > 0) {
@@ -19,7 +19,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             method: "POST",
-            url: "http://localhost:8080/service/addservice/",
+            url: "http://localhost:8080/service/addservice",
             data: formData,
             dataType: "json",
             // encode: true,
@@ -45,7 +45,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             method: "POST",
-            url: "http://localhost:8080/service/addsub/",
+            url: "http://localhost:8080/service/addsub",
             data: formData,
             dataType: "json",
             encode: true,
@@ -63,7 +63,7 @@ $(document).ready(function () {
 });
 function BindpatientData() {
     $.ajax({
-        url: "http://localhost:8080/service/sub/",
+        url: "http://localhost:8080/service/sub",
         type: "GET",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
@@ -90,7 +90,7 @@ function BindpatientData() {
     $(document).ready(function () {
         $("#addSubServicePanel").click(function (event) {
             $.ajax({
-                url: "http://localhost:8080/service/allService/",
+                url: "http://localhost:8080/service/allService",
                 type: "GET",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
