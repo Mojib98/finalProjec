@@ -11,6 +11,7 @@ import com.finalProject.Project.repository.interfaces.SingUpRepository;
 import com.finalProject.Project.service.interfaces.SingUpService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,18 +20,13 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class SingUpServiceImp  implements SingUpService {
    private final SingUpRepository singUpRepository;
    private final ModelMapper modelMapper = new ModelMapper();
    private final EmailService emailService;
    private final ConfirmationTokenRepository confirmationTokenRepository;
-
-    public SingUpServiceImp(SingUpRepository singUpRepository, EmailService emailService,
-                            ConfirmationTokenRepository confirmationTokenRepository) {
-        this.singUpRepository = singUpRepository;
-        this.emailService = emailService;
-        this.confirmationTokenRepository = confirmationTokenRepository;
-    }
+   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     @Transactional
@@ -44,6 +40,9 @@ public class SingUpServiceImp  implements SingUpService {
         });*/
         String tokenCode = "EXPERT"+UUID.randomUUID().toString();
         Expert expert = modelMapper.map(userDto, Expert.class);
+
+        String password = bCryptPasswordEncoder.encode(userDto.getPassword());
+        expert.setPassword(password);
         ConfirmationToken token = new ConfirmationToken(tokenCode,expert);
         expert.setStatus(UserStatus.AWAITING_CONFIRMATION_EMAIL);
         expert.setWallet(0);
@@ -63,6 +62,8 @@ public class SingUpServiceImp  implements SingUpService {
         Customer customer = modelMapper.map(userDto, Customer.class);
         customer.setStatus(UserStatus.AWAITING_CONFIRMATION_EMAIL);
         customer.setWallet(50000);
+        String password = bCryptPasswordEncoder.encode(userDto.getPassword());
+        customer.setPassword(password);
         String tokenCode = UUID.randomUUID().toString();
         ConfirmationToken token = new ConfirmationToken(tokenCode,customer);
         String link = "http://localhost:8080/singup/confirm?token=" + tokenCode;
