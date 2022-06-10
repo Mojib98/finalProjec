@@ -16,20 +16,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
     private CustomerServiceImpl service;
     private Customer customer;
-//        var user = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-
-
-    {
-//        customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
-
     private final ModelMapper modelMapper = new ModelMapper();
     //'ROLE_ADMIN',
     @PostMapping("/createorder")
@@ -40,14 +31,18 @@ public class CustomerController {
     }
     @GetMapping("/myOffer")
     public List<OfferDto> findOfferForOrder(@RequestParam String id) {
+
         customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        modelMapper.addMappings(new PropertyMap<Offer, OfferDto>() {
-            @Override
-            protected void configure() {
+        TypeMap<Offer,OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
+        if (typeMap == null) {
+            modelMapper.addMappings(new PropertyMap<Offer, OfferDto>() {
+                @Override
+                protected void configure() {
 //                skip(destination.getSubServiceId());
-                skip(destination.getExpertName());
-            }
-        });
+                    skip(destination.getExpertName());
+                }
+            });
+        }
         Integer ids=Integer.parseInt(id);
         var list = service.findOfferByOrderId(ids);
         return Arrays.asList(modelMapper.map(list, OfferDto[].class));

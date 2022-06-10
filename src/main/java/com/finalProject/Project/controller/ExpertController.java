@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -21,15 +22,8 @@ import java.util.Scanner;
 @RequestMapping("/exp")
 public class ExpertController {
     private final ModelMapper modelMapper = new ModelMapper();
-
-    Integer id;
-    Expert expert = new Expert();
-    {
-        expert.setId(184);
-    }
+    Expert expert;
     List<Service> serviceList;
-    Scanner scanner = new Scanner(System.in);
-
     @Autowired
     ExpertService expertService;
     @Autowired
@@ -43,11 +37,13 @@ public class ExpertController {
     }
     @PostMapping("/request")
     public void requestForSpecialty(@ModelAttribute SpecialistDto specialistDto){
+        expert = (Expert) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(specialistDto);
         expertService.requestForSpecialty(expert,specialistDto.getServiceName());
     }
     @GetMapping("/seeorder")
     public List<OrderDto> seeOrders(){
+        expert = (Expert) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TypeMap<Order,OrderDto> typeMap = modelMapper.getTypeMap(Order.class, OrderDto.class);
         if (typeMap == null) {
             modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
@@ -64,6 +60,7 @@ public class ExpertController {
     }
     @PostMapping("/writeOffer")
     public void writeOffer(@ModelAttribute OfferDto offerDto) {
+        expert = (Expert) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         modelMapper.addMappings(new PropertyMap<OfferDto, Offer>() {
             @Override
             protected void configure() {
@@ -86,6 +83,7 @@ public class ExpertController {
     }
     @GetMapping("/startOrder")
     public List<OrderDto> seeOrderForStart(){
+        expert = (Expert) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.WAIT_FOR_ARRIVE);
 //        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
 //            @Override
@@ -111,20 +109,19 @@ public class ExpertController {
         System.out.println(orderDto.getId());
         expertService.startWork(orderDto.getId());
     }
-    public void downWork() {
-        try {
-            List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.START);
-            for (Offer a : acceptOffers) {
-                System.out.println(a.getId());
-                System.out.println(a.getWorkTime());
-            }
-            System.out.println("please select one of for start ");
-            Integer id = scanner.nextInt();
-            expertService.changeWorkByExpert(id, WorkStatus.DONE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void downWork() {
+//        try {
+//            List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.START);
+//            for (Offer a : acceptOffers) {
+//                System.out.println(a.getId());
+//                System.out.println(a.getWorkTime());
+//            }
+//            System.out.println("please select one of for start ");
+//            expertService.changeWorkByExpert(id, WorkStatus.DONE);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     private void checkingOffer(Offer offer,Order order,SubService service){
         if (offer.getWorkTime().isBefore(order.getTimeForWork()) )
             throw new RuntimeException("time not current try");
@@ -145,6 +142,7 @@ public class ExpertController {
     }
     @GetMapping("/donelist")
     public List<OrderDto> seeStartedOrder(){
+        expert = (Expert) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Offer> acceptOffers = expertService.findOfferForAction(expert.getId(), WorkStatus.START);
 //        modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
 //            @Override
@@ -159,6 +157,7 @@ public class ExpertController {
     }
     @GetMapping("/showMyInfo")
     public UserDto showMyInfo(){
+        expert = (Expert) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Expert expert1 = expertService.showMyInfo(this.expert.getId());
         System.out.println(expert1.getWallet());
         UserDto userDto = modelMapper.map(expert1,UserDto.class);
@@ -167,6 +166,7 @@ public class ExpertController {
     }
     @GetMapping("/seeAllorder")
     public List<OrderDto> AllOrder(){
+        expert = (Expert) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TypeMap<Order,OrderDto> typeMap = modelMapper.getTypeMap(Order.class, OrderDto.class);
         if (typeMap == null) {
             modelMapper.addMappings(new PropertyMap<Order, OrderDto>() {
