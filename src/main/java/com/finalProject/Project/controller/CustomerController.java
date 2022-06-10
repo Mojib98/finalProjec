@@ -28,7 +28,6 @@ public class CustomerController {
 
     {
 //        customer = (Customer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        customer.setId(189);
     }
 
     private final ModelMapper modelMapper = new ModelMapper();

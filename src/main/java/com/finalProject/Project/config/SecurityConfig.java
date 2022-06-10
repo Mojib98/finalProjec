@@ -43,10 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
 //                .antMatchers("/user/**").authenticated() // means what ever that begins with /api
 //                .antMatchers(HttpMethod.GET, "/milad").authenticated() // means exactly /milad endpoint with HTTP method GET
-//                .antMatchers("/user/**").hasAnyRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("ADMIN")
 //                .antMatchers("/customer/**").hasAnyRole("ROLE_CUSTOMER")
 //                .antMatchers("/exp/**").hasAnyRole("EXPERT","ADMIN")
-//                .antMatchers("/service/**").hasAnyRole("CUSTOMER","ADMIN")
+                .antMatchers("/service/**").hasAnyRole("CUSTOMER","ADMIN")
                 .antMatchers("/singup/**").permitAll()
                 .antMatchers("/customer/onlinePaying","/customer/howMuch").permitAll()
                 .anyRequest().permitAll()
@@ -80,7 +80,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
+        auth.
+                authenticationProvider(daoAuthenticationProvider());
+                auth.inMemoryAuthentication()
+                .withUser("ADMIN")
+                .password("$2a$10$4cdCfnV3DryySlu70U0cZ.WQTaeJOymtO8ogAwyS22aIai.8AQEDC")
+                .authorities("ROLE_ADMIN").
+                and()
+                .passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean

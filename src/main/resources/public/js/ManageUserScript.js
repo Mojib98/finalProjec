@@ -594,3 +594,9 @@ function searchExpertByOrderNumber() {
         }
     });
 }
+$(document).ready(function () {
+    $("#showMangeService").click(function (event) {
+        window.location.replace('./ManageService.html');
+
+    })
+});
