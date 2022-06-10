@@ -37,12 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/**").permitAll()
 //                .antMatchers("/user/**").authenticated() // means what ever that begins with /api
                 .antMatchers("/user/**").hasAnyRole("ADMIN")
-                .antMatchers("/customer/**").hasAnyRole("CUSTOMER")
+//                .antMatchers("/customer/**").hasAnyRole("CUSTOMER")
                 .antMatchers("/exp/**").hasAnyRole("EXPERT","ADMIN")
                 .antMatchers("/service/**").hasAnyRole("CUSTOMER","ADMIN")
                 .antMatchers("/singup/**").permitAll()
                 .antMatchers("/customer/onlinePaying","/customer/howMuch").permitAll()
-//                .anyRequest().permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin().successHandler(success)
                 ;

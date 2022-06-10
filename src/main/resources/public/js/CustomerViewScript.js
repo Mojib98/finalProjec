@@ -434,7 +434,7 @@ $(document).ready(function () {
 $("#onlinePaying").click(function (event) {
     // 'customerId': '189'
 
-    $.redirect('http://localhost:63342/Project/public/payment.html', {'orderId':$('input[name="downOrder"]:checked').val(),'rate':$('#rating').val() },'GET');
+    $.redirect('./payment.html', {'orderId':$('input[name="downOrder"]:checked').val(),'rate':$('#rating').val() },'GET');
     // $().redirect('google.com', {'arg1': 'value1', 'arg2': 'value2'});
 });
 

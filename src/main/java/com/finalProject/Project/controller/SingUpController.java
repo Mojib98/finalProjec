@@ -28,8 +28,8 @@ public class SingUpController {
     }
     @PostMapping("/expert")
     public void singUpExpert(@ModelAttribute UserDto  userDto) throws IOException {
-//        checker.checkerForSingUp(userDto);
-        checker.checkSizeOfAvatar(userDto.getImage());
+        checker.checkerForSingUp(userDto);
+//        checker.checkSizeOfAvatar(userDto.getImage());
         singUpService.requestForSingUp(userDto);
     }
 

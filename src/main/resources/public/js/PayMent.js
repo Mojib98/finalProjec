@@ -1,5 +1,5 @@
-import "https://code.jquery.com/jquery-3.6.0.js";
-import "https://code.jquery.com/jquery-migrate-3.4.0.js";
+// import "https://code.jquery.com/jquery-3.6.0.js";
+// import "https://code.jquery.com/jquery-migrate-3.4.0.js";
 // import "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
 import "./Redirect.js";
 import "./jquery-captcha.js";
@@ -17,7 +17,7 @@ $(document).ready(function () {
         const ans = captcha.valid($('input[name="code"]').val());
         if (ans) {
             paying();
-            window.location.replace('http://localhost:63342/Project/public/CustomerView.html');
+            window.location.replace('./CustomerView.html');
         } else {
             captcha = new Captcha($('#canvas'));
         }
@@ -25,10 +25,11 @@ $(document).ready(function () {
 
     });
 });
+$(document).ready(function () {
 setTimeout$(document).ready(function () {
     setTimeout(function () {
         alert("This is the alert message for timer"); 
-        window.location.replace('http://localhost:63342/Project/public/CustomerView.html');
+        window.location.replace('./CustomerView.html');
         // $.redirect('/CustomerView.html',null,'get');  
 
     }, 600000);
@@ -36,6 +37,7 @@ setTimeout$(document).ready(function () {
 
 
 
+});
 });
 
 
@@ -101,7 +103,7 @@ function paying() {
         // encode: true,
         success: function (response) {
             if (response) {
-                $.redirect('http://localhost:63342/Project/public/CustomerView.html', null, 'get');
+                $.redirect('./CustomerView.html', null, 'get');
             }
         }, error: function (errormessage) {
             alert(errormessage.responseText);

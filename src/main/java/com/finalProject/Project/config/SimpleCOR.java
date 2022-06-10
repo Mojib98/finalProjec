@@ -1,4 +1,3 @@
-/*
 package com.finalProject.Project.config;
 
 import org.springframework.stereotype.Component;
@@ -28,4 +27,3 @@ class SimpleCOR implements Filter {
     public void destroy() {}
 
 }
-*/
