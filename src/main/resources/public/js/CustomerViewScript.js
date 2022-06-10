@@ -369,7 +369,7 @@ $(document).ready(function () {
 });
 //all order
 $(document).ready(function () {
-    $("#").click(function (event) {
+    $("#ALlOrder").click(function (event) {
         $.ajax({
             url: "http://localhost:8080/customer/allmyorder/",
             type: "GET",
@@ -434,7 +434,7 @@ $(document).ready(function () {
 $("#onlinePaying").click(function (event) {
     // 'customerId': '189'
 
-    $.redirect('/payment.html', {'orderId':$('input[name="downOrder"]:checked').val(),'rate':$('#rating').val() },'GET');
+    $.redirect('http://localhost:63342/Project/public/payment.html', {'orderId':$('input[name="downOrder"]:checked').val(),'rate':$('#rating').val() },'GET');
     // $().redirect('google.com', {'arg1': 'value1', 'arg2': 'value2'});
 });
 

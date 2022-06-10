@@ -2,6 +2,7 @@ package com.finalProject.Project.entity;
 
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import lombok.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import java.util.Objects;
 @Getter
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "users")
-public abstract class User extends BaseClass{
+public abstract class User extends BaseClass  {
     @NotNull
     private String firstName;
     @NotNull
@@ -37,15 +38,6 @@ public abstract class User extends BaseClass{
         this.password = password;
         this.status = status;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", status=" + status +
-                "} " + super.toString();
     }
-}
+
+

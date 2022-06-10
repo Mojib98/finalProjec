@@ -17,7 +17,7 @@ $(document).ready(function () {
         const ans = captcha.valid($('input[name="code"]').val());
         if (ans) {
             paying();
-            window.location.replace('/CustomerView.html');
+            window.location.replace('http://localhost:63342/Project/public/CustomerView.html');
         } else {
             captcha = new Captcha($('#canvas'));
         }
@@ -28,7 +28,7 @@ $(document).ready(function () {
 setTimeout$(document).ready(function () {
     setTimeout(function () {
         alert("This is the alert message for timer"); 
-        window.location.replace('/CustomerView.html');
+        window.location.replace('http://localhost:63342/Project/public/CustomerView.html');
         // $.redirect('/CustomerView.html',null,'get');  
 
     }, 600000);
@@ -101,7 +101,7 @@ function paying() {
         // encode: true,
         success: function (response) {
             if (response) {
-                $.redirect('/CustomerView.html', null, 'get');
+                $.redirect('http://localhost:63342/Project/public/CustomerView.html', null, 'get');
             }
         }, error: function (errormessage) {
             alert(errormessage.responseText);
