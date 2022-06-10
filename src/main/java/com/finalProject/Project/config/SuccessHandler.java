@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.Collection;
 @Component
 public class SuccessHandler implements AuthenticationSuccessHandler {
-    Customer authCustomer = null;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -26,24 +25,23 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
             System.out.println("role " + grantedAuthority.getAuthority());
             if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 redirectUrl = "manageUser.html";
-
                 break;
             } else if (grantedAuthority.getAuthority().equals("ROLE_CUSTOMER")) {
                     redirectUrl = "CustomerView.html";
                     break;
-                }else if (grantedAuthority.getAuthority().equals("ROLE_EXPERT")) {
+                }else {
                 redirectUrl = "ExpertView.html";
                 break;
             }
+
+        }
+        System.out.println("redirectUrl " + redirectUrl);
+        if (redirectUrl == null) {
+            throw new IllegalStateException();
+        }
         response.setStatus(HttpServletResponse.SC_OK);
 
-            System.out.println("redirectUrl " + redirectUrl);
-            if (redirectUrl == null) {
-                throw new IllegalStateException();
-            }
-
-            new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
-        }
+        new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
 
 }
