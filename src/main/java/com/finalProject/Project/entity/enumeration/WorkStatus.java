@@ -7,6 +7,8 @@ public enum WorkStatus {
     START,
     DONE,
     WAIT,
+    PAID,
     PAYED,
     EXPIRED;
 }
+

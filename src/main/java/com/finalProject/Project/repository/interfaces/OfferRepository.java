@@ -1,7 +1,9 @@
 package com.finalProject.Project.repository.interfaces;
 
+import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Offer;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -21,4 +23,19 @@ public interface OfferRepository extends CrudRepository<Offer,Integer> {
     List<Offer> sortByPrice( @Param("id") Integer id, @Param("work") WorkStatus workStatus);
     @Query("select f from Offer  f where f.orders.customers.id=:id and f.workStatus=:work order by  f.expert.rate desc ")
     List<Offer> sortByRate( @Param("id") Integer id, @Param("work") WorkStatus workStatus);
+    @Query(
+            "select new Offer (f.id,f.time,f.offerPrice,f.workTime,f.workStatus,f.expert.lastName,f.orders.id,f.orders.subService.name) from Offer f where " +
+                    "f.orders.customers.email=:email and f.workStatus='SELECTED' or f.workStatus='PAID'"
+    )
+    List<Offer> expertHistory(@Param("email") String email);
+    @Query(
+            "select new Offer (f.id,f.time,f.offerPrice,f.workTime,f.workStatus,f.expert.lastName,f.orders.id,f.orders.subService.name) from Offer f where " +
+                    "f.orders.customers.email=:email and f.workStatus='SELECTED' or f.workStatus='PAID'"
+    )
+    List<Offer> customerHistory(@Param("email") String email);
+    List<Offer> findAll(Specification<Offer> spec);
+    Offer findByOrdersIdAndWorkStatus(Integer id,WorkStatus workStatus);
+
+
+
 }

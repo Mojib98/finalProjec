@@ -35,9 +35,10 @@ import java.time.LocalDateTime;
         @UniqueConstraint(columnNames={"expert_id", "orders_id"})
 )
 public class Offer extends BaseClass {
+    @Column(name = "offer_price")
     private Integer offerPrice;
+    @Column(name = "time_for_work")
     private Integer timeForWork;
-//    private LocalTime time;
     private LocalDateTime workTime;
     @Enumerated(EnumType.STRING)
     private WorkStatus workStatus;
@@ -47,6 +48,8 @@ public class Offer extends BaseClass {
     private Expert expert;
     @ManyToOne
     private Order orders;
+    @Transient
+    private String subServiceName;
 
     public Offer(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime workTime, WorkStatus workStatus, Expert expert, Order orders) {
         super(id, time);
@@ -55,6 +58,17 @@ public class Offer extends BaseClass {
         this.workStatus = workStatus;
         this.expert = expert;
         this.orders = orders;
+    }
+    public Offer(Integer id, LocalDateTime time, Integer offerPrice, LocalDateTime workTime, WorkStatus workStatus, String name, Integer ordersId,String serviceName) {
+        super(id, time);
+        this.offerPrice = offerPrice;
+        this.workTime = workTime;
+        this.workStatus = workStatus;
+        this.expert = new Expert();
+        this.expert.setLastName(name);
+        this.orders = new Order();
+        this.orders.setId(ordersId);
+        this.subServiceName =serviceName;
     }
 
 }

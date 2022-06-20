@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="js/ManageServiceScript.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+    <div>
+
+
+    </div>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">fsadfsa</span>
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adservice"
+                    aria-expanded="false" aria-controls="adservice">
+                    اضافه کردن سرویس
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#adsubservice"
+                    aria-expanded="false" aria-controls="adsubservice" id="addSubServicePanel">
+                    اضافه کردن زیرخدمت
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#showAll"
+                    aria-expanded="false" aria-controls="showAll" id="show">
+                    ndn کردن زیرخدمت
+                </button>
+                <!-- <button type = "button" value="show all" id="show">show</button> -->
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                </div>
+            </div>
+        </nav>
+        <div class="collapse" id="adservice">
+            <div class="mb-3 card card-body">
+                <label for="service" class="form-label">service</label>
+                <input id="service" type="text" class="form-control" id="newServiceName" placeholder="سرویس را وارد کنید">
+                <button type="button" value="service" id="butservice">Add</button>
+            </div>
+        </div>
+        <div class="collapse" id="adsubservice">
+            <div class=" mb-3 card card-body">
+                <p>
+                    <label for="category" class="form-label">category</label>
+                    <input id="category" name="category" type="text">
+                </p>
+
+                <p>
+                    <label for="subService" class="form-label">subService</label>
+                    <input id="subService" name="subService" type="text">
+                </p>
+
+                <p>
+                    <label for="describe" class="form-label">describe</label>
+                    <input id="describe" name="describe" type="text">
+                </p>
+
+                <p>
+                    <label for="price" class="form-label">price</label>
+                    <input id="price" name="price" type="text" accept="application/vnd.apple.numbers">
+                </p>
+
+                
+                <p>
+                    <select class="form-select" aria-label="Default select example" id="services">
+                        <option selected value="5"  >انتخاب کنید</option>
+                      </select>
+                </p>
+                <p>
+                    <button type="button" class="btn btn-outline-success" value="service" id="butsub">Add</button>
+                </p>
+            </div>
+        </div>
+
+        <div class="collapse" id="showAll">
+
+            <h1>لیست تمامی خدمات موجود در سامانه</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    service list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>subservice</th>
+                            <th>price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblbody">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+        </div>
+
+</body>
+
+</html>

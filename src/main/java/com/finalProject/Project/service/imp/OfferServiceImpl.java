@@ -72,5 +72,9 @@ public class OfferServiceImpl implements OfferService {
         return offerRepository.sortByPrice(id, WorkStatus.WAIT);
 
     }
+    @Transactional
+    public Offer findOfferByOrderId(Integer id){
+        return offerRepository.findByOrdersIdAndWorkStatus(id,WorkStatus.PAYED);
+    }
 
 }

@@ -1,72 +1,69 @@
 package com.finalProject.Project;
 
-import com.finalProject.Project.app.*;
-import com.finalProject.Project.app.SingUpAppImpl;
-import com.finalProject.Project.entity.Customer;
 import com.finalProject.Project.entity.Expert;
-import com.finalProject.Project.service.imp.ManageExpertService;
-import com.finalProject.Project.service.imp.OfferServiceImpl;
+import com.finalProject.Project.entity.dto.OrderDto;
+import com.finalProject.Project.entity.enumeration.WorkStatus;
+import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.time.LocalDateTime;
 
 @SpringBootApplication
+@EnableWebSecurity(debug = true)
 public class ProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectApplication.class, args);
 	}
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:63342");
+			}
+		};
+	}
 	@Component
 	class Start implements ApplicationRunner {
 		@Autowired
-		ManageForSystem manageForSystem;
-		@Autowired
-		SingUpAppImpl sing;
-		@Autowired
-		ManagerForExpert manager;
-		@Autowired
-		ExpertApp expertApp;
-		@Autowired
-        CustomerApp customerApp;
-		@Autowired
-		Menu menu;
-		@Autowired
-		ManageExpertService expertService;
-		@Autowired
-		OfferServiceImpl offerService;
+		ManagerProfileServiceImpl profileService;
+		LocalDateTime start =LocalDateTime.of(2022,5,29, 0,0,0);
+		LocalDateTime end =LocalDateTime.of(2022,5,29, 23,59,59);
 
-		Expert expert = new Expert();
-		Customer customer = new Customer();
+
 
 
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
-			expert.setId(80);
-			expertApp.setExpert(expert);
-			customer.setId(78);
-			customerApp.setCustomer(customer);
-	/*		customerApp.choiceOffer();
-			expertApp.writeOffer();*/
-//			while (true)
-//				expertApp.writeOffer();
-//				customerApp.choiceOffer();
-//			expertApp.downWork();
-//
-//		var s=	offerService.sortByRateAndPrice(13);
-//			System.out.println(s);
-//					manageForSystem.addSubService();
-//			menu.MangeSpecialist();
-			while (true){
+			OrderDto orderDto  = new OrderDto();
+//			orderDto.setWorkStatus(WorkStatus.DONE);
+//			orderDto.setSubServiceName("majidshoyee");
+//			orderDto.setServiceName("washing");
+//		var s=	profileService.searchOrder(orderDto);
+//			var s = profileService.findBySingUpTime(start,end);
+//			for (Expert e:s){
+//				System.out.println(e.getId());
+//			}
+
+		/*	while (true){
 				try {
-					expertApp.writeOffer();
-//					sing.requestForSingUp();
-//					customerApp.createOrder();
+
+
+
 				}catch (Exception e){
 					e.printStackTrace();
 				}
-			}
+			}*/
 
 		}
 	}

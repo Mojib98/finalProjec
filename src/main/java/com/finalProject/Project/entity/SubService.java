@@ -1,9 +1,9 @@
 package com.finalProject.Project.entity;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 @Data
 @Entity
@@ -16,18 +16,20 @@ import java.time.LocalDateTime;
         where s.expert.id=19*/
 @Table(name = "sub_service")
 public class SubService extends BaseClass {
-    @Column(nullable = false, unique = true)
+    @Column(unique = true,nullable = false)
     private String name;
+    @NotNull
     private Integer basePrice;
+    @NotNull
     private String describe;
     @ManyToOne
-    private Service category;
+    private Service service;
 
     public SubService(Integer id, LocalDateTime time, String name, Integer basePrice, String describe, Service service) {
         super(id, time);
         this.name = name;
         this.basePrice = basePrice;
         this.describe = describe;
-        this.category = service;
+        this.service = service;
     }
 }

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="js/ExpertViewScript.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+
+
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" id="showMangeService">
+                    <span class="navbar-toggler-icon">showMangeService</span>
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#showAllService" aria-expanded="true" aria-controls="#showAllService">
+                    درخواست تخصص
+
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#showListOrderForStart" aria-expanded="true" aria-controls="showListOrderForStart"
+                    id="showOrderForStart">
+                    start work
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#showListOrderForDown" aria-expanded="true" aria-controls="showListOrderForDown"
+                    id="showDownWork">
+                    Done work
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#showAllOrderForOffer" aria-expanded="true" aria-controls="showAllOrderForOffer"
+                id="createOffer">
+                create Offer
+            </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#showAllOrder" aria-expanded="true" aria-controls="showAllOrder"
+                        id="showAllOrderBut">
+                    مشاهده تمام پیشنهادات
+                </button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#myInfo" aria-expanded="true" aria-controls="myInfo"
+                        id="info">
+                    دیدن رتبه و کیف پول
+                </button>
+
+            </div>
+        </nav>
+
+        <div class="collapse navbar-collapse" id="showAllService">
+            <div class="card card-body">
+                <div id="listof">
+                </div>
+                <button type="button" class="btn btn-outline-primary" id="request">ثبت درخواست</button>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="showListOrderForStart">
+            <div class="card card-body">
+                <div>
+
+                    <h1></h1>
+                    <br />
+                    <fieldset>
+                        <legend>
+                            service list
+                        </legend>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>name</th>
+                                    <th>email</th>
+                                    <th>status</th>
+                                    <th>checkbox</th>
+                                    <!-- <th>price</th>
+                        <th>Address</th>
+                        <th>City</th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="listOrderForStart">
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                        data-bs-target="#" aria-expanded="true" aria-controls="#" id="forStartWork">
+                        choiceOffer
+                    </button>
+                </div>
+            </div>
+            <!-- <button type="button" class="btn btn-outline-primary" id="startWork">ثبت درخواست</button> -->
+        </div>
+    </div>
+    <div class="collapse navbar-collapse" id="showListOrderForDown">
+        <div class="card card-body">
+            <div>
+
+                <h1></h1>
+                <br />
+                <fieldset>
+                    <legend>
+                        service list
+                    </legend>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>name</th>
+                                <th>email</th>
+                                <th>status</th>
+                                <th>checkbox</th>
+                                <!-- <th>price</th>
+                <th>Address</th>
+                <th>City</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="listOrderForDown">
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-toggle=".collapse.show"
+                    data-bs-target="#showOffer" aria-expanded="true" aria-controls="#showOffer" id="finish">
+                    finish
+                </button>
+            </div>
+        </div>
+        <!-- <button type="button" class="btn btn-outline-primary" id="startWork">ثبت درخواست</button> -->
+    </div>
+    </div>
+
+
+    <div id="showAllOrderForOffer" class="collapse">
+
+        <h1>لیست سفارشات برای شما</h1>
+        <br />
+        <fieldset>
+            <legend>
+                Order list
+            </legend>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>subService</th>
+                    <th>describe</th>
+                    <th>time</th>
+                    <th>price</th>
+                    <th>address</th>
+                    <th>checkbox</th>
+                    <!-- <th>price</th>
+            <th>Address</th>
+            <th>City</th> -->
+                </tr>
+                </thead>
+                <tbody id="tblbody">
+                </tbody>
+            </table>
+        </fieldset>
+        <div>
+            <p>
+                <label for="describe" class="floatLabel">describe</label>
+                <input id="describe" name="describe" type="text">
+            </p>
+            <p>
+                <label for="time" class="floatLabel">time</label>
+                <input id="time" name="time" type="datetime-local">
+            </p>
+
+            <p>
+                <label for="price" class="floatLabel">price</label>
+                <input id="price" name="price" type="number" accept="application/vnd.apple.numbers">
+            </p>
+            <p>
+                <button type="button" value="Create My Account" id="button">Add</button>
+
+            </p>
+        </div>
+<!--        <button type="button" class="btn btn-outline-success" value="service" id="butdet">Add</button>-->
+
+    <div id="div3">
+    </div>
+        <div id="myInfo" class="collapse">
+            <p>Thnaks</p>
+
+                    </div>
+        <div id="showOrderAll" class="collapse">
+
+            <h1>لیست سفارشات برای شما</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    Order list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>subService</th>
+                        <th>describe</th>
+                        <th>time</th>
+                        <th>price</th>
+                        <th>address</th>
+                        <th>checkbox</th>
+                        <!-- <th>price</th>
+                <th>Address</th>
+                <th>City</th> -->
+                    </tr>
+                    </thead>
+                    <tbody id="">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+
+    <div id="showAllOrder" class="collapse">
+
+        <h1>لیست سفارشات برای شما</h1>
+        <br />
+        <fieldset>
+            <legend>
+                Order list
+            </legend>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>subService</th>
+                    <th>describe</th>
+                    <th>time</th>
+                    <th>price</th>
+                    <th>address</th>
+                    <!-- <th>price</th>
+            <th>Address</th>
+            <th>City</th> -->
+                </tr>
+                </thead>
+                <tbody id="AllOrders">
+                </tbody>
+            </table>
+        </fieldset>
+<!--        <button type="button" class="btn btn-outline-success" value="service" id="butdet">Add</button>-->
+
+    <div id="div3">
+    </div>
+        <div id="myInfo" class="collapse">
+            <p>Thnaks</p>
+
+                    </div>
+        <div id="showOrderAll" class="collapse">
+
+            <h1>لیست سفارشات برای شما</h1>
+            <br />
+            <fieldset>
+                <legend>
+                    Order list
+                </legend>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>subService</th>
+                        <th>describe</th>
+                        <th>time</th>
+                        <th>price</th>
+                        <th>address</th>
+                        <th>checkbox</th>
+                        <!-- <th>price</th>
+                <th>Address</th>
+                <th>City</th> -->
+                    </tr>
+                    </thead>
+                    <tbody id="showAllOrder">
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

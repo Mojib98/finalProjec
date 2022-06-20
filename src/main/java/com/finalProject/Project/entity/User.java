@@ -2,6 +2,7 @@ package com.finalProject.Project.entity;
 
 import com.finalProject.Project.entity.enumeration.UserStatus;
 import lombok.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,8 +14,8 @@ import java.util.Objects;
 @Setter
 @Getter
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@MappedSuperclass
-public abstract class User extends BaseClass{
+@Table(name = "users")
+public abstract class User extends BaseClass  {
     @NotNull
     private String firstName;
     @NotNull
@@ -29,15 +30,6 @@ public abstract class User extends BaseClass{
 
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        User person = (User) o;
-        return Objects.equals(email, person.email);
-    }
-
     public User(Integer id, LocalDateTime time, String firstName, String lastName, String email, String password, UserStatus status) {
         super(id, time);
         this.firstName = firstName;
@@ -46,9 +38,6 @@ public abstract class User extends BaseClass{
         this.password = password;
         this.status = status;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), email);
     }
-}
+
+
