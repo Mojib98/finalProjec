@@ -136,22 +136,13 @@
         </ul>
     </h4>
 </details>
-    <img src="https://github.com/Mojib98/finalProject/blob/master/src/main/resources/home/arkad/IdeaProjects/Untitled%20Diagram.jpg" alt="">
+  
 
 <details>
     <summary>
          EER
     </summary>
 
-
-
-
-
-
-
-
-
-
-
-
+  <p>
+    <img src="https://github.com/Mojib98/finalProject/blob/master/src/main/resources/home/arkad/IdeaProjects/Untitled%20Diagram.jpg" alt=""></p>
 </details>
