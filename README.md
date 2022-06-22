@@ -1,5 +1,6 @@
 # finalProject
-  <h1>پروژه درخواست خدمات</h1>
+  
+      <h1>پروژه درخواست خدمات</h1>
     <h2>شرح پروژه</h2>
     <h3>
         کاربران پروژه
@@ -25,9 +26,14 @@
              مشتری با قبول پیشنهاد متخصص و مبلغ خدمت را قبول کرده.متخصص می تواند کار شروع کن و بعد پایان کار  مشتری میتواند به کار متخصص امتیاز دهد و پیشنهاد را تسویه کند. 
         </pre>
     </h4>
+    
     <h3>
         عملیات‌های مشتری
     </h3>
+    <details>
+        <summary>
+            شرح عملیات مشتری
+        </summary>
     <h4>
         <ul>
             <li>
@@ -59,7 +65,14 @@
             </li>
         </ul>
     </h4>
+</details>
+<!--شرح عمل-->
+
     <h3>عملیات متخصص</h3>
+    <details>
+        <summary>
+            شرح عملیات‌
+        </summary>
     <h4>
         <ul>
             <li>
@@ -87,7 +100,13 @@
             </li>
         </ul>
     </h4>
-    <h3>عملیات مدیر</h3>
+</details>
+<h3>عملیات مدیر</h3>
+
+<details>
+        <summary>
+            شرح عملیات مدیر
+        </summary>
     <h4>
         <ul>
             <li>
@@ -116,4 +135,22 @@
             </li>
         </ul>
     </h4>
-    <h1>در حال تکمیل</h1>
+</details>
+<details>
+    <summary>
+         EER
+    </summary>
+
+    <img src="https://github.com/Mojib98/finalProject/blob/9a3fb789175ef44345ce5bd27fc47da307578f2d/src/main/resources/home/arkad/IdeaProjects/Untitled%20Diagram.jpg" alt="">
+
+
+
+
+
+
+
+
+
+
+
+</details>
