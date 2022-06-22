@@ -141,7 +141,7 @@
          EER
     </summary>
 
-    <img src="src/main/resources/home/arkad/IdeaProjects/Untitled Diagram.jpg" alt="">
+    <img src="https://github.com/Mojib98/finalProject/blob/master/src/main/resources/home/arkad/IdeaProjects/Untitled%20Diagram.jpg" alt="">
 
 
 
