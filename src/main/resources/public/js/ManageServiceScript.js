@@ -9,9 +9,10 @@ $("input[name='price']").on("change", function () {
     }
 });
 $(document).ready(function () {
+    alert($("#newServiceName").val())
     $("#butservice").click(function (event) {
         var formData = {
-            serviceName: $("#newServiceName").val(),
+            serviceName: $("#newServiceName").val()
 
             // superheroAlias: $("#superheroAlias").val(),
         };

@@ -1,3 +1,4 @@
+/*
 package com.finalProject.Project.config;
 
 import org.springframework.context.annotation.Bean;
@@ -37,3 +38,4 @@ class SimpleCOR implements Filter {
 //    }
 
 }
+*/

@@ -30,7 +30,7 @@ public class ManagerSystemController {
     ServicesServiceImpl service;
 
     @PostMapping("/addservice")
-    public void addService(@ModelAttribute ServiceDto service) {
+    public void addService( ServiceDto service) {
 //        Service service = modelMapper.map(serviceDto,Service.class);
         System.out.println(service);
         servicesService.insertService(service.getServiceName());
