@@ -1,5 +1,8 @@
 package com.finalProject.Project.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -25,5 +28,12 @@ class SimpleCOR implements Filter {
     public void init(FilterConfig filterConfig) {}
 
     public void destroy() {}
+//        @Bean
+//        SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+//        http
+//                // ...
+//                .cors(cors -> cors.disable());
+//        return http.build();
+//    }
 
 }

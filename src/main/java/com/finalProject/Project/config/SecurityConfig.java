@@ -9,7 +9,9 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
 @AllArgsConstructor
@@ -32,19 +34,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
 //                .and()
 //                .cors().configurationSource(corsConfigurationSource()).and()
-                .csrf().disable()
-                .authorizeRequests()
+                .csrf().disable().cors()
+//                .authorizeRequests()
 //                .antMatchers("/**").permitAll()
 //                .antMatchers("/user/**").authenticated() // means what ever that begins with /api
-                .antMatchers("/user/**").hasAnyRole("ADMIN")
+//                .antMatchers("/user/**").hasAnyRole("ADMIN")
 //                .antMatchers("/customer/**").hasAnyRole("CUSTOMER")
-                .antMatchers("/exp/**").hasAnyRole("EXPERT","ADMIN")
+              /*  .antMatchers("/exp/**").hasAnyRole("EXPERT","ADMIN")
                 .antMatchers("/service/**").hasAnyRole("CUSTOMER","ADMIN")
                 .antMatchers("/singup/**").permitAll()
-                .antMatchers("/customer/onlinePaying","/customer/howMuch").permitAll()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin().successHandler(success)
+                .antMatchers("/customer/onlinePaying","/customer/howMuch").permitAll()*/
+//                .anyRequest().permitAll()
+//                .and()
+//                .formLogin().successHandler(success)
                 ;
     }
 
@@ -73,6 +75,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(userDetailService);
         return provider;
     }
+//    @Bean
+//    SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+//        http
+//                // ...
+//                .cors(cors -> cors.disable());
+//        return http.build();
+//    }
 
 
 

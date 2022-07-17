@@ -70,7 +70,7 @@ public class ManagerSystemController {
     }
 
     @PostMapping("/sub")
-    public List<ServiceDto> showAllSubService(@ModelAttribute ServiceDto serviceDto) {
+    public List<ServiceDto> showAllSubService(ServiceDto serviceDto) {
         TypeMap<SubService, ServiceDto> typeMap = modelMapper.getTypeMap(SubService.class, ServiceDto.class);
         if (typeMap == null) {
             modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
@@ -86,8 +86,8 @@ public class ManagerSystemController {
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
 
-    /*    @GetMapping("/sub")
-        public List<ServiceDto> showAllService(){
+        @GetMapping("/sub")
+        public List<ServiceDto> showAllSubService(){
             modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
                 @Override
                 protected void configure() {
@@ -98,7 +98,7 @@ public class ManagerSystemController {
             var listService= servicesService.showAllSubService();
     //        System.out.println(listService.get(0).getService().getName());
             return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
-        }*/
+        }
     //search do here
     public Service findServiceByName(String name) {
         Service service = servicesService.findServiceByName(name);

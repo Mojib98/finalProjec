@@ -65,7 +65,8 @@ function BindpatientData() {
     $.ajax({
         url: "http://localhost:8080/service/sub",
         type: "GET",
-        contentType: "application/json;charset=utf-8",
+        method : "GET",
+        // contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (result) {
             debugger;
