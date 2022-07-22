@@ -2,7 +2,7 @@ import "https://code.jquery.com/jquery-3.6.0.js";
 import "https://code.jquery.com/jquery-migrate-3.4.0.js";
 import "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js";
 $("input[name='price']").on("change", function () {
-    if ($(this).val() > 0) {
+    if ($(this).val() >= 0) {
     } else {
         alert("negative mony")
         $(this).val('');
@@ -72,6 +72,8 @@ function BindpatientData() {
         success: function (result) {
             debugger;
             if (result) {
+                $("#tblbody").empty();
+
                 //itetrate thorugh each record and bind it to td
                 var html = '';
                 $.each(result, function (key, item) {
@@ -98,7 +100,6 @@ function BindpatientData() {
                 dataType: "json",
                 success: function (result) {
                     $("#services").empty();
-                    $("#services").attr('disabled', false);
                     $.each(result,function(key, value)
                     {
                         $("#services").append('<option value="' + value.serviceName +'">' + value.serviceName + '</option>');

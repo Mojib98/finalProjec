@@ -1,20 +1,14 @@
 package com.finalProject.Project.controller;
 
-import com.finalProject.Project.entity.Offer;
-import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.SubService;
-import com.finalProject.Project.entity.dto.OfferDto;
-import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.entity.dto.ServiceDto;
-import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import com.finalProject.Project.service.interfaces.ManageServiceForService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -42,9 +36,7 @@ public class ManagerSystemController {
             modelMapper.addMappings(new PropertyMap<ServiceDto, SubService>() {
                 @Override
                 protected void configure() {
-//                skip(destination.getService());
                     map().setName(source.getSubServiceName());
-//                skip(source.getServiceName());
                 }
                 // if not  already added
             });
@@ -61,6 +53,7 @@ public class ManagerSystemController {
 
     @GetMapping("/allService")
     public List<ServiceDto> showAllService() {
+
         var listService = servicesService.showAllService();
         System.out.println(listService);
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
@@ -73,7 +66,6 @@ public class ManagerSystemController {
             modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
                 @Override
                 protected void configure() {
-//                map().setServiceName(source..getName());
                     map().setSubServiceName(source.getName());
                     skip(destination.getServiceName());
                 }
@@ -85,15 +77,16 @@ public class ManagerSystemController {
 
     @GetMapping("/sub")
     public List<ServiceDto> showAllSubService() {
-        modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
-            @Override
-            protected void configure() {
-                //                map().setServiceName(source.getService().getName());
-                map().setSubServiceName(source.getName());
-            }
-        });
+        TypeMap<SubService, ServiceDto> typeMap = modelMapper.getTypeMap(SubService.class, ServiceDto.class);
+        if (typeMap == null) {
+            modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
+                @Override
+                protected void configure() {
+                    map().setSubServiceName(source.getName());
+                }
+            });
+        }
         var listService = servicesService.showAllSubService();
-        //        System.out.println(listService.get(0).getService().getName());
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
 

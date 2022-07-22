@@ -25,9 +25,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Some Thing Wrong " + ex.getMessage());
 
     }
-    public ResponseEntity<Object> exception(RuntimeException runtimeException){
+    @ExceptionHandler(RuntimeException.class)
+    public String exception(RuntimeException runtimeException, WebRequest webRequest){
         logger.error(runtimeException.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Some Thing Wrong " + runtimeException.getMessage());
+        return makeErrorPage(runtimeException.getMessage());
     }
     public String makeErrorPage(String error){
 
@@ -61,4 +62,5 @@ public class GlobalExceptionHandler {
                 "</body>\n" +
                 "</html>";
     }
+
 }

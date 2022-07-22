@@ -17,6 +17,10 @@ public interface ManageServiceForService {
 
     List<SubService> showAllSubService();
 
+    void checkUniqSubService(SubService service);
+
+    void checkUniqService(Service service);
+
     List<SubService> showAllSubServiceById(Integer id);
 
 }
