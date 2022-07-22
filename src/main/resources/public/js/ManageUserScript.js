@@ -330,16 +330,16 @@ $("#request").click(function (event) {
 //-------------------------------------history of customer---------------
 $(document).ready(function () {
     $("#historyOfCustomerbut").click(function (event) {
-        customerHistory();
+        userHistory("http://localhost:8080/user/customerHistory",$("#inputemailcustomer").val());
     })
 });
 
-function customerHistory() {
+function userHistory(targetUrl,email) {
     $.ajax({
-        url: "http://localhost:8080/user/customerHistory",
+        url: targetUrl,
         type: "GET",
         data: {
-            email:$("#inputemailcustomer").val(),
+            email:email,
         },
         // contentType: "application/json;charset=utf-8",
         dataType: "json",
@@ -370,16 +370,16 @@ function customerHistory() {
 }
 $(document).ready(function () {
     $("#historyOfExpertbut").click(function (event) {
-        expertHistory();
+        userHistory("http://localhost:8080/user/expertHistory",$("#inputemailexpert").val());
     })
 });
 
-function expertHistory() {
+function expertHistory(expertHistory) {
     $.ajax({
-        url: "http://localhost:8080/user/expertHistory",
+        url: expertHistory,
         type: "GET",
         data: {
-            email:$("#inputemailcustomer").val(),
+            email:$("#inputemailexpert").val(),
         },
         // contentType: "application/json;charset=utf-8",
         dataType: "json",

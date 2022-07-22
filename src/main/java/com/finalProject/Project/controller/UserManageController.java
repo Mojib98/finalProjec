@@ -125,8 +125,10 @@ public class UserManageController {
 //        var listOf = managerProfileService.historyOfferForExpert(email);
 //        return Arrays.asList(modelMapper.map(listOf, OfferDto[].class));
 //    }
-    @GetMapping("w{email}")
-    public List<OfferDto> expertHistoryOffer(String email) {
+    @GetMapping("expertHistory")
+    public List<OfferDto> expertHistoryOffer(@RequestParam String email) {
+        if (email.isEmpty())
+            return null;
         System.out.println(email);
         TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
         if (typeMap == null) {
@@ -145,6 +147,8 @@ public class UserManageController {
 
     @GetMapping("/customerHistory")
     public List<OfferDto> customerHistoryOffer(@RequestParam String email) {
+        if (email.isEmpty())
+            return null;
         System.out.println(email);
         TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
         if (typeMap == null) {
