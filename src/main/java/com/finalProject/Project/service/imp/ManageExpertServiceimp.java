@@ -41,6 +41,7 @@ public class ManageExpertServiceimp implements ManageServiceForExpert {
     @Override
     @Transactional
     public void handleRequestForExpert(List<Integer> accepted) {
+        List<Integer> removlaList=accepted;
 
         for (Integer id : accepted) {
             Expert expert = new Expert();
@@ -48,11 +49,15 @@ public class ManageExpertServiceimp implements ManageServiceForExpert {
             expert.setStatus(UserStatus.CONFIRMED);
             System.out.println(expert);
             changeStatusExpert(expert);
+            removlaList.remove(id);
         }
-     /*   for (Expert expert : unAccepted) {
+        for (Integer id : removlaList) {
+            Expert expert = new Expert();
+            expert.setId(id);
+            System.out.println(expert);
             expert.setStatus(UserStatus.UNCONFIRMED);
             changeStatusExpert(expert);
-        }*/
+        }
     }
 
 
