@@ -57,8 +57,7 @@ public class UserManageController {
 //                skip(source.getServiceName());
             }
         });
-        var s = Arrays.asList(modelMapper.map(list, SpecialistDto[].class));
-        return s;
+        return  Arrays.asList(modelMapper.map(list, SpecialistDto[].class));
     }
 
     @PostMapping("/searchexpert")
@@ -66,18 +65,16 @@ public class UserManageController {
         System.out.println(userDto);
         Expert expert = modelMapper.map(userDto, Expert.class);
         List<Expert> experts = manager.search(expert);
-        var s = Arrays.asList(modelMapper.map(experts, UserDto[].class));
-        return s;
+        return Arrays.asList(modelMapper.map(experts, UserDto[].class));
     }
 
     @PostMapping("/searchcustomer")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     public List<UserDto> searchCustomer(@ModelAttribute UserDto userDto) {
         System.out.println(userDto);
         Customer customer = modelMapper.map(userDto, Customer.class);
         List<Customer> customers = manager.searchCustomer(customer);
-        var s = Arrays.asList(modelMapper.map(customers, UserDto[].class));
-        return s;
+        return Arrays.asList(modelMapper.map(customers, UserDto[].class));
     }
 
     @PostMapping("/addSpecialty")
@@ -146,8 +143,8 @@ public class UserManageController {
 
     }
 
-    @GetMapping("/customerHistory{email}")
-    public List<OfferDto> customerHistoryOffer(String email) {
+    @GetMapping("/customerHistory")
+    public List<OfferDto> customerHistoryOffer(@RequestParam String email) {
         System.out.println(email);
         TypeMap<Offer, OfferDto> typeMap = modelMapper.getTypeMap(Offer.class, OfferDto.class);
         if (typeMap == null) {
@@ -160,6 +157,7 @@ public class UserManageController {
             });
         }
         List<Offer> offerList = managerProfileService.historyOfferForCustomer(email);
+        System.out.println(offerList);
         return Arrays.asList(modelMapper.map(offerList, OfferDto[].class));
 
     }
