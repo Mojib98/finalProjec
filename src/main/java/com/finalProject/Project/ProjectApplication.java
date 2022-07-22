@@ -4,6 +4,7 @@ import com.finalProject.Project.entity.Expert;
 import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.entity.enumeration.WorkStatus;
 import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -24,14 +25,17 @@ public class ProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectApplication.class, args);
 	}
-	@Bean
+/*	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurerAdapter() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**").allowedOrigins("http://localhost:63342");
 			}
-		};
+		};*/
+	@Bean
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
 	}
 	@Component
 	class Start implements ApplicationRunner {

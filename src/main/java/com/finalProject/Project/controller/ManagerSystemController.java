@@ -1,4 +1,5 @@
 package com.finalProject.Project.controller;
+
 import com.finalProject.Project.entity.Offer;
 import com.finalProject.Project.entity.Order;
 import com.finalProject.Project.entity.Service;
@@ -8,34 +9,30 @@ import com.finalProject.Project.entity.dto.OrderDto;
 import com.finalProject.Project.entity.dto.ServiceDto;
 import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
 import com.finalProject.Project.service.imp.ServicesServiceImpl;
+import com.finalProject.Project.service.interfaces.ManageServiceForService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @CrossOrigin
+@AllArgsConstructor
 @RequestMapping("/service")
 public class ManagerSystemController {
-    private final ModelMapper modelMapper = new ModelMapper();
-    @Autowired
-    private ServicesServiceImpl servicesService;
-    @Autowired
-    private ManagerProfileServiceImpl managerProfileService;
-
-    @Autowired
-    ServicesServiceImpl service;
+    private final ModelMapper modelMapper;
+    private ManageServiceForService servicesService;
+    private ServicesServiceImpl service;
 
     @PostMapping("/addservice")
-    public void addService( ServiceDto service) {
-//        Service service = modelMapper.map(serviceDto,Service.class);
+    public void addService(ServiceDto service) {
         System.out.println(service);
         servicesService.insertService(service.getServiceName());
-
-
     }
 
     @PostMapping("/addsub")
@@ -86,19 +83,20 @@ public class ManagerSystemController {
         return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
     }
 
-        @GetMapping("/sub")
-        public List<ServiceDto> showAllSubService(){
-            modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
-                @Override
-                protected void configure() {
-    //                map().setServiceName(source.getService().getName());
-                    map().setSubServiceName(source.getName());
-                }
-            });
-            var listService= servicesService.showAllSubService();
-    //        System.out.println(listService.get(0).getService().getName());
-            return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
-        }
+    @GetMapping("/sub")
+    public List<ServiceDto> showAllSubService() {
+        modelMapper.addMappings(new PropertyMap<SubService, ServiceDto>() {
+            @Override
+            protected void configure() {
+                //                map().setServiceName(source.getService().getName());
+                map().setSubServiceName(source.getName());
+            }
+        });
+        var listService = servicesService.showAllSubService();
+        //        System.out.println(listService.get(0).getService().getName());
+        return Arrays.asList(modelMapper.map(listService, ServiceDto[].class));
+    }
+
     //search do here
     public Service findServiceByName(String name) {
         Service service = servicesService.findServiceByName(name);

@@ -7,6 +7,7 @@ import com.finalProject.Project.repository.interfaces.CommentRepository;
 import com.finalProject.Project.repository.interfaces.CustomerRepository;
 import com.finalProject.Project.repository.interfaces.OrderRepository;
 import com.finalProject.Project.service.interfaces.CustomerService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
     private final OfferServiceImpl offerService;
     private final OrderRepository orderRepository;
@@ -29,19 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final ManageExpertService expertService;
     private final CommentRepository commentRepository;
-    private final ModelMapper modelMapper = new ModelMapper();
-
-
-    public CustomerServiceImpl(OfferServiceImpl offerService, OrderRepository orderRepository,
-                               ServicesServiceImpl servicesService, CustomerRepository customerRepository,
-                               ManageExpertService expertService, CommentRepository commentRepository) {
-        this.offerService = offerService;
-        this.orderRepository = orderRepository;
-        this.servicesService = servicesService;
-        this.customerRepository = customerRepository;
-        this.expertService = expertService;
-        this.commentRepository = commentRepository;
-    }
+    private final ModelMapper modelMapper;
 
     @Transactional
     public void insertOrder(OrderDto orderDto,Customer customer) {
