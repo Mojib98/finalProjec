@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ManageExpertService implements ManageServiceForExpert {
+public class ManageExpertServiceimp implements ManageServiceForExpert {
     private final ManageRepositoryForExpert manageRepositoryForExpert;
     private final SpecialtyRepository specialtyRepository;
     private final CustomerRepository customerRepository;
 
-    public ManageExpertService(ManageRepositoryForExpert manageRepositoryForExpert, SpecialtyRepository specialtyRepository, CustomerRepository customerRepository) {
+    public ManageExpertServiceimp(ManageRepositoryForExpert manageRepositoryForExpert, SpecialtyRepository specialtyRepository, CustomerRepository customerRepository) {
         this.manageRepositoryForExpert = manageRepositoryForExpert;
         this.specialtyRepository = specialtyRepository;
         this.customerRepository = customerRepository;
@@ -40,7 +40,7 @@ public class ManageExpertService implements ManageServiceForExpert {
 
     @Override
     @Transactional
-    public void handleRequestForExpert(List<Integer> accepted, List<Integer> unAccepted) {
+    public void handleRequestForExpert(List<Integer> accepted) {
 
         for (Integer id : accepted) {
             Expert expert = new Expert();
@@ -65,7 +65,7 @@ public class ManageExpertService implements ManageServiceForExpert {
 
     @Override
     @Transactional
-    public void handelRequestForSpecialty(List<Integer> accepted, List<Specialty> unAccepted) {
+    public void handelRequestForSpecialty(List<Integer> accepted) {
         for (Integer id : accepted) {
             Specialty specialty = specialtyRepository.findById(id).get();
             specialty.setId(id);

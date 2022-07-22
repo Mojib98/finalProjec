@@ -3,7 +3,6 @@ package com.finalProject.Project.controller;
 import com.finalProject.Project.entity.Service;
 import com.finalProject.Project.entity.SubService;
 import com.finalProject.Project.entity.dto.ServiceDto;
-import com.finalProject.Project.service.imp.ServicesServiceImpl;
 import com.finalProject.Project.service.interfaces.ManageServiceForService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,8 +19,7 @@ import java.util.List;
 @RequestMapping("/service")
 public class ManagerSystemController {
     private final ModelMapper modelMapper;
-    private ManageServiceForService servicesService;
-    private ServicesServiceImpl service;
+    private final ManageServiceForService servicesService;
 
     @PostMapping("/addservice")
     public void addService(ServiceDto service) {

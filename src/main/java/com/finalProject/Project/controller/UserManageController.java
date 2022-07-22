@@ -2,79 +2,43 @@ package com.finalProject.Project.controller;
 
 import com.finalProject.Project.entity.*;
 import com.finalProject.Project.entity.dto.*;
-import com.finalProject.Project.entity.enumeration.UserStatus;
 import com.finalProject.Project.repository.interfaces.UserRepository;
-import com.finalProject.Project.service.imp.ManageExpertService;
-import com.finalProject.Project.service.imp.ManagerProfileServiceImpl;
+import com.finalProject.Project.service.interfaces.ManageProfile;
+import com.finalProject.Project.service.interfaces.ManageServiceForExpert;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.TypeMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/user")
+@AllArgsConstructor
 public class UserManageController {
-//    var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    @Autowired
-    ManageExpertService manager;
-    @Autowired
-    ManagerProfileServiceImpl managerProfileService;
-    @Autowired
-    UserRepository userRepository;
-    private final ModelMapper modelMapper = new ModelMapper();
+    private final ManageServiceForExpert manager;
+    private final ManageProfile managerProfileService;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
 
     @PostMapping("/expertdetermine")
     public void determineSingUp(@ModelAttribute UserDto selectedExpert) {
-        List<Expert> list = manager.requestListSingUp();
-        System.out.println(selectedExpert.getIds());
-        System.out.println(selectedExpert.getUserDto());
-        manager.handleRequestForExpert(selectedExpert.getIds(), null);
-
-      /*  try {
-            List<Expert> accept = new ArrayList<>();
-            List<Expert> unAccept = new ArrayList<>();
-            for (Expert request : list) {
-                System.out.print(request.getId() + "  ");
-                System.out.print(request.getFirstName() + "  ");
-                System.out.print(request.getLastName() + "  ");
-                System.out.print(request.getTime() + "  ");
-                System.out.println("if confirmation insert 'y' or insert 'n'");
-                char check = scanner.next().charAt(0);
-                switch (check) {
-                    case 'y':
-                        accept.add(request);
-                        break;
-                    case 'n':
-                        unAccept.add(request);
-                        break;
-                    default:
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+        manager.handleRequestForExpert(selectedExpert.getIds());
     }
 
     @PostMapping("/specialtydetermine")
     public void determineForRequestSpecialty(@ModelAttribute SpecialistDto specialistDto) {
-
-        manager.handelRequestForSpecialty(specialistDto.getIds(), null);
-
+        manager.handelRequestForSpecialty(specialistDto.getIds());
     }
 
     @GetMapping("/listExpert")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public List<UserDto> requestListSingUp() {
         List<Expert> list = manager.requestListSingUp();
         return Arrays.asList(modelMapper.map(list, UserDto[].class));
@@ -121,25 +85,26 @@ public class UserManageController {
 
         manager.insertSpecialty(specialistDto);
     }
-  /*  private Expert optionForSearch() {
-        Expert expert = new Expert();
-        System.out.println("\t\t!!!if want add option insert request else insert  'no'");
-        System.out.println("\tfirst name");
-        String fName = checker();
-        expert.setFirstName(fName);
-        System.out.println("\tlast name");
-        String lName = checker();
-        expert.setLastName(lName);
-        System.out.println("\temail");
-        String email = checker();
-        expert.setEmail(email);
-        System.out.println("\tstatus");
-        String status = checker();
-        UserStatus status1 = UserStatus.valueOf(status);
-        expert.setStatus(status1);
-        return expert;*/
+
+    /*  private Expert optionForSearch() {
+          Expert expert = new Expert();
+          System.out.println("\t\t!!!if want add option insert request else insert  'no'");
+          System.out.println("\tfirst name");
+          String fName = checker();
+          expert.setFirstName(fName);
+          System.out.println("\tlast name");
+          String lName = checker();
+          expert.setLastName(lName);
+          System.out.println("\temail");
+          String email = checker();
+          expert.setEmail(email);
+          System.out.println("\tstatus");
+          String status = checker();
+          UserStatus status1 = UserStatus.valueOf(status);
+          expert.setStatus(status1);
+          return expert;*/
 //        UserStatus status1 = UserStatus.CONFIRMED;
-  //  }
+    //  }
 /*    private String checker() {
         if (string.equals("no"))
             return null;
@@ -221,26 +186,30 @@ public class UserManageController {
 
 //        return null;
     }
+
     @GetMapping("/finbuserbydate{date}")
-    public List<UserDto> findUserBySingUpTime(String date){
+    public List<UserDto> findUserBySingUpTime(String date) {
         var list = managerProfileService.findByDate(date);
         return Arrays.asList(modelMapper.map(list, UserDto[].class));
     }
+
     @GetMapping("/findcustomerordernum{number}")
-    public List<UserDto> findCustomerByOrderNumb(Long number){
+    public List<UserDto> findCustomerByOrderNumb(Long number) {
         System.out.println(number.getClass());
         var list = managerProfileService.findCustomerByOrderNumber(number);
         return Arrays.asList(modelMapper.map(list, UserDto[].class));
     }
+
     @GetMapping("/findexpertordernum{number}")
-    public List<UserDto> findExpertByOrderNumb(Long number){
+    public List<UserDto> findExpertByOrderNumb(Long number) {
         System.out.println(number.getClass());
         var list = managerProfileService.findExpertByOrderNumber(number);
         return Arrays.asList(modelMapper.map(list, UserDto[].class));
     }
+
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/majid")
-    public String test(){
+    public String test() {
         return "ok";
     }
 

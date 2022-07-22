@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final OrderRepository orderRepository;
     private final ServicesServiceImpl servicesService;
     private final CustomerRepository customerRepository;
-    private final ManageExpertService expertService;
+    private final ManageExpertServiceimp expertService;
     private final CommentRepository commentRepository;
     private final ModelMapper modelMapper;
 
